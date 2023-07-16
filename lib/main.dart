@@ -1,9 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:seller_apps/auth/signinscreen.dart';
 import 'package:seller_apps/const/global.dart';
 import 'package:seller_apps/main/mainscreen.dart';
+import 'package:seller_apps/service/provider/dropvalueselectallprovider.dart';
+import 'package:seller_apps/service/provider/searchtextprovider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
@@ -19,15 +22,29 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        useMaterial3: true,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) {
+            return DropValuesAllProvider();
+          },
+        ),
+        ChangeNotifierProvider(
+          create: (context) {
+            return SearchTextProvider();
+          },
+        )
+      ],
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          useMaterial3: true,
+        ),
+        home: FirebaseAuth.instance.currentUser == null
+            ? const SignInScrren()
+            : MainScreen(),
       ),
-      home: FirebaseAuth.instance.currentUser == null
-          ? SignInScrren()
-          : MainScreen(),
     );
   }
 }

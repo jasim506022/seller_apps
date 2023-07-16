@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-class ArticlesShimmerEffectWidget extends StatelessWidget {
-  const ArticlesShimmerEffectWidget({
+class LoadingProductWidget extends StatelessWidget {
+  const LoadingProductWidget({
     Key? key,
   }) : super(key: key);
 
@@ -13,7 +13,12 @@ class ArticlesShimmerEffectWidget extends StatelessWidget {
     Color widgetShimmerColor = Colors.grey.shade100;
     Size size = MediaQuery.of(context).size;
 
-    return ListView.builder(
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: .78,
+          crossAxisSpacing: 8,
+          mainAxisSpacing: 8),
       itemCount: 20,
       itemBuilder: (context, index) {
         return Card(
@@ -35,8 +40,8 @@ class ArticlesShimmerEffectWidget extends StatelessWidget {
                       Container(
                         height: 140,
                         alignment: Alignment.center,
-                        margin: const EdgeInsets.all(10),
-                        padding: const EdgeInsets.all(20),
+                        margin: const EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                             color: const Color(0xfff6f5f1),
                             borderRadius: BorderRadius.circular(5)),

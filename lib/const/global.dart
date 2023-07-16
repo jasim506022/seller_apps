@@ -13,3 +13,14 @@ flutterToast({required String msg}) {
       textColor: Colors.white,
       fontSize: 16.0);
 }
+
+const List<String> categorylist = <String>[
+  "All",
+  'Fruits',
+  'Vegetables',
+  'Dairy & Egg',
+  'Dry & Canned',
+  "Drinks",
+  "Meat & Fish",
+  "Candy & Chocolate"
+];

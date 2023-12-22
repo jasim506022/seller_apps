@@ -89,35 +89,6 @@ class GlobalMethod {
     ]));
   }
 
-// Select Photo for Profile
-
-/*
-  Future<dynamic> selectImageForProfile({
-    required Textstyle textStyle,
-    required BuildContext context,
-    required ImagePicker imagePicker,
-  }) {
-    return
-    
-     showModalBottomSheet(
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(25.0),
-        ),
-      ),
-      context: context,
-      builder: (context) {
-        return 
-      },
-    );
-  
-  }
-
-*/
-//Show bottom Model Item
-
-//Capture Image for Profile
-
 // Flutter Toast
   flutterToast({required String msg}) {
     Fluttertoast.showToast(
@@ -219,21 +190,6 @@ class GlobalMethod {
     loadingProvider.setLoading(loading: false);
   }
 
-/*
-  //Show Dialog
-  showDialogMethod(
-      {required BuildContext context,
-      required String title,
-      required String message}) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return ShowErrorDialogWidget();
-      },
-    );
-  }
-
-*/
 // Obtain Image From Dialog
   obtainImageDialog(
       {required BuildContext context, required ImagePicker imagePicker}) {

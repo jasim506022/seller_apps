@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:seller_apps/const/const.dart';
 
+import '../const/const.dart';
 import '../const/textstyle.dart';
 
 class EmptyWidget extends StatelessWidget {
@@ -16,27 +16,29 @@ class EmptyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     mq = MediaQuery.of(context).size;
-    return Stack(
-      children: [
-        Image.asset(
-          image,
-          height: mq.height * .65,
-          width: mq.width * .7,
-        ),
-        Positioned(
-          top: 120,
-          left: 130,
-          right: 40,
-          child: Center(
-            child: Container(
-              height: 300,
-              width: 130,
-              alignment: Alignment.center,
-              child: Text(title, style: Textstyle.emptyTestStyle),
-            ),
+    return Center(
+      child: Stack(
+        children: [
+          Image.asset(
+            image,
+            height: mq.height * .65,
+            width: mq.width * .7,
           ),
-        )
-      ],
+          Positioned(
+            top: mq.height * .1411,
+            left: mq.width * .289,
+            right: mq.width * .089,
+            child: Center(
+              child: Container(
+                height: mq.height * .353,
+                width: mq.height * .289,
+                alignment: Alignment.center,
+                child: Text(title, style: Textstyle.emptyTestStyle),
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 }

@@ -1,13 +1,13 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:seller_apps/page/home/addproductpage.dart';
-import 'package:seller_apps/page/product/detailsproductpage.dart';
 
 import '../const/const.dart';
 import '../const/gobalcolor.dart';
 import '../const/textstyle.dart';
 import '../model/productsmodel.dart';
+import '../page/home/addproductpage.dart';
+import '../page/product/detailsproductpage.dart';
 
 class ProductWidget extends StatelessWidget {
   const ProductWidget({
@@ -17,7 +17,6 @@ class ProductWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Textstyle textstyle = Textstyle(context);
-    mq = MediaQuery.of(context).size;
     final productModel = Provider.of<ProductModel>(context);
     return InkWell(
       onTap: () {
@@ -65,11 +64,12 @@ class ProductWidget extends StatelessWidget {
                     ),
                   ),
                   Positioned(
-                    left: 10,
-                    top: 10,
+                    left: mq.width * .022,
+                    top: mq.height * .012,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8, vertical: 5),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: mq.width * .02,
+                          vertical: mq.height * .006),
                       decoration: BoxDecoration(
                         border: Border.all(color: red, width: .5),
                         borderRadius: BorderRadius.circular(15),
@@ -83,7 +83,7 @@ class ProductWidget extends StatelessWidget {
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 12, right: 12),
+                  padding: EdgeInsets.symmetric(horizontal: mq.width * .028),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,

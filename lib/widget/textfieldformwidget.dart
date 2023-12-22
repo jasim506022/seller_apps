@@ -1,63 +1,60 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../const/const.dart';
+
 // ignore: must_be_immutable
-class TextFieldFormWidget extends StatelessWidget {
+class TextFieldFormWidget extends StatefulWidget {
   TextFieldFormWidget(
       {super.key,
       required this.hintText,
       required this.controller,
       this.autofocus = false,
+      this.obscureText = false,
+      this.isShowPassword = false,
       this.textInputAction = TextInputAction.next,
       this.maxLines = 1,
-      this.textInputType = TextInputType.text});
+      this.textInputType = TextInputType.text,
+      required this.validator});
   final String hintText;
   final TextEditingController controller;
   bool? autofocus;
   TextInputAction? textInputAction;
   TextInputType? textInputType;
   int? maxLines;
+  bool? obscureText;
+  bool? isShowPassword;
+  final String? Function(String?)? validator;
 
+  @override
+  State<TextFieldFormWidget> createState() => _TextFieldFormWidgetState();
+}
+
+class _TextFieldFormWidgetState extends State<TextFieldFormWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      padding: EdgeInsets.symmetric(vertical: mq.height * .012),
       child: TextFormField(
-          controller: controller,
-          autofocus: autofocus!,
-          maxLines: maxLines,
-          validator: (value) {
-            if (value!.isEmpty) {
-              return "Field Doesn't Empty";
-            }
-            return null;
-          },
-          textInputAction: textInputAction,
-          keyboardType: textInputType,
+          controller: widget.controller,
+          autofocus: widget.autofocus!,
+          maxLines: widget.maxLines,
+          validator: widget.validator,
+          obscureText: widget.obscureText!,
+          textInputAction: widget.textInputAction,
+          keyboardType: widget.textInputType,
           style: GoogleFonts.poppins(
               fontSize: 14,
               fontWeight: FontWeight.w600,
               color: Theme.of(context).primaryColor),
-          decoration: InputDecoration(
-            fillColor: Theme.of(context).canvasColor,
-            filled: true,
-            labelStyle:
-                GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.w500),
-            hintText: hintText,
-            enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.circular(15)),
-            focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.circular(15)),
-            contentPadding:
-                const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-            hintStyle: const TextStyle(
-              color: Color(0xffc8c8d5),
-            ),
-          )),
+          decoration: globalMethod.textFormFielddecoration(
+              hintText: widget.hintText,
+              isShowPassword: widget.isShowPassword!,
+              obscureText: widget.obscureText!,
+              function: () {
+                widget.obscureText = !widget.obscureText!;
+                setState(() {});
+              })),
     );
   }
 }
-
-// ignore: must_be_immutable

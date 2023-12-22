@@ -23,15 +23,8 @@ List<String> category = <String>[
   "Candy & Chocolate",
 ];
 
-// const List<String> category = <String>[
-//   'Fruits',
-//   'Vegetables',
-//   'Dairy & Egg',
-//   'Dry & Canned',
-//   "Drinks",
-//   "Meat & Fish",
-//   "Candy & Chocolate"
-// ];
+enum ProductSelect { detele, edit }
+
 const List<String> unitList = <String>[
   'Per Kg',
   'Per Dozen',

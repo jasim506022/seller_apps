@@ -40,6 +40,7 @@ class Utils {
       getTheme ? white.withOpacity(.7) : black;
 
   Color? get categorySelectBackground => getTheme ? greenColor : black;
-  Color? get backgroun =>
+
+  Color? get backgroundCutilsolor =>
       getTheme ? backgroundDarkColor : const Color(0xfff2f2f8);
 }

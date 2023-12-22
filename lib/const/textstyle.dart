@@ -34,6 +34,11 @@ class Textstyle {
   TextStyle get mediumText600 =>
       GoogleFonts.roboto(color: red, fontSize: 14, fontWeight: FontWeight.w600);
 
+  TextStyle get mediumText => GoogleFonts.roboto(
+      color: Theme.of(context).primaryColor,
+      fontSize: 14,
+      fontWeight: FontWeight.normal);
+
   TextStyle get mediumTextbold =>
       GoogleFonts.roboto(color: red, fontSize: 14, fontWeight: FontWeight.bold);
 

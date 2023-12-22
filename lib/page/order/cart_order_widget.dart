@@ -2,8 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
-import 'package:seller_apps/service/provider/totalamountprovider.dart';
 
 import '../../const/const.dart';
 import '../../const/gobalcolor.dart';
@@ -52,7 +50,7 @@ class _CartOrderWidgetState extends State<CartOrderWidget> {
         child: Container(
           padding: const EdgeInsets.all(10),
           margin: const EdgeInsets.all(10),
-          height: widget.itemCount * 120,
+          height: widget.itemCount * MediaQuery.of(context).size.height * .151,
           child: ListView.builder(
             physics: const NeverScrollableScrollPhysics(),
             itemCount: widget.itemCount,
@@ -60,7 +58,7 @@ class _CartOrderWidgetState extends State<CartOrderWidget> {
               ProductModel model = ProductModel.fromMap(
                   widget.data[index].data() as Map<String, dynamic>);
               return Container(
-                height: 110,
+                height: MediaQuery.of(context).size.height * .123,
                 width: MediaQuery.of(context).size.width * .9,
                 decoration: BoxDecoration(
                     color: Theme.of(context).cardColor,
@@ -71,8 +69,8 @@ class _CartOrderWidgetState extends State<CartOrderWidget> {
                     Stack(
                       children: [
                         Container(
-                          height: 95,
-                          width: 140,
+                          height: MediaQuery.of(context).size.height * .112,
+                          width: MediaQuery.of(context).size.width * .31,
                           alignment: Alignment.center,
                           margin: const EdgeInsets.all(10),
                           padding: const EdgeInsets.all(20),
@@ -82,7 +80,7 @@ class _CartOrderWidgetState extends State<CartOrderWidget> {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(10),
                             child: FancyShimmerImage(
-                              height: 120,
+                              height: MediaQuery.of(context).size.height * .141,
                               boxFit: BoxFit.contain,
                               imageUrl: model.productimage![0],
                             ),

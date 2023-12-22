@@ -1,19 +1,24 @@
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
+import 'package:seller_apps/page/order/shiftedorderpage.dart';
 
+import '../auth/signinpage.dart';
 import '../../const/const.dart';
 import '../../const/global.dart';
 import '../../const/gobalcolor.dart';
 import '../../const/textstyle.dart';
 import '../../service/provider/theme_provider.dart';
-import '../main/mainscreen.dart';
-import '../order/delivarypage.dart';
-import '../order/earninscreen.dart';
+import '../completeorder/totalsellerpage.dart';
+import '../main/mainpage.dart';
+
+import '../order/completeorderpage.dart';
 import '../order/orderpage.dart';
 import 'editprofilepage.dart';
 
@@ -68,7 +73,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => MainScreen(),
+                            builder: (context) => MainPage(),
                           ));
                     },
                   ),
@@ -90,38 +95,29 @@ class _ProfilePageState extends State<ProfilePage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const DeliveryPage(),
+                            builder: (context) => const ShiftedOrderPage(),
                           ));
                     },
                   ),
                   _buildListTitleMethod(
-                    icon: Icons.picture_in_picture_alt_rounded,
-                    title: 'Not Yet Received Orders',
-                    funcion: () {},
-                  ),
-                  _buildListTitleMethod(
-                    icon: Icons.picture_in_picture_alt_rounded,
-                    title: 'Not Yet Received Orders',
-                    funcion: () {},
-                  ),
-                  _buildListTitleMethod(
-                    icon: Icons.picture_in_picture_alt_rounded,
-                    title: 'Not Yet Received Orders',
-                    funcion: () {},
-                  ),
-                  _buildListTitleMethod(
                     icon: Icons.access_time,
                     title: 'History',
-                    funcion: () {},
+                    funcion: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const CompleteOrderPage(),
+                          ));
+                    },
                   ),
                   _buildListTitleMethod(
-                    icon: Icons.access_time,
+                    icon: Icons.money,
                     title: 'Earn',
                     funcion: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const EarningScrren(),
+                            builder: (context) => const TotalSellPage(),
                           ));
                     },
                   ),
@@ -140,10 +136,23 @@ class _ProfilePageState extends State<ProfilePage> {
                           if (result.isNotEmpty &&
                               result[0].rawAddress.isNotEmpty) {
                             if (mounted) {
-                              globalMethod.logoutScreen(
+                              globalMethod.logoutOrDeleteScreen(
                                   context: context,
                                   title: "Are you want to Logout?",
-                                  content: "Are you want to Logout this Apps");
+                                  content: "Are you want to Logout this Apps",
+                                  function: () {
+                                    FirebaseAuth.instance
+                                        .signOut()
+                                        .then((value) async {
+                                      await GoogleSignIn().signOut();
+                                    });
+                                    Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (c) => const SigninPage()),
+                                      (route) => false,
+                                    );
+                                  });
                             }
                           }
                         } on SocketException {
@@ -176,7 +185,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(mq.width * .133),
                   child: CachedNetworkImage(
-                    imageUrl: sharedPreference!.getString("imageurl")!,
+                    imageUrl: sharedPreference!.getString("imageurl") ??
+                        "https://www.cricbuzz.com/a/img/v1/152x152/i1/c170899/tamim-iqbal.jpg",
                     placeholder: (context, url) =>
                         const CircularProgressIndicator(),
                     errorWidget: (context, url, error) =>
@@ -195,11 +205,13 @@ class _ProfilePageState extends State<ProfilePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text(sharedPreference!.getString("name")!,
+                      Text(
+                          sharedPreference!.getString("name") ??
+                              "Md Jasim Uddin",
                           style: textstyle.largeText.copyWith(
                               fontSize: 20,
                               color: Theme.of(context).primaryColor)),
-                      Text(sharedPreference!.getString("email")!,
+                      Text(sharedPreference!.getString("email") ?? "md Jasim",
                           style: textstyle.mediumText600.copyWith(
                               fontSize: 15,
                               color: Theme.of(context).hintColor)),

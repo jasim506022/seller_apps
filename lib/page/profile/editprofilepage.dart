@@ -10,10 +10,11 @@ import '../../const/const.dart';
 import '../../const/gobalcolor.dart';
 import '../../const/textstyle.dart';
 import '../../const/utils.dart';
-import '../../database/firebasedatabase.dart';
+import '../../service/database/firebasedatabase.dart';
 import '../../service/provider/editprofileprovider.dart';
+import '../../service/provider/loadingprovider.dart';
 import '../../widget/profiletextfieldwidget.dart';
-import '../main/mainscreen.dart';
+import '../main/mainpage.dart';
 import '../../model/profilemodel.dart';
 
 class EditProfilePage extends StatefulWidget {
@@ -70,40 +71,38 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 widget.isEdit == true
                     ? IconButton(
                         onPressed: () async {
-                          if (editPageProvider.isChangeProfilePicture) {
-                            String fileName = DateTime.now()
-                                .millisecondsSinceEpoch
-                                .toString();
+                          try {
+                            final result =
+                                await InternetAddress.lookup('google.com');
+                            if (result.isNotEmpty &&
+                                result[0].rawAddress.isNotEmpty) {
+                              if (editPageProvider.isChangeProfilePicture) {
+                                if (mounted) {
+                                  Provider.of<LoadingProvider>(context,
+                                          listen: false)
+                                      .setLoading(loading: true);
+                                }
 
-                            try {
-                              final result =
-                                  await InternetAddress.lookup('google.com');
-                              if (result.isNotEmpty &&
-                                  result[0].rawAddress.isNotEmpty) {
-                                // Creating a storage reference
+                                String fileName = DateTime.now()
+                                    .millisecondsSinceEpoch
+                                    .toString();
+
                                 Reference storageRef = FirebaseDatabase
                                     .storageRef
                                     .child("sellerImage")
                                     .child(FirebaseDatabase.selleruid)
                                     .child(fileName);
-
-                                // Uploading the file
                                 UploadTask uploadTask = storageRef.putFile(
                                     File(editPageProvider.imageXFile!.path));
-
-                                // When the upload is complete
                                 TaskSnapshot taskSnapshot =
                                     await uploadTask.whenComplete(() {});
+                                await taskSnapshot.ref
+                                    .getDownloadURL()
+                                    .then((downloadurl) {
+                                  editPageProvider.setSinglePhotoUrl(
+                                      imageUrl: downloadurl);
+                                });
 
-                                // Getting the download URL
-                                String downloadUrl =
-                                    await taskSnapshot.ref.getDownloadURL();
-
-                                // Setting the download URL in the provider
-                                editPageProvider.setSinglePhotoUrl(
-                                    imageUrl: downloadUrl);
-
-                                // Creating profile data map
                                 Map<String, dynamic> profileData = {
                                   "name": _nameTEC.text,
                                   "email": _emailTEC.text,
@@ -112,55 +111,59 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                   "imageurl": editPageProvider.imageurl,
                                 };
 
-                                // Updating profile data
                                 await FirebaseDatabase.updateProfileData(
-                                    map: profileData);
-
-                                // Displaying a success message
-                                globalMethod.flutterToast(
-                                    msg: "Successfully Update Profile Data");
-
-                                // Navigating to the MainScreen
-                                if (mounted) {
+                                        map: profileData)
+                                    .then((value) {
+                                  Provider.of<LoadingProvider>(context,
+                                          listen: false)
+                                      .setLoading(loading: false);
+                                  globalMethod.flutterToast(
+                                      msg: "Successfully Update Profile Data");
                                   Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => MainScreen(),
-                                    ),
-                                  );
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => MainPage(),
+                                      ));
+                                }).catchError((error) {
+                                  globalMethod.flutterToast(
+                                      msg: "Error $error");
+                                });
+                              } else {
+                                if (mounted) {
+                                  Provider.of<LoadingProvider>(context,
+                                          listen: false)
+                                      .setLoading(loading: true);
                                 }
-                              }
-                            } on SocketException {
-                              globalMethod.flutterToast(
-                                  msg: "Please Check your Internet");
-                            } catch (error) {
-                              // Handling errors
-                              print('Error: $error');
-                              // Displaying an error message to the user, if necessary
-                              globalMethod.flutterToast(
-                                  msg: "Error updating profile data");
-                            }
-                          } else {
-                            Map<String, dynamic> profileData = {
-                              "name": _nameTEC.text,
-                              "email": _emailTEC.text,
-                              "address": _addressTEC.text,
-                              "phone": _phoneTEC.text,
-                            };
 
-                            await FirebaseDatabase.updateProfileData(
-                                    map: profileData)
-                                .then((value) {
-                              globalMethod.flutterToast(
-                                  msg: "Successfully Update Profile Data");
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => MainScreen(),
-                                  ));
-                            }).catchError((error) {
-                              globalMethod.flutterToast(msg: "Error $error");
-                            });
+                                Map<String, dynamic> profileData = {
+                                  "name": _nameTEC.text,
+                                  "email": _emailTEC.text,
+                                  "address": _addressTEC.text,
+                                  "phone": _phoneTEC.text,
+                                };
+
+                                await FirebaseDatabase.updateProfileData(
+                                        map: profileData)
+                                    .then((value) {
+                                  Provider.of<LoadingProvider>(context,
+                                          listen: false)
+                                      .setLoading(loading: false);
+                                  globalMethod.flutterToast(
+                                      msg: "Successfully Update Profile Data");
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => MainPage(),
+                                      ));
+                                }).catchError((error) {
+                                  globalMethod.flutterToast(
+                                      msg: "Error $error");
+                                });
+                              }
+                            }
+                          } on SocketException {
+                            globalMethod.flutterToast(
+                                msg: "Please Check your Internet");
                           }
                         },
                         icon: Icon(Icons.done,
@@ -168,182 +171,208 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     : Container()
               ],
             ),
-            body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-              child: SingleChildScrollView(
-                child: FutureBuilder(
-                  future: FirebaseDatabase.profileSnapshot(),
-                  builder: (context, snapshot) {
-                    try {
-                      if (snapshot.hasData) {
-                        ProfileModel profileModel =
-                            ProfileModel.fromMap(snapshot.data!.data()!);
-                        _nameTEC.text = profileModel.name!;
-                        _emailTEC.text = profileModel.email!;
-                        _addressTEC.text = profileModel.address!;
-                        _phoneTEC.text = profileModel.phone!;
-                        String image = profileModel.imageurl!;
+            body: Consumer<LoadingProvider>(
+              builder: (context, loadingProvider, child) {
+                return Column(
+                  children: [
+                    loadingProvider.isLoading
+                        ? LinearProgressIndicator(
+                            backgroundColor: Theme.of(context).primaryColor)
+                        : Container(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 15),
+                      child: SingleChildScrollView(
+                        child: FutureBuilder(
+                          future: FirebaseDatabase.profileSnapshot(),
+                          builder: (context, snapshot) {
+                            try {
+                              if (snapshot.hasData) {
+                                ProfileModel profileModel =
+                                    ProfileModel.fromMap(
+                                        snapshot.data!.data()!);
+                                _nameTEC.text = profileModel.name!;
+                                _emailTEC.text = profileModel.email!;
+                                _addressTEC.text = profileModel.address!;
+                                _phoneTEC.text = profileModel.phone!;
+                                String image = profileModel.imageurl!;
 
-                        return Column(
-                          children: [
-                            widget.isEdit == true
-                                ? Stack(
-                                    children: [
-                                      Container(
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                .2,
-                                        width:
-                                            MediaQuery.of(context).size.height *
-                                                .2,
-                                        decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            border: Border.all(
-                                                color: Theme.of(context)
-                                                    .primaryColor,
-                                                width: 3)),
-                                        child:
-                                            editPageProvider.imageXFile == null
-                                                ? CircleAvatar(
-                                                    backgroundImage:
-                                                        NetworkImage(image),
-                                                  )
-                                                : CircleAvatar(
-                                                    backgroundImage: FileImage(
-                                                        File(editPageProvider
-                                                            .imageXFile!.path)),
-                                                  ),
-                                      ),
-                                      Positioned(
-                                        bottom: 0,
-                                        right: 0,
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              color: Colors.red.shade400,
-                                              shape: BoxShape.circle),
-                                          child: IconButton(
-                                              onPressed: () {
-                                                // getImageFromGaller();
-                                                // _selectImageForProfile(
-                                                //     textStyle);
-                                                globalMethod
-                                                    .captureImageSinglePhoto(
-                                                        context: context,
-                                                        imagePicker: picker);
-                                              },
-                                              icon: Icon(
-                                                Icons.camera_alt,
-                                                color: white,
-                                                size: 30,
-                                              )),
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                : Container(
-                                    height:
-                                        MediaQuery.of(context).size.height * .2,
-                                    width:
-                                        MediaQuery.of(context).size.height * .2,
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        border:
-                                            Border.all(color: red, width: 2)),
-                                    child: CircleAvatar(
-                                      backgroundImage: NetworkImage(
-                                          editPageProvider.imageurl),
-                                    ),
-                                  ),
-                            _buildTextForm(
-                                controller: _nameTEC,
-                                icon: Icons.person,
-                                title: "Name"),
-                            SizedBox(
-                              height: mq.height * .012,
-                            ),
-                            Column(
-                              children: [
-                                Row(
+                                return Column(
                                   children: [
-                                    Icon(
-                                      Icons.phone,
-                                      color: utils.profileTextColor,
+                                    widget.isEdit == true
+                                        ? Stack(
+                                            children: [
+                                              Container(
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    .2,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    .2,
+                                                decoration: BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                    border: Border.all(
+                                                        color: Theme.of(context)
+                                                            .primaryColor,
+                                                        width: 3)),
+                                                child: editPageProvider
+                                                            .imageXFile ==
+                                                        null
+                                                    ? CircleAvatar(
+                                                        backgroundImage:
+                                                            NetworkImage(image),
+                                                      )
+                                                    : CircleAvatar(
+                                                        backgroundImage:
+                                                            FileImage(File(
+                                                                editPageProvider
+                                                                    .imageXFile!
+                                                                    .path)),
+                                                      ),
+                                              ),
+                                              Positioned(
+                                                bottom: 0,
+                                                right: 0,
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                      color:
+                                                          Colors.red.shade400,
+                                                      shape: BoxShape.circle),
+                                                  child: IconButton(
+                                                      onPressed: () {
+                                                        _selectImageForProfile(
+                                                            textStyle);
+                                                      },
+                                                      icon: Icon(
+                                                        Icons.camera_alt,
+                                                        color: white,
+                                                        size: 30,
+                                                      )),
+                                                ),
+                                              ),
+                                            ],
+                                          )
+                                        : Container(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                .2,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                .2,
+                                            decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                border: Border.all(
+                                                    color: red, width: 2)),
+                                            child: CircleAvatar(
+                                              backgroundImage: NetworkImage(
+                                                  editPageProvider.imageurl),
+                                            ),
+                                          ),
+                                    _buildTextForm(
+                                        controller: _nameTEC,
+                                        icon: Icons.person,
+                                        title: "Name"),
+                                    SizedBox(
+                                      height: mq.height * .012,
+                                    ),
+                                    Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              Icons.phone,
+                                              color: utils.profileTextColor,
+                                            ),
+                                            SizedBox(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  .025,
+                                            ),
+                                            Text("Phone",
+                                                style: textStyle.profileText())
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: mq.height * .012,
+                                        ),
+                                        widget.isEdit == false
+                                            ? Container(
+                                                alignment: Alignment.centerLeft,
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 15),
+                                                height: 58,
+                                                width: MediaQuery.of(context)
+                                                    .size
+                                                    .width,
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Theme.of(context)
+                                                            .canvasColor,
+                                                        width: 1),
+                                                    color: Theme.of(context)
+                                                        .canvasColor,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            15)),
+                                                child: Text(
+                                                  "+88${profileModel.phone!}",
+                                                  style: GoogleFonts.poppins(
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.w600,
+                                                    color:
+                                                        utils.profileTextColor,
+                                                  ),
+                                                ),
+                                              )
+                                            : ProfileTextFieldFormWidget(
+                                                controller: _phoneTEC,
+                                                enabled: widget.isEdit == false
+                                                    ? false
+                                                    : true,
+                                              ),
+                                      ],
                                     ),
                                     SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          .025,
+                                      height: mq.height * .011,
                                     ),
-                                    Text("Phone",
-                                        style: textStyle.profileText())
+                                    _buildTextForm(
+                                        controller: _emailTEC,
+                                        icon: Icons.email,
+                                        title: "Email",
+                                        isEmail: true),
+                                    SizedBox(
+                                      height: mq.height * .011,
+                                    ),
+                                    _buildTextForm(
+                                        controller: _addressTEC,
+                                        icon: Icons.place,
+                                        title: "Address"),
                                   ],
-                                ),
-                                SizedBox(
-                                  height: mq.height * .012,
-                                ),
-                                widget.isEdit == false
-                                    ? Container(
-                                        alignment: Alignment.centerLeft,
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 15),
-                                        height: 58,
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: Theme.of(context)
-                                                    .canvasColor,
-                                                width: 1),
-                                            color:
-                                                Theme.of(context).canvasColor,
-                                            borderRadius:
-                                                BorderRadius.circular(15)),
-                                        child: Text(
-                                          "+88${profileModel.phone!}",
-                                          style: GoogleFonts.poppins(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w600,
-                                            color: utils.profileTextColor,
-                                          ),
-                                        ),
-                                      )
-                                    : ProfileTextFieldFormWidget(
-                                        controller: _phoneTEC,
-                                        enabled: widget.isEdit == false
-                                            ? false
-                                            : true,
-                                      ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: mq.height * .011,
-                            ),
-                            _buildTextForm(
-                                controller: _emailTEC,
-                                icon: Icons.email,
-                                title: "Email",
-                                isEmail: true),
-                            SizedBox(
-                              height: mq.height * .011,
-                            ),
-                            _buildTextForm(
-                                controller: _addressTEC,
-                                icon: Icons.place,
-                                title: "Address"),
-                          ],
-                        );
-                      } else if (snapshot.hasError) {
-                        return globalMethod.flutterToast(
-                            msg: "Error: ${snapshot.error}");
-                      } else {
-                        return const Center(child: CircularProgressIndicator());
-                      }
-                    } catch (error) {
-                      return globalMethod.flutterToast(
-                          msg: "Unexpected Error: $error");
-                    }
-                  },
-                ),
-              ),
+                                );
+                              } else if (snapshot.hasError) {
+                                return globalMethod.flutterToast(
+                                    msg: "Error: ${snapshot.error}");
+                              } else {
+                                return const Center(
+                                    child: CircularProgressIndicator());
+                              }
+                            } catch (error) {
+                              return globalMethod.flutterToast(
+                                  msg: "Unexpected Error: $error");
+                            }
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              },
             ),
           );
         },
@@ -375,11 +404,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
         ),
         isEmail
             ? ProfileTextFieldFormWidget(
-                controller: _nameTEC,
-                enabled: true,
+                controller: controller,
+                enabled: false,
               )
             : ProfileTextFieldFormWidget(
-                controller: _nameTEC,
+                controller: controller,
                 enabled: !widget.isEdit ? false : true,
               ),
       ],
@@ -405,35 +434,41 @@ class _EditProfilePageState extends State<EditProfilePage> {
               Align(
                 alignment: Alignment.center,
                 child: Container(
-                  width: 100,
-                  height: 4, // Adjust the height as needed
+                  width: mq.width * .22,
+                  height: mq.height * .005, // Adjust the height as needed
                   decoration: BoxDecoration(
                       color: Theme.of(context).indicatorColor,
                       borderRadius: BorderRadius.circular(2)),
                 ),
               ),
-              const SizedBox(
-                height: 15,
-              ),
+              SizedBox(height: mq.height * .02),
               Align(
                   alignment: Alignment.center,
                   child: Text("Profile Photo", style: textStyle.largeBoldText)),
-              const SizedBox(
-                height: 8,
+              SizedBox(
+                height: mq.height * .01,
               ),
               Row(
                 children: [
                   _showBottomModelItem(textStyle, "Camera", Icons.camera_alt,
                       () {
-                    // getImageFromGaller();
-                    // globalMethod.captureImageSinglePhoto(
-                    //     context: context, imagePicker: picker);
+                    Navigator.pop(context);
+                    globalMethod.captureImageSinglePhoto(
+                        context: context,
+                        imagePicker: picker,
+                        imageSource: ImageSource.camera);
                   }),
                   SizedBox(
-                    width: MediaQuery.of(context).size.width * .066,
+                    width: mq.width * .066,
                   ),
-                  _showBottomModelItem(
-                      textStyle, "Gallery", Icons.photo_album, () {}),
+                  _showBottomModelItem(textStyle, "Gallery", Icons.photo_album,
+                      () {
+                    Navigator.pop(context);
+                    globalMethod.captureImageSinglePhoto(
+                        context: context,
+                        imagePicker: picker,
+                        imageSource: ImageSource.gallery);
+                  }),
                 ],
               )
             ],
@@ -464,7 +499,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.width * .01,
+              height: mq.width * .01,
             ),
             Text(
               title,

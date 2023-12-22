@@ -6,24 +6,24 @@ import '../../widget/empty_widget.dart';
 import '../../widget/single_loading_product_widget.dart';
 import 'cart_order_widget.dart';
 
-class OrderPage extends StatefulWidget {
-  const OrderPage({super.key});
+class ShiftedOrderPage extends StatefulWidget {
+  const ShiftedOrderPage({super.key});
 
   @override
-  State<OrderPage> createState() => _OrderPageState();
+  State<ShiftedOrderPage> createState() => _OrderPageState();
 }
 
-class _OrderPageState extends State<OrderPage> {
+class _OrderPageState extends State<ShiftedOrderPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: const Text(
-            "New Order",
+            "Shifted Order",
           ),
         ),
         body: StreamBuilder(
-          stream: FirebaseDatabase.allOrderSnapshots(status: 'normal'),
+          stream: FirebaseDatabase.allOrderSnapshots(status: 'delivery'),
           builder: (context, orderSnapshot) {
             if (orderSnapshot.connectionState == ConnectionState.waiting) {
               return const Center(
@@ -34,7 +34,7 @@ class _OrderPageState extends State<OrderPage> {
                 orderSnapshot.data!.docs.isEmpty) {
               return const EmptyWidget(
                 image: 'asset/empty/empty.png',
-                title: 'Currently Now No order Found',
+                title: 'Currently Now No Shift order Found',
               );
             } else if (orderSnapshot.hasData) {
               var listOrderSnapshot = orderSnapshot.data!.docs;
@@ -49,7 +49,6 @@ class _OrderPageState extends State<OrderPage> {
                           ConnectionState.waiting) {
                         return const LoadingSingleProductWidget();
                       } else if (orderSnapshot.hasError) {
-                        // Error Dialog Show
                         return Text(
                           'Error Occure: ${orderSnapshot.error}',
                         );

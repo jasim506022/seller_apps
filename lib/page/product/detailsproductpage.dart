@@ -1,23 +1,20 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:seller_apps/const/global.dart';
-import 'package:seller_apps/page/home/addproductpage.dart';
 
+import '../../const/approutes.dart';
+import '../../const/global.dart';
 import '../../const/gobalcolor.dart';
 import '../../const/textstyle.dart';
 import '../../const/utils.dart';
 
 import '../../const/const.dart';
-import '../../database/firebasedatabase.dart';
+import '../../service/database/firebasedatabase.dart';
 import '../../model/productsmodel.dart';
-import '../main/mainscreen.dart';
+import '../home/addproductpage.dart';
 import 'details_card_swiper.dart';
 import 'loading_similar_widet.dart';
 import 'similar_product_widget.dart';
-
-enum ProductSelect { detele, edit }
 
 class ProductDetailsPage extends StatefulWidget {
   const ProductDetailsPage({super.key, required this.productModel});
@@ -34,7 +31,6 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
   Widget build(BuildContext context) {
     Textstyle textstyle = Textstyle(context);
     Utils utils = Utils(context);
-    mq = MediaQuery.of(context).size;
 
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
         statusBarColor: utils.green300,
@@ -62,8 +58,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                       height: mq.height * 1.2,
                       width: mq.height * 1.2,
                       decoration: BoxDecoration(
-                          color: utils.green100, //100
-                          shape: BoxShape.circle),
+                          color: utils.green100, shape: BoxShape.circle),
                     ),
                   ),
                   Positioned(
@@ -105,12 +100,11 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                             children: [
                               InkWell(
                                 onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            MainScreen(index: 0),
-                                      ));
+                                  Navigator.pushNamed(
+                                    context,
+                                    AppRouters.mainPage,
+                                    arguments: 0,
+                                  );
                                 },
                                 child: Container(
                                   alignment: Alignment.center,
@@ -126,14 +120,38 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                                 ),
                               ),
                               Container(
-                                height: 50,
-                                width: 50,
+                                alignment: Alignment.center,
                                 decoration: BoxDecoration(
                                     color: greenColor, shape: BoxShape.circle),
                                 child: PopupMenuButton<ProductSelect>(
                                   color: Theme.of(context).cardColor,
                                   onSelected: (ProductSelect product) {
                                     if (product.name == "detele") {
+                                      globalMethod.logoutOrDeleteScreen(
+                                          context: context,
+                                          title: "Are You want to Delete",
+                                          content:
+                                              "Do you Want to Delete The Product Produc. If you delete the Product it can not be undo",
+                                          function: () async {
+                                            try {
+                                              await FirebaseDatabase
+                                                      .deleteProductSnapshot(
+                                                          productId: widget
+                                                              .productModel
+                                                              .productId!)
+                                                  .then((value) {
+                                                Navigator.pushNamed(context,
+                                                    AppRouters.mainPage);
+                                                globalMethod.flutterToast(
+                                                    msg: "Delete Succesffully");
+                                              });
+                                            } catch (error) {
+                                              globalMethod.flutterToast(
+                                                  msg:
+                                                      "An Error Occured: $error");
+                                            }
+                                          });
+/*
                                       showDialog(
                                         context: context,
                                         builder: (context) {
@@ -183,8 +201,9 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                                                         Navigator.push(
                                                             context,
                                                             MaterialPageRoute(
-                                                              builder: (context) =>
-                                                                  MainScreen(),
+                                                              builder:
+                                                                  (context) =>
+                                                                      MainPage(),
                                                             ));
                                                         globalMethod.flutterToast(
                                                             msg:
@@ -206,6 +225,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                                           );
                                         },
                                       );
+                               */
                                     } else {
                                       Navigator.push(
                                           context,

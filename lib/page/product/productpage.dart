@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import '../../const/const.dart';
 
 import '../../const/global.dart';
-import '../../database/firebasedatabase.dart';
+import '../../service/database/firebasedatabase.dart';
 import '../../model/productsmodel.dart';
 import '../../service/provider/dropvalueselectallprovider.dart';
 import '../../widget/empty_widget.dart';
@@ -24,9 +24,8 @@ class _ProductPageState extends State<ProductPage> {
   @override
   void initState() {
     Future.delayed(Duration.zero, () {
-      var myData =
-          Provider.of<CateoryDropValueProvider>(context, listen: false);
-      myData.setDroupValue(selectValue: allCategoryList.first);
+      Provider.of<CateoryDropValueProvider>(context, listen: false)
+          .setDroupValue(selectValue: allCategoryList.first);
     });
     super.initState();
   }
@@ -101,6 +100,17 @@ class _ProductPageState extends State<ProductPage> {
                                 child: const ProductWidget(),
                               );
                             },
+                          );
+                        } else if (!snapshot.hasData ||
+                            snapshot.data!.docs.isEmpty) {
+                          return const Text(
+                            'asset/payment/emptytow.png',
+                            style: TextStyle(color: Colors.black),
+                          );
+                        } else if (!snapshot.hasData) {
+                          return const EmptyWidget(
+                            image: 'asset/empty/empty.png',
+                            title: 'No Data Found',
                           );
                         }
                         return const LoadingProductWidget();

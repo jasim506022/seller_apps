@@ -22,7 +22,7 @@ class DeliveryCartWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool addMoney = false;
+    mq = MediaQuery.of(context).size;
     Textstyle textstyle = Textstyle(context);
     return InkWell(
       onTap: () {
@@ -35,44 +35,57 @@ class DeliveryCartWidget extends StatelessWidget {
             ));
       },
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        padding: EdgeInsets.symmetric(
+          horizontal: mq.width * .022,
+          vertical: mq.height * .008,
+        ),
         child: Column(
           children: [
             Container(
-              height: 130,
-              width: MediaQuery.of(context).size.width * .9,
+              height: mq.height * .152,
+              width: mq.width * .9,
               decoration: BoxDecoration(
                   color: Theme.of(context).cardColor,
-                  borderRadius: BorderRadius.circular(20)),
+                  borderRadius: BorderRadius.circular(
+                    mq.width * .044,
+                  )),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Stack(
                     children: [
                       Container(
-                        height: 110,
-                        width: 140,
+                        height: mq.height * .131,
+                        width: mq.width * .311,
                         alignment: Alignment.center,
-                        margin: const EdgeInsets.all(10),
-                        padding: const EdgeInsets.all(20),
+                        margin: EdgeInsets.all(
+                          mq.width * .022,
+                        ),
+                        padding: EdgeInsets.all(
+                          mq.width * .022,
+                        ),
                         decoration: BoxDecoration(
                             color: cardImageBg,
                             borderRadius: BorderRadius.circular(5)),
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(
+                            mq.width * .022,
+                          ),
                           child: FancyShimmerImage(
-                            height: 120,
+                            height: mq.height * .143,
                             boxFit: BoxFit.contain,
                             imageUrl: productModel.productimage![0],
                           ),
                         ),
                       ),
                       Positioned(
-                        left: 10,
-                        top: 10,
+                        left: mq.height * .012,
+                        top: mq.width * .022,
                         child: Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 8, vertical: 5),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: mq.width * .028,
+                            vertical: mq.height * .007,
+                          ),
                           decoration: BoxDecoration(
                             border: Border.all(color: red, width: .5),
                             borderRadius: BorderRadius.circular(15),
@@ -92,8 +105,11 @@ class DeliveryCartWidget extends StatelessWidget {
                   ),
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.only(
-                          left: 20, right: 12, top: 15, bottom: 15),
+                      padding: EdgeInsets.only(
+                          left: mq.width * .044,
+                          right: mq.height * .027,
+                          top: mq.height * .018,
+                          bottom: mq.height * .018),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,16 +119,16 @@ class DeliveryCartWidget extends StatelessWidget {
                                 style: textstyle.largeBoldText.copyWith(
                                     color: Theme.of(context).primaryColor)),
                           ),
-                          const SizedBox(
-                            height: 5,
+                          SizedBox(
+                            height: mq.height * .007,
                           ),
                           Text(
                             productModel.productunit!.toString(),
                             style: textstyle.mediumTextbold
                                 .copyWith(color: Theme.of(context).hintColor),
                           ),
-                          const SizedBox(
-                            height: 5,
+                          SizedBox(
+                            height: mq.height * .007,
                           ),
                           Row(
                             children: [
@@ -145,15 +161,6 @@ class DeliveryCartWidget extends StatelessWidget {
             const SizedBox(
               height: 5,
             ),
-
-            // SizedBox(
-            //   width: MediaQuery.of(context)
-            //       .size
-            //       .width, // Adjust the width as needed
-            //   child: CustomPaint(
-            //     painter: DottedLinePainter(),
-            //   ),
-            // ),
           ],
         ),
       ),

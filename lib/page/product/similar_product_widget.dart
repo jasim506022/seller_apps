@@ -19,7 +19,7 @@ class SimilarProductWidget extends StatelessWidget {
       height: mq.height * .18,
       width: mq.width * .3,
       padding: const EdgeInsets.all(10),
-      margin: const EdgeInsets.only(left: 15),
+      margin: EdgeInsets.only(left: mq.width * .034),
       color: Theme.of(context).cardColor,
       child: Column(
         children: [

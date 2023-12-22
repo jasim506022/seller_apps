@@ -27,6 +27,7 @@ class ProfileModel {
       'name': name,
       'phone': phone,
       'uid': uid,
+      "status": status
     };
   }
 

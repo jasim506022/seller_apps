@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:seller_apps/auth/signinscreen.dart';
+import '../const/const.dart';
 import '../widget/textfieldformwidget.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
@@ -16,7 +18,6 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     emailET.dispose();
     super.dispose();
   }
@@ -73,19 +74,35 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
-                  alignment: Alignment.center,
-                  height: 60,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                      color: const Color(0xff00b761),
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Text(
-                    "Reset Passord",
-                    style: GoogleFonts.poppins(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 17),
+                InkWell(
+                  onTap: () async {
+                    await FirebaseAuth.instance
+                        .sendPasswordResetEmail(email: emailET.text)
+                        .then((value) {
+                      globalMethod.flutterToast(msg: "Please Check Your mail");
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SignInScrren(),
+                          ));
+                    }).catchError((error) {
+                      globalMethod.flutterToast(msg: "Error Occured: $error");
+                    });
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    height: 60,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        color: const Color(0xff00b761),
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Text(
+                      "Reset Passord",
+                      style: GoogleFonts.poppins(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17),
+                    ),
                   ),
                 ),
                 const SizedBox(

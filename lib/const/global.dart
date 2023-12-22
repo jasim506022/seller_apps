@@ -1,20 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 SharedPreferences? sharedPreference;
 
-flutterToast({required String msg}) {
-  Fluttertoast.showToast(
-      msg: msg,
-      toastLength: Toast.LENGTH_LONG,
-      gravity: ToastGravity.BOTTOM,
-      backgroundColor: const Color(0xff00B761),
-      textColor: Colors.white,
-      fontSize: 16.0);
-}
-
-const List<String> categorylist = <String>[
+List<String> allCategoryList = <String>[
   "All",
   'Fruits',
   'Vegetables',
@@ -23,4 +11,31 @@ const List<String> categorylist = <String>[
   "Drinks",
   "Meat & Fish",
   "Candy & Chocolate"
+];
+
+List<String> category = <String>[
+  'Fruits',
+  'Vegetables',
+  'Dairy & Egg',
+  'Dry & Canned',
+  "Drinks",
+  "Meat & Fish",
+  "Candy & Chocolate",
+];
+
+// const List<String> category = <String>[
+//   'Fruits',
+//   'Vegetables',
+//   'Dairy & Egg',
+//   'Dry & Canned',
+//   "Drinks",
+//   "Meat & Fish",
+//   "Candy & Chocolate"
+// ];
+const List<String> unitList = <String>[
+  'Per Kg',
+  'Per Dozen',
+  'Litter',
+  'Pc',
+  'Pcs',
 ];

@@ -1,13 +1,13 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:seller_apps/auth/forgetpasswordscreen.dart';
 import 'package:seller_apps/auth/signupscreen.dart';
-import 'package:seller_apps/main/mainscreen.dart';
+import 'package:seller_apps/page/main/mainscreen.dart';
 import 'package:seller_apps/widget/loadingwidget.dart';
-import '../const/global.dart';
+import '../const/const.dart';
+
 import '../widget/passwordtextfieldwidget.dart';
 import '../widget/textfieldformwidget.dart';
 
@@ -26,7 +26,6 @@ class _SignInScrrenState extends State<SignInScrren> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     passwordET.dispose();
     emailET.dispose();
     super.dispose();
@@ -41,6 +40,7 @@ class _SignInScrrenState extends State<SignInScrren> {
         },
       );
 
+      // ignore: unused_local_variable
       User? currentUser;
 
       FirebaseAuth.instance
@@ -56,7 +56,7 @@ class _SignInScrrenState extends State<SignInScrren> {
             ));
       }).catchError((error) {
         Navigator.pop(context);
-        flutterToast(msg: 'Error Occured: $error');
+        globalMethod.flutterToast(msg: 'Error Occured: $error');
       });
     }
   }
@@ -137,7 +137,7 @@ class _SignInScrrenState extends State<SignInScrren> {
                         "Forget Password",
                         style: GoogleFonts.poppins(
                             color: const Color(0xff686874),
-                            fontWeight: FontWeight.w500),
+                            fontWeight: FontWeight.w800),
                       ),
                     )),
                 const SizedBox(

@@ -27,6 +27,7 @@ class _PaswordTextFieldWidgetState extends State<PaswordTextFieldWidget> {
             if (value!.isEmpty) {
               return "Field Doesn't Empty";
             }
+            return null;
           },
           style: GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.w600),
           obscureText: widget.obscureText!,

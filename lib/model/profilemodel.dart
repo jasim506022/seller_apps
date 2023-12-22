@@ -6,14 +6,17 @@ class ProfileModel {
   String? imageurl;
   String? name;
   String? phone;
-  ProfileModel({
-    this.address,
-    this.earnings,
-    this.email,
-    this.imageurl,
-    this.name,
-    this.phone,
-  });
+  String? status;
+  String? uid;
+  ProfileModel(
+      {this.address,
+      this.earnings,
+      this.email,
+      this.imageurl,
+      this.name,
+      this.phone,
+      this.status,
+      this.uid});
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -23,6 +26,7 @@ class ProfileModel {
       'imageurl': imageurl,
       'name': name,
       'phone': phone,
+      'uid': uid,
     };
   }
 
@@ -34,6 +38,8 @@ class ProfileModel {
       imageurl: map['imageurl'],
       name: map['name'],
       phone: map['phone'],
+      status: map['status'],
+      uid: map['uid'],
     );
   }
 }

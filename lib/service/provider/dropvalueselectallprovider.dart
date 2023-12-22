@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 import '../../const/global.dart';
 
-class DropValuesAllProvider with ChangeNotifier {
-  String droupSelectValue = categorylist.first;
+class CateoryDropValueProvider with ChangeNotifier {
+  String _cateoryDropValueProvider = allCategoryList.first;
 
-  String get drouValue => droupSelectValue;
+  String get cateoryDropValue => _cateoryDropValueProvider;
 
   setDroupValue({required String selectValue}) {
-    droupSelectValue = selectValue;
+    _cateoryDropValueProvider = selectValue;
     notifyListeners();
   }
 }

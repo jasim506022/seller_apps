@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,6 +13,7 @@ import 'package:seller_apps/auth/signinscreen.dart';
 import 'package:seller_apps/const/global.dart';
 import 'package:seller_apps/widget/loadingwidget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../const/const.dart';
 import '../widget/passwordtextfieldwidget.dart';
 import '../widget/textfieldformwidget.dart';
 import 'forgetpasswordscreen.dart';
@@ -25,7 +27,6 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   @override
   void dispose() {
-    // TODO: implement dispose
     phoneET.dispose();
     nameET.dispose();
     emailET.dispose();
@@ -88,7 +89,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             currentUser = user.user;
           }).catchError((error) {
             Navigator.pop(context);
-            flutterToast(msg: 'Error $error');
+            globalMethod.flutterToast(msg: 'Error $error');
           });
           if (currentUser != null) {
             FirebaseFirestore.instance
@@ -113,7 +114,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
 // ignore: use_build_context_synchronously
             Navigator.pop(context);
-            flutterToast(msg: 'Registration Successfully');
+            globalMethod.flutterToast(msg: 'Registration Successfully');
 
             // ignore: use_build_context_synchronously
             Navigator.push(
@@ -125,12 +126,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
         } else {
           // ignore: use_build_context_synchronously
           Navigator.pop(context);
-          flutterToast(msg: "Password and Confirm Password Doesn't Equal");
+          globalMethod.flutterToast(
+              msg: "Password and Confirm Password Doesn't Equal");
         }
       }
     } else {
       // ignore: use_build_context_synchronously
-      flutterToast(msg: 'Please Select An Image');
+      globalMethod.flutterToast(msg: 'Please Select An Image');
     }
   }
 
@@ -227,8 +229,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             fontSize: 14, fontWeight: FontWeight.w600),
                         decoration: InputDecoration(
                           hintText: 'Phone Number',
-                          hintStyle:
-                              GoogleFonts.poppins(color: Color(0xffc8c8d5)),
+                          hintStyle: GoogleFonts.poppins(
+                              color: const Color(0xffc8c8d5)),
                           labelStyle: GoogleFonts.poppins(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
@@ -275,7 +277,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 InkWell(
                   onTap: () {
-                    print("Hello");
+                    if (kDebugMode) {
+                      print("Hello");
+                    }
                     signUpForm();
                   },
                   child: Container(

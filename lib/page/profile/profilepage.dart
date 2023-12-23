@@ -135,6 +135,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               await InternetAddress.lookup('google.com');
                           if (result.isNotEmpty &&
                               result[0].rawAddress.isNotEmpty) {
+                            /*
                             if (mounted) {
                               globalMethod.logoutOrDeleteScreen(
                                   context: context,
@@ -154,6 +155,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     );
                                   });
                             }
+                            */
                           }
                         } on SocketException {
                           globalMethod.flutterToast(

@@ -53,11 +53,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
       },
       child: WillPopScope(onWillPop: () async {
         if (widget.isEdit) {
-          bool? stayOnScreen = await globalMethod.stayOnScreenMethod(
-              content: '"Do you Want to Save Profile Changes"',
-              context: context,
-              title: "Save Profile Data");
-          return Future.value(stayOnScreen);
+          // bool? stayOnScreen = await globalMethod.stayOnScreenMethod(
+          //     content: '"Do you Want to Save Profile Changes"',
+          //     context: context,
+          //     title: "Save Profile Data");
+          // return Future.value(stayOnScreen);
         }
         return true;
       }, child: Consumer<EditPageProvider>(
@@ -242,8 +242,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                                       shape: BoxShape.circle),
                                                   child: IconButton(
                                                       onPressed: () {
-                                                        _selectImageForProfile(
-                                                            textStyle);
+                                                        // _selectImageForProfile(
+                                                        //     textStyle);
                                                       },
                                                       icon: Icon(
                                                         Icons.camera_alt,
@@ -415,6 +415,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     );
   }
 
+/*
   Future<dynamic> _selectImageForProfile(Textstyle textStyle) {
     return showModalBottomSheet(
       shape: const RoundedRectangleBorder(
@@ -510,4 +511,5 @@ class _EditProfilePageState extends State<EditProfilePage> {
       ),
     );
   }
+  */
 }

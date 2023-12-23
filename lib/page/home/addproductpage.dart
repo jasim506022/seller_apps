@@ -11,11 +11,13 @@ import 'package:seller_apps/service/provider/loadingprovider.dart';
 
 import '../../const/const.dart';
 import '../../const/global.dart';
+import '../../const/globalmethod.dart';
 import '../../const/gobalcolor.dart';
 import '../../const/textstyle.dart';
 import '../../service/database/firebasedatabase.dart';
 import '../../model/productsmodel.dart';
 import '../../service/provider/imageaddremoveprovider.dart';
+import '../../widget/capture_image_selection_dialog_widget.dart';
 import '../../widget/custom_show_dialog_widget.dart';
 import '../../widget/textfieldformwidget.dart';
 
@@ -955,8 +957,82 @@ class _AddProductPageState extends State<AddProductPage> {
                     backgroundColor: greenColor,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30))),
-                onPressed: () => globalMethod.obtainImageDialog(
-                    context: context, imagePicker: imagePicker),
+                onPressed: () => showDialog(
+                      context: context,
+                      builder: (context) => CaptureImageSelectionDialogWidget(
+                          imagePicker: imagePicker),
+                    ),
+                // globalMethod.obtainImageDialog(
+                //     context: context, imagePicker: imagePicker),
+                /*
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return SimpleDialog(
+                        backgroundColor: Theme.of(context).cardColor,
+                        title: Text(
+                          "Selected Image",
+                          style: GoogleFonts.poppins(
+                            color: greenColor,
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        children: [
+                          SimpleDialogOption(
+                            onPressed: () {
+                              captureImage(
+                                  context: context,
+                                  imagePicker: imagePicker,
+                                  source: ImageSource.camera);
+                            },
+                            child: Text(
+                              "Capture image with Camera",
+                              style: GoogleFonts.poppins(
+                                color: Theme.of(context).primaryColor,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                          SimpleDialogOption(
+                            onPressed: () {
+                              captureImage(
+                                  context: context,
+                                  imagePicker: imagePicker,
+                                  source: ImageSource.gallery);
+                            },
+                            child: Text(
+                              "Capture image with Gallery",
+                              style: GoogleFonts.poppins(
+                                color: Theme.of(context).primaryColor,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                          SimpleDialogOption(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text(
+                              "Cancel",
+                              style: GoogleFonts.poppins(
+                                color: red,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    }
+
+                     => CaptureImageSelectionDialogWidget(
+                         imagePicker: imagePicker),
+                    ),
+               */
+
                 child: Text(
                   "Add New Product",
                   style: textstyle.largeText.copyWith(

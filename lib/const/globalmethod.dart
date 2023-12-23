@@ -190,6 +190,7 @@ class GlobalMethod {
     loadingProvider.setLoading(loading: false);
   }
 
+/*
 // Obtain Image From Dialog
   obtainImageDialog(
       {required BuildContext context, required ImagePicker imagePicker}) {
@@ -276,6 +277,9 @@ class GlobalMethod {
     uploadSingleTourProvider.setImageListXfile(imageListXfile: imagesListXfile);
   }
 
+*/
+
+/*
 // StayOnScreenMethod
   Future<dynamic> stayOnScreenMethod(
       {required BuildContext context,
@@ -317,13 +321,14 @@ class GlobalMethod {
       },
     );
   }
-
+*/
   String getFormateDate(
       {required BuildContext context, required String datetime}) {
     final date = DateTime.fromMillisecondsSinceEpoch(int.parse(datetime));
     return DateFormat("yyyy-MM-dd").format(date);
   }
 
+/*
 //Capture Image From Gallery
   captureImageSinglePhoto(
       {required BuildContext context,
@@ -335,7 +340,7 @@ class GlobalMethod {
     XFile? imagesListXfile = await imagePicker.pickImage(source: imageSource);
     uploadSingleTourProvider.setImageFile(photo: imagesListXfile!);
   }
-
+  */
   double productPrice(double productprice, double discount) {
     return productprice - (productprice * discount / 100);
   }
@@ -355,6 +360,7 @@ class GlobalMethod {
     );
   }
 
+/*
 // Logout Screen
   logoutOrDeleteScreen(
       {required BuildContext context,
@@ -392,4 +398,6 @@ class GlobalMethod {
       },
     );
   }
+
+*/
 }

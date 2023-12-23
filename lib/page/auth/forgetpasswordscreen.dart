@@ -56,10 +56,6 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                 );
               },
             );
-            // globalMethod.showDialogMethod(
-            //     context: context,
-            //     message: e.toString(),
-            //     title: 'Error Occured');
           }
         },
         child: Text(

@@ -127,6 +127,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                                   color: Theme.of(context).cardColor,
                                   onSelected: (ProductSelect product) {
                                     if (product.name == "detele") {
+                                      /*
                                       globalMethod.logoutOrDeleteScreen(
                                           context: context,
                                           title: "Are You want to Delete",
@@ -151,6 +152,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                                                       "An Error Occured: $error");
                                             }
                                           });
+
+*/
 /*
                                       showDialog(
                                         context: context,

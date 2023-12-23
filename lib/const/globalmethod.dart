@@ -2,14 +2,12 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:image_picker/image_picker.dart';
+
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 
 import '../model/profilemodel.dart';
 import '../service/database/firebasedatabase.dart';
-import '../service/provider/imageaddremoveprovider.dart';
-import '../service/provider/editprofileprovider.dart';
+
 import '../service/provider/loadingprovider.dart';
 import '../widget/show_error_dialog_widget.dart';
 import 'const.dart';
@@ -190,157 +188,12 @@ class GlobalMethod {
     loadingProvider.setLoading(loading: false);
   }
 
-/*
-// Obtain Image From Dialog
-  obtainImageDialog(
-      {required BuildContext context, required ImagePicker imagePicker}) {
-    return showDialog(
-      context: context,
-      builder: (context) {
-        return SimpleDialog(
-          backgroundColor: Theme.of(context).cardColor,
-          title: Text(
-            "Selected Image",
-            style: GoogleFonts.poppins(
-              color: greenColor,
-              fontSize: 17,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          children: [
-            SimpleDialogOption(
-              onPressed: () {
-                captureImageFromCamera(
-                    context: context, imagePicker: imagePicker);
-              },
-              child: Text(
-                "Capture image with Camera",
-                style: GoogleFonts.poppins(
-                  color: Theme.of(context).primaryColor,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-            SimpleDialogOption(
-              onPressed: () {
-                captureImageFromGallery(
-                    context: context, imagePicker: imagePicker);
-              },
-              child: Text(
-                "Capture image with Gallery",
-                style: GoogleFonts.poppins(
-                  color: Theme.of(context).primaryColor,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-            SimpleDialogOption(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text(
-                "Cancel",
-                style: GoogleFonts.poppins(
-                  color: red,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-//Capture Image From Camera
-  captureImageFromCamera(
-      {required BuildContext context, required ImagePicker imagePicker}) async {
-    ImageAddRemoveProvider addUpdateProdcutProvider =
-        Provider.of<ImageAddRemoveProvider>(context, listen: false);
-    Navigator.pop(context);
-    XFile? image = await imagePicker.pickImage(source: ImageSource.camera);
-    List<XFile> imagesListXfile = [];
-    imagesListXfile.add(image!);
-    addUpdateProdcutProvider.setImageListXfile(imageListXfile: imagesListXfile);
-  }
-
-  //Capture Image From Gallery
-  captureImageFromGallery(
-      {required BuildContext context, required ImagePicker imagePicker}) async {
-    ImageAddRemoveProvider uploadSingleTourProvider =
-        Provider.of<ImageAddRemoveProvider>(context, listen: false);
-    Navigator.pop(context);
-    List<XFile> imagesListXfile = await imagePicker.pickMultiImage();
-    uploadSingleTourProvider.setImageListXfile(imageListXfile: imagesListXfile);
-  }
-
-*/
-
-/*
-// StayOnScreenMethod
-  Future<dynamic> stayOnScreenMethod(
-      {required BuildContext context,
-      required String title,
-      required String content,
-      bool isBackScreenButton = false}) {
-    return showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          backgroundColor: Theme.of(context).cardColor,
-          title: Text(title,
-              style: GoogleFonts.poppins(
-                  color: greenColor,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold)),
-          content: Text(content,
-              style: GoogleFonts.poppins(
-                  color: Theme.of(context).primaryColor,
-                  fontSize: 13,
-                  fontWeight: FontWeight.w700)),
-          actions: [
-            TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text("Okay")),
-            TextButton(
-                onPressed: () {
-                  if (isBackScreenButton) {
-                    Navigator.popUntil(context, (route) => route.isFirst);
-                  } else {
-                    Navigator.pop(context, true);
-                  }
-                },
-                child: const Text("No"))
-          ],
-        );
-      },
-    );
-  }
-*/
   String getFormateDate(
       {required BuildContext context, required String datetime}) {
     final date = DateTime.fromMillisecondsSinceEpoch(int.parse(datetime));
     return DateFormat("yyyy-MM-dd").format(date);
   }
 
-/*
-//Capture Image From Gallery
-  captureImageSinglePhoto(
-      {required BuildContext context,
-      required ImagePicker imagePicker,
-      required ImageSource imageSource}) async {
-    EditPageProvider uploadSingleTourProvider =
-        Provider.of<EditPageProvider>(context, listen: false);
-
-    XFile? imagesListXfile = await imagePicker.pickImage(source: imageSource);
-    uploadSingleTourProvider.setImageFile(photo: imagesListXfile!);
-  }
-  */
   double productPrice(double productprice, double discount) {
     return productprice - (productprice * discount / 100);
   }
@@ -359,45 +212,4 @@ class GlobalMethod {
       contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
     );
   }
-
-/*
-// Logout Screen
-  logoutOrDeleteScreen(
-      {required BuildContext context,
-      required String title,
-      required String content,
-      required Function function}) {
-    return showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          backgroundColor: Theme.of(context).cardColor,
-          title: Text(title,
-              style: GoogleFonts.poppins(
-                  color: greenColor,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold)),
-          content: Text(content,
-              style: GoogleFonts.poppins(
-                  color: Theme.of(context).primaryColor,
-                  fontSize: 13,
-                  fontWeight: FontWeight.w700)),
-          actions: [
-            TextButton(
-                onPressed: () {
-                  function();
-                },
-                child: const Text("Okay")),
-            TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text("No"))
-          ],
-        );
-      },
-    );
-  }
-
-*/
 }

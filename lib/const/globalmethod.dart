@@ -194,7 +194,7 @@ class GlobalMethod {
     return DateFormat("yyyy-MM-dd").format(date);
   }
 
-  double productPrice(double productprice, double discount) {
+  double discountedPrice(double productprice, double discount) {
     return productprice - (productprice * discount / 100);
   }
 

@@ -148,7 +148,7 @@ class _CartOrderWidgetState extends State<CartOrderWidget> {
                                         style: textstyle.mediumText600
                                             .copyWith(color: greenColor)),
                                     Text(
-                                        "${globalMethod.productPrice(model.productprice!, model.discount!.toDouble())}",
+                                        "${globalMethod.discountedPrice(model.productprice!, model.discount!.toDouble())}",
                                         style: textstyle.mediumText600.copyWith(
                                             letterSpacing: 1.2,
                                             color: greenColor)),
@@ -156,7 +156,7 @@ class _CartOrderWidgetState extends State<CartOrderWidget> {
                                 ),
                                 const Spacer(),
                                 Text(
-                                    "= ৳. ${globalMethod.productPrice(model.productprice!, model.discount!.toDouble()) * widget.seperateQuantilies[index]}",
+                                    "= ৳. ${globalMethod.discountedPrice(model.productprice!, model.discount!.toDouble()) * widget.seperateQuantilies[index]}",
                                     style: textstyle.mediumTextbold.copyWith(
                                       color: greenColor,
                                       fontSize: 16,

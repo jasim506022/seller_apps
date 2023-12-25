@@ -26,13 +26,13 @@ class SimilarProductWidget extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: FancyShimmerImage(
-              height: 100,
+              height: mq.height * .118,
               boxFit: BoxFit.fill,
               imageUrl: models.productimage![0],
             ),
           ),
-          const SizedBox(
-            height: 10,
+          SizedBox(
+            height: mq.height * .012,
           ),
           FittedBox(
             child: Text(

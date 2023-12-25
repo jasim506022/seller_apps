@@ -91,7 +91,7 @@ class ProductWidget extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            "৳. ${(productModel.productprice!) - (productModel.productprice! * productModel.discount! / 100)}",
+                            "৳. ${globalMethod.discountedPrice(productModel.productprice!, productModel.discount!.toDouble())}",
                             style: textstyle.largeText.copyWith(color: red),
                           ),
                           SizedBox(

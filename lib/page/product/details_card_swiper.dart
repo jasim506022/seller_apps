@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
-import 'package:seller_apps/const/const.dart';
 
+import '../../const/const.dart';
 import '../../const/gobalcolor.dart';
 import '../../model/productsmodel.dart';
 
@@ -33,8 +33,6 @@ class DetailsSwiperWidget extends StatelessWidget {
             );
           },
           autoplay: productModel.productimage!.length > 1,
-
-          // autoplay: productModel.productimage!.length == 1 ? false : true,
           itemCount: productModel.productimage!.length,
           pagination: SwiperPagination(
               alignment: Alignment.bottomCenter,

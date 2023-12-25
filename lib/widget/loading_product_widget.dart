@@ -92,28 +92,6 @@ class LoadingProductWidget extends StatelessWidget {
                         _buildShimmerTextContainer(utils, mq.height * 0.025),
                         SizedBox(height: mq.height * 0.012),
                         _buildShimmerTextContainer(utils, mq.height * 0.05),
-                        /*
-                        SizedBox(height: mq.height * 0.02),
-                        Container(
-                          height: mq.height * 0.025,
-                          width: mq.width,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: utils.widgetShimmerColor,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          height: mq.height * 0.05,
-                          width: mq.width,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: utils.widgetShimmerColor,
-                          ),
-                        ),
-                     */
                       ],
                     ),
                   )

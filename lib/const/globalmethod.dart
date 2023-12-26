@@ -16,21 +16,45 @@ import 'gobalcolor.dart';
 
 class GlobalMethod {
 // Text Form Field Decoration
-  InputDecoration textFormFielddecoration(
-      {bool isShowPassword = false,
-      required String hintText,
-      bool obscureText = false,
-      required Function function}) {
+  InputDecoration textFormFielddecoration({
+    bool isShowPassword = false,
+    required String hintText,
+    bool obscureText = false,
+    required Function function,
+    bool profileTextForm = false,
+  }) {
+    final OutlineInputBorder defaultOutlineInputBorder = OutlineInputBorder(
+      borderSide: BorderSide(
+        color: profileTextForm ? Colors.black : Colors.transparent,
+        width: profileTextForm ? 1 : 0,
+      ),
+      borderRadius: BorderRadius.circular(15),
+    );
     return InputDecoration(
-      labelStyle:
-          GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.w500),
+      labelStyle: GoogleFonts.poppins(
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
+      ),
       fillColor: searchLightColor,
       filled: true,
       hintText: hintText,
-      enabledBorder: OutlineInputBorder(
+      border: defaultOutlineInputBorder,
+      enabledBorder: defaultOutlineInputBorder,
+      focusedBorder: defaultOutlineInputBorder,
+      /*
+      border: OutlineInputBorder(
+      borderSide: const BorderSide(color: Colors.black, width: 2),
+      borderRadius: BorderRadius.circular(15),
+    ),
+      enabledBorder: 
+      OutlineInputBorder(
           borderSide: BorderSide.none, borderRadius: BorderRadius.circular(15)),
-      focusedBorder: OutlineInputBorder(
+      focusedBorder: 
+      
+      OutlineInputBorder(
           borderSide: BorderSide.none, borderRadius: BorderRadius.circular(15)),
+      
+      */
       suffixIcon: isShowPassword
           ? IconButton(
               onPressed: () {

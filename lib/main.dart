@@ -19,7 +19,7 @@ import 'page/splash/onboardingpage.dart';
 import 'page/splash/splashpage.dart';
 
 import 'service/provider/dropvalueselectallprovider.dart';
-import 'service/provider/editprofileprovider.dart';
+
 import 'service/provider/loadingprovider.dart';
 import 'service/provider/searchprovider.dart';
 import 'service/provider/theme_provider.dart';
@@ -64,11 +64,6 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) {
             return TotalAmountProvider();
-          },
-        ),
-        ChangeNotifierProvider(
-          create: (context) {
-            return EditPageProvider();
           },
         ),
         ChangeNotifierProvider(

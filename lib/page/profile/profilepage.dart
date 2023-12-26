@@ -8,13 +8,13 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
-import 'package:seller_apps/service/database/firebasedatabase.dart';
 
 import '../../const/approutes.dart';
 import '../../const/const.dart';
 import '../../const/gobalcolor.dart';
 import '../../const/textstyle.dart';
 import '../../model/profilemodel.dart';
+import '../../service/database/firebasedatabase.dart';
 import '../../service/provider/theme_provider.dart';
 import '../../widget/custom_show_dialog_widget.dart';
 import '../completeorder/totalsellerpage.dart';
@@ -43,6 +43,7 @@ class _ProfilePageState extends State<ProfilePage> {
         statusBarIconBrightness: Theme.of(context).brightness));
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text("Profile"),
       ),
       body: FutureBuilder(

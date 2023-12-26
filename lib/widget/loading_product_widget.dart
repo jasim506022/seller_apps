@@ -21,8 +21,8 @@ class LoadingProductWidget extends StatelessWidget {
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: .73,
-          crossAxisSpacing: mq.width * .009,
-          mainAxisSpacing: mq.width * .018),
+          crossAxisSpacing: mq.width * .006,
+          mainAxisSpacing: mq.width * .015),
       itemCount: 20,
       itemBuilder: (context, index) {
         return Card(
@@ -42,7 +42,7 @@ class LoadingProductWidget extends StatelessWidget {
                   Stack(
                     children: [
                       Container(
-                        height: mq.height * .145,
+                        height: mq.height * .141,
                         alignment: Alignment.center,
                         margin: const EdgeInsets.all(5),
                         padding: const EdgeInsets.all(10),

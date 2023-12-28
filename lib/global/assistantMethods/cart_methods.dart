@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:seller_apps/global/globall.dart';
 
 class CartMethods {
@@ -25,8 +26,12 @@ class CartMethods {
   separateItemQuantitiesFromUserCartList() {
     //2367121:5
     List<String>? userCartList = sharedPreferences!.getStringList("userCart");
-    print("userCartList = ");
-    print(userCartList);
+    if (kDebugMode) {
+      print("userCartList = ");
+    }
+    if (kDebugMode) {
+      print(userCartList);
+    }
 
     List<int> itemsQuantitiesList = [];
     for (int i = 1; i < userCartList!.length; i++) {
@@ -42,8 +47,12 @@ class CartMethods {
       itemsQuantitiesList.add(quantityNumber);
     }
 
-    print("itemsQuantitiesList = ");
-    print(itemsQuantitiesList);
+    if (kDebugMode) {
+      print("itemsQuantitiesList = ");
+    }
+    if (kDebugMode) {
+      print(itemsQuantitiesList);
+    }
     return itemsQuantitiesList;
   }
 
@@ -69,8 +78,12 @@ class CartMethods {
   separateOrderItemsQuantities(productIDs) {
     //2367121:5
     List<String>? userCartList = List<String>.from(productIDs);
-    print("userCartList = ");
-    print(userCartList);
+    if (kDebugMode) {
+      print("userCartList = ");
+    }
+    if (kDebugMode) {
+      print(userCartList);
+    }
 
     List<int> itemsQuantitiesList = [];
     for (int i = 1; i < userCartList.length; i++) {

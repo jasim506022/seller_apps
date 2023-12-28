@@ -17,8 +17,11 @@ import 'details_card_swiper.dart';
 import 'list_similer_product_widget.dart';
 
 class ProductDetailsPage extends StatefulWidget {
-  const ProductDetailsPage({super.key, required this.productModel});
+  const ProductDetailsPage(
+      {super.key, required this.productModel, this.isDelivery = false});
   final ProductModel productModel;
+
+  final bool? isDelivery;
 
   @override
   State<ProductDetailsPage> createState() => _ProductDetailsPageState();
@@ -125,7 +128,10 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: WillPopScope(
         onWillPop: () async {
-          Navigator.pushNamed(context, AppRouters.mainPage, arguments: 1);
+          widget.isDelivery!
+              ? Navigator.pop(context)
+              : Navigator.pushNamed(context, AppRouters.mainPage, arguments: 1);
+
           return Future.value(true);
         },
         child: SingleChildScrollView(
@@ -161,11 +167,11 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                               children: [
                                 InkWell(
                                   onTap: () {
-                                    Navigator.pushNamed(
-                                      context,
-                                      AppRouters.mainPage,
-                                      arguments: 1,
-                                    );
+                                    widget.isDelivery!
+                                        ? Navigator.pop(context)
+                                        : Navigator.pushNamed(
+                                            context, AppRouters.mainPage,
+                                            arguments: 1);
                                   },
                                   child: Container(
                                     alignment: Alignment.center,
@@ -274,18 +280,26 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                     SizedBox(
                       height: mq.height * .024,
                     ),
-                    Text(
-                      "Similar Products",
-                      style: GoogleFonts.abrilFatface(
-                          color: Theme.of(context).primaryColor,
-                          fontSize: 18,
-                          letterSpacing: 2,
-                          fontWeight: FontWeight.w700),
-                    ),
-                    SizedBox(
-                      height: mq.height * .012,
-                    ),
-                    ListSimilerProductWidget(productModel: widget.productModel),
+                    if (!widget.isDelivery!)
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Similar Products",
+                            style: GoogleFonts.abrilFatface(
+                                color: Theme.of(context).primaryColor,
+                                fontSize: 18,
+                                letterSpacing: 2,
+                                fontWeight: FontWeight.w700),
+                          ),
+                          SizedBox(
+                            height: mq.height * .012,
+                          ),
+                          ListSimilerProductWidget(
+                              productModel: widget.productModel),
+                        ],
+                      ),
                     SizedBox(
                       height: mq.height * .024,
                     ),

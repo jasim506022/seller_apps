@@ -1,76 +1,25 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
-import 'package:seller_apps/page/order/single_card_widget.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:seller_apps/model/productsmodel.dart';
 
 import '../../const/const.dart';
 import '../../const/gobalcolor.dart';
-import '../../model/productsmodel.dart';
-import 'deliverypage.dart';
+import '../../const/textstyle.dart';
 
-class CartOrderWidget extends StatefulWidget {
-  const CartOrderWidget(
+class SingleCardWidget extends StatelessWidget {
+  const SingleCardWidget(
       {super.key,
-      required this.itemCount,
-      required this.data,
-      required this.orderId,
-      required this.seperateQuantilies});
-
-  final int itemCount;
-  final List<DocumentSnapshot> data;
-  final String orderId;
+      required this.productModel,
+      required this.seperateQuantilies,
+      required this.index});
+  final ProductModel productModel;
   final List<dynamic> seperateQuantilies;
+  final int index;
 
-  @override
-  State<CartOrderWidget> createState() => _CartOrderWidgetState();
-}
-
-class _CartOrderWidgetState extends State<CartOrderWidget> {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => DeliveryPage(
-                orderId: widget.orderId,
-                seperateQuantilies: widget.seperateQuantilies,
-              ),
-            ));
-      },
-      child: Card(
-        color: Theme.of(context).cardColor,
-        elevation: 5,
-        margin: EdgeInsets.symmetric(
-            horizontal: mq.width * .033, vertical: mq.width * .012),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-        shadowColor: black,
-        child: Container(
-          padding: const EdgeInsets.all(10),
-          margin: const EdgeInsets.all(10),
-          height: widget.itemCount * mq.height * .151,
-          child: ListView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: widget.itemCount,
-            itemBuilder: (context, index) {
-              ProductModel model = ProductModel.fromMap(
-                  widget.data[index].data() as Map<String, dynamic>);
-              return SingleCardWidget(
-                index: index,
-                productModel: model,
-                seperateQuantilies: widget.seperateQuantilies,
-              );
-              //return _cardWidget(context, model, textstyle, index);
-            },
-          ),
-        ),
-      ),
-    );
-  }
-  /*
-
-  Container _cardWidget(BuildContext context, ProductModel model,
-      Textstyle textstyle, int index) {
+    Textstyle textstyle = Textstyle(context);
     return Container(
       height: mq.height * .123,
       width: mq.width * .9,
@@ -95,7 +44,7 @@ class _CartOrderWidgetState extends State<CartOrderWidget> {
                   child: FancyShimmerImage(
                     height: mq.height * .141,
                     boxFit: BoxFit.contain,
-                    imageUrl: model.productimage![0],
+                    imageUrl: productModel.productimage![0],
                   ),
                 ),
               ),
@@ -111,7 +60,7 @@ class _CartOrderWidgetState extends State<CartOrderWidget> {
                     color: lightred.withOpacity(.2),
                   ),
                   child: Text(
-                    "${model.discount}% Off",
+                    "${productModel.discount}% Off",
                     style: GoogleFonts.poppins(
                       color: red,
                       fontSize: 10,
@@ -135,14 +84,14 @@ class _CartOrderWidgetState extends State<CartOrderWidget> {
                 children: [
                   FittedBox(
                     child: Text(
-                      model.productname!,
+                      productModel.productname!,
                       style: textstyle.largestText.copyWith(fontSize: 16),
                     ),
                   ),
                   SizedBox(height: mq.height * .007),
                   Row(
                     children: [
-                      Text(model.productunit!.toString(),
+                      Text(productModel.productunit!.toString(),
                           style: textstyle.mediumTextbold.copyWith(
                             color: Theme.of(context).hintColor,
                           )),
@@ -156,18 +105,18 @@ class _CartOrderWidgetState extends State<CartOrderWidget> {
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text("${widget.seperateQuantilies[index]} * ",
+                          Text("${seperateQuantilies[index]} * ",
                               style: textstyle.mediumText600
                                   .copyWith(color: greenColor)),
                           Text(
-                              "${globalMethod.discountedPrice(model.productprice!, model.discount!.toDouble())}",
+                              "${globalMethod.discountedPrice(productModel.productprice!, productModel.discount!.toDouble())}",
                               style: textstyle.mediumText600.copyWith(
                                   letterSpacing: 1.2, color: greenColor)),
                         ],
                       ),
                       const Spacer(),
                       Text(
-                          "= ৳. ${globalMethod.discountedPrice(model.productprice!, model.discount!.toDouble()) * widget.seperateQuantilies[index]}",
+                          "= ৳. ${globalMethod.discountedPrice(productModel.productprice!, productModel.discount!.toDouble()) * seperateQuantilies[index]}",
                           style: textstyle.mediumTextbold.copyWith(
                             color: greenColor,
                             fontSize: 16,
@@ -183,6 +132,4 @@ class _CartOrderWidgetState extends State<CartOrderWidget> {
       ),
     );
   }
-
-*/
 }

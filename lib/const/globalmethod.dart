@@ -41,20 +41,6 @@ class GlobalMethod {
       border: defaultOutlineInputBorder,
       enabledBorder: defaultOutlineInputBorder,
       focusedBorder: defaultOutlineInputBorder,
-      /*
-      border: OutlineInputBorder(
-      borderSide: const BorderSide(color: Colors.black, width: 2),
-      borderRadius: BorderRadius.circular(15),
-    ),
-      enabledBorder: 
-      OutlineInputBorder(
-          borderSide: BorderSide.none, borderRadius: BorderRadius.circular(15)),
-      focusedBorder: 
-      
-      OutlineInputBorder(
-          borderSide: BorderSide.none, borderRadius: BorderRadius.circular(15)),
-      
-      */
       suffixIcon: isShowPassword
           ? IconButton(
               onPressed: () {
@@ -106,7 +92,7 @@ class GlobalMethod {
               textStyle: const TextStyle(
                 decoration: TextDecoration.underline,
               ),
-              color: greenColor,
+              color: deepGreen,
               fontWeight: FontWeight.w800))
     ]));
   }
@@ -215,7 +201,7 @@ class GlobalMethod {
   String getFormateDate(
       {required BuildContext context, required String datetime}) {
     final date = DateTime.fromMillisecondsSinceEpoch(int.parse(datetime));
-    return DateFormat("yyyy-MM-dd").format(date);
+    return DateFormat("MMM d, yyyy").format(date);
   }
 
   double discountedPrice(double productprice, double discount) {
@@ -234,6 +220,17 @@ class GlobalMethod {
         borderRadius: BorderRadius.circular(15),
       ),
       contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+    );
+  }
+
+  Container buildShimmerTextContainer(Color color, double height) {
+    return Container(
+      height: height,
+      width: mq.width,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(5),
+        color: color,
+      ),
     );
   }
 }

@@ -250,7 +250,7 @@ class FirebaseDatabase {
     return firestore
         .collection("orders")
         .where("status", isEqualTo: status)
-        .where("seller", arrayContains: sharedPreference!.get("uid"))
+        .where("seller", arrayContains: selleruid)
         .snapshots();
   }
 

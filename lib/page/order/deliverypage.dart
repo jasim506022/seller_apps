@@ -24,7 +24,6 @@ class _DeliveryPageState extends State<DeliveryPage> {
   String orderStatus = "";
   String userId = "";
 
-// Main widget build method
   Widget _buildOrderStatusContainer() {
     switch (orderStatus) {
       case "normal":
@@ -46,7 +45,7 @@ class _DeliveryPageState extends State<DeliveryPage> {
           onTap: () => _showOrderCompleteDialog,
         );
       default:
-        return const SizedBox.shrink(); // Or some default widget if needed
+        return const SizedBox.shrink();
     }
   }
 
@@ -64,7 +63,6 @@ class _DeliveryPageState extends State<DeliveryPage> {
     setState(() {});
   }
 
-// Helper function to display an alert dialog
   void _showOrderCompleteDialog() {
     showDialog(
         context: context,
@@ -105,7 +103,6 @@ class _DeliveryPageState extends State<DeliveryPage> {
                       children: [
                         DeliveryUserProfileWidget(
                             userId: userId, orderId: widget.orderId),
-                        // _buildUserDetails(textstyle),
                         SizedBox(
                           height: mq.height * .02,
                         ),
@@ -114,98 +111,15 @@ class _DeliveryPageState extends State<DeliveryPage> {
                           userId: userId,
                           orderStatus: orderStatus,
                         ),
-
                         globalMethod.buldRichText(
                             context: context,
                             simpleText: "Tracking Number :",
                             colorText: orderDataMap["trackingnumber"],
                             function: () {}),
-
-/*
-                        RichText(
-                          text: TextSpan(
-                            children: [
-                              TextSpan(
-                                text: "Tracking Number : ",
-                                style: textstyle.mediumText600.copyWith(
-                                  color: Theme.of(context).primaryColor,
-                                ),
-                              ),
-                              TextSpan(
-                                text: orderDataMap["trackingnumber"],
-                                style: textstyle.mediumText600.copyWith(),
-                              ),
-                            ],
-                          ),
-                        ),
-
-                        */
                         SizedBox(
                           height: mq.height * .05,
                         ),
-                        _buildOrderStatusContainer()
-                        /*
-                      if (orderStatus == "normal")
-                        _buildStatusContainer(
-                          "asset/order/readyfordeliver.png",
-                          "Produt Ready to Handover on Delivery Man",
-                          () {
-                            FirebaseFirestore.instance
-                                .collection("orders")
-                                .doc(widget.orderId)
-                                .update({"status": "delivery"}).then((value) {
-                              FirebaseFirestore.instance
-                                  .collection("users")
-                                  .doc(userId)
-                                  .collection("orders")
-                                  .doc(widget.orderId)
-                                  .update({"status": "delivery"}).then((value) {
-                                setState(() {});
-                              });
-                            });
-                          },
-                        ),
-                      if (orderStatus == "delivery")
-                        _buildStatusContainer(
-                          "asset/order/readyfordeliver.png",
-                          "Product Pust to Delivery Man",
-                          () {
-                            FirebaseFirestore.instance
-                                .collection("orders")
-                                .doc(widget.orderId)
-                                .update({"status": "complete"}).then((value) {
-                              FirebaseFirestore.instance
-                                  .collection("users")
-                                  .doc(userId)
-                                  .collection("orders")
-                                  .doc(widget.orderId)
-                                  .update({"status": "complete"}).then((value) {
-                                setState(() {});
-                              });
-                            });
-                          },
-                        ),
-                      if (orderStatus == "complete")
-                        _buildStatusContainer(
-                          "asset/order/doneorder.png",
-                          "Order Delivery Complete",
-                          () {
-                            showDialog(
-                              context: context,
-                              builder: (context) {
-                                return const AlertDialog(
-                                  title: Text("Order Complete"),
-                                  content:
-                                      Text("Order Already HandOver to User"),
-                                );
-                              },
-                            );
-                          },
-                        ),
-                     
-                     */
-
-                        ,
+                        _buildOrderStatusContainer(),
                         SizedBox(
                           height: mq.height * .025,
                         ),
@@ -237,234 +151,8 @@ class _DeliveryPageState extends State<DeliveryPage> {
                   title: 'Error Occured: $e',
                 );
               }
-/*
-              if (snapshot.hasData) {
-                final orderDataMap = snapshot.data!.data();
-                orderStatus = orderDataMap!["status"];
-                userId = orderDataMap["orderBy"];
-                return SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _buildUserDetails(textstyle),
-                      SizedBox(
-                        height: mq.height * .01,
-                      ),
-                      _buildDeliveryAddress(textstyle, orderDataMap),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      RichText(
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: "Tracking Number : ",
-                              style: textstyle.mediumText600.copyWith(
-                                color: Theme.of(context).primaryColor,
-                              ),
-                            ),
-                            TextSpan(
-                              text: orderDataMap["trackingnumber"],
-                              style: textstyle.mediumText600.copyWith(),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 25,
-                      ),
-                      buildOrderStatusContainer()
-                      /*
-                      if (orderStatus == "normal")
-                        _buildStatusContainer(
-                          "asset/order/readyfordeliver.png",
-                          "Produt Ready to Handover on Delivery Man",
-                          () {
-                            FirebaseFirestore.instance
-                                .collection("orders")
-                                .doc(widget.orderId)
-                                .update({"status": "delivery"}).then((value) {
-                              FirebaseFirestore.instance
-                                  .collection("users")
-                                  .doc(userId)
-                                  .collection("orders")
-                                  .doc(widget.orderId)
-                                  .update({"status": "delivery"}).then((value) {
-                                setState(() {});
-                              });
-                            });
-                          },
-                        ),
-                      if (orderStatus == "delivery")
-                        _buildStatusContainer(
-                          "asset/order/readyfordeliver.png",
-                          "Product Pust to Delivery Man",
-                          () {
-                            FirebaseFirestore.instance
-                                .collection("orders")
-                                .doc(widget.orderId)
-                                .update({"status": "complete"}).then((value) {
-                              FirebaseFirestore.instance
-                                  .collection("users")
-                                  .doc(userId)
-                                  .collection("orders")
-                                  .doc(widget.orderId)
-                                  .update({"status": "complete"}).then((value) {
-                                setState(() {});
-                              });
-                            });
-                          },
-                        ),
-                      if (orderStatus == "complete")
-                        _buildStatusContainer(
-                          "asset/order/doneorder.png",
-                          "Order Delivery Complete",
-                          () {
-                            showDialog(
-                              context: context,
-                              builder: (context) {
-                                return const AlertDialog(
-                                  title: Text("Order Complete"),
-                                  content:
-                                      Text("Order Already HandOver to User"),
-                                );
-                              },
-                            );
-                          },
-                        ),
-                     
-                     */
-                      ,
-                      const SizedBox(
-                        height: 10,
-                      ),
-                    ],
-                  ),
-                );
-              }
-*/
             }),
       ),
     );
   }
-
-/*
-  Widget _buildStatusContainer(
-      String imageAsset, String buttonText, Function onTap) {
-    Textstyle textstyle = Textstyle(context);
-    return OrderStatusWidget(
-        context: context, context: context, textstyle: textstyle);
-  }
-*/
-/*
-  _buildDeliveryAddress(
-      Textstyle textstyle, Map<String, dynamic> orderDataMap) {
-    return OrderDeliveryLocationWidget(
-      orderDataMap: orderDataMap,
-      userId: userId,
-      orderStatus: orderStatus,
-    );
-  }
-  */
-
-/*
-  _buildUserDetails(Textstyle textstyle) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-          child: Text(
-            "User Details: ",
-            style: textstyle.largeBoldText.copyWith(color: red),
-          ),
-        ),
-        DeliveryUserProfileWidget(userId: userId, widget: widget),
-      ],
-    );
-  }
-
-  */
-  /*
-  Container _buildOrderItem(Map<String, dynamic> orderDataMap) {
-    Textstyle textstyle = Textstyle(context);
-    return OrderItemWidget(context: context, textstyle: textstyle, context: context, widget: widget);
-  }
-  */
 }
-
-
-/*
-class OrderItemWidget extends StatelessWidget {
-  const OrderItemWidget({
-    super.key,
-    required this.textstyle,
-    required this.widget,
-  });
-
-  final Textstyle textstyle;
-  final DeliveryPage widget;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-      color: Theme.of(context).cardColor,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Order No: ${orderDataMap["orderId"]}",
-            style: textstyle.largeText
-                .copyWith(color: Theme.of(context).primaryColor),
-          ),
-          const SizedBox(height: 20),
-          Flexible(
-            child: FutureBuilder(
-              future: FirebaseDatabase.orderDeliveryOrderProductSnapshot(
-                  list: orderDataMap['productIds']),
-              builder: (context, productSnapshot) {
-                if (productSnapshot.connectionState ==
-                    ConnectionState.waiting) {
-                  return ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: 2,
-                    itemBuilder: (context, index) => const LoadingCardWidget(),
-                  );
-                } else if (productSnapshot.hasData) {
-                  return ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: productSnapshot.data!.docs.length,
-                    itemBuilder: (context, itemIndex) {
-                      ProductModel productModel = ProductModel.fromMap(
-                        productSnapshot.data!.docs[itemIndex].data(),
-                      );
-
-                      return DeliveryCartWidget(
-                        productModel: productModel,
-                        itemQunter: widget.seperateQuantilies[itemIndex],
-                        index: itemIndex + 1,
-                      );
-                    },
-                  );
-                }
-                return ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: 2,
-                  itemBuilder: (context, index) => const LoadingCardWidget(),
-                );
-              },
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-*/

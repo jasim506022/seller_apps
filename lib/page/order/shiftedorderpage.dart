@@ -1,11 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../const/cartmethod.dart';
-import '../../const/gobalcolor.dart';
-import '../../service/database/firebasedatabase.dart';
-import '../../widget/empty_widget.dart';
-import '../../widget/single_loading_product_widget.dart';
-import 'cart_order_widget.dart';
+import 'main_order_page_widget.dart';
 
 class ShiftedOrderPage extends StatefulWidget {
   const ShiftedOrderPage({super.key});
@@ -23,7 +17,11 @@ class _OrderPageState extends State<ShiftedOrderPage> {
             "Shifted Order",
           ),
         ),
-        body: StreamBuilder(
+        body: const MainOrderPage(
+          status: 'delivery',
+        ));
+    /*
+        StreamBuilder(
           stream: FirebaseDatabase.allOrderSnapshots(status: 'delivery'),
           builder: (context, orderSnapshot) {
             try {
@@ -90,7 +88,7 @@ class _OrderPageState extends State<ShiftedOrderPage> {
             }
           },
         ));
-
+*/
     /*
          StreamBuilder(
           stream: FirebaseDatabase.allOrderSnapshots(status: 'delivery'),

@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../const/cartmethod.dart';
-import '../../const/gobalcolor.dart';
-import '../../service/database/firebasedatabase.dart';
-import '../../widget/empty_widget.dart';
-import '../../widget/single_loading_product_widget.dart';
-import 'cart_order_widget.dart';
+import 'main_order_page_widget.dart';
 
 class OrderPage extends StatefulWidget {
   const OrderPage({super.key});
@@ -23,7 +18,12 @@ class _OrderPageState extends State<OrderPage> {
             "Running Order",
           ),
         ),
-        body: StreamBuilder(
+        body: const MainOrderPage(
+          status: 'normal',
+        ));
+
+    /*
+         StreamBuilder(
           stream: FirebaseDatabase.allOrderSnapshots(status: 'normal'),
           builder: (context, orderSnapshot) {
             try {
@@ -90,5 +90,6 @@ class _OrderPageState extends State<OrderPage> {
             }
           },
         ));
+  */
   }
 }

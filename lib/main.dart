@@ -4,7 +4,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:seller_apps/page/auth/forgetpasswordscreen.dart';
 import 'package:seller_apps/page/auth/signupscreen.dart';
+import 'package:seller_apps/page/completeorder/totalsellerpage.dart';
 import 'package:seller_apps/page/order/completeorderpage.dart';
+import 'package:seller_apps/page/order/shiftedorderpage.dart';
 import 'package:seller_apps/service/provider/imageaddremoveprovider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -89,6 +91,8 @@ class MyApp extends StatelessWidget {
               AppRouters.completeOrderPage: (context) =>
                   const CompleteOrderPage(),
               AppRouters.orderPage: (context) => const OrderPage(),
+              AppRouters.shiftPage: (context) => const ShiftedOrderPage(),
+              AppRouters.totalSales: (context) => const TotalSellPage(),
             },
           );
         },

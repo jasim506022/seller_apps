@@ -205,7 +205,9 @@ class GlobalMethod {
   }
 
   double discountedPrice(double productprice, double discount) {
-    return productprice - (productprice * discount / 100);
+    double discountPrice = productprice - (productprice * discount / 100);
+
+    return double.parse(discountPrice.toStringAsFixed(2));
   }
 
 // Drop Down Button Decoration

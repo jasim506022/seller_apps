@@ -17,12 +17,6 @@ import '../../model/profilemodel.dart';
 import '../../service/database/firebasedatabase.dart';
 import '../../service/provider/theme_provider.dart';
 import '../../widget/custom_show_dialog_widget.dart';
-import '../completeorder/totalsellerpage.dart';
-import '../main/mainpage.dart';
-
-import '../order/completeorderpage.dart';
-import '../order/orderpage.dart';
-import '../order/shiftedorderpage.dart';
 import 'editprofilepage.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -85,58 +79,52 @@ class _ProfilePageState extends State<ProfilePage> {
                               icon: Icons.home_outlined,
                               title: 'Home',
                               funcion: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const MainPage(),
-                                    ));
+                                Navigator.pushNamed(
+                                    context, AppRouters.mainPage);
                               },
                             ),
                             _buildListTitleMethod(
                               icon: Icons.reorder,
                               title: 'My Orders',
                               funcion: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const OrderPage(),
-                                    ));
+                                Navigator.pushNamed(
+                                    context, AppRouters.orderPage);
                               },
                             ),
                             _buildListTitleMethod(
                               icon: Icons.picture_in_picture_alt_rounded,
                               title: 'Shifted Orders',
                               funcion: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const ShiftedOrderPage(),
-                                    ));
+                                Navigator.pushNamed(
+                                    context, AppRouters.shiftPage);
                               },
                             ),
                             _buildListTitleMethod(
                               icon: Icons.access_time,
                               title: 'History',
                               funcion: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const CompleteOrderPage(),
-                                    ));
+                                Navigator.pushNamed(
+                                    context, AppRouters.completeOrderPage);
+                                // Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //       builder: (context) =>
+                                //           const CompleteOrderPage(),
+                                //     ));
                               },
                             ),
                             _buildListTitleMethod(
                               icon: Icons.money,
                               title: 'Earn',
                               funcion: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const TotalSellPage(),
-                                    ));
+                                Navigator.pushNamed(
+                                    context, AppRouters.totalSales);
+                                // Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //       builder: (context) =>
+                                //           const TotalSellPage(),
+                                //     ));
                               },
                             ),
                             Consumer<ThemeProvider>(
@@ -211,12 +199,14 @@ class _ProfilePageState extends State<ProfilePage> {
         width: mq.width,
         color: Theme.of(context).cardColor,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: EdgeInsets.symmetric(horizontal: mq.width * .044),
           child: Row(
             children: [
-              SizedBox(
+              Container(
                 height: mq.width * .266,
                 width: mq.width * .266,
+                decoration: BoxDecoration(
+                    border: Border.all(color: red), shape: BoxShape.circle),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(mq.width * .133),
                   child: CachedNetworkImage(

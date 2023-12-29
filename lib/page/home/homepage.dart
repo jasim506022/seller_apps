@@ -101,7 +101,7 @@ class HomePage extends StatelessWidget {
                                 text: "Total Sales",
                                 function: () {
                                   Navigator.pushNamed(
-                                      context, AppRouters.completeOrderPage);
+                                      context, AppRouters.totalSales);
                                 },
                               ),
                               GridViewItem(

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:seller_apps/const/cartmethod.dart';
-import 'package:seller_apps/const/gobalcolor.dart';
-import 'package:seller_apps/service/provider/totalamountprovider.dart';
 
+import '../../const/cartmethod.dart';
+import '../../const/const.dart';
+import '../../const/gobalcolor.dart';
+import '../../service/provider/totalamountprovider.dart';
 import '../order/completeorderpage.dart';
 
 class TotalSellPage extends StatefulWidget {
@@ -26,7 +27,6 @@ class _TotalSellPageState extends State<TotalSellPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 234, 234, 234),
       appBar: AppBar(
         title: const Text(
           "Total Earn",
@@ -36,36 +36,46 @@ class _TotalSellPageState extends State<TotalSellPage> {
         builder: (context, value, child) {
           return Center(
               child: Container(
-            height: 350,
-            width: 350,
+            height: mq.height * .42,
+            width: mq.height * .42,
             decoration:
-                BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+                BoxDecoration(color: greenColor, shape: BoxShape.circle),
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    "Tk. ${value.amount}",
-                    style: TextStyle(color: Colors.black, fontSize: 50),
+                    "Tk. ${value.amount.toStringAsFixed(2)}",
+                    style: TextStyle(
+                        color: white,
+                        fontSize: 50,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    height: mq.height * 0.02,
                   ),
                   InkWell(
                     onTap: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => CompleteOrderPage(),
+                            builder: (context) => const CompleteOrderPage(),
                           ));
                     },
                     child: Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: mq.width * .088,
+                          vertical: mq.height * .015),
                       decoration: BoxDecoration(
-                          color: greenColor,
+                          color: white,
                           borderRadius: BorderRadius.circular(10)),
                       child: Text(
                         "Details",
-                        style: TextStyle(color: Colors.white, fontSize: 18),
+                        style: TextStyle(
+                            color: black,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
                   )

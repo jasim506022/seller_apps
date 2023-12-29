@@ -100,43 +100,7 @@ class DeliveryUserProfileWidget extends StatelessWidget {
                                   _buildTableRow(
                                       context, "Order", formattedDate),
                                 ],
-                              )
-
-                              /*
-                            
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Name:\t${userProfile.name!}",
-                                    style: textstyle.largeText.copyWith(
-                                        fontSize: 16,
-                                        color: Theme.of(context).primaryColor)),
-                                SizedBox(
-                                  height: mq.height * 0.01,
-                                ),
-                                Text("Emai:\t\t${userProfile.email!}",
-                                    style: textstyle.mediumText600.copyWith(
-                                        fontSize: 14,
-                                        color: Theme.of(context).hintColor)),
-                                SizedBox(
-                                  height: mq.height * 0.01,
-                                ),
-                                Text("Phone:\t\t 0${userProfile.phone!}",
-                                    style: textstyle.mediumText600
-                                        .copyWith(fontSize: 14, color: red)),
-                                SizedBox(
-                                  height: mq.height * 0.01,
-                                ),
-                                Text(
-                                  "Order:\t\t $formattedDate",
-                                  style: textstyle.mediumTextbold.copyWith(
-                                      color: Theme.of(context).primaryColor),
-                                )
-                              ],
-                            ),
-                        
-                        */
-                              ),
+                              )),
                         )
                       ],
                     ),
@@ -223,33 +187,6 @@ class DeliveryUserLoading extends StatelessWidget {
                             utils.widgetShimmerColor, mq.height * 0.017),
                         globalMethod.buildShimmerTextContainer(
                             utils.widgetShimmerColor, mq.height * 0.017),
-
-                        // Text("Name:\t${userProfile.name!}",
-                        //     style: textstyle.largeText.copyWith(
-                        //         fontSize: 16,
-                        //         color: Theme.of(context).primaryColor)),
-
-                        // SizedBox(
-                        //   height: mq.height * 0.01,
-                        // ),
-                        // Text("Emai:\t\t${userProfile.email!}",
-                        //     style: textstyle.mediumText600.copyWith(
-                        //         fontSize: 14,
-                        //         color: Theme.of(context).hintColor)),
-                        // SizedBox(
-                        //   height: mq.height * 0.01,
-                        // ),
-                        // Text("Phone:\t\t 0${userProfile.phone!}",
-                        //     style: textstyle.mediumText600
-                        //         .copyWith(fontSize: 14, color: red)),
-                        // SizedBox(
-                        //   height: mq.height * 0.01,
-                        // ),
-                        // Text(
-                        //   "Order:\t\t $formattedDate",
-                        //   style: textstyle.mediumTextbold
-                        //       .copyWith(color: Theme.of(context).primaryColor),
-                        // )
                       ],
                     ),
                   ),

@@ -7,6 +7,7 @@ import 'package:seller_apps/service/database/firebasedatabase.dart';
 import 'package:seller_apps/model/productsmodel.dart';
 
 import '../service/provider/totalamountprovider.dart';
+import 'const.dart';
 
 class CartMethods {
   static List<ProductModel> allProductList = [];
@@ -42,7 +43,10 @@ class CartMethods {
             Future.delayed(Duration.zero, () {
               Provider.of<TotalAmountProvider>(context, listen: false)
                   .setAmount(
-                      amount: listItem[p] * event.docs[p]['productprice']);
+                      amount: listItem[p] *
+                          globalMethod.discountedPrice(
+                              event.docs[p]['productprice'],
+                              event.docs[p]['discount']));
             });
             if (kDebugMode) {
               print(listItem[p] * event.docs[p]['productprice']);

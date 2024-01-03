@@ -1,4 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -31,8 +33,17 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   sharedPreference = await SharedPreferences.getInstance();
+  FirebaseMessaging.onBackgroundMessage(firebaseMessingbackground);
   isviewed = sharedPreference!.getInt('onBoarding');
   runApp(const MyApp());
+}
+
+Future<void> firebaseMessingbackground(RemoteMessage message) async {
+  if (kDebugMode) {
+    print("Handling a background message ${message.data}");
+    print("Handling a background message ${message.notification!.title}");
+    print("Handling a background message ${message.notification!.body}");
+  }
 }
 
 class MyApp extends StatelessWidget {

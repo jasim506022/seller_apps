@@ -60,6 +60,7 @@ dependencies:
   d_chart: ^2.6.3
   fl_chart: ^0.64.0
   google_sign_in: ^6.1.6
+  http: ^1.1.0
   
 
 dev_dependencies:

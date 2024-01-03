@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:seller_apps/page/other/pushnotification.dart';
 import 'package:seller_apps/widget/show_error_dialog_widget.dart';
 import '../../const/const.dart';
 import '../../const/gobalcolor.dart';
@@ -28,16 +29,22 @@ class _DeliveryPageState extends State<DeliveryPage> {
     switch (orderStatus) {
       case "normal":
         return OrderStatusWidget(
-          imageAsset: "asset/order/readyfordeliver.png",
-          title: "Product Ready to Handover on Delivery Man",
-          onTap: () => _updateOrderStatus("delivery"),
-        );
+            imageAsset: "asset/order/readyfordeliver.png",
+            title: "Product Ready to Handover on Delivery Man",
+            onTap: () {
+              PushNotification message = PushNotification();
+              message.sendNotificationUser("Bangladesh", "Indian", "Oakay");
+              // _updateOrderStatus("delivery");
+            });
       case "delivery":
         return OrderStatusWidget(
-          imageAsset: "asset/order/readyfordeliver.png",
-          title: "Product Pushed to Delivery Man",
-          onTap: () => _updateOrderStatus("complete"),
-        );
+            imageAsset: "asset/order/readyfordeliver.png",
+            title: "Product Pushed to Delivery Man",
+            onTap: () {
+              PushNotification message = PushNotification();
+              message.sendNotificationUser("Bangladesh", "Indian", "Oakay");
+              // _updateOrderStatus("complete");
+            });
       case "complete":
         return OrderStatusWidget(
           imageAsset: "asset/order/doneorder.png",

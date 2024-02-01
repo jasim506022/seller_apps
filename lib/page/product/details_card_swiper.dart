@@ -19,7 +19,7 @@ class DetailsSwiperWidget extends StatelessWidget {
     return Align(
       alignment: Alignment.center,
       child: SizedBox(
-        height: mq.height * .33,
+        height: mq.height * .31,
         child: Swiper(
           itemBuilder: (BuildContext context, int index) {
             return CachedNetworkImage(
@@ -32,7 +32,9 @@ class DetailsSwiperWidget extends StatelessWidget {
               errorWidget: (context, url, error) => const Icon(Icons.error),
             );
           },
-          autoplay: productModel.productimage!.length == 1 ? false : true,
+          autoplay: productModel.productimage!.length > 1,
+
+          // autoplay: productModel.productimage!.length == 1 ? false : true,
           itemCount: productModel.productimage!.length,
           pagination: SwiperPagination(
               alignment: Alignment.bottomCenter,

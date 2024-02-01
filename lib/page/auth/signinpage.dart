@@ -328,12 +328,6 @@ class _SigninPageState extends State<SigninPage> {
                 );
               },
             );
-            // globalMethod.showDialogMethod(
-            //   context: context,
-            //   message:
-            //       "No Internect Connection. Please your Interenet Connection",
-            //   title: 'No Internet Connection',
-            // );
           } on FirebaseAuthException catch (e) {
             globalMethod.handleError(context, e, loadingProvider);
             /*
@@ -404,11 +398,6 @@ class _SigninPageState extends State<SigninPage> {
                 );
               },
             );
-            // globalMethod.showDialogMethod(
-            //   context: context,
-            // message: e.toString(),
-            // title: 'Error Occurred',
-            // );
 
             loadingProvider.setLoading(loading: false);
           }

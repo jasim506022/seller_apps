@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:seller_apps/const/approutes.dart';
 import 'package:seller_apps/const/gobalcolor.dart';
 
 class CustomDialogWidget extends StatelessWidget {
@@ -50,7 +51,8 @@ class CustomDialogWidget extends StatelessWidget {
         TextButton(
           onPressed: () {
             if (isBackScreenButton) {
-              Navigator.popUntil(context, (route) => route.isFirst);
+              Navigator.popUntil(
+                  context, ModalRoute.withName(AppRouters.mainPage));
             } else {
               Navigator.pop(context, true);
             }

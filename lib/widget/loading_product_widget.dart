@@ -18,11 +18,11 @@ class LoadingProductWidget extends StatelessWidget {
     return GridView.builder(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: .73,
-          crossAxisSpacing: 8,
-          mainAxisSpacing: 8),
+          crossAxisSpacing: mq.width * .009,
+          mainAxisSpacing: mq.width * .018),
       itemCount: 20,
       itemBuilder: (context, index) {
         return Card(
@@ -59,41 +59,40 @@ class LoadingProductWidget extends StatelessWidget {
                         ),
                       ),
                       Positioned(
-                        left: 10,
-                        top: 10,
+                        left: mq.width * .022,
+                        top: mq.width * .012,
                         child: Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 8, vertical: 5),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: mq.width * .018,
+                              vertical: mq.height * .065),
                           decoration: BoxDecoration(
                             border: Border.all(color: red, width: .5),
                             borderRadius: BorderRadius.circular(15),
                             color: utils.widgetShimmerColor,
                           ),
                           child: Container(
-                            height: 25,
-                            width: 25,
+                            height: mq.height * .0294,
+                            width: mq.height * .0294,
                             color: utils.widgetShimmerColor,
                           ),
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    width: 10,
+                  SizedBox(
+                    height: mq.height * .022,
                   ),
                   Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                          height: mq.height * 0.025,
-                          width: mq.width,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: utils.widgetShimmerColor,
-                          ),
-                        ),
+                        _buildShimmerTextContainer(utils, mq.height * 0.025),
+                        SizedBox(height: mq.height * 0.02),
+                        _buildShimmerTextContainer(utils, mq.height * 0.025),
+                        SizedBox(height: mq.height * 0.012),
+                        _buildShimmerTextContainer(utils, mq.height * 0.05),
+                        /*
                         SizedBox(height: mq.height * 0.02),
                         Container(
                           height: mq.height * 0.025,
@@ -108,12 +107,13 @@ class LoadingProductWidget extends StatelessWidget {
                         ),
                         Container(
                           height: mq.height * 0.05,
-                          width: double.infinity,
+                          width: mq.width,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
                             color: utils.widgetShimmerColor,
                           ),
                         ),
+                     */
                       ],
                     ),
                   )
@@ -123,6 +123,17 @@ class LoadingProductWidget extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  Container _buildShimmerTextContainer(Utils utils, double height) {
+    return Container(
+      height: height,
+      width: mq.width,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(5),
+        color: utils.widgetShimmerColor,
+      ),
     );
   }
 }

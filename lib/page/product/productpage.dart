@@ -87,11 +87,11 @@ class _ProductPageState extends State<ProductPage> {
                           return GridView.builder(
                             itemCount: snapshot.data!.docs.length,
                             gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                SliverGridDelegateWithFixedCrossAxisCount(
                                     crossAxisCount: 2,
                                     childAspectRatio: .78,
-                                    crossAxisSpacing: 8,
-                                    mainAxisSpacing: 8),
+                                    crossAxisSpacing: mq.width * .009,
+                                    mainAxisSpacing: mq.width * .018),
                             itemBuilder: (context, index) {
                               ProductModel productModel = ProductModel.fromMap(
                                   snapshot.data!.docs[index].data());

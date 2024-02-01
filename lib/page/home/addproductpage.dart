@@ -16,6 +16,7 @@ import '../../const/textstyle.dart';
 import '../../service/database/firebasedatabase.dart';
 import '../../model/productsmodel.dart';
 import '../../service/provider/imageaddremoveprovider.dart';
+import '../../widget/capture_image_selection_dialog_widget.dart';
 import '../../widget/custom_show_dialog_widget.dart';
 import '../../widget/textfieldformwidget.dart';
 
@@ -37,7 +38,6 @@ class _AddProductPageState extends State<AddProductPage> {
   TextEditingController descriptionTEC = TextEditingController();
   TextEditingController discountTEC = TextEditingController();
 
-  // Image Pick
   ImagePicker imagePicker = ImagePicker();
   String productId = DateTime.now().millisecondsSinceEpoch.toString();
 
@@ -56,33 +56,19 @@ class _AddProductPageState extends State<AddProductPage> {
           ..setUnit(unitValue: productModel.productunit!)
           ..imageListUrl.addAll(productModel.productimage!.cast<String>());
 
-        // for (String images in widget.productModel!.productimage!) {
-        //   addUpdadateProductProvider.imageListUrl.add(images);
-        //   setState(() {});
-        // }
-
         productTEC.text = productModel.productname!;
         priceTEC.text = productModel.productprice!.toString();
         ratingTEC.text = productModel.productrating!.toString();
         descriptionTEC.text = productModel.productdescription!;
         discountTEC.text = productModel.discount!.toString();
         productId = productModel.productId!;
-
-        // addUpdadateProductProvider.categorySet(
-        //     cateory: widget.productModel!.productcategory!);
-        // addUpdadateProductProvider.setUnit(
-        //     unitValue: widget.productModel!.productunit!);
       });
     } else {
       Future.delayed(Duration.zero, () {
-        // ImageAddRemoveProvider addUpdadateProductProvider =
-        //     Provider.of<ImageAddRemoveProvider>(context, listen: false);
         addUpdadateProductProvider
           ..setImageListXfile(imageListXfile: [])
           ..setImageListUrl(imageListUrl: [])
           ..setCategory(cateory: category.first);
-        // addUpdadateProductProvider.setImageListUrl(imageListUrl: []);
-        // addUpdadateProductProvider.categorySet(cateory: category.first);
       });
     }
     super.initState();
@@ -211,7 +197,6 @@ class _AddProductPageState extends State<AddProductPage> {
     }
   }
 
-// Add New Product
   Future<void> addNewProduct(
       ImageAddRemoveProvider imageAddRemoveProvider) async {
     if (imageAddRemoveProvider.imagesListXfile.isEmpty) {
@@ -228,7 +213,6 @@ class _AddProductPageState extends State<AddProductPage> {
     _buldSetLoading(false);
   }
 
-// Update Product
   Future<void> updateProduct(
       ImageAddRemoveProvider imageAddRemoveProvider) async {
     if (imageAddRemoveProvider.imageListUrl.isEmpty) {
@@ -254,20 +238,17 @@ class _AddProductPageState extends State<AddProductPage> {
     }
   }
 
-// Build Success
   void _buildSuccess(String message) {
     _buldSetLoading(false);
     globalMethod.flutterToast(msg: message);
     Navigator.pushReplacementNamed(context, AppRouters.mainPage);
   }
 
-// set Loading Propvider
   void _buldSetLoading(bool isLoading) {
     Provider.of<LoadingProvider>(context, listen: false)
         .setLoading(loading: isLoading);
   }
 
-// To add or update product
   Map<String, dynamic> _buildProductMap(
       ImageAddRemoveProvider imageAddRemoveProvider) {
     return {
@@ -319,11 +300,6 @@ class _AddProductPageState extends State<AddProductPage> {
               // );
 
               return Future.value(stayOnScreenFunction(context));
-              // globalMethod.stayOnScreenMethod(
-              //     context: context,
-              //     title: "Save Upload Product",
-              //     content: "Do you Want to Save Product Changes"
-              //     );
             },
             child: Scaffold(
               appBar: AppBar(
@@ -339,11 +315,6 @@ class _AddProductPageState extends State<AddProductPage> {
                           );
                         },
                       );
-                      //   globalMethod.stayOnScreenMethod(
-                      //       isBackScreenButton: true,
-                      //       context: context,
-                      //       title: "Save Upload Product",
-                      //       content: "Do you Want to Save Product Changes");
                     },
                     icon: Icon(
                       Icons.arrow_back,
@@ -368,160 +339,6 @@ class _AddProductPageState extends State<AddProductPage> {
                       color: greenColor,
                     ),
                   )
-                  /*
-                  IconButton(
-                      onPressed: widget.isUpdate == true
-                          ? () async {
-                              try {
-                                if (imageAddRemoveProvider
-                                    .imageListUrl.isNotEmpty) {
-                                  if (_keyForm.currentState!.validate()) {
-                                    setLoading(true);
-                                   
-                                   
-
-                                    Map<String, dynamic> updateproductMap = {
-                                      "productId": productId,
-                                      "sellerId":
-                                          sharedPreference!.getString("uid"),
-                                      "sellerName":
-                                          sharedPreference!.getString("name"),
-                                      "productname": productTEC.text,
-                                      "productcategory":
-                                          imageAddRemoveProvider.categoryName,
-                                      "productprice":
-                                          double.parse(priceTEC.text),
-                                      "productunit":
-                                          imageAddRemoveProvider.unit,
-                                      "productrating":
-                                          double.parse(ratingTEC.text),
-                                      "productdescription": descriptionTEC.text,
-                                      "publishDate": DateTime.now(),
-                                      "discount": int.parse(discountTEC.text),
-                                      "productimage":
-                                          imageAddRemoveProvider.imageListUrl,
-                                      "stutus": "avaible"
-                                    };
-
-                                    await FirebaseDatabase
-                                            .updateFirebaseFirestoreProductData(
-                                                productId: productId,
-                                                map: updateproductMap)
-                                        .catchError((error) {
-                                      globalMethod.flutterToast(
-                                          msg: " Error Occured: $error ");
-                                    });
-
-                                    if (mounted) {
-                                      Provider.of<LoadingProvider>(context,
-                                              listen: false)
-                                          .setLoading(loading: false);
-                                      globalMethod.flutterToast(
-                                          msg: " Update Successfully ");
-
-                                      Navigator.pushReplacementNamed(
-                                        context,
-                                        AppRouters.mainPage,
-                                      );
-                                    }
-                                  }
-                                } else {
-                                  globalMethod.flutterToast(
-                                      msg: "Please Select atleast One Image");
-                                }
-                              } catch (error) {
-                                globalMethod.flutterToast(
-                                    msg: "An Error Occured: $error");
-                              }
-                            }
-                          : () async {
-                              try {
-                                if (imageAddRemoveProvider
-                                    .imagesListXfile.isNotEmpty) {
-                                  if (_keyForm.currentState!.validate()) {
-                                    Provider.of<LoadingProvider>(context,
-                                            listen: false)
-                                        .setLoading(loading: true);
-
-                                    for (XFile imageFile
-                                        in imageAddRemoveProvider
-                                            .imagesListXfile) {
-                                      String fileName = DateTime.now()
-                                          .millisecondsSinceEpoch
-                                          .toString();
-
-                                      Reference reference =
-                                          FirebaseDatabase.storageReference(
-                                              catogryName:
-                                                  imageAddRemoveProvider
-                                                      .categoryName,
-                                              fileName: fileName);
-
-                                      await reference
-                                          .putFile(File(imageFile.path));
-
-                                      String imageurl =
-                                          await reference.getDownloadURL();
-                                      imageAddRemoveProvider.imageListUrl
-                                          .add(imageurl);
-                                    }
-
-                                    
-                                    Map<String, dynamic> productMapData = {
-                                      "productId": productId,
-                                      "sellerId":
-                                          sharedPreference!.getString("uid"),
-                                      "sellerName":
-                                          sharedPreference!.getString("name"),
-                                      "productname": productTEC.text,
-                                      "productcategory":
-                                          imageAddRemoveProvider.categoryName,
-                                      "productprice":
-                                          double.parse(priceTEC.text),
-                                      "productunit":
-                                          imageAddRemoveProvider.unit,
-                                      "productrating":
-                                          double.parse(ratingTEC.text),
-                                      "productdescription": descriptionTEC.text,
-                                      "publishDate": DateTime.now(),
-                                      "discount": int.parse(discountTEC.text),
-                                      "productimage":
-                                          imageAddRemoveProvider.imageListUrl,
-                                      "stutus": "avaible"
-                                    };
-                                    FirebaseDatabase
-                                            .pushFirebaseFirestoreProductData(
-                                                productId: productId,
-                                                map: productMapData)
-                                        .catchError((error) {
-                                      globalMethod.flutterToast(
-                                          msg: " Error Occured: $error ");
-                                    });
-                                    if (mounted) {
-                                      Provider.of<LoadingProvider>(context,
-                                              listen: false)
-                                          .setLoading(loading: false);
-                                      globalMethod.flutterToast(
-                                          msg: " Add Successfully ");
-
-                                      Navigator.pushReplacementNamed(
-                                          context, AppRouters.mainPage);
-                                    }
-                                  }
-                                } else {
-                                  globalMethod.flutterToast(
-                                      msg: "Please Select atleast One Image");
-                                }
-                              } catch (error) {
-                                globalMethod.flutterToast(
-                                    msg: "An Error Occured: $error");
-                              }
-                            },
-                      icon: Icon(
-                        Icons.cloud_upload,
-                        color: greenColor,
-                      ))
-                */
                 ],
               ),
               body: Padding(
@@ -546,145 +363,6 @@ class _AddProductPageState extends State<AddProductPage> {
                                       true, imageAddRemoveProvider, context)
                                   : buildImageGrid(
                                       false, imageAddRemoveProvider, context),
-                              /*
-                              widget.isUpdate == true
-                                  ? Container(
-                                      height: mq.height * .25,
-                                      width: MediaQuery.of(context).size.width,
-                                      padding: const EdgeInsets.all(3),
-                                      margin: const EdgeInsets.all(5),
-                                      decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: greenColor, width: 3)),
-                                      child: GridView.builder(
-                                        itemCount: imageAddRemoveProvider
-                                            .imageListUrl.length,
-                                        itemBuilder: (context, index) {
-                                          return Stack(
-                                            children: [
-                                              ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          color:
-                                                              Theme.of(context)
-                                                                  .primaryColor,
-                                                          width: 1)),
-                                                  child: Image.network(
-                                                      height: mq.height * .25,
-                                                      width: mq.height * .25,
-                                                      fit: BoxFit.fill,
-                                                      imageAddRemoveProvider
-                                                          .imageListUrl[index]),
-                                                ),
-                                              ),
-                                              InkWell(
-                                                onTap: () {
-                                                  Provider.of<ImageAddRemoveProvider>(
-                                                          context,
-                                                          listen: false)
-                                                      .removieImageUrl(
-                                                          imageUrl: index);
-                                                },
-                                                child: Container(
-                                                  padding:
-                                                      const EdgeInsets.all(4),
-                                                  margin:
-                                                      const EdgeInsets.all(2),
-                                                  decoration: BoxDecoration(
-                                                      color: white,
-                                                      shape: BoxShape.circle),
-                                                  child: Icon(
-                                                    Icons.close,
-                                                    color: red,
-                                                    size: 25,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                        gridDelegate:
-                                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                          childAspectRatio: 1.5,
-                                          crossAxisSpacing: 10,
-                                          mainAxisSpacing: 10,
-                                          crossAxisCount: 2,
-                                        ),
-                                      ),
-                                    )
-                                  : Container(
-                                      height: mq.height * .25,
-                                      width: MediaQuery.of(context).size.width,
-                                      padding: const EdgeInsets.all(3),
-                                      decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: greenColor, width: 1)),
-                                      child: GridView.builder(
-                                        itemCount: imageAddRemoveProvider
-                                            .imagesListXfile.length,
-                                        itemBuilder: (context, index) {
-                                          return Stack(
-                                            children: [
-                                              ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          color:
-                                                              Theme.of(context)
-                                                                  .primaryColor,
-                                                          width: 1)),
-                                                  child: Image.file(
-                                                    File(imageAddRemoveProvider
-                                                        .imagesListXfile[index]
-                                                        .path),
-                                                    height: mq.height * .25,
-                                                    width: mq.height * .25,
-                                                    fit: BoxFit.contain,
-                                                  ),
-                                                ),
-                                              ),
-                                              InkWell(
-                                                onTap: () {
-                                                  Provider.of<ImageAddRemoveProvider>(
-                                                          context,
-                                                          listen: false)
-                                                      .removieImageXfile(
-                                                          indexImageXfile:
-                                                              index);
-                                                },
-                                                child: Container(
-                                                  padding:
-                                                      const EdgeInsets.all(4),
-                                                  margin:
-                                                      const EdgeInsets.all(2),
-                                                  decoration: BoxDecoration(
-                                                      color: white,
-                                                      shape: BoxShape.circle),
-                                                  child: Icon(
-                                                    Icons.close,
-                                                    color: red,
-                                                    size: 25,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                        gridDelegate:
-                                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                          childAspectRatio: 1.5,
-                                          crossAxisSpacing: 10,
-                                          mainAxisSpacing: 10,
-                                          crossAxisCount: 2,
-                                        ),
-                                      ),
-                                    ),
-                              */
                               const SizedBox(
                                 height: 10,
                               ),
@@ -929,7 +607,6 @@ class _AddProductPageState extends State<AddProductPage> {
     return stayOnScreen;
   }
 
-// Default Page
   Scaffold defaultPage() {
     Textstyle textstyle = Textstyle(context);
     return Scaffold(
@@ -955,8 +632,11 @@ class _AddProductPageState extends State<AddProductPage> {
                     backgroundColor: greenColor,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30))),
-                onPressed: () => globalMethod.obtainImageDialog(
-                    context: context, imagePicker: imagePicker),
+                onPressed: () => showDialog(
+                      context: context,
+                      builder: (context) => CaptureImageSelectionDialogWidget(
+                          imagePicker: imagePicker),
+                    ),
                 child: Text(
                   "Add New Product",
                   style: textstyle.largeText.copyWith(

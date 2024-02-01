@@ -14,12 +14,14 @@ import '../../model/productsmodel.dart';
 import '../../widget/custom_show_dialog_widget.dart';
 import '../home/addproductpage.dart';
 import 'details_card_swiper.dart';
-import 'loading_similar_widet.dart';
-import 'similar_product_widget.dart';
+import 'list_similer_product_widget.dart';
 
 class ProductDetailsPage extends StatefulWidget {
-  const ProductDetailsPage({super.key, required this.productModel});
+  const ProductDetailsPage(
+      {super.key, required this.productModel, this.isDelivery = false});
   final ProductModel productModel;
+
+  final bool? isDelivery;
 
   @override
   State<ProductDetailsPage> createState() => _ProductDetailsPageState();
@@ -28,16 +30,6 @@ class ProductDetailsPage extends StatefulWidget {
 ProductSelect selectMenu = ProductSelect.detele;
 
 class _ProductDetailsPageState extends State<ProductDetailsPage> {
-  // @override
-  // void initState() {
-  //   Utils utils = Utils(context);
-  //   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-  //       statusBarColor: utils.green300,
-  //       statusBarBrightness: Brightness.dark,
-  //       statusBarIconBrightness: Theme.of(context).brightness));
-  //   super.initState();
-  // }
-
   @override
   void didChangeDependencies() {
     Utils utils = Utils(context);
@@ -46,6 +38,71 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
         statusBarBrightness: Brightness.dark,
         statusBarIconBrightness: Theme.of(context).brightness));
     super.didChangeDependencies();
+  }
+
+  Container _selectPoupMenuButton(BuildContext context) {
+    return Container(
+      alignment: Alignment.center,
+      decoration: BoxDecoration(color: greenColor, shape: BoxShape.circle),
+      child: PopupMenuButton<ProductSelect>(
+        color: Theme.of(context).cardColor,
+        onSelected: (ProductSelect product) {
+          if (product.name == "detele") {
+            showDialog(
+              context: context,
+              builder: (context) => CustomDialogWidget(
+                  title: "Are You want to Delete",
+                  content:
+                      "Do you Want to Delete The Product Produc. If you delete the Product it can not be undo",
+                  onOkayPressed: () async {
+                    try {
+                      await FirebaseDatabase.deleteProductSnapshot(
+                              productId: widget.productModel.productId!)
+                          .then((value) {
+                        Navigator.pushNamed(context, AppRouters.mainPage);
+                        globalMethod.flutterToast(msg: "Delete Succesffully");
+                      });
+                    } catch (error) {
+                      globalMethod.flutterToast(
+                          msg: "An Error Occured: $error");
+                    }
+                  }),
+            );
+          } else {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AddProductPage(
+                      isUpdate: true, productModel: widget.productModel),
+                ));
+          }
+        },
+        itemBuilder: (BuildContext context) {
+          return <PopupMenuItem<ProductSelect>>[
+            PopupMenuItem(
+              value: ProductSelect.detele,
+              child: Text(
+                "Delete",
+                style: GoogleFonts.poppins(
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).primaryColor,
+                  fontSize: 14,
+                ),
+              ),
+            ),
+            PopupMenuItem(
+                value: ProductSelect.edit,
+                child: Text(
+                  "Edit",
+                  style: GoogleFonts.poppins(
+                      color: Theme.of(context).primaryColor,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold),
+                )),
+          ];
+        },
+      ),
+    );
   }
 
   Widget buildCircle(
@@ -71,7 +128,10 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: WillPopScope(
         onWillPop: () async {
-          Navigator.pushNamed(context, AppRouters.mainPage, arguments: 1);
+          widget.isDelivery!
+              ? Navigator.pop(context)
+              : Navigator.pushNamed(context, AppRouters.mainPage, arguments: 1);
+
           return Future.value(true);
         },
         child: SingleChildScrollView(
@@ -85,66 +145,12 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                 width: MediaQuery.of(context).size.width,
                 child: Stack(
                   children: [
-                    // buildCircle(
-                    //     -mq.height * .35,
-                    //     -mq.height * .26,
-                    //     mq.height * .47,
-                    //     mq.height * 1.2,
-                    //     mq.height * 1.2,
-                    //     utils.green100),
-                    // buildCircle(
-                    //     -mq.height * .12,
-                    //     -mq.height * .12,
-                    //     -mq.height * .32,
-                    //     mq.height * .67,
-                    //     mq.width * .8,
-                    //     utils.green200),
-                    // buildCircle(0, 0, -mq.width * .425, mq.width * .85,
-                    //     mq.width * .85, utils.green300),
-
                     buildCircle(-mq.height * .26, -mq.height * .7,
                         mq.height * 1.2, utils.green100),
                     buildCircle(-mq.height * .12, -mq.height * .32,
                         mq.height * .67, utils.green200),
                     buildCircle(
                         0, -mq.height * .425, mq.height * .95, utils.green300),
-                    /*
-                    Positioned(
-                      left: -mq.height * .26,
-                      right: -mq.height * .26,
-                      top: -mq.height * .7,
-                      child: Container(
-                        height: mq.height * 1.2,
-                        width: mq.height * 1.2,
-                        decoration: BoxDecoration(
-                            color: utils.green100, shape: BoxShape.circle),
-                      ),
-                    ),
-                    Positioned(
-                      left: -mq.height * .12,
-                      right: -mq.height * .12,
-                      top: -mq.height * .32,
-                      child: Container(
-                        height: mq.height * .67,
-                        width: mq.height * .67,
-                        decoration: BoxDecoration(
-                            color: utils.green200, //200
-                            shape: BoxShape.circle),
-                      ),
-                    ),
-                    Positioned(
-                      left: 0,
-                      right: 0,
-                      top: -mq.width * .425,
-                      child: Container(
-                        height: mq.width * .95,
-                        width: mq.width * .95,
-                        decoration: BoxDecoration(
-                            color: utils.green300, //300
-                            shape: BoxShape.circle),
-                      ),
-                    ),
-      */
                     Positioned(
                       child: Padding(
                         padding:
@@ -161,11 +167,11 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                               children: [
                                 InkWell(
                                   onTap: () {
-                                    Navigator.pushNamed(
-                                      context,
-                                      AppRouters.mainPage,
-                                      arguments: 1,
-                                    );
+                                    widget.isDelivery!
+                                        ? Navigator.pop(context)
+                                        : Navigator.pushNamed(
+                                            context, AppRouters.mainPage,
+                                            arguments: 1);
                                   },
                                   child: Container(
                                     alignment: Alignment.center,
@@ -274,18 +280,26 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                     SizedBox(
                       height: mq.height * .024,
                     ),
-                    Text(
-                      "Similar Products",
-                      style: GoogleFonts.abrilFatface(
-                          color: Theme.of(context).primaryColor,
-                          fontSize: 18,
-                          letterSpacing: 2,
-                          fontWeight: FontWeight.w700),
-                    ),
-                    SizedBox(
-                      height: mq.height * .012,
-                    ),
-                    ListSimilerProductWidget(productModel: widget.productModel),
+                    if (!widget.isDelivery!)
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Similar Products",
+                            style: GoogleFonts.abrilFatface(
+                                color: Theme.of(context).primaryColor,
+                                fontSize: 18,
+                                letterSpacing: 2,
+                                fontWeight: FontWeight.w700),
+                          ),
+                          SizedBox(
+                            height: mq.height * .012,
+                          ),
+                          ListSimilerProductWidget(
+                              productModel: widget.productModel),
+                        ],
+                      ),
                     SizedBox(
                       height: mq.height * .024,
                     ),
@@ -298,230 +312,4 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
       ),
     );
   }
-
-  Container _selectPoupMenuButton(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      decoration: BoxDecoration(color: greenColor, shape: BoxShape.circle),
-      child: PopupMenuButton<ProductSelect>(
-        color: Theme.of(context).cardColor,
-        onSelected: (ProductSelect product) {
-          if (product.name == "detele") {
-            showDialog(
-              context: context,
-              builder: (context) => CustomDialogWidget(
-                  title: "Are You want to Delete",
-                  content:
-                      "Do you Want to Delete The Product Produc. If you delete the Product it can not be undo",
-                  onOkayPressed: () async {
-                    try {
-                      await FirebaseDatabase.deleteProductSnapshot(
-                              productId: widget.productModel.productId!)
-                          .then((value) {
-                        Navigator.pushNamed(context, AppRouters.mainPage);
-                        globalMethod.flutterToast(msg: "Delete Succesffully");
-                      });
-                    } catch (error) {
-                      globalMethod.flutterToast(
-                          msg: "An Error Occured: $error");
-                    }
-                  }),
-            );
-          } else {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => AddProductPage(
-                      isUpdate: true, productModel: widget.productModel),
-                ));
-          }
-        },
-        itemBuilder: (BuildContext context) {
-          return <PopupMenuItem<ProductSelect>>[
-            PopupMenuItem(
-              value: ProductSelect.detele,
-              child: Text(
-                "Delete",
-                style: GoogleFonts.poppins(
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).primaryColor,
-                  fontSize: 14,
-                ),
-              ),
-            ),
-            PopupMenuItem(
-                value: ProductSelect.edit,
-                child: Text(
-                  "Edit",
-                  style: GoogleFonts.poppins(
-                      color: Theme.of(context).primaryColor,
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold),
-                )),
-          ];
-        },
-      ),
-    );
-  }
 }
-
-class ListSimilerProductWidget extends StatelessWidget {
-  const ListSimilerProductWidget({
-    super.key,
-    required this.productModel,
-  });
-
-  final ProductModel productModel;
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: mq.height * .18,
-      width: MediaQuery.of(context).size.width,
-      child: StreamBuilder(
-        stream:
-            FirebaseDatabase.similarProductSnapshot(productModel: productModel),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const LoadingSimilierWidget();
-          } else if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-            return const Text(
-              'asset/payment/emptytow.png',
-            );
-          } else if (snapshot.hasError) {
-            return Text(
-              'Error Occure: ${snapshot.error}',
-            );
-          }
-
-          if (snapshot.hasData) {
-            return ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: snapshot.data!.docs.length,
-                itemBuilder: (context, index) {
-                  ProductModel models =
-                      ProductModel.fromMap(snapshot.data!.docs[index].data());
-                  return InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ProductDetailsPage(
-                              productModel: models,
-                            ),
-                          ));
-                    },
-                    child: SimilarProductWidget(models: models),
-                  );
-                });
-          }
-          return const LoadingSimilierWidget();
-        },
-      ),
-    );
-  }
-}
-
-
-                                      /*
-                                      globalMethod.logoutOrDeleteScreen(
-                                          context: context,
-                                          title: "Are You want to Delete",
-                                          content:
-                                              "Do you Want to Delete The Product Produc. If you delete the Product it can not be undo",
-                                          function: () async {
-                                            try {
-                                              await FirebaseDatabase
-                                                      .deleteProductSnapshot(
-                                                          productId: widget
-                                                              .productModel
-                                                              .productId!)
-                                                  .then((value) {
-                                                Navigator.pushNamed(context,
-                                                    AppRouters.mainPage);
-                                                globalMethod.flutterToast(
-                                                    msg: "Delete Succesffully");
-                                              });
-                                            } catch (error) {
-                                              globalMethod.flutterToast(
-                                                  msg:
-                                                      "An Error Occured: $error");
-                                            }
-                                          });
-
-*/
-/*
-                                      showDialog(
-                                        context: context,
-                                        builder: (context) {
-                                          return AlertDialog(
-                                            backgroundColor:
-                                                Theme.of(context).cardColor,
-                                            title: Text(
-                                                "Are You want to Delete",
-                                                style: GoogleFonts.poppins(
-                                                    color: greenColor,
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                        FontWeight.bold)),
-                                            content: Text(
-                                                "Do you Want to Delete The Product Produc. If you delete the Product it can not be undo",
-                                                style: GoogleFonts.poppins(
-                                                    color: Theme.of(context)
-                                                        .primaryColor,
-                                                    fontSize: 12,
-                                                    fontWeight:
-                                                        FontWeight.w700)),
-                                            actions: [
-                                              TextButton(
-                                                  onPressed: () async {
-                                                    try {
-                                                      await FirebaseFirestore
-                                                          .instance
-                                                          .collection("seller")
-                                                          .doc(sharedPreference!
-                                                              .getString("uid"))
-                                                          .collection(
-                                                              "products")
-                                                          .doc(widget
-                                                              .productModel
-                                                              .productId)
-                                                          .delete()
-                                                          .then((value) async {
-                                                        await FirebaseFirestore
-                                                            .instance
-                                                            .collection(
-                                                                "products")
-                                                            .doc(widget
-                                                                .productModel
-                                                                .productId)
-                                                            .delete();
-                                                      }).then((value) {
-                                                        Navigator.push(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                              builder:
-                                                                  (context) =>
-                                                                      MainPage(),
-                                                            ));
-                                                        globalMethod.flutterToast(
-                                                            msg:
-                                                                "Delete Succesffully");
-                                                      });
-                                                    } catch (error) {
-                                                      globalMethod.flutterToast(
-                                                          msg:
-                                                              "An Error Occured: $error");
-                                                    }
-                                                  },
-                                                  child: const Text("Okay")),
-                                              TextButton(
-                                                  onPressed: () {
-                                                    Navigator.pop(context);
-                                                  },
-                                                  child: const Text("No"))
-                                            ],
-                                          );
-                                        },
-                                      );
-                               
-*/

@@ -8,8 +8,10 @@ import '../const/textstyle.dart';
 import '../service/provider/imageaddremoveprovider.dart';
 
 class SelectPhotoProfile extends StatelessWidget {
-  const SelectPhotoProfile({super.key, required this.imagePicker});
+  const SelectPhotoProfile(
+      {super.key, required this.imagePicker, this.icChangeprofile});
   final ImagePicker imagePicker;
+  final bool? icChangeprofile;
   @override
   Widget build(BuildContext context) {
     Textstyle textstyle = Textstyle(context);
@@ -72,7 +74,8 @@ class SelectPhotoProfile extends StatelessWidget {
     ImageAddRemoveProvider addUpdateProdcutProvider =
         Provider.of<ImageAddRemoveProvider>(context, listen: false);
     XFile? image = await imagePicker.pickImage(source: imageSource);
-    addUpdateProdcutProvider.setSingleImageXFile(singleImageXFile: image);
+    addUpdateProdcutProvider.setSingleImageXFile(
+        singleImageXFile: image, isChange: icChangeprofile ?? false);
   }
 
   Padding _showBottomModelItem(

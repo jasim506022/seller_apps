@@ -12,18 +12,20 @@ class TextFieldFormWidget extends StatefulWidget {
       this.autofocus = false,
       this.obscureText = false,
       this.isShowPassword = false,
+      this.enable = true,
       this.textInputAction = TextInputAction.next,
       this.maxLines = 1,
       this.textInputType = TextInputType.text,
       required this.validator});
   final String hintText;
   final TextEditingController controller;
-  bool? autofocus;
-  TextInputAction? textInputAction;
-  TextInputType? textInputType;
-  int? maxLines;
+  final bool? autofocus;
+  final TextInputAction? textInputAction;
+  final TextInputType? textInputType;
+  final int? maxLines;
+  final bool enable;
   bool? obscureText;
-  bool? isShowPassword;
+  final bool? isShowPassword;
   final String? Function(String?)? validator;
 
   @override
@@ -40,13 +42,16 @@ class _TextFieldFormWidgetState extends State<TextFieldFormWidget> {
           autofocus: widget.autofocus!,
           maxLines: widget.maxLines,
           validator: widget.validator,
+          enabled: widget.enable,
           obscureText: widget.obscureText!,
           textInputAction: widget.textInputAction,
           keyboardType: widget.textInputType,
           style: GoogleFonts.poppins(
               fontSize: 14,
               fontWeight: FontWeight.w600,
-              color: Theme.of(context).primaryColor),
+              color: widget.enable
+                  ? Theme.of(context).primaryColor
+                  : Colors.black54),
           decoration: globalMethod.textFormFielddecoration(
               hintText: widget.hintText,
               isShowPassword: widget.isShowPassword!,

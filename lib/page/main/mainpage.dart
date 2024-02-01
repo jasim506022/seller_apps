@@ -5,6 +5,8 @@ import '../../const/cartmethod.dart';
 import '../../const/const.dart';
 import '../../const/gobalcolor.dart';
 import '../home/homepage.dart';
+import '../other/local_service.dart';
+import '../other/pushnotification.dart';
 import '../product/productpage.dart';
 import '../profile/profilepage.dart';
 import '../search/searchpage.dart';
@@ -29,7 +31,37 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     super.initState();
+    LocalServiceNotification.initializeuser(context);
+    PushNotification message = PushNotification();
+    message.requestNotificationPermission();
+    message.initMessageInforUser(context);
+    // message.getFcmToken();
+    // FirebaseDatabase.iniNotification();
+    // LocalServiceNotification.initialize(context);
+
     globalMethod.getUsersharedPreference();
+    /*
+    FirebaseMessaging.instance.getInitialMessage().then((message) {
+      if (message != null) {
+        final routeFormMessage = message.data['routes'];
+        print(routeFormMessage);
+      }
+    });
+    FirebaseMessaging.onMessage.listen((message) {
+      if (message.notification != null) {
+        print(message.notification!.body);
+        print(message.notification!.title);
+      }
+
+      LocalServiceNotification.display(message);
+    });
+
+    FirebaseMessaging.onMessageOpenedApp.listen((message) {
+      final routeFormMessage = message.data['routes'];
+      print(routeFormMessage);
+    });
+    
+    */
     CartMethods.allProduct();
   }
 

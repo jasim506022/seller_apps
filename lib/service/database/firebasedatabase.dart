@@ -1,9 +1,13 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:seller_apps/model/profilemodel.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -16,6 +20,17 @@ import '../../widget/show_error_dialog_widget.dart';
 class FirebaseDatabase {
   // instance of FirebaseAuth
   static FirebaseAuth auth = FirebaseAuth.instance;
+
+  static FirebaseMessaging firebaseMessing = FirebaseMessaging.instance;
+
+  static Future<void> iniNotification() async {
+    await firebaseMessing.requestPermission();
+    final fCMToken = await firebaseMessing.getToken();
+
+    if (kDebugMode) {
+      print("Token: $fCMToken");
+    }
+  }
 
   // instance of FirebaseFirestore
   static final firestore = FirebaseFirestore.instance;
@@ -39,6 +54,33 @@ class FirebaseDatabase {
         email: email,
         password: password,
       );
+
+  static Future<void> sendPushNotification() async {
+    try {
+      final body = {
+        "to":
+            "c_M-5llkSoC7Zt-W7_ZgEt:APA91bFA6DnkPzbFrK76DMixhKw1nhjttMsedw4F0chEWpSGcHX13UlwiN-SP96QWUQ8hwG2vqca3foMXrFHpk5nZdNvKhIpN90wUPFvEcUT2EC4Oou0Pb9Cjv3Bb25BQ2kbCoWNUbVq",
+        "notificatio": {"title": "How are you", "body": "What are you doing"}
+      };
+      var res = await post(Uri.parse("https://fcm.googleapis.com/fcm/send"),
+          headers: {
+            HttpHeaders.contentTypeHeader: "application/json",
+            HttpHeaders.authorizationHeader:
+                "key=AAAAss2Sy-E:APA91bGkl-bkcLh9_XYIkj_f6_pWo8BRElO-8_U-buseYplgyd-lxMiiysx3ftR4lLgkZTYdWx3zgnigIuw2_JMUiW4ZnNKgeCYjlqYSPQLI7EhQkGgoHr3EdobNYNmuKmwUmWh7gNr8"
+          },
+          body: jsonEncode(body));
+      if (kDebugMode) {
+        print("Response Status: ${res.statusCode}");
+      }
+      if (kDebugMode) {
+        print("Response Status: ${res.body}");
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print("Sent Notification : $e");
+      }
+    }
+  }
 
 // Sign In With Gmail
   static Future<UserCredential?> signWithGoogle(
@@ -250,7 +292,7 @@ class FirebaseDatabase {
     return firestore
         .collection("orders")
         .where("status", isEqualTo: status)
-        .where("seller", arrayContains: sharedPreference!.get("uid"))
+        .where("seller", arrayContains: selleruid)
         .snapshots();
   }
 

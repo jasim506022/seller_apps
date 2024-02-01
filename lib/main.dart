@@ -1,10 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:seller_apps/page/auth/forgetpasswordscreen.dart';
 import 'package:seller_apps/page/auth/signupscreen.dart';
+import 'package:seller_apps/page/completeorder/totalsellerpage.dart';
 import 'package:seller_apps/page/order/completeorderpage.dart';
+import 'package:seller_apps/page/order/shiftedorderpage.dart';
 import 'package:seller_apps/service/provider/imageaddremoveprovider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -19,7 +23,7 @@ import 'page/splash/onboardingpage.dart';
 import 'page/splash/splashpage.dart';
 
 import 'service/provider/dropvalueselectallprovider.dart';
-import 'service/provider/editprofileprovider.dart';
+
 import 'service/provider/loadingprovider.dart';
 import 'service/provider/searchprovider.dart';
 import 'service/provider/theme_provider.dart';
@@ -29,8 +33,17 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   sharedPreference = await SharedPreferences.getInstance();
+  FirebaseMessaging.onBackgroundMessage(firebaseMessingbackground);
   isviewed = sharedPreference!.getInt('onBoarding');
   runApp(const MyApp());
+}
+
+Future<void> firebaseMessingbackground(RemoteMessage message) async {
+  if (kDebugMode) {
+    print("Handling a background message ${message.data}");
+    print("Handling a background message ${message.notification!.title}");
+    print("Handling a background message ${message.notification!.body}");
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -68,11 +81,6 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) {
-            return EditPageProvider();
-          },
-        ),
-        ChangeNotifierProvider(
-          create: (context) {
             return LoadingProvider();
           },
         ),
@@ -94,6 +102,8 @@ class MyApp extends StatelessWidget {
               AppRouters.completeOrderPage: (context) =>
                   const CompleteOrderPage(),
               AppRouters.orderPage: (context) => const OrderPage(),
+              AppRouters.shiftPage: (context) => const ShiftedOrderPage(),
+              AppRouters.totalSales: (context) => const TotalSellPage(),
             },
           );
         },

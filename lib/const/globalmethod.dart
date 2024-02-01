@@ -16,21 +16,31 @@ import 'gobalcolor.dart';
 
 class GlobalMethod {
 // Text Form Field Decoration
-  InputDecoration textFormFielddecoration(
-      {bool isShowPassword = false,
-      required String hintText,
-      bool obscureText = false,
-      required Function function}) {
+  InputDecoration textFormFielddecoration({
+    bool isShowPassword = false,
+    required String hintText,
+    bool obscureText = false,
+    required Function function,
+    bool profileTextForm = false,
+  }) {
+    final OutlineInputBorder defaultOutlineInputBorder = OutlineInputBorder(
+      borderSide: BorderSide(
+        color: profileTextForm ? Colors.black : Colors.transparent,
+        width: profileTextForm ? 1 : 0,
+      ),
+      borderRadius: BorderRadius.circular(15),
+    );
     return InputDecoration(
-      labelStyle:
-          GoogleFonts.poppins(fontSize: 14, fontWeight: FontWeight.w500),
+      labelStyle: GoogleFonts.poppins(
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
+      ),
       fillColor: searchLightColor,
       filled: true,
       hintText: hintText,
-      enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide.none, borderRadius: BorderRadius.circular(15)),
-      focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide.none, borderRadius: BorderRadius.circular(15)),
+      border: defaultOutlineInputBorder,
+      enabledBorder: defaultOutlineInputBorder,
+      focusedBorder: defaultOutlineInputBorder,
       suffixIcon: isShowPassword
           ? IconButton(
               onPressed: () {
@@ -82,7 +92,7 @@ class GlobalMethod {
               textStyle: const TextStyle(
                 decoration: TextDecoration.underline,
               ),
-              color: greenColor,
+              color: deepGreen,
               fontWeight: FontWeight.w800))
     ]));
   }
@@ -191,11 +201,13 @@ class GlobalMethod {
   String getFormateDate(
       {required BuildContext context, required String datetime}) {
     final date = DateTime.fromMillisecondsSinceEpoch(int.parse(datetime));
-    return DateFormat("yyyy-MM-dd").format(date);
+    return DateFormat("MMM d, yyyy").format(date);
   }
 
   double discountedPrice(double productprice, double discount) {
-    return productprice - (productprice * discount / 100);
+    double discountPrice = productprice - (productprice * discount / 100);
+
+    return double.parse(discountPrice.toStringAsFixed(2));
   }
 
 // Drop Down Button Decoration
@@ -210,6 +222,17 @@ class GlobalMethod {
         borderRadius: BorderRadius.circular(15),
       ),
       contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+    );
+  }
+
+  Container buildShimmerTextContainer(Color color, double height) {
+    return Container(
+      height: height,
+      width: mq.width,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(5),
+        color: color,
+      ),
     );
   }
 }

@@ -2,24 +2,21 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
-import 'package:seller_apps/page/order/shiftedorderpage.dart';
 
-import '../auth/signinpage.dart';
+import '../../const/approutes.dart';
 import '../../const/const.dart';
-import '../../const/global.dart';
 import '../../const/gobalcolor.dart';
 import '../../const/textstyle.dart';
+import '../../model/profilemodel.dart';
+import '../../service/database/firebasedatabase.dart';
 import '../../service/provider/theme_provider.dart';
-import '../completeorder/totalsellerpage.dart';
-import '../main/mainpage.dart';
-
-import '../order/completeorderpage.dart';
-import '../order/orderpage.dart';
+import '../../widget/custom_show_dialog_widget.dart';
 import 'editprofilepage.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -40,155 +37,180 @@ class _ProfilePageState extends State<ProfilePage> {
         statusBarIconBrightness: Theme.of(context).brightness));
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text("Profile"),
       ),
-      body: Column(
-        children: [
-          _buildSellerProfile(textstyle),
-          Divider(
-            height: MediaQuery.of(context).size.width * .015,
-            color: grey,
-            thickness: 2,
-          ),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  _buildListTitleMethod(
-                    icon: Icons.person,
-                    title: 'About',
-                    funcion: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                const EditProfilePage(isEdit: false),
-                          ));
-                    },
-                  ),
-                  _buildListTitleMethod(
-                    icon: Icons.home_outlined,
-                    title: 'Home',
-                    funcion: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const MainPage(),
-                          ));
-                    },
-                  ),
-                  _buildListTitleMethod(
-                    icon: Icons.reorder,
-                    title: 'My Orders',
-                    funcion: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const OrderPage(),
-                          ));
-                    },
-                  ),
-                  _buildListTitleMethod(
-                    icon: Icons.picture_in_picture_alt_rounded,
-                    title: 'Shifted Orders',
-                    funcion: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const ShiftedOrderPage(),
-                          ));
-                    },
-                  ),
-                  _buildListTitleMethod(
-                    icon: Icons.access_time,
-                    title: 'History',
-                    funcion: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const CompleteOrderPage(),
-                          ));
-                    },
-                  ),
-                  _buildListTitleMethod(
-                    icon: Icons.money,
-                    title: 'Earn',
-                    funcion: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const TotalSellPage(),
-                          ));
-                    },
-                  ),
-                  Consumer<ThemeProvider>(
-                    builder: (context, themeProvider, child) {
-                      return _buildSwitchListTile(themeProvider, context);
-                    },
-                  ),
-                  _buildListTitleMethod(
-                      icon: Icons.exit_to_app,
-                      title: "Sign Out",
-                      funcion: () async {
-                        try {
-                          final result =
-                              await InternetAddress.lookup('google.com');
-                          if (result.isNotEmpty &&
-                              result[0].rawAddress.isNotEmpty) {
-                            /*
-                            if (mounted) {
-                              globalMethod.logoutOrDeleteScreen(
-                                  context: context,
-                                  title: "Are you want to Logout?",
-                                  content: "Are you want to Logout this Apps",
-                                  function: () {
-                                    FirebaseAuth.instance
-                                        .signOut()
-                                        .then((value) async {
-                                      await GoogleSignIn().signOut();
-                                    });
-                                    Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (c) => const SigninPage()),
-                                      (route) => false,
-                                    );
-                                  });
-                            }
-                            */
-                          }
-                        } on SocketException {
-                          globalMethod.flutterToast(
-                              msg: "Please Check your Internet");
-                        }
-                      },
-                      color: red),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
+      body: FutureBuilder(
+          future: FirebaseDatabase.profileSnapshot(),
+          builder: (context, snapshot) {
+            try {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasData) {
+                ProfileModel profileModel =
+                    ProfileModel.fromMap(snapshot.data!.data()!);
+                return Column(
+                  children: [
+                    _buildSellerProfile(textstyle, profileModel),
+                    Divider(
+                      height: MediaQuery.of(context).size.width * .015,
+                      color: grey,
+                      thickness: 2,
+                    ),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            _buildListTitleMethod(
+                              icon: Icons.person,
+                              title: 'About',
+                              funcion: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => EditProfilePage(
+                                        isEdit: false,
+                                        profileModel: profileModel,
+                                      ),
+                                    ));
+                              },
+                            ),
+                            _buildListTitleMethod(
+                              icon: Icons.home_outlined,
+                              title: 'Home',
+                              funcion: () {
+                                Navigator.pushNamed(
+                                    context, AppRouters.mainPage);
+                              },
+                            ),
+                            _buildListTitleMethod(
+                              icon: Icons.reorder,
+                              title: 'My Orders',
+                              funcion: () {
+                                Navigator.pushNamed(
+                                    context, AppRouters.orderPage);
+                              },
+                            ),
+                            _buildListTitleMethod(
+                              icon: Icons.picture_in_picture_alt_rounded,
+                              title: 'Shifted Orders',
+                              funcion: () {
+                                Navigator.pushNamed(
+                                    context, AppRouters.shiftPage);
+                              },
+                            ),
+                            _buildListTitleMethod(
+                              icon: Icons.access_time,
+                              title: 'History',
+                              funcion: () {
+                                Navigator.pushNamed(
+                                    context, AppRouters.completeOrderPage);
+                                // Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //       builder: (context) =>
+                                //           const CompleteOrderPage(),
+                                //     ));
+                              },
+                            ),
+                            _buildListTitleMethod(
+                              icon: Icons.money,
+                              title: 'Earn',
+                              funcion: () {
+                                Navigator.pushNamed(
+                                    context, AppRouters.totalSales);
+                                // Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //       builder: (context) =>
+                                //           const TotalSellPage(),
+                                //     ));
+                              },
+                            ),
+                            Consumer<ThemeProvider>(
+                              builder: (context, themeProvider, child) {
+                                return _buildSwitchListTile(
+                                    themeProvider, context);
+                              },
+                            ),
+                            _buildListTitleMethod(
+                                icon: Icons.exit_to_app,
+                                title: "Sign Out",
+                                funcion: () async {
+                                  try {
+                                    final result = await InternetAddress.lookup(
+                                        'google.com');
+                                    if (result.isNotEmpty &&
+                                        result[0].rawAddress.isNotEmpty) {
+                                      if (mounted) {
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) =>
+                                              CustomDialogWidget(
+                                                  title:
+                                                      "Are you want to Logout?",
+                                                  content:
+                                                      "Are you want to Logout this Apps",
+                                                  onOkayPressed: () {
+                                                    FirebaseAuth.instance
+                                                        .signOut()
+                                                        .then((value) async {
+                                                      await GoogleSignIn()
+                                                          .signOut();
+                                                    });
+                                                    Navigator
+                                                        .pushNamedAndRemoveUntil(
+                                                            context,
+                                                            AppRouters.signPage,
+                                                            (route) => false);
+                                                  }),
+                                        );
+                                      }
+                                    }
+                                  } on SocketException {
+                                    globalMethod.flutterToast(
+                                        msg: "Please Check your Internet");
+                                  }
+                                },
+                                color: red),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              } else if (snapshot.hasError) {
+                return globalMethod.flutterToast(
+                    msg: "Error: ${snapshot.error}");
+              } else {
+                return const Center(child: CircularProgressIndicator());
+              }
+            } catch (error) {
+              return globalMethod.flutterToast(msg: "Unexpected Error: $error");
+            }
+          }),
     );
   }
 
-  Container _buildSellerProfile(Textstyle textstyle) {
+  Container _buildSellerProfile(
+      Textstyle textstyle, ProfileModel profileModel) {
     return Container(
         height: mq.height * .18,
         width: mq.width,
         color: Theme.of(context).cardColor,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: EdgeInsets.symmetric(horizontal: mq.width * .044),
           child: Row(
             children: [
-              SizedBox(
+              Container(
                 height: mq.width * .266,
                 width: mq.width * .266,
+                decoration: BoxDecoration(
+                    border: Border.all(color: red), shape: BoxShape.circle),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(mq.width * .133),
                   child: CachedNetworkImage(
-                    imageUrl: sharedPreference!.getString("imageurl") ??
-                        "https://www.cricbuzz.com/a/img/v1/152x152/i1/c170899/tamim-iqbal.jpg",
+                    imageUrl: profileModel.imageurl!,
                     placeholder: (context, url) =>
                         const CircularProgressIndicator(),
                     errorWidget: (context, url, error) =>
@@ -207,13 +229,11 @@ class _ProfilePageState extends State<ProfilePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text(
-                          sharedPreference!.getString("name") ??
-                              "Md Jasim Uddin",
+                      Text(profileModel.name!,
                           style: textstyle.largeText.copyWith(
                               fontSize: 20,
                               color: Theme.of(context).primaryColor)),
-                      Text(sharedPreference!.getString("email") ?? "md Jasim",
+                      Text(profileModel.email!,
                           style: textstyle.mediumText600.copyWith(
                               fontSize: 15,
                               color: Theme.of(context).hintColor)),
@@ -238,8 +258,8 @@ class _ProfilePageState extends State<ProfilePage> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) =>
-                                      const EditProfilePage(isEdit: true),
+                                  builder: (context) => EditProfilePage(
+                                      isEdit: true, profileModel: profileModel),
                                 ));
                           },
                           child: Text(

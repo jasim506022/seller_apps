@@ -31,6 +31,7 @@ class DeliveryCartWidget extends StatelessWidget {
             MaterialPageRoute(
               builder: (context) => ProductDetailsPage(
                 productModel: productModel,
+                isDelivery: true,
               ),
             ));
       },

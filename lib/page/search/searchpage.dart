@@ -29,8 +29,8 @@ class _SearchPageState extends State<SearchPage> {
   void initState() {
     Future.delayed(Duration.zero, () {
       Provider.of<SearchProvider>(context, listen: false)
-          .setSearch(isSearch: false);
-      Provider.of<SearchProvider>(context, listen: false).clearSearchList();
+        ..setSearch(isSearch: false)
+        ..clearSearchList();
     });
     super.initState();
   }
@@ -77,12 +77,15 @@ class _SearchPageState extends State<SearchPage> {
                             controller: searchTEC,
                             onChanged: (textEntered) {
                               searchProvider.clearSearchList();
+
                               for (var product in _productList) {
-                                if (product.productname!
-                                        .toLowerCase()
+                                final productNameLowerCase =
+                                    product.productname!.toLowerCase();
+                                final productCategoryLowerCase =
+                                    product.productcategory!.toLowerCase();
+                                if (productNameLowerCase
                                         .contains(textEntered.toLowerCase()) ||
-                                    product.productcategory!
-                                        .toLowerCase()
+                                    productCategoryLowerCase
                                         .contains(textEntered.toLowerCase())) {
                                   searchProvider.addProductSearchList(
                                       productModel: product);

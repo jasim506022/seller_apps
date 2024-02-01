@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seller_apps/const/const.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../const/gobalcolor.dart';
@@ -13,10 +14,11 @@ class LoadingSingleProductWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     Utils utils = Utils(context);
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+      padding: EdgeInsets.symmetric(
+          horizontal: mq.width * .022, vertical: mq.height * .01),
       child: Container(
-        height: 160,
-        width: MediaQuery.of(context).size.width * .8,
+        height: mq.height * .188,
+        width: mq.width * .8,
         decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
@@ -35,8 +37,8 @@ class LoadingSingleProductWidget extends StatelessWidget {
               Stack(
                 children: [
                   Container(
-                    height: 140,
-                    width: 140,
+                    height: mq.height * .165,
+                    width: mq.height * .165,
                     alignment: Alignment.center,
                     margin: const EdgeInsets.all(10),
                     padding: const EdgeInsets.all(20),
@@ -46,17 +48,18 @@ class LoadingSingleProductWidget extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: Container(
-                        height: 120,
+                        height: mq.height * .141,
                         color: utils.widgetShimmerColor,
                       ),
                     ),
                   ),
                   Positioned(
-                    left: 10,
-                    top: 10,
+                    left: mq.width * .022,
+                    top: mq.height * .012,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8, vertical: 5),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: mq.width * .02,
+                          vertical: mq.height * .007),
                       decoration: BoxDecoration(
                         border: Border.all(
                             color: const Color(0xffed6767), width: .5),
@@ -65,8 +68,8 @@ class LoadingSingleProductWidget extends StatelessWidget {
                             .withOpacity(.2),
                       ),
                       child: Container(
-                        height: 20,
-                        width: 20,
+                        height: mq.width * .044,
+                        width: mq.width * .044,
                         color: utils.widgetShimmerColor,
                       ),
                     ),
@@ -75,12 +78,28 @@ class LoadingSingleProductWidget extends StatelessWidget {
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.only(
-                      left: 20, right: 12, top: 15, bottom: 15),
+                  padding: EdgeInsets.only(
+                      left: mq.width * .044,
+                      right: mq.width * .025,
+                      top: mq.height * .02,
+                      bottom: mq.height * .02),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      globalMethod.buildShimmerTextContainer(
+                          utils.widgetShimmerColor, mq.height * 0.02),
+                      SizedBox(
+                        height: mq.height * .008,
+                      ),
+                      globalMethod.buildShimmerTextContainer(
+                          utils.widgetShimmerColor, mq.height * 0.02),
+                      SizedBox(
+                        height: mq.height * .008,
+                      ),
+                      globalMethod.buildShimmerTextContainer(
+                          utils.widgetShimmerColor, mq.height * 0.02),
+                      /*
                       Container(
                         height: 30,
                         width: MediaQuery.of(context).size.width * 0.7,
@@ -91,7 +110,7 @@ class LoadingSingleProductWidget extends StatelessWidget {
                       ),
                       Container(
                         height: 30,
-                        width: MediaQuery.of(context).size.width,
+                        width: mq.width,
                         color: utils.widgetShimmerColor,
                       ),
                       const SizedBox(
@@ -106,6 +125,8 @@ class LoadingSingleProductWidget extends StatelessWidget {
                           color: utils.widgetShimmerColor,
                         ),
                       ),
+                   
+                   */
                     ],
                   ),
                 ),

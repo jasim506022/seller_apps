@@ -288,17 +288,6 @@ class _AddProductPageState extends State<AddProductPage> {
           },
           child: WillPopScope(
             onWillPop: () async {
-              // bool stayOnScreen = showDialog(
-              //   context: context,
-              //   builder: (BuildContext context) {
-              //     return CustomDialogWidget(
-
-              //       title: 'Title',
-              //       content: 'Content',
-              //     );
-              //   },
-              // );
-
               return Future.value(stayOnScreenFunction(context));
             },
             child: Scaffold(

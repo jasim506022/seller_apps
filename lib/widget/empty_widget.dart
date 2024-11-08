@@ -15,7 +15,7 @@ class EmptyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    mq = MediaQuery.of(context).size;
+    var  mq = MediaQuery.of(context).size;
     return Center(
       child: Stack(
         children: [

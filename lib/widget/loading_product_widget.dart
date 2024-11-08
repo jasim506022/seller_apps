@@ -12,7 +12,7 @@ class LoadingProductWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Utils utils = Utils(context);
-    mq = MediaQuery.of(context).size;
+  var  mq = MediaQuery.of(context).size;
 
     return GridView.builder(
       physics: const NeverScrollableScrollPhysics(),

@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -52,7 +53,7 @@ class GlobalMethod {
               ))
           : null,
       contentPadding: EdgeInsets.symmetric(
-          horizontal: mq.width * .033, vertical: mq.height * .025),
+          horizontal: 15.w, vertical: 20.h),
       hintStyle: const TextStyle(
         color: Color(0xffc8c8d5),
       ),
@@ -66,7 +67,7 @@ class GlobalMethod {
           borderRadius: BorderRadius.circular(15),
         ),
         padding: EdgeInsets.symmetric(
-            horizontal: mq.width * 0.022, vertical: mq.height * 0.018),
+            horizontal: 10.w, vertical: 10.h),
       );
 
 // Rich Text
@@ -228,7 +229,7 @@ class GlobalMethod {
   Container buildShimmerTextContainer(Color color, double height) {
     return Container(
       height: height,
-      width: mq.width,
+      width: 1.sw,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
         color: color,

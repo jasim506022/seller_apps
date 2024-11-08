@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
@@ -25,19 +26,19 @@ class SelectPhotoProfile extends StatelessWidget {
           Align(
             alignment: Alignment.center,
             child: Container(
-              width: mq.width * .22,
-              height: mq.height * .005,
+              width: 10.w,
+              height: 1.h,
               decoration: BoxDecoration(
                   color: Theme.of(context).indicatorColor,
                   borderRadius: BorderRadius.circular(2)),
             ),
           ),
-          SizedBox(height: mq.height * .02),
+          SizedBox(height: 15.h),
           Align(
               alignment: Alignment.center,
               child: Text("Select Photo", style: textstyle.largeBoldText)),
           SizedBox(
-            height: mq.height * .01,
+            height: 10.h,
           ),
           Row(
             children: [
@@ -50,7 +51,7 @@ class SelectPhotoProfile extends StatelessWidget {
                     imageSource: ImageSource.camera);
               }),
               SizedBox(
-                width: mq.width * .066,
+                width: 30.w,
               ),
               _showBottomModelItem(textstyle, "Gallery", Icons.photo_album, () {
                 Navigator.pop(context);
@@ -82,7 +83,7 @@ class SelectPhotoProfile extends StatelessWidget {
       Textstyle textStyle, String title, IconData icon, VoidCallback funcion) {
     return Padding(
       padding: EdgeInsets.symmetric(
-          horizontal: mq.width * .012, vertical: mq.height * .012),
+          horizontal: 8.w, vertical: 10.h),
       child: InkWell(
         onTap: funcion,
         child: Column(
@@ -100,7 +101,7 @@ class SelectPhotoProfile extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: mq.width * .01,
+              height: 5.h,
             ),
             Text(
               title,

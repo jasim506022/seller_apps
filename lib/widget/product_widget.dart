@@ -1,13 +1,14 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 import '../const/const.dart';
 import '../const/gobalcolor.dart';
 import '../const/textstyle.dart';
 import '../model/productsmodel.dart';
-import '../page/home/addproductpage.dart';
-import '../page/product/detailsproductpage.dart';
+import '../view/home/addproductpage.dart';
+import '../view/product/detailsproductpage.dart';
 
 class ProductWidget extends StatelessWidget {
   const ProductWidget({
@@ -47,7 +48,7 @@ class ProductWidget extends StatelessWidget {
               Stack(
                 children: [
                   Container(
-                    height: mq.height * .125,
+                    height: 0.125.sh,
                     alignment: Alignment.center,
                     margin: const EdgeInsets.all(10),
                     padding: const EdgeInsets.all(20),
@@ -57,19 +58,19 @@ class ProductWidget extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: FancyShimmerImage(
-                        height: mq.height * .85,
+                        height:0.85.h,
                         boxFit: BoxFit.contain,
                         imageUrl: productModel.productimage![0],
                       ),
                     ),
                   ),
                   Positioned(
-                    left: mq.width * .022,
-                    top: mq.height * .012,
+                    left: 10.w,
+                    top: 10.h,
                     child: Container(
                       padding: EdgeInsets.symmetric(
-                          horizontal: mq.width * .02,
-                          vertical: mq.height * .006),
+                          horizontal: 10.w,
+                          vertical: 1.h),
                       decoration: BoxDecoration(
                         border: Border.all(color: red, width: .5),
                         borderRadius: BorderRadius.circular(15),
@@ -83,7 +84,7 @@ class ProductWidget extends StatelessWidget {
               ),
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: mq.width * .028),
+                  padding: EdgeInsets.symmetric(horizontal: 12.w),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,7 +96,7 @@ class ProductWidget extends StatelessWidget {
                             style: textstyle.largeText.copyWith(color: red),
                           ),
                           SizedBox(
-                            width: mq.height * .016,
+                            width: 8.w,
                           ),
                           Text(
                             "${(productModel.productprice!)}",
@@ -104,7 +105,7 @@ class ProductWidget extends StatelessWidget {
                         ],
                       ),
                       SizedBox(
-                        height: mq.height * .005,
+                        height: 1.h,
                       ),
                       FittedBox(
                         child: Text(
@@ -113,7 +114,7 @@ class ProductWidget extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        height: mq.height * .005,
+                        height: 5.h,
                       ),
                       InkWell(
                         onTap: () {
@@ -126,7 +127,7 @@ class ProductWidget extends StatelessWidget {
                         },
                         child: Container(
                           alignment: Alignment.center,
-                          height: mq.height * .045,
+                          height: 40.h,
                           width: MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
@@ -140,7 +141,7 @@ class ProductWidget extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        height: mq.height * .008,
+                        height: 5.h,
                       ),
                     ],
                   ),

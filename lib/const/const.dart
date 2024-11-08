@@ -4,5 +4,5 @@ import 'globalmethod.dart';
 
 GlobalMethod globalMethod = GlobalMethod();
 double previousEarning = 0.0;
-late Size mq;
+// late Size mq;
 int? isviewed;

@@ -2,25 +2,29 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:seller_apps/page/auth/forgetpasswordscreen.dart';
-import 'package:seller_apps/page/auth/signupscreen.dart';
-import 'package:seller_apps/page/completeorder/totalsellerpage.dart';
-import 'package:seller_apps/page/order/completeorderpage.dart';
-import 'package:seller_apps/page/order/shiftedorderpage.dart';
+import 'package:seller_apps/res/routes/app_routes.dart';
+import 'package:seller_apps/view/auth/forgetpasswordscreen.dart';
+import 'package:seller_apps/view/auth/sign_up_screen.dart';
+import 'package:seller_apps/view/completeorder/totalsellerpage.dart';
+import 'package:seller_apps/view/order/completeorderpage.dart';
+import 'package:seller_apps/view/order/shiftedorderpage.dart';
 import 'package:seller_apps/service/provider/imageaddremoveprovider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'page/auth/signinpage.dart';
-import 'const/approutes.dart';
+import 'binding/initial_binding.dart';
+import 'view/auth/sign_in_page.dart';
+import 'res/routes/routes_name.dart';
 import 'const/const.dart';
 import 'const/global.dart';
 import 'const/gobalcolor.dart';
-import 'page/main/mainpage.dart';
-import 'page/order/orderpage.dart';
-import 'page/splash/onboardingpage.dart';
-import 'page/splash/splashpage.dart';
+import 'view/main/mainpage.dart';
+import 'view/order/orderpage.dart';
+import 'view/splash/onboardingpage.dart';
+import 'view/splash/splashpage.dart';
 
 import 'service/provider/dropvalueselectallprovider.dart';
 
@@ -51,62 +55,52 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    mq = MediaQuery.of(context).size;
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (context) {
-            return CateoryDropValueProvider();
-          },
-        ),
-        ChangeNotifierProvider(
-          create: (context) {
-            return SearchProvider();
-          },
-        ),
-        ChangeNotifierProvider(
-          create: (context) {
-            return ImageAddRemoveProvider();
-          },
-        ),
-        ChangeNotifierProvider(
-          create: (context) {
-            return ThemeProvider();
-          },
-        ),
-        ChangeNotifierProvider(
-          create: (context) {
-            return TotalAmountProvider();
-          },
-        ),
-        ChangeNotifierProvider(
-          create: (context) {
-            return LoadingProvider();
-          },
-        ),
-      ],
-      child: Consumer<ThemeProvider>(
-        builder: (context, themeProvder, child) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            theme: themeData(themeProvder),
-            initialRoute: AppRouters.initailRoutes,
-            routes: {
-              AppRouters.initailRoutes: (context) => const SplashPage(),
-              AppRouters.signPage: (context) => const SigninPage(),
-              AppRouters.mainPage: (context) => const MainPage(),
-              AppRouters.onBaordingPage: (context) => const OnboardingPage(),
-              AppRouters.signupPage: (context) => const SignUpScreen(),
-              AppRouters.forgetPassword: (context) =>
-                  const ForgetPasswordScreen(),
-              AppRouters.completeOrderPage: (context) =>
-                  const CompleteOrderPage(),
-              AppRouters.orderPage: (context) => const OrderPage(),
-              AppRouters.shiftPage: (context) => const ShiftedOrderPage(),
-              AppRouters.totalSales: (context) => const TotalSellPage(),
+    return ScreenUtilInit(
+      designSize: const Size(450, 851), //582
+      builder: (context, child) => MultiProvider(
+        providers: [
+          ChangeNotifierProvider(
+            create: (context) {
+              return CateoryDropValueProvider();
             },
-          );
-        },
+          ),
+          ChangeNotifierProvider(
+            create: (context) {
+              return SearchProvider();
+            },
+          ),
+          ChangeNotifierProvider(
+            create: (context) {
+              return ImageAddRemoveProvider();
+            },
+          ),
+          ChangeNotifierProvider(
+            create: (context) {
+              return ThemeProvider();
+            },
+          ),
+          ChangeNotifierProvider(
+            create: (context) {
+              return TotalAmountProvider();
+            },
+          ),
+          ChangeNotifierProvider(
+            create: (context) {
+              return LoadingProvider();
+            },
+          ),
+        ],
+        child: Consumer<ThemeProvider>(
+          builder: (context, themeProvder, child) {
+            return GetMaterialApp(
+              initialBinding: InitialBinding(),
+              debugShowCheckedModeBanner: false,
+              theme: themeData(themeProvder),
+              initialRoute: RoutesName.initailRoutes,
+              getPages: AppRoutes.appRoutes(),
+            );
+          },
+        ),
       ),
     );
   }

@@ -1,0 +1,181 @@
+import 'dart:async';
+import 'dart:io';
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
+
+import '../const/utils.dart';
+import '../data/response/app_data_exception.dart';
+import '../widget/custom_alert_dialog_widget.dart';
+
+import 'apps_color.dart';
+import 'apps_text_style.dart';
+import 'app_string.dart';
+
+class AppsFunction {
+  // IsValidEmail
+  static bool isValidEmail(String email) {
+    // Regular expression for a more comprehensive email validation
+    String emailRegex = r'^[\w-]+(\.[\w-]+)*@([a-zA-Z0-9-]+\.)*[a-zA-Z]{2,7}$';
+    RegExp regex = RegExp(emailRegex);
+    return regex.hasMatch(email);
+  }
+
+// Show Back Dialog
+  static Future<bool?> showBackDialog() {
+    return Get.dialog<bool>(CustomAlertDialogWidget(
+      icon: Icons.question_mark_rounded,
+      title: AppString.exit,
+      subTitle: AppString.exitApps,
+      yesOnPress: () {
+        Get.back(result: true);
+      },
+      noOnPress: () {
+        Get.back(result: false);
+      },
+    ));
+  }
+
+  static Future<bool> verifyInternetStatus() async {
+    bool checkInternet = await AppsFunction.internetChecking();
+    if (checkInternet) {
+      AppsFunction.showNoInternetSnackbar();
+    }
+    return checkInternet;
+  }
+
+  static Future<bool> internetChecking() async {
+    final List<ConnectivityResult> connectivityResult =
+        await (Connectivity().checkConnectivity());
+
+    return connectivityResult.contains(ConnectivityResult.none);
+  }
+
+  static SnackbarController showNoInternetSnackbar() {
+    return Get.snackbar(
+        'No Internet', 'Please check your internet settings and try again.',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: AppColors.black.withOpacity(.7),
+        colorText: AppColors.white,
+        duration: const Duration(seconds: 1),
+        margin: EdgeInsets.zero,
+        borderRadius: 0);
+  }
+
+  static flutterToast({required String msg}) {
+    Fluttertoast.showToast(
+        msg: msg,
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: AppColors.red,
+        textColor: AppColors.white,
+        fontSize: 16.0);
+  }
+
+
+/*
+    Get.defaultDialog(
+        barrierDismissible: barrierDismissible ?? true,
+        contentPadding: EdgeInsets.only(left: 20.w, right: 20.w, bottom: 20.h),
+        title: "",
+        content: Column(
+          children: [
+            Image.asset(
+              icon,
+              height: 100.h,
+              width: 100.w,
+            ),
+            SizedBox(
+              height: 20.h,
+            ),
+            Text(
+              title,
+              style: AppsTextStyle.titleTextStyle
+                  .copyWith(color: AppColors.deepGreen),
+            ),
+            SizedBox(
+              height: 15.h,
+            ),
+            if (content != null)
+              Text(
+                content,
+                textAlign: TextAlign.center,
+                style: AppsTextStyle.subTitleTextStyle,
+              ),
+            SizedBox(
+              height: 20.h,
+            ),
+            if (buttonText != null)
+              RoundButtonWidget(
+                buttonColors: AppColors.red,
+                width: Get.width,
+                title: buttonText,
+                onPress: () {
+                  Get.back();
+                },
+              )
+          ],
+        ));
+  
+  */
+  
+
+  static InputDecoration textFormFielddecoration(
+      {bool isShowPassword = false,
+      required String hintText,
+      bool obscureText = false,
+      bool isEnable = true,
+      required Function function}) {
+    Utils utils = Utils(Get.context!);
+    return InputDecoration(
+        fillColor: isEnable ? AppColors.searchLightColor : utils.textFeildColor,
+        filled: true,
+        hintText: hintText,
+        border: OutlineInputBorder(
+            borderSide: BorderSide.none,
+            borderRadius: BorderRadius.circular(15.r)),
+        enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide.none,
+            borderRadius: BorderRadius.circular(15.r)),
+        focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide.none,
+            borderRadius: BorderRadius.circular(15.r)),
+        suffixIcon: isShowPassword
+            ? IconButton(
+                onPressed: () {
+                  function();
+                },
+                icon: Icon(
+                  Icons.password,
+                  color: obscureText ? AppColors.hintLightColor : AppColors.red,
+                ))
+            : null,
+        contentPadding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 20.h),
+        hintStyle: AppsTextStyle.hintTextStyle);
+  }
+
+  static void handleException(Object e) {
+    if (e is FirebaseAuthException) {
+      throw FirebaseAuthExceptions(e);
+    } else if (e is FirebaseException) {
+      throw FirebaseExceptions(e);
+    } else if (e is SocketException) {
+      throw InternetException(e.toString());
+    } else if (e is PlatformException) {
+      throw PlatformExceptions(e);
+    } else if (e is FileSystemException) {
+      throw FileSystemExceptions(e.toString());
+    } else if (e is OutOfMemoryError) {
+      throw OutOfMemoryErrors(e.toString());
+    } else if (e is TimeoutException) {
+      throw TimeOutExceptions(e.message.toString());
+    } else {
+      throw OthersException(e.toString());
+    }
+  }
+}

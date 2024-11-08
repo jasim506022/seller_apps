@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../res/apps_color.dart';
 import '../service/provider/theme_provider.dart';
 import 'gobalcolor.dart';
 
@@ -10,6 +11,10 @@ class Utils {
 
   bool get getTheme => Provider.of<ThemeProvider>(context).getDarkTheme;
   Color get getColor => getTheme ? Colors.white : Colors.black;
+
+Color get textFeildColor => getTheme
+      ? AppColors.white.withOpacity(.9)
+      : AppColors.black.withOpacity(.1);
 
   Color get baseShimmerColor =>
       getTheme ? Colors.grey.shade500 : Colors.grey.shade200;

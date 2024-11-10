@@ -20,7 +20,6 @@ import 'app_string.dart';
 class AppsFunction {
   // IsValidEmail
   static bool isValidEmail(String email) {
-    // Regular expression for a more comprehensive email validation
     String emailRegex = r'^[\w-]+(\.[\w-]+)*@([a-zA-Z0-9-]+\.)*[a-zA-Z]{2,7}$';
     RegExp regex = RegExp(emailRegex);
     return regex.hasMatch(email);
@@ -28,7 +27,7 @@ class AppsFunction {
 
 // Show Back Dialog
   static Future<bool?> showBackDialog() {
-    return Get.dialog<bool>(CustomAlertDialogWidget(
+    return Get.dialog(CustomAlertDialogWidget(
       icon: Icons.question_mark_rounded,
       title: AppString.exit,
       subTitle: AppString.exitApps,
@@ -77,7 +76,6 @@ class AppsFunction {
         fontSize: 16.0);
   }
 
-
 /*
     Get.defaultDialog(
         barrierDismissible: barrierDismissible ?? true,
@@ -123,7 +121,6 @@ class AppsFunction {
         ));
   
   */
-  
 
   static InputDecoration textFormFielddecoration(
       {bool isShowPassword = false,

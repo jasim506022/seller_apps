@@ -2,6 +2,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../data/response/service/data_firebase_service.dart';
+import '../model/profilemodel.dart';
 import '../res/app_function.dart';
 
 class SignInRepository {
@@ -36,9 +37,9 @@ class SignInRepository {
     }
   }
 
-  Future<void> createUserGmail({required User user}) async {
+  Future<void> createUserGmail({required User user, required ProfileModel profileModel}) async {
     try {
-      await _dataFirebaseService.createUserGmail(user: user);
+      await _dataFirebaseService.createUserGmail(user: user, profileModel: profileModel);
     } catch (e) {
       AppsFunction.handleException(e);
     }

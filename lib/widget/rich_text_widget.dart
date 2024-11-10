@@ -27,12 +27,10 @@ class RichTextWidget extends StatelessWidget {
       TextSpan(
           recognizer: TapGestureRecognizer()
             ..onTap = () async {
-              bool checkInternet = await AppsFunction.internetChecking();
-              if (checkInternet) {
-                AppsFunction.showNoInternetSnackbar();
-              } else {
+              if (!(await AppsFunction.verifyInternetStatus())) {
                 function();
               }
+           
             },
           text: colorText,
           style: AppsTextStyle.buttonTextStyle.copyWith(

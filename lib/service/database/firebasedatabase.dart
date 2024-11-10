@@ -151,6 +151,7 @@ class FirebaseDatabase {
       required String phone,
       required String name,
       required String image}) async {
+        
     ProfileModel profileModel = ProfileModel(
         name: name,
         earnings: 0.0,

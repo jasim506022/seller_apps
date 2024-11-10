@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
+
+  static Color backgroundLightColor = const Color(0xfffcfcfc);
   // Grey Color
   static Color grey = Colors.grey;
   // Deep Green

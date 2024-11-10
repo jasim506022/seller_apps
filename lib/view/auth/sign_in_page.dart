@@ -3,8 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../const/gobalcolor.dart';
-
 import '../../controller/sign_in_controller.dart';
 import '../../res/app_asset/icon_asset.dart';
 import '../../res/app_function.dart';
@@ -30,12 +28,15 @@ class SigninPage extends StatefulWidget {
 
 class _SigninPageState extends State<SigninPage> {
   var signInController = Get.find<SignInController>();
-
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   @override
   void didChangeDependencies() {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: white, statusBarIconBrightness: Brightness.dark));
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+          statusBarColor: AppColors.backgroundLightColor,
+          statusBarIconBrightness: Brightness.dark),
+    );
     super.didChangeDependencies();
   }
 
@@ -58,7 +59,6 @@ class _SigninPageState extends State<SigninPage> {
           AppsFunction.verifyInternetStatus();
         },
         child: Scaffold(
-          backgroundColor: white,
           body: SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
@@ -78,7 +78,9 @@ class _SigninPageState extends State<SigninPage> {
                   CustomButtonWidget(
                     onPressed: () async {
                       if (!_formKey.currentState!.validate()) return;
-                      signInController.signInWithEmailAndPassword();
+                      if (!(await AppsFunction.verifyInternetStatus())) {
+                        signInController.signInWithEmailAndPassword();
+                      }
                     },
                     title: AppString.signIn,
                   ),

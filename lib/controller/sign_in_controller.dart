@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:seller_apps/res/app_string.dart';
 
 import '../model/app_exception.dart';
+import '../model/profilemodel.dart';
 import '../repository/sign_in_repository.dart';
 import '../res/app_asset/icon_asset.dart';
 import '../res/app_function.dart';
@@ -34,35 +35,31 @@ class SignInController extends GetxController {
   }
 
   Future<void> signInWithEmailAndPassword() async {
-    if (!(await AppsFunction.verifyInternetStatus())) {
-      try {
-        loadingController.setLoading(true);
+    try {
+      loadingController.setLoading(true);
 
-        await repository.signInWithEmailAndPassword(
-          email: emailET.text,
-          password: passwordET.text,
+      await repository.signInWithEmailAndPassword(
+        email: emailET.text,
+        password: passwordET.text,
+      );
+
+      loadingController.setLoading(false);
+      Get.offNamed(RoutesName.mainPage);
+      cleanTextField();
+      AppsFunction.flutterToast(msg: AppString.signInSuccessfully);
+    } catch (e) {
+      if (e is AppException) {
+        Get.dialog(
+          ErrorDialogWidget(
+            icon: IconAsset.warningIcon,
+            title: e.title!,
+            content: e.message,
+            buttonText: AppString.okay,
+          ),
         );
-
-        loadingController.setLoading(false);
-
-        Get.offNamed(RoutesName.mainPage);
-        cleanTextField();
-        AppsFunction.flutterToast(msg: AppString.signInSuccessfully);
-      } catch (e) {
-        if (e is AppException) {
-          Get.dialog(
-            ErrorDialogWidget(
-              icon: IconAsset.warningIcon,
-              title: e.title!,
-              content: e.message,
-              buttonText: AppString.okay,
-            ),
-            barrierDismissible: false,
-          );
-        }
-      } finally {
-        loadingController.setLoading(false);
       }
+    } finally {
+      loadingController.setLoading(false);
     }
   }
 
@@ -85,7 +82,18 @@ class SignInController extends GetxController {
           Get.offNamed(RoutesName.mainPage);
           AppsFunction.flutterToast(msg: AppString.signInSuccessfully);
         } else {
-          await repository.createUserGmail(user: userCredentialGmail.user!);
+          var user = userCredentialGmail.user!;
+          ProfileModel profileModel = ProfileModel(
+              name: user.displayName,
+              earnings: 0.0,
+              status: "approved",
+              email: user.email,
+              phone: user.phoneNumber,
+              uid: user.uid,
+              address: "",
+              imageurl: user.photoURL);
+          await repository.createUserGmail(
+              user: user, profileModel: profileModel);
           Get.offNamed(RoutesName.mainPage);
           AppsFunction.flutterToast(msg: AppString.signInSuccessfully);
         }

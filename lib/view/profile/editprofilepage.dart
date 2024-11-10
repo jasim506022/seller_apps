@@ -15,7 +15,7 @@ import '../../service/database/firebasedatabase.dart';
 import '../../service/provider/imageaddremoveprovider.dart';
 import '../../service/provider/loadingprovider.dart';
 import '../../widget/custom_show_dialog_widget.dart';
-import '../../widget/select_photo_profile_widget.dart';
+import '../../widget/profile_photo_option_sheet_widget.dart';
 import '../../widget/text_field_form_widget.dart';
 import '../main/mainpage.dart';
 import '../../model/profilemodel.dart';
@@ -256,15 +256,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                               shape: BoxShape.circle),
                                           child: IconButton(
                                             onPressed: () {
-                                              showModalBottomSheet(
-                                                context: context,
-                                                builder: (context) {
-                                                  return SelectPhotoProfile(
-                                                    icChangeprofile: true,
-                                                    imagePicker: picker,
-                                                  );
-                                                },
-                                              );
+                                              // showModalBottomSheet(
+                                              //   context: context,
+                                              //   builder: (context) {
+                                              //     return SelectPhotoProfile(
+                                              //       icChangeprofile: true,
+                                              //       imagePicker: picker,
+                                              //     );
+                                              //   },
+                                              // );
                                             },
                                             icon: const Icon(Icons.camera_alt,
                                                 color: Colors.white, size: 30),

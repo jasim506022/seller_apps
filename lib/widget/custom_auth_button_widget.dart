@@ -6,9 +6,8 @@ import '../controller/loading_controller.dart';
 import '../res/apps_color.dart';
 import '../res/apps_text_style.dart';
 
-
-class CustomButtonWidget extends StatelessWidget {
-  const CustomButtonWidget(
+class CustomAuthButtonWidget extends StatelessWidget {
+  const CustomAuthButtonWidget(
       {super.key, required this.onPressed, required this.title});
 
   final VoidCallback onPressed;

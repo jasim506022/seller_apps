@@ -9,4 +9,8 @@ class RoutesName {
   static const String orderPage = '/orderPage';
   static const String shiftPage = '/shiftPage';
   static const String totalSales = '/totalSales';
+  static const String uploadProduct = '/uploadProduct';
+  static const String product = '/product';
+   static const String runningOrder = '/runningOrder';
+  static const String example = '/example';
 }

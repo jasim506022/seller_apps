@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import 'package:seller_apps/controller/profile_controller.dart';
 import '../../const/cartmethod.dart';
 import '../../const/const.dart';
 import '../../const/gobalcolor.dart';
-import '../home/homepage.dart';
+import '../home/home_page.dart';
 import '../other/local_service.dart';
 import '../other/pushnotification.dart';
 import '../product/productpage.dart';
@@ -21,6 +23,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  var prifleController = Get.find<ProfileController>();
   List<Widget> bottomNavigatorWidget = <Widget>[
     const HomePage(),
     const ProductPage(),
@@ -38,8 +41,9 @@ class _MainPageState extends State<MainPage> {
     // message.getFcmToken();
     // FirebaseDatabase.iniNotification();
     // LocalServiceNotification.initialize(context);
-
-    globalMethod.getUsersharedPreference();
+    _initializeIndex();
+    // globalMethod.getUsersharedPreference();
+    prifleController.getUserInformationSnapshot();
     /*
     FirebaseMessaging.instance.getInitialMessage().then((message) {
       if (message != null) {
@@ -68,12 +72,21 @@ class _MainPageState extends State<MainPage> {
   int currentIndex = 0;
   int? indexValue;
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final dynamic data = ModalRoute.of(context)!.settings.arguments;
-    indexValue = data;
+  void _initializeIndex() {
+    int? data = Get.arguments;
+    if (data != null) {
+      setState(() {
+        currentIndex = data;
+      });
+    }
   }
+
+  // @override
+  // void didChangeDependencies() {
+  //   super.didChangeDependencies();
+  //   final dynamic data = ModalRoute.of(context)!.settings.arguments;
+  //   indexValue = data;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +101,6 @@ class _MainPageState extends State<MainPage> {
         onTap: (i) {
           setState(() {
             currentIndex = i;
-            indexValue = null;
           });
         },
         items: [

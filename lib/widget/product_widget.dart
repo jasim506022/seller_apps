@@ -3,13 +3,193 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
-import '../const/const.dart';
-import '../const/gobalcolor.dart';
-import '../const/textstyle.dart';
 import '../model/productsmodel.dart';
-import '../view/home/addproductpage.dart';
-import '../view/product/detailsproductpage.dart';
+import '../res/app_function.dart';
+import '../res/apps_color.dart';
+import '../res/apps_text_style.dart';
 
+class ProductWidget extends StatelessWidget {
+  const ProductWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final productModel = Provider.of<ProductModel>(context);
+
+    return InkWell(
+      onTap: () async {
+        if (!(await AppsFunction.verifyInternetStatus())) {}
+      },
+      child: Card(
+        child: Container(
+          height: 1.sh,
+          width: 1.sw,
+          decoration: BoxDecoration(
+              color: Theme.of(context).cardColor,
+              borderRadius: BorderRadius.circular(20.r),
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.white,
+                  spreadRadius: .08,
+                )
+              ]),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ProductImageWidget(
+                imageHeith: 90.h,
+                productModel: productModel,
+                height: 100.h,
+                width: 1.sw,
+              ),
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 12.w),
+                  child: _buildProductDetails(productModel),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Column _buildProductDetails(
+    ProductModel productModel,
+  ) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Text(
+              "৳. ${AppsFunction.productPrice(productModel.productprice!, productModel.discount!.toDouble())}",
+              style: AppsTextStyle.largeBoldText.copyWith(color: AppColors.red),
+            ),
+            SizedBox(
+              width: 15.w,
+            ),
+            Text(
+              "${(productModel.productprice!)}",
+              style: AppsTextStyle.mediumText400lineThrough,
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 2.h,
+        ),
+        FittedBox(
+          child: Text(
+            productModel.productname!,
+            style: AppsTextStyle.largeBoldText, //15
+          ),
+        ),
+        SizedBox(
+          height: 5.h,
+        ),
+        InkWell(
+            onTap: () async {
+              if (!(await AppsFunction.verifyInternetStatus())) {
+                
+              }
+            },
+            child: Container(
+              alignment: Alignment.center,
+              height: 45.h,
+              width: 1.sw,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15.r),
+                color: AppColors.greenColor,
+              ),
+              child: Text(
+                "Edit/Update",
+                style: AppsTextStyle.buttonTextStyle,
+              ),
+            )),
+        SizedBox(
+          height: 7.h,
+        ),
+      ],
+    );
+  }
+}
+
+class ProductImageWidget extends StatelessWidget {
+  const ProductImageWidget({
+    super.key,
+    required this.productModel,
+    required this.height,
+    required this.width,
+    required this.imageHeith,
+  });
+  final ProductModel productModel;
+  final double height;
+  final double width;
+  final double imageHeith;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Container(
+          height: height,
+          width: width,
+          alignment: Alignment.center,
+          margin: EdgeInsets.all(10.r),
+          padding: EdgeInsets.all(20.r),
+          decoration: BoxDecoration(
+              color: AppColors.cardImageBg,
+              borderRadius: BorderRadius.circular(5.r)),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10.r),
+            child: FancyShimmerImage(
+              height: imageHeith,
+              boxFit: BoxFit.contain,
+              imageUrl: productModel.productimage![0],
+            ),
+          ),
+        ),
+        ProductDiscountWidget(discount: productModel.discount!),
+      ],
+    );
+  }
+}
+
+class ProductDiscountWidget extends StatelessWidget {
+  const ProductDiscountWidget({
+    super.key,
+    required this.discount,
+  });
+
+  final num discount;
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      left: 10.w,
+      top: 10.h,
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 5.h),
+        decoration: BoxDecoration(
+          border: Border.all(color: AppColors.red, width: .5.w),
+          borderRadius: BorderRadius.circular(15.r),
+          color: AppColors.lightred.withOpacity(.2),
+        ),
+        child: Text(
+          "$discount% Off",
+          style: AppsTextStyle.smallBoldText.copyWith(
+            color: AppColors.red,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/*
 class ProductWidget extends StatelessWidget {
   const ProductWidget({
     super.key,
@@ -58,7 +238,7 @@ class ProductWidget extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: FancyShimmerImage(
-                        height:0.85.h,
+                        height: 85.h,
                         boxFit: BoxFit.contain,
                         imageUrl: productModel.productimage![0],
                       ),
@@ -68,9 +248,8 @@ class ProductWidget extends StatelessWidget {
                     left: 10.w,
                     top: 10.h,
                     child: Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 10.w,
-                          vertical: 1.h),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10.w, vertical: 1.h),
                       decoration: BoxDecoration(
                         border: Border.all(color: red, width: .5),
                         borderRadius: BorderRadius.circular(15),
@@ -92,7 +271,7 @@ class ProductWidget extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            "৳. ${globalMethod.discountedPrice(productModel.productprice!, productModel.discount!.toDouble())}",
+                            "৳. ${globalMethod.discountedPrice(productModel.productprice!.toDouble(), productModel.discount!.toDouble())}",
                             style: textstyle.largeText.copyWith(color: red),
                           ),
                           SizedBox(
@@ -118,12 +297,16 @@ class ProductWidget extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => AddProductPage(
-                                    isUpdate: true, productModel: productModel),
-                              ));
+                          Get.toNamed(RoutesName.uploadProduct, arguments: {
+                            "isUpdate": true,
+                            "productModel": productModel
+                          });
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //       builder: (context) => AddProductPage(
+                          //           isUpdate: true, productModel: productModel),
+                          //     ));
                         },
                         child: Container(
                           alignment: Alignment.center,
@@ -154,3 +337,5 @@ class ProductWidget extends StatelessWidget {
     );
   }
 }
+
+*/

@@ -9,7 +9,7 @@ import '../../res/app_function.dart';
 
 import '../../res/app_string.dart';
 import '../../res/apps_text_style.dart';
-import '../../widget/custom_button_widget.dart';
+import '../../widget/custom_auth_button_widget.dart';
 import '../../widget/rich_text_widget.dart';
 import '../../widget/text_field_form_widget.dart';
 import 'widget/profile_capture_image_widget.dart';
@@ -55,13 +55,13 @@ class _SignUpPageState extends State<SignUpPage> {
                       height: 10.h,
                     ),
                     Text(AppString.logInPageSubjectTitle,
-                        style: AppsTextStyle.mediumNormalTextStyle),
+                        style: AppsTextStyle.largeNormalText),
                     SizedBox(height: 20.h),
                     _buildSignUpForm(),
                     SizedBox(
                       height: 15.h,
                     ),
-                    CustomButtonWidget(
+                    CustomAuthButtonWidget(
                       onPressed: () async {
                         if (!formKeySignUp.currentState!.validate()) return;
                         if (!(await AppsFunction.verifyInternetStatus())) {

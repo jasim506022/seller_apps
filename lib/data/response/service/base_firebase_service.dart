@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:image_picker/image_picker.dart';
 
+import '../../../model/productsmodel.dart';
 import '../../../model/profilemodel.dart';
 
 abstract class BaseFirebaseService {
@@ -16,7 +18,8 @@ abstract class BaseFirebaseService {
       {required String email, required String password});
   Future<UserCredential?> signWithGoogle();
   Future<bool> userExists();
-  Future<void> createUserGmail({required User user, required ProfileModel profileModel});
+  Future<void> createUserGmail(
+      {required User user, required ProfileModel profileModel});
 
   // Sign Up Page
   Future<String> uploadUserImgeUrl({required File file});
@@ -25,6 +28,12 @@ abstract class BaseFirebaseService {
   Future<void> uploadUserProfile(
       {required ProfileModel profileModel, required String firebaseDocument});
 
- Future<void> forgetPasswordSnapshot({required String email});
+  Future<void> forgetPasswordSnapshot({required String email});
 
+  //
+  Future<DocumentSnapshot<Map<String, dynamic>>> getUserInformationSnapshot();
+  Future<List<String>> uploadImageStorage({required List<XFile> imageList});
+
+  Future<void> uploadProductSnapshot(
+      {required ProductModel productModel, required bool isUpdate});
 }

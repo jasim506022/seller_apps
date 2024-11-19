@@ -141,14 +141,14 @@ class DeliveryCartWidget extends StatelessWidget {
                                       style: textstyle.mediumText600
                                           .copyWith(color: greenColor)),
                                   Text(
-                                      "${globalMethod.discountedPrice(productModel.productprice!, productModel.discount!.toDouble())}",
+                                      "${globalMethod.discountedPrice(productModel.productprice!.toDouble(), productModel.discount!.toDouble())}",
                                       style: textstyle.mediumText600
                                           .copyWith(color: greenColor)),
                                 ],
                               ),
                               const Spacer(),
                               Text(
-                                  "= ৳. ${globalMethod.discountedPrice(productModel.productprice!, productModel.discount!.toDouble()) * itemQunter}",
+                                  "= ৳. ${globalMethod.discountedPrice(productModel.productprice!.toDouble(), productModel.discount!.toDouble()) * itemQunter}",
                                   style: textstyle.largeBoldText.copyWith(
                                       color: greenColor, letterSpacing: 1.2)),
                             ],

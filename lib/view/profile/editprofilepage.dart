@@ -17,7 +17,7 @@ import '../../service/provider/loadingprovider.dart';
 import '../../widget/custom_show_dialog_widget.dart';
 import '../../widget/profile_photo_option_sheet_widget.dart';
 import '../../widget/text_field_form_widget.dart';
-import '../main/mainpage.dart';
+import '../main/main_page.dart';
 import '../../model/profilemodel.dart';
 
 class EditProfilePage extends StatefulWidget {

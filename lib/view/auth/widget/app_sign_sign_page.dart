@@ -36,7 +36,7 @@ class AppSignInPageIntro extends StatelessWidget {
         Text(
           subTitle,
           textAlign: TextAlign.center,
-          style: AppsTextStyle.mediumNormalTextStyle,
+          style: AppsTextStyle.largeNormalText,
         ),
         SizedBox(
           height: 40.h,
@@ -45,3 +45,4 @@ class AppSignInPageIntro extends StatelessWidget {
     );
   }
 }
+//     android:windowSoftInputMode="adjustResize"

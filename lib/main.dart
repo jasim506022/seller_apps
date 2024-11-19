@@ -7,24 +7,16 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:seller_apps/res/routes/app_routes.dart';
-import 'package:seller_apps/view/auth/forget_password_page.dart';
-import 'package:seller_apps/view/auth/sign_up_page.dart';
-import 'package:seller_apps/view/completeorder/totalsellerpage.dart';
-import 'package:seller_apps/view/order/completeorderpage.dart';
-import 'package:seller_apps/view/order/shiftedorderpage.dart';
+
 import 'package:seller_apps/service/provider/imageaddremoveprovider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'binding/initial_binding.dart';
-import 'view/auth/sign_in_page.dart';
 import 'res/routes/routes_name.dart';
 import 'const/const.dart';
 import 'const/global.dart';
 import 'const/gobalcolor.dart';
-import 'view/main/mainpage.dart';
-import 'view/order/orderpage.dart';
-import 'view/splash/onboardingpage.dart';
-import 'view/splash/splashpage.dart';
+
 
 import 'service/provider/dropvalueselectallprovider.dart';
 

@@ -40,7 +40,7 @@ class ImageAddRemoveProvider with ChangeNotifier {
   }
 
   // Cateogry
-  String _categoryName = category.first;
+  String _categoryName = categoryList.first;
 
   // get Category Item
   String get getCategory => _categoryName;

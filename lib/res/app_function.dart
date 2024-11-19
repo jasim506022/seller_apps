@@ -11,8 +11,8 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 
 import '../const/utils.dart';
 import '../data/response/app_data_exception.dart';
-import '../widget/custom_alert_dialog_widget.dart';
 
+import '../widget/show_alert_dialog_widget.dart';
 import 'apps_color.dart';
 import 'apps_text_style.dart';
 import 'app_string.dart';
@@ -76,52 +76,6 @@ class AppsFunction {
         fontSize: 16.0);
   }
 
-/*
-    Get.defaultDialog(
-        barrierDismissible: barrierDismissible ?? true,
-        contentPadding: EdgeInsets.only(left: 20.w, right: 20.w, bottom: 20.h),
-        title: "",
-        content: Column(
-          children: [
-            Image.asset(
-              icon,
-              height: 100.h,
-              width: 100.w,
-            ),
-            SizedBox(
-              height: 20.h,
-            ),
-            Text(
-              title,
-              style: AppsTextStyle.titleTextStyle
-                  .copyWith(color: AppColors.deepGreen),
-            ),
-            SizedBox(
-              height: 15.h,
-            ),
-            if (content != null)
-              Text(
-                content,
-                textAlign: TextAlign.center,
-                style: AppsTextStyle.subTitleTextStyle,
-              ),
-            SizedBox(
-              height: 20.h,
-            ),
-            if (buttonText != null)
-              RoundButtonWidget(
-                buttonColors: AppColors.red,
-                width: Get.width,
-                title: buttonText,
-                onPress: () {
-                  Get.back();
-                },
-              )
-          ],
-        ));
-  
-  */
-
   static InputDecoration textFormFielddecoration(
       {bool isShowPassword = false,
       required String hintText,
@@ -175,4 +129,29 @@ class AppsFunction {
       throw OthersException(e.toString());
     }
   }
+
+    static double calculateDiscountedPrice(num productprice, double discount) {
+    return productprice - (productprice * discount / 100);
+  }
+
+//Product Price
+  static double productPrice(num productprice, double discount) {
+    return calculateDiscountedPrice(productprice, discount);
+  }
+
+   static Container lineShimmer(Utils utils, double height, [double? width]) {
+    return Container(
+      height: height,
+      width: width ?? 1.sw,
+      decoration: BoxDecoration(
+          color: utils.widgetShimmerColor,
+          borderRadius: BorderRadius.circular(15.r)),
+    );
+  }
+
+  // //Product Price
+  // static double productPriceWithQuantity(
+  //     double productprice, double discount, int quantity) {
+  //   return calculateDiscountedPrice(productprice, discount) * quantity;
+  // }
 }

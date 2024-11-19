@@ -110,14 +110,14 @@ class SingleCardWidget extends StatelessWidget {
                               style: textstyle.mediumText600
                                   .copyWith(color: greenColor)),
                           Text(
-                              "${globalMethod.discountedPrice(productModel.productprice!, productModel.discount!.toDouble())}",
+                              "${globalMethod.discountedPrice(productModel.productprice!.toDouble(), productModel.discount!.toDouble())}",
                               style: textstyle.mediumText600.copyWith(
                                   letterSpacing: 1.2, color: greenColor)),
                         ],
                       ),
                       const Spacer(),
                       Text(
-                          "= ৳. ${globalMethod.discountedPrice(productModel.productprice!, productModel.discount!.toDouble()) * seperateQuantilies[index]}",
+                          "= ৳. ${globalMethod.discountedPrice(productModel.productprice!.toDouble(), productModel.discount!.toDouble()) * seperateQuantilies[index]}",
                           style: textstyle.mediumTextbold.copyWith(
                             color: greenColor,
                             fontSize: 16,

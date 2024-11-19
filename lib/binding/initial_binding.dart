@@ -1,11 +1,14 @@
 import 'package:get/get.dart';
+import 'package:seller_apps/controller/category_controller.dart';
 import 'package:seller_apps/controller/forget_password_controller.dart';
 import 'package:seller_apps/repository/forget_password_repository.dart';
 
 import '../controller/loading_controller.dart';
+import '../controller/profile_controller.dart';
 import '../controller/select_image_controller.dart';
 import '../controller/sign_in_controller.dart';
 import '../controller/sign_up_controller.dart';
+import '../repository/profile_repository.dart';
 import '../repository/select_image_repository.dart';
 import '../repository/sign_in_repository.dart';
 import '../repository/sign_up_repository.dart';
@@ -19,8 +22,7 @@ class InitialBinding extends Bindings {
         () => SignInController(repository: Get.find<SignInRepository>()));
     Get.put<LoadingController>(LoadingController());
 
-  Get.lazyPut<SelectImageRepository>(() => SelectImageRepository());
-
+    Get.lazyPut<SelectImageRepository>(() => SelectImageRepository());
 
     Get.lazyPut<SelectImageController>(() =>
         SelectImageController(repository: Get.find<SelectImageRepository>()));
@@ -30,9 +32,17 @@ class InitialBinding extends Bindings {
     Get.put<SignUpController>(
         SignUpController(repository: Get.find<SignUpRepository>()));
 
-          Get.lazyPut<ForgetPasswordRepository>(() => ForgetPasswordRepository());
+    Get.lazyPut<ForgetPasswordRepository>(() => ForgetPasswordRepository());
 
-    Get.put<ForgetPasswordController>(
-        ForgetPasswordController(repository: Get.find<ForgetPasswordRepository>()));
+    Get.put<ForgetPasswordController>(ForgetPasswordController(
+        repository: Get.find<ForgetPasswordRepository>()));
+
+    Get.lazyPut<ProfileRepository>(() => ProfileRepository(), fenix: true);
+
+    Get.lazyPut<ProfileController>(
+        () => ProfileController(repository: Get.find<ProfileRepository>()),
+        fenix: true);
+
+    Get.lazyPut<CategoryController>(() => CategoryController(), fenix: true);
   }
 }

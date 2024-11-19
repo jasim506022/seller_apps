@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:seller_apps/res/apps_text_style.dart';
 
-import '../../const/const.dart';
-import '../../const/gobalcolor.dart';
-import '../../const/textstyle.dart';
+import '../../../const/gobalcolor.dart';
 
 class GridViewItem extends StatelessWidget {
   const GridViewItem({
@@ -17,29 +17,27 @@ class GridViewItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-      var mq = MediaQuery.of(context).size;
-    Textstyle textstyle = Textstyle(context);
     return InkWell(
       onTap: function,
       child: Container(
-          padding: const EdgeInsets.all(8),
+          padding: EdgeInsets.all(8.r),
           decoration: BoxDecoration(
               color: Theme.of(context).cardColor,
-              borderRadius: BorderRadius.circular(20)),
+              borderRadius: BorderRadius.circular(20.r)),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image.asset(
                 image,
-                height: mq.height * .085,
-                width: mq.height * .085,
+                height: 70.h,
+                width: 70.h,
                 color: greenColor,
               ),
               SizedBox(
-                height: mq.height * .012,
+                height: 10.h,
               ),
-              Text(text, style: textstyle.largeText)
+              Text(text, style: AppsTextStyle.titleTextStyle)
             ],
           )),
     );

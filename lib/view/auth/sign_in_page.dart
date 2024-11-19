@@ -11,7 +11,7 @@ import '../../res/apps_color.dart';
 import '../../res/apps_text_style.dart';
 
 import '../../res/routes/routes_name.dart';
-import '../../widget/custom_button_widget.dart';
+import '../../widget/custom_auth_button_widget.dart';
 
 import '../../widget/rich_text_widget.dart';
 
@@ -75,7 +75,7 @@ class _SigninPageState extends State<SigninPage> {
                   ),
                   _buildForgetPasswordButton(),
                   SizedBox(height: 15.h),
-                  CustomButtonWidget(
+                  CustomAuthButtonWidget(
                     onPressed: () async {
                       if (!_formKey.currentState!.validate()) return;
                       if (!(await AppsFunction.verifyInternetStatus())) {
@@ -208,8 +208,8 @@ class _SigninPageState extends State<SigninPage> {
           padding: EdgeInsets.symmetric(horizontal: 15.w),
           child: Text(
             AppString.withOr,
-            style: AppsTextStyle.mediumNormalTextStyle
-                .copyWith(color: AppColors.grey),
+            style:
+                AppsTextStyle.largeNormalText.copyWith(color: AppColors.grey),
           ),
         ),
         _buildLine(),

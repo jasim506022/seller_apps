@@ -13,7 +13,7 @@ List<String> allCategoryList = <String>[
   "Candy & Chocolate"
 ];
 
-List<String> category = <String>[
+List<String> categoryList = <String>[
   'Fruits',
   'Vegetables',
   'Dairy & Egg',

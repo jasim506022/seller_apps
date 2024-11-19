@@ -12,7 +12,7 @@ import '../../const/const.dart';
 import '../../service/database/firebasedatabase.dart';
 import '../../model/productsmodel.dart';
 import '../../widget/custom_show_dialog_widget.dart';
-import '../home/addproductpage.dart';
+import '../add_product/add_product_page.dart';
 import 'details_card_swiper.dart';
 import 'list_similer_product_widget.dart';
 
@@ -69,12 +69,12 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                   }),
             );
           } else {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => AddProductPage(
-                      isUpdate: true, productModel: widget.productModel),
-                ));
+            // Navigator.push(
+            //     context,
+            //     MaterialPageRoute(
+            //       builder: (context) => AddProductPage(
+            //           isUpdate: true, productModel: widget.productModel),
+            //     ));
           }
         },
         itemBuilder: (BuildContext context) {
@@ -221,7 +221,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          "৳. ${globalMethod.discountedPrice(widget.productModel.productprice!, widget.productModel.discount!.toDouble())}",
+                          "৳. ${globalMethod.discountedPrice(widget.productModel.productprice!.toDouble(), widget.productModel.discount!.toDouble())}",
                           style: GoogleFonts.abrilFatface(
                               color: greenColor,
                               fontSize: 16,

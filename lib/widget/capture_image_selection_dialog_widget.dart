@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:provider/provider.dart';
 
-import '../const/gobalcolor.dart';
-import '../service/provider/imageaddremoveprovider.dart';
+import '../controller/add_product_controller.dart';
+import '../res/apps_color.dart';
+import '../res/apps_text_style.dart';
 
 class CaptureImageSelectionDialogWidget extends StatefulWidget {
-  const CaptureImageSelectionDialogWidget(
-      {super.key, required this.imagePicker});
-  final ImagePicker imagePicker;
+  const CaptureImageSelectionDialogWidget({
+    super.key,
+  });
 
   @override
   State<CaptureImageSelectionDialogWidget> createState() =>
@@ -18,88 +18,65 @@ class CaptureImageSelectionDialogWidget extends StatefulWidget {
 
 class _CaptureImageSelectionDialogWidgetState
     extends State<CaptureImageSelectionDialogWidget> {
+  var addProductController = Get.put(AddProductController());
   @override
   Widget build(BuildContext context) {
     return SimpleDialog(
       backgroundColor: Theme.of(context).cardColor,
       title: Text(
         "Selected Image",
-        style: GoogleFonts.poppins(
-          color: greenColor,
-          fontSize: 17,
-          fontWeight: FontWeight.bold,
-        ),
+        style:
+            AppsTextStyle.titleTextStyle.copyWith(color: AppColors.greenColor),
       ),
       children: [
         SimpleDialogOption(
           onPressed: () {
-            captureImage(
-                context: context,
-                imagePicker: widget.imagePicker,
-                source: ImageSource.camera);
+            addProductController.uploadProductImage(ImageSource.camera);
+            Get.back();
           },
-          child: Text(
-            "Capture image with Camera",
-            style: GoogleFonts.poppins(
-              color: Theme.of(context).primaryColor,
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
+          child: Text("Capture image with Camera",
+              style: AppsTextStyle.mediumBoldText),
         ),
         SimpleDialogOption(
           onPressed: () {
-            captureImage(
-                context: context,
-                imagePicker: widget.imagePicker,
-                source: ImageSource.gallery);
+            addProductController.uploadProductImage(ImageSource.gallery);
+            Get.back();
           },
-          child: Text(
-            "Capture image with Gallery",
-            style: GoogleFonts.poppins(
-              color: Theme.of(context).primaryColor,
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
+          child: Text("Capture image with Gallery",
+              style: AppsTextStyle.mediumBoldText),
         ),
         SimpleDialogOption(
           onPressed: () {
-            Navigator.pop(context);
+            Get.back();
           },
-          child: Text(
-            "Cancel",
-            style: GoogleFonts.poppins(
-              color: red,
-              fontSize: 14,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
+          child: Text("Cancel",
+              style:
+                  AppsTextStyle.titleTextStyle.copyWith(color: AppColors.red)),
         ),
       ],
     );
   }
 
-  void captureImage(
-      {required BuildContext context,
-      required ImagePicker imagePicker,
-      required ImageSource source}) async {
-    ImageAddRemoveProvider provider =
-        Provider.of<ImageAddRemoveProvider>(context, listen: false);
-    Navigator.pop(context);
+  // void captureImage(
+  //     {required BuildContext context,
+  //     required ImagePicker imagePicker,
+  //     required ImageSource source}) async {
+  //   ImageAddRemoveProvider provider =
+  //       Provider.of<ImageAddRemoveProvider>(context, listen: false);
+  //   Navigator.pop(context);
 
-    XFile? image;
-    List<XFile> imagesListXfile = [];
+  //   XFile? image;
+  //   List<XFile> imagesListXfile = [];
 
-    if (source == ImageSource.camera) {
-      image = await imagePicker.pickImage(source: ImageSource.camera);
-      if (image != null) {
-        imagesListXfile.add(image);
-        provider.setImageListXfile(imageListXfile: imagesListXfile);
-      }
-    } else if (source == ImageSource.gallery) {
-      imagesListXfile = await imagePicker.pickMultiImage();
-      provider.setImageListXfile(imageListXfile: imagesListXfile);
-    }
-  }
+  //   if (source == ImageSource.camera) {
+  //     image = await imagePicker.pickImage(source: ImageSource.camera);
+  //     if (image != null) {
+  //       imagesListXfile.add(image);
+  //       provider.setImageListXfile(imageListXfile: imagesListXfile);
+  //     }
+  //   } else if (source == ImageSource.gallery) {
+  //     imagesListXfile = await imagePicker.pickMultiImage();
+  //     provider.setImageListXfile(imageListXfile: imagesListXfile);
+  //   }
+  // }
 }

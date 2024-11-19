@@ -4,7 +4,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:seller_apps/const/global.dart';
+import 'package:seller_apps/res/app_string.dart';
 
+import '../../../model/productsmodel.dart';
 import '../../../model/profilemodel.dart';
 import 'base_firebase_service.dart';
 
@@ -17,6 +21,10 @@ class DataFirebaseService implements BaseFirebaseService {
 
   @override
   FirebaseStorage get firebaseStorage => FirebaseStorage.instance;
+
+/*
+Flutter Auth Firebase Snapshot
+*/
 
   @override
   User? getCurrentUser() {
@@ -35,7 +43,6 @@ class DataFirebaseService implements BaseFirebaseService {
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
     final GoogleSignInAuthentication? googleAuth =
         await googleUser?.authentication;
-        //f
 
     final credential = GoogleAuthProvider.credential(
       accessToken: googleAuth?.accessToken,
@@ -61,14 +68,13 @@ class DataFirebaseService implements BaseFirebaseService {
         .set(profileModel.toMap());
   }
 
-  // Sign up
   @override
   Future<String> uploadUserImgeUrl({required File file}) async {
     String fileName = "ju_grocery_${DateTime.now().millisecondsSinceEpoch}";
     Reference storageRef = firebaseStorage
         .ref()
         .child("seller")
-        .child(firebaseAuth.currentUser!.uid)
+        // .child(firebaseAuth.currentUser!.uid)
         .child(fileName);
     UploadTask uploadTask = storageRef.putFile(file);
     TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() {});
@@ -96,5 +102,60 @@ class DataFirebaseService implements BaseFirebaseService {
   @override
   Future<void> forgetPasswordSnapshot({required String email}) async {
     firebaseAuth.sendPasswordResetEmail(email: email);
+  }
+
+//
+  @override
+  Future<DocumentSnapshot<Map<String, dynamic>>> getUserInformationSnapshot() {
+    return firebaseFirestore
+        .collection("seller")
+        .doc(firebaseAuth.currentUser!.uid)
+        .get();
+  }
+
+  @override
+  Future<List<String>> uploadImageStorage(
+      {required List<XFile> imageList}) async {
+    List<String> imageUrlList = [];
+
+    for (var image in imageList) {
+      await postImages(image)
+          .then((downLoadUrl) => imageUrlList.add(downLoadUrl));
+    }
+    return imageUrlList;
+  }
+
+  Future<String> postImages(XFile? imageFile) async {
+    final uniqueImageName =
+        "${imageFile!.name}_${DateTime.now().millisecondsSinceEpoch}";
+
+    final ref = firebaseStorage.ref().child(
+        "sellers/${sharedPreference!.getString(AppString.uidSharedPreference)}${sharedPreference!.getString(AppString.nameSharedPreference)}_images/$uniqueImageName");
+
+    UploadTask uploadTask = ref.putFile(File(imageFile.path));
+    TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() {});
+    return taskSnapshot.ref.getDownloadURL();
+  }
+
+  @override
+  Future<void> uploadProductSnapshot(
+      {required ProductModel productModel, required bool isUpdate}) async {
+    final seller = firebaseFirestore
+        .collection("seller")
+        .doc(sharedPreference!.getString(AppString.uidSharedPreference));
+
+    var sellerProductDoc =
+        seller.collection("products").doc(productModel.productId);
+    var globalProductDoc =
+        firebaseFirestore.collection("products").doc(productModel.productId);
+    if (isUpdate) {
+      sellerProductDoc.update(productModel.toMap());
+
+      globalProductDoc.update(productModel.toMap());
+    } else {
+      sellerProductDoc.set(productModel.toMap());
+
+      globalProductDoc.set(productModel.toMap());
+    }
   }
 }

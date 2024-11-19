@@ -6,7 +6,7 @@ import 'package:seller_apps/controller/forget_password_controller.dart';
 import '../../res/app_function.dart';
 import '../../res/app_string.dart';
 
-import '../../widget/custom_button_widget.dart';
+import '../../widget/custom_auth_button_widget.dart';
 import '../../widget/rich_text_widget.dart';
 import '../../widget/text_field_form_widget.dart';
 import 'widget/app_sign_sign_page.dart';
@@ -44,7 +44,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                 SizedBox(
                   height: 10.h,
                 ),
-                CustomButtonWidget(
+                CustomAuthButtonWidget(
                   onPressed: () async {
                     if (!_formKey.currentState!.validate()) return;
                     if (!(await AppsFunction.verifyInternetStatus())) {

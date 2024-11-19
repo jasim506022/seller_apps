@@ -14,11 +14,21 @@ class AppsTextStyle {
   static TextStyle get largeTitleTextStyle => GoogleFonts.roboto(
       color: theme.primaryColor, fontSize: 22.sp, fontWeight: FontWeight.w900);
 
+  // Title Text Style
+  static TextStyle get titleTextStyle => GoogleFonts.poppins(
+      color: theme.primaryColor, fontSize: 18.sp, fontWeight: FontWeight.w700);
+
 // Large Normal Text
-  static TextStyle get mediumNormalTextStyle => GoogleFonts.poppins(
+  static TextStyle get largeNormalText => GoogleFonts.poppins(
         fontSize: 16.sp,
         color: theme.primaryColor,
         fontWeight: FontWeight.w400,
+      );
+  // Large Normal Text
+  static TextStyle get largeBoldText => GoogleFonts.poppins(
+        fontSize: 16.sp,
+        color: theme.primaryColor,
+        fontWeight: FontWeight.w800,
       );
 
   // Search text Field Input Text
@@ -32,8 +42,7 @@ class AppsTextStyle {
   // Sub Title TextStyle
   static TextStyle get subTitleTextStyle => GoogleFonts.poppins(
         fontWeight: FontWeight.w600,
-        fontSize: 14.sp,
-    
+        fontSize: 15.sp,
         color: theme.hintColor,
       );
 
@@ -41,18 +50,28 @@ class AppsTextStyle {
   static TextStyle get buttonTextStyle => GoogleFonts.poppins(
       color: AppColors.white, fontWeight: FontWeight.bold, fontSize: 15.sp);
 
-  // Title Text Style
-  static TextStyle get titleTextStyle => GoogleFonts.poppins(
-      color: theme.primaryColor, fontSize: 18.sp, fontWeight: FontWeight.w700);
-
-// Medium Blod Text
-  static TextStyle get mediumBoldText => GoogleFonts.poppins(
-      color: theme.primaryColor, fontSize: 14.sp, fontWeight: FontWeight.w800);
-
 // Hint Normal Text
   static TextStyle get hintTextStyle => GoogleFonts.poppins(
         fontSize: 14.sp,
         color: AppColors.grey,
         fontWeight: FontWeight.normal,
       );
+
+// Medium Text
+  static TextStyle get mediumBoldText => GoogleFonts.poppins(
+      color: theme.primaryColor, fontSize: 14.sp, fontWeight: FontWeight.w800);
+
+
+// others 
+static TextStyle mediumText400lineThrough = GoogleFonts.roboto(
+      decoration: TextDecoration.lineThrough,
+      color: const Color(0xffcecfd2),
+      fontSize: 14.sp,
+      fontWeight: FontWeight.w700);
+
+      // Small Bold Text
+  static TextStyle get smallBoldText => GoogleFonts.poppins(
+      color: theme.primaryColor, fontSize: 12.sp, fontWeight: FontWeight.w700);
+
+
 }

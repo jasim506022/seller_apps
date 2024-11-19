@@ -11,11 +11,12 @@ import '../service/database/firebasedatabase.dart';
 
 import '../service/provider/loadingprovider.dart';
 import '../widget/show_error_dialog_widget.dart';
-import 'const.dart';
+
 import 'global.dart';
 import 'gobalcolor.dart';
 
 class GlobalMethod {
+
 // Text Form Field Decoration
   InputDecoration textFormFielddecoration({
     bool isShowPassword = false,
@@ -118,6 +119,7 @@ class GlobalMethod {
   }
 
 // Get User Share Preference
+
   getUsersharedPreference() async {
     try {
       await FirebaseDatabase.currentUserDataSnapshot().then((snapshot) async {

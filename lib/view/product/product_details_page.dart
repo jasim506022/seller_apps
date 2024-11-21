@@ -81,8 +81,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                     SimilarProductList(
                       productModel: productModel,
                     ),
-                    const SizedBox(
-                      height: 20,
+                    SizedBox(
+                      height: 20.h,
                     ),
                   ],
                 ),

@@ -64,6 +64,7 @@ dependencies:
   flutter_screenutil: ^5.9.3
   get: ^4.6.6
   connectivity_plus: ^6.1.0
+  font_awesome_flutter: ^10.8.0
   
 
 dev_dependencies:

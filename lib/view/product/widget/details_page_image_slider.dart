@@ -86,11 +86,7 @@ class DetailsPageImageSlideWithCartBridgeWidget extends StatelessWidget {
                         ),
                       ),
                       InkWell(
-                          onTap: () async {
-                            // if (!(await AppsFunction.verifyInternetStatus())) {
-                            //   Get.toNamed(RoutesName.cartPage);
-                            // }
-                          },
+                          onTap: () async {},
                           child: _buildCircularButton(
                               PopupButtonWidget(productModel: productModel)))
                     ],

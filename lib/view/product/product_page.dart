@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../const/global.dart';
@@ -19,7 +20,7 @@ class ProductPage extends StatelessWidget {
             "Products",
           )),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 4),
+        padding: EdgeInsets.symmetric(horizontal: 4.h),
         child: Column(
           children: [
             DropdownCategoryWidget(

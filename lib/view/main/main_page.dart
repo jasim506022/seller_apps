@@ -9,7 +9,7 @@ import '../../const/gobalcolor.dart';
 import '../home/home_page.dart';
 import '../other/local_service.dart';
 import '../other/pushnotification.dart';
-import '../product/productpage.dart';
+import '../product/product_page.dart';
 import '../profile/profilepage.dart';
 import '../search/searchpage.dart';
 

@@ -11,6 +11,7 @@ class RoutesName {
   static const String totalSales = '/totalSales';
   static const String uploadProduct = '/uploadProduct';
   static const String product = '/product';
-   static const String runningOrder = '/runningOrder';
+  static const String runningOrder = '/runningOrder';
+  static const String detailsPage = '/detailsPage';
   static const String example = '/example';
 }

@@ -26,7 +26,7 @@ import 'service/provider/theme_provider.dart';
 import 'service/provider/totalamountprovider.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding. ensureInitialized();
   await Firebase.initializeApp();
   sharedPreference = await SharedPreferences.getInstance();
   FirebaseMessaging.onBackgroundMessage(firebaseMessingbackground);

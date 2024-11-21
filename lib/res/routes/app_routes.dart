@@ -4,7 +4,8 @@ import 'package:seller_apps/view/add_product/add_product_page.dart';
 import 'package:seller_apps/view/main/main_page.dart';
 import 'package:seller_apps/view/order/completeorderpage.dart';
 import 'package:seller_apps/view/order/orderpage.dart';
-import 'package:seller_apps/view/product/productpage.dart';
+import 'package:seller_apps/view/product/product_details_page.dart';
+import 'package:seller_apps/view/product/product_page.dart';
 
 import '../../view/auth/forget_password_page.dart';
 import '../../view/auth/sign_in_page.dart';
@@ -41,23 +42,27 @@ class AppRoutes {
         ),
         GetPage(
           name: RoutesName.uploadProduct,
-          page: () =>  AddProductPage(),
+          page: () => const AddProductPage(),
         ),
-         GetPage(
+        GetPage(
+          name: RoutesName.detailsPage,
+          page: () => const ProductDetailsPage(),
+        ),
+        GetPage(
           name: RoutesName.product,
-          page: () =>  const ProductPage(),
+          page: () => const ProductPage(),
         ),
         GetPage(
           name: RoutesName.totalSales,
-          page: () =>  const TotalSellPage(),
+          page: () => const TotalSellPage(),
         ),
         GetPage(
           name: RoutesName.runningOrder,
-          page: () =>  const OrderPage(),
+          page: () => const OrderPage(),
         ),
         GetPage(
           name: RoutesName.completeOrderPage,
-          page: () =>  const CompleteOrderPage(),
+          page: () => const CompleteOrderPage(),
         ),
       ];
 }

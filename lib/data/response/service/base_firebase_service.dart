@@ -36,4 +36,14 @@ abstract class BaseFirebaseService {
 
   Future<void> uploadProductSnapshot(
       {required ProductModel productModel, required bool isUpdate});
+
+  //
+  Stream<QuerySnapshot<Map<String, dynamic>>> productSnapshots(
+      {required String category});
+
+  // Delete Product
+  Future<void> deleteProductSnapshot({required String productId});
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> similarProductSnapshot(
+      {required ProductModel productModel});
 }

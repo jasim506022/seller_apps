@@ -150,12 +150,52 @@ Flutter Auth Firebase Snapshot
         firebaseFirestore.collection("products").doc(productModel.productId);
     if (isUpdate) {
       sellerProductDoc.update(productModel.toMap());
-
       globalProductDoc.update(productModel.toMap());
     } else {
       sellerProductDoc.set(productModel.toMap());
-
       globalProductDoc.set(productModel.toMap());
     }
+  }
+
+  //
+  @override
+  Stream<QuerySnapshot<Map<String, dynamic>>> productSnapshots(
+      {required String category}) {
+    var collectionRef = firebaseFirestore
+        .collection("seller")
+        .doc(sharedPreference!.getString(AppString.uidSharedPreference))
+        .collection("products");
+    var query = collectionRef.orderBy("publishDate", descending: true);
+
+    if (category != "All") {
+      query = query.where("productcategory", isEqualTo: category);
+    }
+
+    return query.snapshots();
+  }
+
+  @override
+  Future<void> deleteProductSnapshot({required String productId}) async {
+    final sellerId = sharedPreference?.getString(AppString.uidSharedPreference);
+    final sellerRef = firebaseFirestore.collection("seller").doc(sellerId);
+
+    sellerRef.collection("products").doc(productId).delete();
+    firebaseFirestore.collection("products").doc(productId).delete();
+  }
+
+  //
+
+  @override
+  Stream<QuerySnapshot<Map<String, dynamic>>> similarProductSnapshot(
+      {required ProductModel productModel}) {
+    return FirebaseFirestore.instance
+        .collection("seller")
+        .doc(sharedPreference!.getString("uid")!)
+        .collection("products")
+        .where("productId", isNotEqualTo: productModel.productId)
+        .where("productcategory", isEqualTo: productModel.productcategory)
+        .snapshots();
+
+    //
   }
 }

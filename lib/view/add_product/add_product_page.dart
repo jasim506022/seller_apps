@@ -33,9 +33,9 @@ class _AddProductPageState extends State<AddProductPage> {
     // Understand the code
 
     isUpdate = data?["isUpdate"] ?? false;
-    productModel = data?["productModel"];
 
     if (isUpdate) {
+      productModel = data?["productModel"];
       _populateProductFields(productModel);
     }
 

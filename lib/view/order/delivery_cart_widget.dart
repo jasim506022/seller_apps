@@ -7,7 +7,7 @@ import '../../const/gobalcolor.dart';
 import '../../const/textstyle.dart';
 import '../../model/productsmodel.dart';
 
-import '../product/detailsproductpage.dart';
+import '../product/product_details_page.dart';
 
 class DeliveryCartWidget extends StatelessWidget {
   const DeliveryCartWidget({
@@ -23,7 +23,7 @@ class DeliveryCartWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var mq = MediaQuery.of(context).size;
-    
+
     Textstyle textstyle = Textstyle(context);
     return InkWell(
       onTap: () {
@@ -31,9 +31,9 @@ class DeliveryCartWidget extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => ProductDetailsPage(
-                // productModel: productModel,
-                // isDelivery: true,
-              ),
+                  // productModel: productModel,
+                  // isDelivery: true,
+                  ),
             ));
       },
       child: Padding(

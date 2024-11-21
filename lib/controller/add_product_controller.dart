@@ -144,7 +144,7 @@ class AddProductController extends GetxController {
       Get.dialog(CustomAlertDialogWidget(
         icon: Icons.question_mark_rounded,
         title: "Save Changed?",
-        subTitle: 'do you want to save change?',
+        content: 'do you want to save change?',
         yesOnPress: () => Get.back(),
         noOnPress: () {
           clearInputField();

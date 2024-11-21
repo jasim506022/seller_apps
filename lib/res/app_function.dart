@@ -30,7 +30,7 @@ class AppsFunction {
     return Get.dialog(CustomAlertDialogWidget(
       icon: Icons.question_mark_rounded,
       title: AppString.exit,
-      subTitle: AppString.exitApps,
+      content: AppString.exitApps,
       yesOnPress: () {
         Get.back(result: true);
       },
@@ -130,7 +130,7 @@ class AppsFunction {
     }
   }
 
-    static double calculateDiscountedPrice(num productprice, double discount) {
+  static double calculateDiscountedPrice(num productprice, double discount) {
     return productprice - (productprice * discount / 100);
   }
 
@@ -139,7 +139,7 @@ class AppsFunction {
     return calculateDiscountedPrice(productprice, discount);
   }
 
-   static Container lineShimmer(Utils utils, double height, [double? width]) {
+  static Container lineShimmer(Utils utils, double height, [double? width]) {
     return Container(
       height: height,
       width: width ?? 1.sw,

@@ -1,13 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../const/const.dart';
-import '../../const/gobalcolor.dart';
-import '../../model/productsmodel.dart';
+import '../../../model/productsmodel.dart';
+import '../../../res/apps_color.dart';
 
-class DetailsSwiperWidget extends StatelessWidget {
-  const DetailsSwiperWidget({
+class DetailsImageSwiperWidget extends StatelessWidget {
+  const DetailsImageSwiperWidget({
     super.key,
     required this.productModel,
   });
@@ -16,11 +16,11 @@ class DetailsSwiperWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var mq = MediaQuery.of(context).size;
     return Align(
       alignment: Alignment.center,
       child: SizedBox(
-        height: mq.height * .31,
+        height: 200.h,
+        width: .9.sw,
         child: Swiper(
           itemBuilder: (BuildContext context, int index) {
             return CachedNetworkImage(
@@ -33,12 +33,12 @@ class DetailsSwiperWidget extends StatelessWidget {
               errorWidget: (context, url, error) => const Icon(Icons.error),
             );
           },
-          autoplay: productModel.productimage!.length > 1,
+          autoplay: productModel.productimage!.length == 1 ? false : true,
           itemCount: productModel.productimage!.length,
           pagination: SwiperPagination(
               alignment: Alignment.bottomCenter,
-              builder:
-                  DotSwiperPaginationBuilder(color: white, activeColor: red)),
+              builder: DotSwiperPaginationBuilder(
+                  color: AppColors.white, activeColor: AppColors.red)),
           control: const SwiperControl(color: Colors.transparent),
         ),
       ),

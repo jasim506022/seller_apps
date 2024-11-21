@@ -80,12 +80,13 @@ class AppsTextStyle {
       color: theme.primaryColor, fontSize: 12.sp, fontWeight: FontWeight.w700);
 
 //
-static TextStyle get rattingText => GoogleFonts.poppins(
+  static TextStyle get rattingText => GoogleFonts.poppins(
         color: Theme.of(context).hintColor,
         fontWeight: FontWeight.w600,
         fontSize: 13.sp,
       );
 
-
-
+//
+  static TextStyle emptyTestStyle = GoogleFonts.roboto(
+      color: AppColors.red, fontSize: 25.sp, fontWeight: FontWeight.bold);
 }

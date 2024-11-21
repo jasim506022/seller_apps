@@ -10,14 +10,14 @@ class CustomAlertDialogWidget extends StatelessWidget {
   const CustomAlertDialogWidget({
     super.key,
     required this.title,
-    required this.subTitle,
+    required this.content,
     required this.yesOnPress,
     this.noOnPress,
     required this.icon,
   });
 
   final String title;
-  final String subTitle;
+  final String content;
   final VoidCallback yesOnPress;
   final VoidCallback? noOnPress;
   final IconData icon;
@@ -43,7 +43,7 @@ class CustomAlertDialogWidget extends StatelessWidget {
               )),
         ],
       ),
-      content: Text(subTitle,
+      content: Text(content,
           style: AppsTextStyle.subTitleTextStyle
               .copyWith(color: Theme.of(context).primaryColor)),
       actions: [

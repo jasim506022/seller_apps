@@ -10,8 +10,8 @@ import '../../service/database/firebasedatabase.dart';
 import '../../model/productsmodel.dart';
 import '../../service/provider/dropvalueselectallprovider.dart';
 import '../../service/provider/searchprovider.dart';
-import '../../widget/loading_product_widget.dart';
 import '../../widget/product_widget.dart';
+import '../loading_widget/loading_product_widget.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});

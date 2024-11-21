@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-import '../../const/const.dart';
 import '../../model/productsmodel.dart';
-import 'detailsproductpage.dart';
+import 'product_details_page.dart';
 
 class SimilarProductWidget extends StatelessWidget {
   const SimilarProductWidget({
@@ -22,8 +21,8 @@ class SimilarProductWidget extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => ProductDetailsPage(
-                // productModel: productModel,
-              ),
+                  // productModel: productModel,
+                  ),
             ));
       },
       child: Container(

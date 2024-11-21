@@ -20,7 +20,7 @@ class SimilarProductList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var productController = Get.put(ProductController());
+    var productController = Get.find<ProductController>();
     return SizedBox(
       height: 150.h,
       width: 1.sw,

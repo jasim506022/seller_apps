@@ -18,7 +18,7 @@ class PopupButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var productController = Get.put(ProductController());
+   var productController = Get.find<ProductController>();
     return PopupMenuButton<ProductSelect>(
       color: Theme.of(context).cardColor,
       iconColor: Colors.white,

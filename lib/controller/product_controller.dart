@@ -14,7 +14,10 @@ import '../widget/show_alert_dialog_widget.dart';
 import 'category_controller.dart';
 
 class ProductController extends GetxController {
-  ProductRepository repository = ProductRepository();
+  final ProductRepository repository;
+
+  ProductController({required this.repository});
+
   final categoryController = Get.find<CategoryController>();
 
   Stream<QuerySnapshot<Map<String, dynamic>>> productSnapshots() {

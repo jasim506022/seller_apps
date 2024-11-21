@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../controller/search_controller.dart';
 
+
+import '../../../controller/search_controller.dart';
 import '../../../res/apps_color.dart';
 import '../../../res/apps_text_style.dart';
 import '../../../widget/drop_down_category_widget.dart';

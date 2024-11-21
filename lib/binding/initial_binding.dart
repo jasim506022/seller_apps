@@ -4,10 +4,13 @@ import 'package:seller_apps/controller/forget_password_controller.dart';
 import 'package:seller_apps/repository/forget_password_repository.dart';
 
 import '../controller/loading_controller.dart';
+import '../controller/product_controller.dart';
 import '../controller/profile_controller.dart';
+import '../controller/search_controller.dart';
 import '../controller/select_image_controller.dart';
 import '../controller/sign_in_controller.dart';
 import '../controller/sign_up_controller.dart';
+import '../repository/product_repository.dart';
 import '../repository/profile_repository.dart';
 import '../repository/select_image_repository.dart';
 import '../repository/sign_in_repository.dart';
@@ -44,5 +47,11 @@ class InitialBinding extends Bindings {
         fenix: true);
 
     Get.lazyPut<CategoryController>(() => CategoryController(), fenix: true);
+    Get.lazyPut<SearchControllers>(() => SearchControllers());
+
+        Get.lazyPut<ProductRepository>(() => ProductRepository(), fenix: true);
+  Get.lazyPut<ProductController>(
+        () => ProductController(repository: Get.find<ProductRepository>()),
+        fenix: true);
   }
 }

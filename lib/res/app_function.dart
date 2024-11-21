@@ -154,4 +154,19 @@ class AppsFunction {
   //     double productprice, double discount, int quantity) {
   //   return calculateDiscountedPrice(productprice, discount) * quantity;
   // }
+
+    static InputDecoration inputDecoration({
+    required String hint,
+  }) {
+    return InputDecoration(
+      enabledBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Color(0xff00B761), width: 1),
+          borderRadius: BorderRadius.circular(15)),
+      focusedBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Color(0xff00B761), width: 1),
+          borderRadius: BorderRadius.circular(15)),
+      hintText: hint,
+      hintStyle: const TextStyle(color: Colors.grey),
+    );
+  }
 }

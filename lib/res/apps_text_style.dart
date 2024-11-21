@@ -31,6 +31,13 @@ class AppsTextStyle {
         fontWeight: FontWeight.w800,
       );
 
+  // Large body Normal Text
+  static TextStyle get mediumNormalText => GoogleFonts.poppins(
+        fontSize: 14.sp,
+        color: theme.primaryColor,
+        fontWeight: FontWeight.w400,
+      );
+
   // Search text Field Input Text
   static TextStyle textFieldInputTextStyle([bool isEnable = false]) =>
       GoogleFonts.poppins(
@@ -61,17 +68,24 @@ class AppsTextStyle {
   static TextStyle get mediumBoldText => GoogleFonts.poppins(
       color: theme.primaryColor, fontSize: 14.sp, fontWeight: FontWeight.w800);
 
-
-// others 
-static TextStyle mediumText400lineThrough = GoogleFonts.roboto(
+// others
+  static TextStyle mediumText400lineThrough = GoogleFonts.roboto(
       decoration: TextDecoration.lineThrough,
       color: const Color(0xffcecfd2),
       fontSize: 14.sp,
       fontWeight: FontWeight.w700);
 
-      // Small Bold Text
+  // Small Bold Text
   static TextStyle get smallBoldText => GoogleFonts.poppins(
       color: theme.primaryColor, fontSize: 12.sp, fontWeight: FontWeight.w700);
+
+//
+static TextStyle get rattingText => GoogleFonts.poppins(
+        color: Theme.of(context).hintColor,
+        fontWeight: FontWeight.w600,
+        fontSize: 13.sp,
+      );
+
 
 
 }

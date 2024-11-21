@@ -24,11 +24,11 @@ class AppColors {
   static Color greenColor = const Color(0xff00b761);
   // Blue Color
   static Color blue = Colors.blue;
-
+  // Yellow
+  static Color yellow = const Color.fromRGBO(255, 241, 112, 1);
 
   // other
 
   static Color cardImageBg = const Color(0xfff6f5f1);
-    static Color lightred = const Color.fromARGB(255, 251, 196, 192);
-
+  static Color lightred = const Color.fromARGB(255, 251, 196, 192);
 }

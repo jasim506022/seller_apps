@@ -52,38 +52,6 @@ class _ProductPageState extends State<ProductPage> {
         padding: const EdgeInsets.symmetric(horizontal: 4),
         child: Column(
           children: [
-            /*
-            Consumer<CateoryDropValueProvider>(
-              builder: (context, dropvaluesall, child) {
-                return DropdownButtonFormField(
-                  decoration:
-                      globalMethod.decorationDropDownButtonForm(context),
-                  value: dropvaluesall.cateoryDropValue,
-                  isExpanded: true,
-                  style: GoogleFonts.poppins(
-                      color: Theme.of(context).primaryColor,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700),
-                  focusColor: Theme.of(context).primaryColor,
-                  elevation: 16,
-                  iconEnabledColor: Theme.of(context).primaryColor,
-                  items: allCategoryList
-                      .map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                        value: value, child: Text(value));
-                  }).toList(),
-                  onChanged: (value) {
-                    if (kDebugMode) {
-                      print(value);
-                    }
-                    Provider.of<CateoryDropValueProvider>(context,
-                            listen: false)
-                        .setDroupValue(selectValue: value!);
-                  },
-                );
-              },
-            ),
-           */
             DropdownCategoryWidget(
               list: allCategoryList,
               value: categoryController.getCategory,
@@ -91,63 +59,7 @@ class _ProductPageState extends State<ProductPage> {
                 categoryController.setCategory(category: value!.toString());
               },
             ),
-            Expanded(child: ProductListWidget())
-            /*
-            Expanded(
-              child: Consumer<CateoryDropValueProvider>(
-                builder: (context, cateoryDropValueProvider, child) {
-                  return StreamBuilder(
-                    stream: FirebaseDatabase.allProductListSnapshots(
-                        category: cateoryDropValueProvider.cateoryDropValue),
-                    builder: (context, snapshot) {
-                      try {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return const LoadingProductWidget();
-                        } else if (snapshot.hasData) {
-                          return GridView.builder(
-                            itemCount: snapshot.data!.docs.length,
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2,
-                                    childAspectRatio: .78,
-                                    crossAxisSpacing: mq.width * .009,
-                                    mainAxisSpacing: mq.width * .018),
-                            itemBuilder: (context, index) {
-                              ProductModel productModel = ProductModel.fromMap(
-                                  snapshot.data!.docs[index].data());
-                              return ChangeNotifierProvider.value(
-                                value: productModel,
-                                child: const ProductWidget(),
-                              );
-                            },
-                          );
-                        } else if (!snapshot.hasData ||
-                            snapshot.data!.docs.isEmpty) {
-                          return const Text(
-                            'asset/payment/emptytow.png',
-                            style: TextStyle(color: Colors.black),
-                          );
-                        } else if (!snapshot.hasData) {
-                          return const EmptyWidget(
-                            image: 'asset/empty/empty.png',
-                            title: 'No Data Found',
-                          );
-                        }
-                        return const LoadingProductWidget();
-                      } catch (error) {
-                        return EmptyWidget(
-                          image: 'asset/empty/empty.png',
-                          title: 'An Error Occured: $error',
-                        );
-                      }
-                    },
-                  );
-                },
-              ),
-            ),
-          
-          */
+            const Expanded(child: ProductListWidget())
           ],
         ),
       ),
@@ -180,11 +92,9 @@ class ProductListWidget extends StatelessWidget {
               );
             }
             if (snapshot.hasData) {
-              return LoadingListProductWidget();
-/*
               return GridView.builder(
                 shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
+                physics: const AlwaysScrollableScrollPhysics(),
                 itemCount: snapshot.data!.docs.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
@@ -201,7 +111,6 @@ class ProductListWidget extends StatelessWidget {
                   );
                 },
               );
-            */
             }
             return const LoadingListProductWidget();
           },
@@ -218,7 +127,7 @@ class LoadingListProductWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.builder(
       shrinkWrap: true,
-      physics: AlwaysScrollableScrollPhysics(),
+      physics: const AlwaysScrollableScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: .76,

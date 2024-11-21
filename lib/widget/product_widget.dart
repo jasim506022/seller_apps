@@ -1,12 +1,15 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import '../model/productsmodel.dart';
 import '../res/app_function.dart';
 import '../res/apps_color.dart';
 import '../res/apps_text_style.dart';
+import '../res/routes/routes_name.dart';
+import '../view/product/detailsproductpage.dart';
 
 class ProductWidget extends StatelessWidget {
   const ProductWidget({
@@ -19,7 +22,17 @@ class ProductWidget extends StatelessWidget {
 
     return InkWell(
       onTap: () async {
-        if (!(await AppsFunction.verifyInternetStatus())) {}
+        if (!(await AppsFunction.verifyInternetStatus())) {
+          Get.to(ProductDetailsPage(),
+              arguments: {"productModel": productModel});
+          // Navigator.push(
+          //     context,
+          //     MaterialPageRoute(
+          //       builder: (context) => ProductDetailsPage(
+          //         // productModel: productModel,
+          //       ),
+          //     ));
+        }
       },
       child: Card(
         child: Container(
@@ -93,7 +106,10 @@ class ProductWidget extends StatelessWidget {
         InkWell(
             onTap: () async {
               if (!(await AppsFunction.verifyInternetStatus())) {
-                
+                Get.toNamed(RoutesName.uploadProduct, arguments: {
+                  "isUpdate": true,
+                  "productModel": productModel
+                });
               }
             },
             child: Container(
@@ -297,10 +313,12 @@ class ProductWidget extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
+
                           Get.toNamed(RoutesName.uploadProduct, arguments: {
                             "isUpdate": true,
                             "productModel": productModel
                           });
+
                           // Navigator.push(
                           //     context,
                           //     MaterialPageRoute(

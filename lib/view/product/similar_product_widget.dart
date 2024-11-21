@@ -22,7 +22,7 @@ class SimilarProductWidget extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => ProductDetailsPage(
-                productModel: productModel,
+                // productModel: productModel,
               ),
             ));
       },

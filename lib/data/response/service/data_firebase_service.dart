@@ -198,4 +198,24 @@ Flutter Auth Firebase Snapshot
 
     //
   }
+
+  // home
+  @override
+  Stream<QuerySnapshot<Map<String, dynamic>>> orderSnapshots(
+      {required String orderStatus}) {
+    String selleruid = sharedPreference!.getString("uid")!;
+    return
+        // firebaseFirestore
+        //     .collection("users")
+        //     .doc(sharedPreference!.getString("uid"))
+        //     .collection("orders")
+        //     .where("status", isEqualTo: orderStatus)
+        //     .snapshots();
+
+        firebaseFirestore
+            .collection("orders")
+            .where("seller", arrayContains: "$selleruid:false")
+            .where("status", isEqualTo: orderStatus)
+            .snapshots();
+  }
 }

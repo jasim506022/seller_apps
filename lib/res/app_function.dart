@@ -148,7 +148,11 @@ class AppsFunction {
           borderRadius: BorderRadius.circular(15.r)),
     );
   }
-
+ //Product Price
+  static double productPriceWithQuantity(
+      num productprice, double discount, int quantity) {
+    return (calculateDiscountedPrice(productprice, discount) * quantity);
+  }
   // //Product Price
   // static double productPriceWithQuantity(
   //     double productprice, double discount, int quantity) {

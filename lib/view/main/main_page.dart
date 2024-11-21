@@ -66,7 +66,7 @@ class _MainPageState extends State<MainPage> {
     });
     
     */
-    CartMethods.allProduct();
+    CartFunctions.allProduct();
   }
 
   int currentIndex = 0;

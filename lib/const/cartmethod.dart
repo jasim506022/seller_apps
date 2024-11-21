@@ -9,7 +9,7 @@ import 'package:seller_apps/model/productsmodel.dart';
 import '../service/provider/totalamountprovider.dart';
 import 'const.dart';
 
-class CartMethods {
+class CartFunctions {
   static List<ProductModel> allProductList = [];
 
   static allProduct() async {
@@ -33,11 +33,11 @@ class CartMethods {
             .doc(sharedPreference!.getString("uid")!)
             .collection("products")
             .where("productId",
-                whereIn: CartMethods.separteOrderProductIdList(
+                whereIn: CartFunctions.separteOrderProductIdList(
                     (seller.docs[i].data())["productIds"]))
             .snapshots()
             .listen((event) {
-          List<dynamic> listItem = CartMethods.separateOrderItemQuantities(
+          List<dynamic> listItem = CartFunctions.separateOrderItemQuantities(
               (seller.docs[i].data())["productIds"]);
           for (var p = 0; p < event.docs.length; p++) {
             Future.delayed(Duration.zero, () {
@@ -147,6 +147,15 @@ class CartMethods {
     return [for (var item in productIds.skip(1)) item.toString().split(":")[0]];
   }
 
+  static List<int> separateOrderItemQuantities(productIds) {
+    List<String> listProductIds = List<String>.from(productIds);
+    return [
+      for (var item in listProductIds.skip(1))
+        int.parse(item.toString().split(":")[2])
+    ];
+  }
+
+/*
 // Seperate Order Item Quantites
   static List<dynamic> separateOrderItemQuantities(List<dynamic> productIds) {
     List<String> productIDList = separteOrderProductIdList(productIds);
@@ -164,4 +173,5 @@ class CartMethods {
           int.parse(item.split(":")[2])
     ];
   }
+  */
 }

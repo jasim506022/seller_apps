@@ -117,7 +117,7 @@ class HomePage extends StatelessWidget {
                                 text: AppString.runningOrder,
                                 function: () {
                                   Get.toNamed(
-                                    RoutesName.orderPage,
+                                    RoutesName.runningOrder,
                                   );
                                 },
                               ),

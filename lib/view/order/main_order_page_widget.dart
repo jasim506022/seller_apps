@@ -4,7 +4,7 @@ import '../../const/cartmethod.dart';
 import '../../const/gobalcolor.dart';
 import '../../service/database/firebasedatabase.dart';
 import '../../widget/empty_widget.dart';
-import '../../widget/single_loading_product_widget.dart';
+import '../loading_widget/loading_single_product_widget.dart';
 import 'cart_order_widget.dart';
 
 class MainOrderPage extends StatelessWidget {
@@ -51,7 +51,7 @@ class MainOrderPage extends StatelessWidget {
                       );
                     } else if (datasnapshot.hasData) {
                       List<dynamic> listItem =
-                          CartMethods.separateOrderItemQuantities(
+                          CartFunctions.separateOrderItemQuantities(
                               (listOrderSnapshot[index].data())["productIds"]);
                       return CartOrderWidget(
                         itemCount: datasnapshot.data!.docs.length,

@@ -58,7 +58,7 @@ class AppRoutes {
         ),
         GetPage(
           name: RoutesName.runningOrder,
-          page: () => const OrderPage(),
+          page: () => const OrderScreen(),
         ),
         GetPage(
           name: RoutesName.completeOrderPage,

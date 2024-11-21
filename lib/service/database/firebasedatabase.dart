@@ -151,7 +151,6 @@ class FirebaseDatabase {
       required String phone,
       required String name,
       required String image}) async {
-        
     ProfileModel profileModel = ProfileModel(
         name: name,
         earnings: 0.0,
@@ -311,8 +310,8 @@ class FirebaseDatabase {
         .doc(selleruid)
         .collection("products")
         .where("productId",
-            whereIn:
-                CartMethods.separteOrderProductIdList((snpshot)["productIds"]))
+            whereIn: CartFunctions.separteOrderProductIdList(
+                (snpshot)["productIds"]))
         .get();
   }
 
@@ -352,7 +351,7 @@ class FirebaseDatabase {
         .doc(selleruid)
         .collection("products")
         .where("productId",
-            whereIn: CartMethods.separteOrderProductIdList(list))
+            whereIn: CartFunctions.separteOrderProductIdList(list))
         .orderBy("publishDate", descending: true)
         .get();
   }

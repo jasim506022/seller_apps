@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 import '../../const/cartmethod.dart';
-import '../../const/const.dart';
 import '../../const/gobalcolor.dart';
 import '../../service/provider/totalamountprovider.dart';
 import '../order/completeorderpage.dart';
@@ -21,7 +20,7 @@ class _TotalSellPageState extends State<TotalSellPage> {
     Future.delayed(Duration.zero, () {
       Provider.of<TotalAmountProvider>(context, listen: false).setZeroAmount();
     });
-    CartMethods.allSellMoeny(context);
+    CartFunctions.allSellMoeny(context);
     super.initState();
   }
 
@@ -37,8 +36,8 @@ class _TotalSellPageState extends State<TotalSellPage> {
         builder: (context, value, child) {
           return Center(
               child: Container(
-            height:0.42.sh,
-            width: 0.42.sh,
+            height: 0.4.sh,
+            width: 0.4.sh,
             decoration:
                 BoxDecoration(color: greenColor, shape: BoxShape.circle),
             child: Center(
@@ -66,8 +65,7 @@ class _TotalSellPageState extends State<TotalSellPage> {
                     },
                     child: Container(
                       padding: EdgeInsets.symmetric(
-                          horizontal: 40.h,
-                          vertical: 15.h),
+                          horizontal: 40.h, vertical: 15.h),
                       decoration: BoxDecoration(
                           color: white,
                           borderRadius: BorderRadius.circular(10)),
@@ -83,13 +81,7 @@ class _TotalSellPageState extends State<TotalSellPage> {
                 ],
               ),
             ),
-          )
-
-              //  Text(
-              //   "${value.amount}",
-              //   style: TextStyle(color: Colors.black, fontSize: 50),
-              // ),
-              );
+          ));
         },
       ),
     );

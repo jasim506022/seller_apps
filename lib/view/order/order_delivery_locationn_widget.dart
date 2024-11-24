@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:seller_apps/const/const.dart';
+import 'package:seller_apps/model/order_model.dart';
 
 import '../../const/gobalcolor.dart';
 import '../../const/textstyle.dart';
@@ -10,16 +11,18 @@ class OrderDeliveryLocationWidget extends StatelessWidget {
     super.key,
     required this.userId,
     required this.orderStatus,
-    required this.orderDataMap,
+    required this.orderModel,
+    // required this.orderDataMap,
   });
 
   final String userId;
   final String orderStatus;
-  final Map<String, dynamic> orderDataMap;
+  // final Map<String, dynamic> orderDataMap;
+  final OrderModel orderModel;
   @override
   Widget build(BuildContext context) {
     Textstyle textstyle = Textstyle(context);
-      var mq = MediaQuery.of(context).size;
+    var mq = MediaQuery.of(context).size;
     return Column(
       children: [
         Container(
@@ -39,7 +42,7 @@ class OrderDeliveryLocationWidget extends StatelessWidget {
               Expanded(
                 child: StreamBuilder(
                     stream: FirebaseDatabase.userDeliverysnapshot(
-                        addressId: orderDataMap['addressId'], userId: userId),
+                        addressId: orderModel.addressId, userId: userId),
                     builder: (context, addressSnashot) {
                       if (addressSnashot.connectionState ==
                           ConnectionState.waiting) {
@@ -80,8 +83,7 @@ class OrderDeliveryLocationWidget extends StatelessWidget {
                 orderStatus == "complete"
                     ? "Order Compete"
                     : globalMethod.getFormateDate(
-                        context: context,
-                        datetime: orderDataMap["deliverydate"]),
+                        context: context, datetime: orderModel.deliveryDate),
                 style:
                     textstyle.largestText.copyWith(color: white, fontSize: 15),
               ),
@@ -94,7 +96,7 @@ class OrderDeliveryLocationWidget extends StatelessWidget {
         Container(
           width: mq.width,
           decoration: BoxDecoration(color: Theme.of(context).cardColor),
-          child: Text("Delivery Partner: ${orderDataMap["deliverypartner"]}",
+          child: Text("Delivery Partner: ${orderModel.deliveryPartner}",
               style: textstyle.mediumText600
                   .copyWith(color: Theme.of(context).primaryColor)),
         ),

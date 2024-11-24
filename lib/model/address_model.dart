@@ -1,6 +1,6 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:flutter/material.dart';
 
-class AddressModel {
+class AddressModel with ChangeNotifier {
   String? city;
   String? completeaddress;
   String? country;
@@ -10,7 +10,7 @@ class AddressModel {
   String? phone;
   String? streetno;
   String? village;
-  String? id;
+  String? addressId;
 
   AddressModel(
       {this.city,
@@ -22,7 +22,7 @@ class AddressModel {
       this.phone,
       this.streetno,
       this.village,
-      this.id});
+      this.addressId});
 
   factory AddressModel.fromMap(Map<String, dynamic> map) {
     return AddressModel(
@@ -38,7 +38,22 @@ class AddressModel {
       phone: map['phone'] != null ? map['phone'] as String : null,
       streetno: map['streetno'] != null ? map['streetno'] as String : null,
       village: map['village'] != null ? map['village'] as String : null,
-      id: map['id'] != null ? map['id'] as String : null,
+      addressId: map['addressId'] != null ? map['addressId'] as String : null,
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'city': city,
+      'completeaddress': completeaddress,
+      'country': country,
+      'deliveryplace': deliveryplace,
+      'flatno': flatno,
+      'name': name,
+      'phone': phone,
+      'streetno': streetno,
+      'village': village,
+      'addressId': addressId,
+    };
   }
 }

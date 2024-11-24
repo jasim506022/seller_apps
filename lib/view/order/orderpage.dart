@@ -13,18 +13,29 @@ import '../../res/app_asset/image_asset.dart';
 import '../../res/app_function.dart';
 import '../../res/apps_color.dart';
 import '../../res/apps_text_style.dart';
+import '../../res/routes/routes_name.dart';
 import '../../widget/dot_line_printer.dart';
 import '../../widget/empty_widget.dart';
 import '../../widget/product_image_widget.dart';
 import '../loading_widget/loading_list_single_product_widget.dart';
 import '../loading_widget/loading_single_product_widget.dart';
+import 'deliverypage.dart';
+import 'main_order_page_widget.dart';
 
 class OrderScreen extends StatelessWidget {
   const OrderScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const OrderStatusListWidget(
+    return
+
+        // Scaffold(
+        //   body: MainOrderPage(
+        //     status: "normal",
+        //   ),
+        // );
+
+        const OrderStatusListWidget(
       appBarTitle: "Order Page",
       orderStatus: "normal",
     );
@@ -132,6 +143,15 @@ class OrderItemWidget extends StatelessWidget {
         } else {
           return InkWell(
             onTap: () {
+              Get.toNamed(RoutesName.delivaryPage, arguments: orderModel);
+              // Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //       builder: (context) => DeliveryPage(
+              //         orderId: orderModel.orderId,
+              //         seperateQuantilies: separateQuantities,
+              //       ),
+              //     ));
               // if (isCardDesign) {
               //   Get.toNamed(RoutesName.deliveryScreen, arguments: orderModel);
               // }

@@ -30,14 +30,14 @@ class _CartOrderWidgetState extends State<CartOrderWidget> {
     var mq = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => DeliveryPage(
-                orderId: widget.orderId,
-                seperateQuantilies: widget.seperateQuantilies,
-              ),
-            ));
+        // Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //       builder: (context) => DeliveryPage(
+        //         orderId: widget.orderId,
+        //         seperateQuantilies: widget.seperateQuantilies,
+        //       ),
+        //     ));
       },
       child: Card(
         color: Theme.of(context).cardColor,

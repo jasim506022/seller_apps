@@ -13,5 +13,6 @@ class RoutesName {
   static const String product = '/product';
   static const String runningOrder = '/runningOrder';
   static const String detailsPage = '/detailsPage';
+   static const String delivaryPage = '/delivaryPage';
   static const String example = '/example';
 }

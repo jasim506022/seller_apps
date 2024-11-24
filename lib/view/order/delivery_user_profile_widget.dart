@@ -1,15 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:seller_apps/const/const.dart';
-import 'package:shimmer/shimmer.dart';
 
-import '../../const/gobalcolor.dart';
-import '../../const/textstyle.dart';
-import '../../const/utils.dart';
+
 import '../../model/profilemodel.dart';
+import '../../res/apps_color.dart';
+import '../../res/apps_text_style.dart';
 import '../../service/database/firebasedatabase.dart';
 import '../../widget/empty_widget.dart';
+import '../loading_widget/loading_delivery_user_widget.dart';
 
 class DeliveryUserProfileWidget extends StatelessWidget {
   const DeliveryUserProfileWidget({
@@ -22,10 +22,6 @@ class DeliveryUserProfileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
-    
-  var mq = MediaQuery.of(context).size;
-    Textstyle textstyle = Textstyle(context);
     String formattedDate = DateFormat('hh:mm a, MMM d, yyyy')
         .format(DateTime.fromMillisecondsSinceEpoch(int.parse(orderId)));
     return Column(
@@ -36,7 +32,7 @@ class DeliveryUserProfileWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
           child: Text(
             "User Details: ",
-            style: textstyle.largeBoldText.copyWith(color: red),
+            style: AppsTextStyle.largeBoldText.copyWith(color: AppColors.red),
           ),
         ),
         StreamBuilder(
@@ -49,57 +45,56 @@ class DeliveryUserProfileWidget extends StatelessWidget {
                     ProfileModel.fromMap(usersnapshots.data!.data()!);
 
                 return Container(
-                  height: mq.height * .155,
-                  width: mq.width,
-                  // color: Colors.red,
-                  color: Theme.of(context).cardColor,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15.r),
+                    color: Colors.black.withOpacity(.04),
+                  ),
                   child: Padding(
-                    padding: EdgeInsets.symmetric(
-                        vertical: mq.height * .011,
-                        horizontal: mq.width * .044),
+                    padding:
+                        EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          height: mq.height * 0.12,
-                          width: mq.height * 0.12,
+                          height: 90.h,
+                          width: 90.h,
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              border: Border.all(color: red, width: 2)),
+                              border:
+                                  Border.all(color: AppColors.red, width: 2.h)),
                           child: ClipRRect(
-                            borderRadius:
-                                BorderRadius.circular(mq.height * 0.06),
+                            borderRadius: BorderRadius.circular(50.h),
                             child: CachedNetworkImage(
                               fit: BoxFit.cover,
                               imageUrl: userProfile.imageurl!,
                               placeholder: (context, url) =>
                                   CircularProgressIndicator(
-                                backgroundColor: white,
+                                backgroundColor: AppColors.white,
                               ),
                               errorWidget: (context, url, error) =>
                                   const Icon(Icons.error),
                             ),
                           ),
                         ),
-                        SizedBox(
-                          width: mq.width * 0.05,
-                        ),
+                        SizedBox(width: 15.w),
                         Expanded(
                           child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                  vertical: mq.width * 0.022),
+                              padding: EdgeInsets.symmetric(vertical: 10.h),
                               child: Table(
+                                defaultVerticalAlignment:
+                                    TableCellVerticalAlignment.intrinsicHeight,
+                                // Understand this code
                                 columnWidths: const {
                                   0: FlexColumnWidth(3),
-                                  1: FlexColumnWidth(7),
+                                  1: FlexColumnWidth(8),
                                 },
                                 children: [
                                   _buildTableRow(
                                       context, "Name", userProfile.name!),
                                   _buildTableRow(
                                       context, "Email", userProfile.email!),
-                                  _buildTableRow(context, "Phone",
-                                      "0${userProfile.phone!}"),
+                                  _buildTableRow(
+                                      context, "Phone", userProfile.phone!),
                                   _buildTableRow(
                                       context, "Order", formattedDate),
                                 ],
@@ -122,84 +117,21 @@ class DeliveryUserProfileWidget extends StatelessWidget {
   }
 
   TableRow _buildTableRow(BuildContext context, String title, String value) {
-      var mq = MediaQuery.of(context).size;
-    Textstyle textstyle = Textstyle(context);
     return TableRow(
       children: [
         TableCell(
           child: Text(
             title,
-            style: textstyle.mediumTextbold
-                .copyWith(color: Theme.of(context).primaryColor),
+            style: AppsTextStyle.mediumBoldText,
           ),
         ),
         TableCell(
           child: Text(
             value,
-            style: textstyle.mediumText600
-                .copyWith(color: Theme.of(context).primaryColor),
+            style: AppsTextStyle.mediumNormalText,
           ),
-        ),
-        SizedBox(
-          height: mq.height * 0.025,
         ),
       ],
     );
-  }
-}
-
-class DeliveryUserLoading extends StatelessWidget {
-
-  const DeliveryUserLoading({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    var mq = MediaQuery.of(context).size;
-    Utils utils = Utils(context);
-    return Container(
-        height: mq.height * .155,
-        width: mq.width,
-        color: Theme.of(context).cardColor,
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-              vertical: mq.height * .011, horizontal: mq.width * .044),
-          child: Shimmer.fromColors(
-            baseColor: utils.baseShimmerColor,
-            highlightColor: utils.highlightShimmerColor,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  height: mq.height * 0.12,
-                  width: mq.height * 0.12,
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle, color: utils.widgetShimmerColor),
-                ),
-                SizedBox(
-                  width: mq.width * 0.05,
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: mq.width * 0.022),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        globalMethod.buildShimmerTextContainer(
-                            utils.widgetShimmerColor, mq.height * 0.017),
-                        globalMethod.buildShimmerTextContainer(
-                            utils.widgetShimmerColor, mq.height * 0.017),
-                        globalMethod.buildShimmerTextContainer(
-                            utils.widgetShimmerColor, mq.height * 0.017),
-                        globalMethod.buildShimmerTextContainer(
-                            utils.widgetShimmerColor, mq.height * 0.017),
-                      ],
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
-        ));
   }
 }

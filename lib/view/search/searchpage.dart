@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../const/const.dart';
 import '../../const/global.dart';
 import '../../const/gobalcolor.dart';
+import '../../controller/search_controller.dart';
 import '../../service/database/firebasedatabase.dart';
 import '../../model/productsmodel.dart';
 import '../../service/provider/dropvalueselectallprovider.dart';
@@ -14,15 +15,11 @@ import '../../widget/product_widget.dart';
 import '../loading_widget/loading_list_product_widget.dart';
 import '../loading_widget/loading_product_widget.dart';
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../controller/search_controller.dart';
 import '../../model/productsmodel.dart';
-
-
 import 'widget/search_bar_widget.dart';
 import 'widget/search_product_grid_widget.dart';
 
@@ -303,4 +300,5 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 }
+
 */

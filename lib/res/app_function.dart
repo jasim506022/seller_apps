@@ -8,7 +8,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:intl/intl.dart';
 
 import '../const/utils.dart';
 import '../data/response/app_data_exception.dart';
@@ -75,6 +74,21 @@ class AppsFunction {
         backgroundColor: AppColors.red,
         textColor: AppColors.white,
         fontSize: 16.0);
+  }
+
+  static InputDecoration inputDecoration({
+    required String hint,
+  }) {
+    return InputDecoration(
+      enabledBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Color(0xff00B761), width: 1),
+          borderRadius: BorderRadius.circular(15)),
+      focusedBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Color(0xff00B761), width: 1),
+          borderRadius: BorderRadius.circular(15)),
+      hintText: hint,
+      hintStyle: const TextStyle(color: Colors.grey),
+    );
   }
 
   static InputDecoration textFormFielddecoration(
@@ -149,43 +163,10 @@ class AppsFunction {
           borderRadius: BorderRadius.circular(15.r)),
     );
   }
- //Product Price
+
+  //Product Price
   static double productPriceWithQuantity(
       num productprice, double discount, int quantity) {
-    return (calculateDiscountedPrice(productprice, discount) * quantity);
-  }
-
-    static String formatDeliveryDate({required String datetime}) {
-    final date = DateTime.fromMillisecondsSinceEpoch(int.parse(datetime));
-    return DateFormat("yyyy-MM-dd").format(date);
-  }
-  // //Product Price
-  // static double productPriceWithQuantity(
-  //     double productprice, double discount, int quantity) {
-  //   return calculateDiscountedPrice(productprice, discount) * quantity;
-  // }
-
-    static InputDecoration inputDecoration({
-    required String hint,
-  }) {
-    return InputDecoration(
-      enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Color(0xff00B761), width: 1),
-          borderRadius: BorderRadius.circular(15)),
-      focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Color(0xff00B761), width: 1),
-          borderRadius: BorderRadius.circular(15)),
-      hintText: hint,
-      hintStyle: const TextStyle(color: Colors.grey),
-    );
-  }
-
-  static Container circleShimmer(Utils utils, double height) {
-    return Container(
-      height: height,
-      width: height,
-      decoration: BoxDecoration(
-          color: utils.widgetShimmerColor, shape: BoxShape.circle),
-    );
+    return calculateDiscountedPrice(productprice, discount) * quantity;
   }
 }

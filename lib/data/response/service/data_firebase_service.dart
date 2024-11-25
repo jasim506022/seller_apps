@@ -218,4 +218,24 @@ Flutter Auth Firebase Snapshot
             .where("status", isEqualTo: orderStatus)
             .snapshots();
   }
+
+  @override
+  Future<QuerySnapshot<Map<String, dynamic>>> orderProductSnapshots(
+      {required List<String> productIDList}) {
+    return firebaseFirestore
+        .collection("seller")
+        .doc(sharedPreference!.getString("uid")!)
+        .collection("products")
+        .where("productId", whereIn: productIDList)
+        .get();
+  }
 }
+
+/*
+FirebaseFirestore.instance
+          .collection("seller")
+          .doc(seller)
+          .collection("products")
+          .where("productId", whereIn: listProductID)
+          .get()
+*/

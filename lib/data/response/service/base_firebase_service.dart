@@ -47,6 +47,9 @@ abstract class BaseFirebaseService {
   Stream<QuerySnapshot<Map<String, dynamic>>> similarProductSnapshot(
       {required ProductModel productModel});
 
-        Stream<QuerySnapshot<Map<String, dynamic>>> orderSnapshots(
+  Stream<QuerySnapshot<Map<String, dynamic>>> orderSnapshots(
       {required String orderStatus});
+
+  Future<QuerySnapshot<Map<String, dynamic>>> orderProductSnapshots(
+      {required List<String> productIDList});
 }

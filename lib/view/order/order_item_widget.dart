@@ -7,11 +7,12 @@ import '../../service/database/firebasedatabase.dart';
 import '../loading_widget/loading_single_product_widget.dart';
 import 'delivery_cart_widget.dart';
 
+/*
 class OrderItemWidget extends StatelessWidget {
   const OrderItemWidget({
     super.key,
     required this.orderDataMap,
-    required this.seperateQuantilies,
+    required this.seperateQuantilies, required bool isCardDesign,
   });
 
   final Map<String, dynamic> orderDataMap;
@@ -81,3 +82,4 @@ class OrderItemWidget extends StatelessWidget {
     );
   }
 }
+*/

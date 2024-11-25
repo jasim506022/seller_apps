@@ -5,4 +5,5 @@ class ImagesAsset {
   static String totalsalesImages = "asset/gridicon/sales.png";
   static String runningOrderImages = "asset/gridicon/order.png";
   static String completeOrderImages = "asset/gridicon/complete.png";
+  static String error = "asset/empty/empty.png";
 }

@@ -23,7 +23,7 @@ class DeliveryUserLoading extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                AppsFunction.circleShimmer(utils, 0.12.sh),
+                // AppsFunction.circleShimmer(utils, 0.12.sh),
                 SizedBox(
                   width: 5.w,
                 ),

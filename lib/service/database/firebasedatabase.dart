@@ -11,7 +11,7 @@ import 'package:http/http.dart';
 import 'package:seller_apps/model/profilemodel.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-import '../../const/cartmethod.dart';
+import '../../const/cart_function.dart';
 import '../../const/const.dart';
 import '../../const/global.dart';
 import '../../model/productsmodel.dart';

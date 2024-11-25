@@ -346,11 +346,11 @@ class DeliveryEstimationCard extends StatelessWidget {
           SizedBox(
             height: 20.h,
           ),
-          Text(
-            AppsFunction.formatDeliveryDate(datetime: orderModel.deliveryDate),
-            style: AppsTextStyle.titleTextStyle
-                .copyWith(color: AppColors.white, fontSize: 28.sp),
-          ),
+          // Text(
+          //   AppsFunction.formatDeliveryDate(datetime: orderModel.deliveryDate),
+          //   style: AppsTextStyle.titleTextStyle
+          //       .copyWith(color: AppColors.white, fontSize: 28.sp),
+          // ),
         ],
       ),
     );

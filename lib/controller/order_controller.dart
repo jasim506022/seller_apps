@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:seller_apps/model/order_model.dart';
 
+import '../const/cart_function.dart';
 import '../model/app_exception.dart';
 import '../repository/order_repository.dart';
 import '../res/app_asset/icon_asset.dart';
@@ -29,13 +31,14 @@ class OrderController extends GetxController {
       rethrow;
     }
   }
-  /*
 
   Future<QuerySnapshot<Map<String, dynamic>>> orderProductSnapshots(
-      {required List<String> listProductID}) async {
+      {required OrderModel orderModel}) async {
     try {
+      var productIDList =
+          CartFunctions.separteOrderProductIdList(orderModel.productIds);
       return await orderRepository.orderProductSnapshots(
-          listProductID: listProductID);
+          productIDList: productIDList);
     } catch (e) {
       if (e is AppException) {
         Get.dialog(
@@ -50,7 +53,7 @@ class OrderController extends GetxController {
       rethrow;
     }
   }
-
+/*
   Future<QuerySnapshot<Map<String, dynamic>>> sellerProductSnapshot(
       {required List<String> productList, required String sellerId}) async {
     try {
@@ -101,6 +104,4 @@ class OrderController extends GetxController {
   }
 
 */
-
-
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
-import '../../const/cartmethod.dart';
+import '../../const/cart_function.dart';
 import '../../const/gobalcolor.dart';
 import '../../service/provider/totalamountprovider.dart';
 import '../order/completeorderpage.dart';

@@ -4,7 +4,7 @@ import 'package:seller_apps/view/add_product/add_product_page.dart';
 import 'package:seller_apps/view/main/main_page.dart';
 import 'package:seller_apps/view/order/completeorderpage.dart';
 import 'package:seller_apps/view/order/deliverypage.dart';
-import 'package:seller_apps/view/order/orderpage.dart';
+import 'package:seller_apps/view/order/order_page.dart';
 import 'package:seller_apps/view/product/product_details_page.dart';
 import 'package:seller_apps/view/product/product_page.dart';
 

@@ -16,18 +16,18 @@ class OrderRepository {
     }
   }
 
-/*
   Future<QuerySnapshot<Map<String, dynamic>>> orderProductSnapshots(
-      {required List<String> listProductID}) async {
+      {required List<String> productIDList}) async {
     try {
       return await _dataFirebaseService.orderProductSnapshots(
-          listProductID: listProductID);
+          productIDList: productIDList);
     } catch (e) {
       AppsFunction.handleException(e);
       rethrow;
     }
   }
 
+/*
   Future<QuerySnapshot<Map<String, dynamic>>> sellerProductSnapshot(
       {required List<String> productList, required String sellerId}) async {
     try {
@@ -60,5 +60,4 @@ class OrderRepository {
   }
 
 */
-
 }

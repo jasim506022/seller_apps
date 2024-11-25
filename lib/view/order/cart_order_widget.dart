@@ -5,7 +5,7 @@ import 'package:seller_apps/view/order/single_card_widget.dart';
 import '../../const/const.dart';
 import '../../const/gobalcolor.dart';
 import '../../model/productsmodel.dart';
-import 'deliverypage.dart';
+import 'delivery_page.dart';
 
 class CartOrderWidget extends StatefulWidget {
   const CartOrderWidget(

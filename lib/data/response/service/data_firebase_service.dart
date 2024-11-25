@@ -229,6 +229,12 @@ Flutter Auth Firebase Snapshot
         .where("productId", whereIn: productIDList)
         .get();
   }
+
+  @override
+  Stream<DocumentSnapshot<Map<String, dynamic>>> userDetailsSnaphots(
+      {required String userId}) {
+    return firebaseFirestore.collection("users").doc(userId).snapshots();
+  }
 }
 
 /*

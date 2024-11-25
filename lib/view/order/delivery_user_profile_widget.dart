@@ -1,10 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart';
-
 
 import '../../model/profilemodel.dart';
+import '../../res/app_function.dart';
 import '../../res/apps_color.dart';
 import '../../res/apps_text_style.dart';
 import '../../service/database/firebasedatabase.dart';
@@ -22,14 +21,12 @@ class DeliveryUserProfileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String formattedDate = DateFormat('hh:mm a, MMM d, yyyy')
-        .format(DateTime.fromMillisecondsSinceEpoch(int.parse(orderId)));
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+          padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 5.h),
           child: Text(
             "User Details: ",
             style: AppsTextStyle.largeBoldText.copyWith(color: AppColors.red),
@@ -47,7 +44,7 @@ class DeliveryUserProfileWidget extends StatelessWidget {
                 return Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15.r),
-                    color: Colors.black.withOpacity(.04),
+                    color: Colors.black.withOpacity(.02),
                   ),
                   child: Padding(
                     padding:
@@ -95,8 +92,8 @@ class DeliveryUserProfileWidget extends StatelessWidget {
                                       context, "Email", userProfile.email!),
                                   _buildTableRow(
                                       context, "Phone", userProfile.phone!),
-                                  _buildTableRow(
-                                      context, "Order", formattedDate),
+                                  _buildTableRow(context, "Order",
+                                      AppsFunction.formatDate(orderId)),
                                 ],
                               )),
                         )

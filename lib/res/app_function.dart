@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:intl/intl.dart';
 
 import '../const/utils.dart';
 import '../data/response/app_data_exception.dart';
@@ -168,5 +169,10 @@ class AppsFunction {
   static double productPriceWithQuantity(
       num productprice, double discount, int quantity) {
     return calculateDiscountedPrice(productprice, discount) * quantity;
+  }
+
+  static String formatDate(String orderTime) {
+    return DateFormat('hh:mm a, MMM d, yyyy')
+        .format(DateTime.fromMillisecondsSinceEpoch(int.parse(orderTime)));
   }
 }

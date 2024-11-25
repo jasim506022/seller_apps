@@ -3,22 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:seller_apps/view/other/pushnotification.dart';
 import 'package:seller_apps/widget/show_error_dialog_widget.dart';
 import '../../const/const.dart';
-import '../../const/gobalcolor.dart';
 import '../../controller/order_controller.dart';
 import '../../model/address_model.dart';
 import '../../model/order_model.dart';
-import '../../res/app_function.dart';
 import '../../res/apps_color.dart';
 import '../../res/apps_text_style.dart';
-import '../../service/database/firebasedatabase.dart';
 
-import '../../widget/empty_widget.dart';
 import 'delivery_user_profile_widget.dart';
 import 'order_delivery_locationn_widget.dart';
-import 'order_item_widget.dart';
 import 'order_status_widget.dart';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';

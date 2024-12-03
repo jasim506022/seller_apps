@@ -231,9 +231,20 @@ Flutter Auth Firebase Snapshot
   }
 
   @override
-  Stream<DocumentSnapshot<Map<String, dynamic>>> userDetailsSnaphots(
+  Stream<DocumentSnapshot<Map<String, dynamic>>> delivaryUserDetailsSnaphots(
       {required String userId}) {
     return firebaseFirestore.collection("users").doc(userId).snapshots();
+  }
+
+  @override
+  Stream<DocumentSnapshot<Map<String, dynamic>>> userDeliveryAddressSnapshot(
+      {required String userId, required String addressId}) {
+    return firebaseFirestore
+        .collection("users")
+        .doc(userId)
+        .collection("useraddress")
+        .doc(addressId)
+        .snapshots();
   }
 }
 

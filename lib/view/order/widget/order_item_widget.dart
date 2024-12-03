@@ -56,6 +56,7 @@ class OrderItemWidget extends StatelessWidget {
           return InkWell(
             onTap: () {
               Get.toNamed(RoutesName.delivaryPage, arguments: orderModel);
+
               // Navigator.push(
               //     context,
               //     MaterialPageRoute(

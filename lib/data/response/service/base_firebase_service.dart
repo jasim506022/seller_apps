@@ -53,6 +53,9 @@ abstract class BaseFirebaseService {
   Future<QuerySnapshot<Map<String, dynamic>>> orderProductSnapshots(
       {required List<String> productIDList});
 
-  Future<QuerySnapshot<Map<String, dynamic>>> userDetailsSnaphots(
+  Stream<DocumentSnapshot<Map<String, dynamic>>> delivaryUserDetailsSnaphots(
       {required String userId});
+
+  Stream<DocumentSnapshot<Map<String, dynamic>>> userDeliveryAddressSnapshot(
+      {required String userId, required String addressId});
 }

@@ -1,108 +1,89 @@
 import 'package:flutter/material.dart';
-import 'package:seller_apps/const/const.dart';
-import 'package:seller_apps/model/order_model.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-import '../../const/gobalcolor.dart';
-import '../../const/textstyle.dart';
-import '../../service/database/firebasedatabase.dart';
+import '../../controller/delivary_controller.dart';
+import '../../model/address_model.dart';
+import '../../model/order_model.dart';
+import '../../res/app_function.dart';
+import '../../res/apps_color.dart';
+import '../../res/apps_text_style.dart';
+import '../../widget/background_shape_widget.dart';
 
 class OrderDeliveryLocationWidget extends StatelessWidget {
   const OrderDeliveryLocationWidget({
     super.key,
-    required this.userId,
-    required this.orderStatus,
     required this.orderModel,
-    // required this.orderDataMap,
   });
 
-  final String userId;
-  final String orderStatus;
-  // final Map<String, dynamic> orderDataMap;
   final OrderModel orderModel;
   @override
   Widget build(BuildContext context) {
-    Textstyle textstyle = Textstyle(context);
-    var mq = MediaQuery.of(context).size;
+    var delivaryController = Get.find<DeliveryController>();
     return Column(
       children: [
-        Container(
-          width: mq.width,
-          padding: EdgeInsets.symmetric(
-              horizontal: mq.width * .011, vertical: mq.height * .011),
-          decoration: BoxDecoration(color: Theme.of(context).cardColor),
+        BackgroundShapeWidget(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text("Delivery Address: ",
-                  style: textstyle.mediumTextbold
-                      .copyWith(color: Theme.of(context).primaryColor)),
-              const SizedBox(
-                width: 15,
+              Text(
+                "Delivery Address: ",
+                style: AppsTextStyle.mediumBoldText,
+              ),
+              SizedBox(
+                width: 15.w,
               ),
               Expanded(
                 child: StreamBuilder(
-                    stream: FirebaseDatabase.userDeliverysnapshot(
-                        addressId: orderModel.addressId, userId: userId),
+                    stream: delivaryController.userDeliveryAddressSnapshot(
+                        orderModel: orderModel),
                     builder: (context, addressSnashot) {
                       if (addressSnashot.connectionState ==
                           ConnectionState.waiting) {
                         return const Center(child: CircularProgressIndicator());
                       } else if (addressSnashot.hasData) {
+                        AddressModel addressModel =
+                            AddressModel.fromMap(addressSnashot.data!.data()!);
                         return Text(
-                            addressSnashot.data!.data()!['completeaddress'],
-                            style: textstyle.mediumText);
+                          addressModel.completeaddress!,
+                          style: AppsTextStyle.mediumNormalText,
+                        );
                       }
-                      return const Text("Address Not Found");
+                      return Text(
+                        "Address Not Found",
+                        style: AppsTextStyle.mediumBoldText,
+                      );
                     }),
               ),
             ],
           ),
         ),
         SizedBox(
-          height: mq.height * .018,
+          height: 10.h,
         ),
-        Container(
-          decoration: BoxDecoration(
-              color: deepGreen, borderRadius: BorderRadius.circular(10)),
-          padding: EdgeInsets.symmetric(
-            horizontal: mq.height * .012,
-            vertical: mq.width * 0.022,
-          ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text("Estimated Delivery Date is: ",
-                  style: textstyle.largeText.copyWith(
-                    color: white,
-                    fontSize: 15,
-                  )),
-              SizedBox(
-                width: mq.width * .044,
-              ),
-              Text(
-                orderStatus == "complete"
-                    ? "Order Compete"
-                    : globalMethod.getFormateDate(
-                        context: context, datetime: orderModel.deliveryDate),
-                style:
-                    textstyle.largestText.copyWith(color: white, fontSize: 15),
-              ),
-            ],
-          ),
-        ),
-        SizedBox(
-          height: mq.height * .018,
-        ),
-        Container(
-          width: mq.width,
-          decoration: BoxDecoration(color: Theme.of(context).cardColor),
-          child: Text("Delivery Partner: ${orderModel.deliveryPartner}",
-              style: textstyle.mediumText600
-                  .copyWith(color: Theme.of(context).primaryColor)),
-        ),
-        SizedBox(
-          height: mq.height * .018,
-        ),
+        BackgroundShapeWidget(
+            backgroundColor: AppColors.deepGreen,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Estimated Delivery Date is: ",
+                    style: AppsTextStyle.mediumBoldText
+                        .copyWith(color: AppColors.white)),
+                SizedBox(
+                  width: 10.w,
+                ),
+                Expanded(
+                  child: Text(
+                    orderModel.status == "complete"
+                        ? "Order Compete"
+                        : AppsFunction.getFormateDate(
+                            datetime: orderModel.deliveryDate),
+                    style: AppsTextStyle.mediumBoldText
+                        .copyWith(color: AppColors.yellow),
+                  ),
+                ),
+              ],
+            ))
       ],
     );
   }

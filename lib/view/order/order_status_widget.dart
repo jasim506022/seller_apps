@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:seller_apps/const/const.dart';
-
-import '../../const/gobalcolor.dart';
-import '../../const/textstyle.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:seller_apps/res/apps_color.dart';
+import 'package:seller_apps/res/apps_text_style.dart';
+import 'package:seller_apps/widget/background_shape_widget.dart';
 
 class OrderStatusWidget extends StatelessWidget {
   const OrderStatusWidget({
@@ -18,36 +18,31 @@ class OrderStatusWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-      var mq = MediaQuery.of(context).size;
-    Textstyle textstyle = Textstyle(context);
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: mq.width * .044),
       color: Theme.of(context).cardColor,
       child: Column(
         children: [
           Image.asset(
             imageAsset,
-            height: mq.height * 0.24,
-            width: mq.width,
+            height: .2.sh,
+            width: 1.sw,
           ),
-          SizedBox(height: mq.height * 0.018),
+          SizedBox(height: 15.h),
           InkWell(
-            onTap: () {
-              onTap();
-            },
-            child: Container(
-              padding: EdgeInsets.symmetric(
-                  horizontal: mq.width * 0.044, vertical: mq.height * .018),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: deepGreen,
-              ),
-              child: Text(
-                title,
-                style: textstyle.mediumTextbold.copyWith(color: white),
-              ),
-            ),
-          ),
+              onTap: () {
+                onTap();
+              },
+              child: BackgroundShapeWidget(
+                backgroundColor: AppColors.deepGreen,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    title,
+                    style: AppsTextStyle.largeBoldText
+                        .copyWith(color: AppColors.white),
+                  ),
+                ),
+              )),
         ],
       ),
     );

@@ -175,4 +175,18 @@ class AppsFunction {
     return DateFormat('hh:mm a, MMM d, yyyy')
         .format(DateTime.fromMillisecondsSinceEpoch(int.parse(orderTime)));
   }
+
+  static Container circleShimmer(Utils utils, double height) {
+    return Container(
+      height: height,
+      width: height,
+      decoration: BoxDecoration(
+          color: utils.widgetShimmerColor, shape: BoxShape.circle),
+    );
+  }
+
+  static String getFormateDate({required String datetime}) {
+    final date = DateTime.fromMillisecondsSinceEpoch(int.parse(datetime));
+    return DateFormat("MMM d, yyyy").format(date);
+  }
 }

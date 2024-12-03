@@ -2,20 +2,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:seller_apps/view/other/pushnotification.dart';
 import 'package:seller_apps/widget/show_error_dialog_widget.dart';
-import '../../const/const.dart';
-import '../../controller/order_controller.dart';
-import '../../model/address_model.dart';
-import '../../model/order_model.dart';
-import '../../res/apps_color.dart';
-import '../../res/apps_text_style.dart';
 
-import 'delivery_user_profile_widget.dart';
+import '../../model/order_model.dart';
+import 'widget/delivary_infor_widget.dart';
+import 'widget/delivery_user_profile_stream.dart';
 import 'order_delivery_locationn_widget.dart';
 import 'order_status_widget.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+
+import 'widget/order_item_widget.dart';
 
 class OrderDeliveryPage extends StatefulWidget {
   const OrderDeliveryPage({
@@ -27,6 +25,23 @@ class OrderDeliveryPage extends StatefulWidget {
 }
 
 class _OrderDeliveryPageState extends State<OrderDeliveryPage> {
+  late OrderModel orderModel;
+
+  Map<String, Map<String, String>> orderStatusData = {
+    "normal": {
+      "imageAsset": "asset/order/readyfordeliver.png",
+      "title": "Please Sent your product on Admin",
+    },
+    "delivery": {
+      "imageAsset": "asset/order/readyfordeliver.png",
+      "title": "Thanks For send product to Admin",
+    },
+    "complete": {
+      "imageAsset": "asset/order/doneorder.png",
+      "title": "Order Delivery Complete",
+    },
+  };
+/*
   void _showOrderCompleteDialog() {
     showDialog(
         context: context,
@@ -35,40 +50,70 @@ class _OrderDeliveryPageState extends State<OrderDeliveryPage> {
             message: "Order Already HandOver to User"));
   }
 
+*/
+
   Widget _buildOrderStatusContainer(String orderStatus) {
-    switch (orderStatus) {
-      case "normal":
-        return OrderStatusWidget(
-            imageAsset: "asset/order/readyfordeliver.png",
-            title: "Product Ready to Handover on Delivery Man",
-            onTap: () {
-              PushNotification message = PushNotification();
-              message.sendNotificationUser("Bangladesh", "Indian", "Oakay");
-              // _updateOrderStatus("delivery");
-            });
-      case "delivery":
-        return OrderStatusWidget(
-            imageAsset: "asset/order/readyfordeliver.png",
-            title: "Product Pushed to Delivery Man",
-            onTap: () {
-              PushNotification message = PushNotification();
-              message.sendNotificationUser("Bangladesh", "Indian", "Oakay");
-              // _updateOrderStatus("complete");
-            });
-      case "complete":
-        return OrderStatusWidget(
-          imageAsset: "asset/order/doneorder.png",
-          title: "Order Delivery Complete",
-          onTap: () => _showOrderCompleteDialog,
-        );
-      default:
-        return const SizedBox.shrink();
+    final statusData = orderStatusData[orderStatus];
+
+    if (statusData == null) {
+      return const SizedBox.shrink(); // Return empty widget for invalid status
     }
+
+    final imageAsset = statusData["imageAsset"]!;
+    final title = statusData["title"]!;
+
+    return OrderStatusWidget(
+      imageAsset: imageAsset,
+      title: title,
+      onTap: () {
+        if (orderStatus == "complete") {
+          // _showOrderCompleteDialog();
+          Get.dialog(const ShowErrorDialogWidget(
+              title: "Order Complete",
+              message: "Order Already HandOver to User"));
+        } else {
+          _handleOrderUpdate(orderStatus);
+        }
+      },
+    );
+  }
+
+  void _handleOrderUpdate(String currentStatus) {
+    // Replace with logic to update order status
+    final notification = PushNotification();
+    notification.sendNotificationUser(
+      "Bangladesh",
+      "Indian",
+      "Order status updated to $currentStatus",
+    );
+
+    if (currentStatus == "normal") _updateOrderStatus("delivery");
+    if (currentStatus == "delivery") _updateOrderStatus("complete");
+  }
+
+  void _updateOrderStatus(String status) async {
+    await FirebaseFirestore.instance
+        .collection("orders")
+        .doc(orderModel.orderId)
+        .update({"status": status});
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc(orderModel.orderBy)
+        .collection("orders")
+        .doc(orderModel.orderId)
+        .update({"status": status});
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    orderModel = Get.arguments;
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    OrderModel orderModel = Get.arguments;
+    // OrderModel orderModel = Get.arguments;
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -81,64 +126,32 @@ class _OrderDeliveryPageState extends State<OrderDeliveryPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                DeliveryUserProfileWidget(
+                DeliveryUserProfileStream(
                     userId: orderModel.orderBy, orderId: orderModel.orderId),
                 SizedBox(
-                  height: 15.h,
-                ),
-                // ChangeNotifierProvider.value(
-                //   value: orderModel,
-                //   child: const DeliveryEstimationCard(),
-                // ),
-                SizedBox(
-                  height: 15.h,
+                  height: 5.h,
                 ),
                 OrderDeliveryLocationWidget(
                   orderModel: orderModel,
-                  userId: orderModel.orderBy,
-                  orderStatus: orderModel.status,
                 ),
-
+                SizedBox(
+                  height: 10.h,
+                ),
                 ChangeNotifierProvider.value(
                   value: orderModel,
                   child: const DeliveryInfoWidget(),
                 ),
                 SizedBox(
-                  height: 15.h,
-                ),
-                globalMethod.buldRichText(
-                    context: context,
-                    simpleText: "Tracking Number :",
-                    colorText: orderModel.trackingNumber,
-                    function: () {}),
-                SizedBox(
                   height: 10.h,
                 ),
                 _buildOrderStatusContainer(orderModel.status),
-                /*
-                if (orderModel.status == "normal")
-                  OrderStatusWidget(
-                    image: ImagesAsset.readyForDelivery,
-                    title: "Ready For Shifted",
-                  ),
-                if (orderModel.status == "shift")
-                  OrderStatusWidget(
-                    image: ImagesAsset.deliveryOrder,
-                    title: "Product Ready for User",
-                  ),
-                if (orderModel.status == "complete")
-                  OrderStatusWidget(
-                    image: ImagesAsset.confirmOrder,
-                    title: "Order is Successfully Done",
-                  ),
                 SizedBox(
-                  height: 10.h,
+                  height: 15.h,
                 ),
                 ChangeNotifierProvider.value(
                   value: orderModel,
-                  child: const OrderProductDetails(),
+                  child: const OrderItemWidget(),
                 )
-              */
               ],
             ),
           )),
@@ -146,210 +159,6 @@ class _OrderDeliveryPageState extends State<OrderDeliveryPage> {
   }
 }
 
-class DeliveryInfoWidget extends StatelessWidget {
-  const DeliveryInfoWidget({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final orderModel = Provider.of<OrderModel>(context, listen: false);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        DelivaryCardWidget(
-          child: DeliveryRichTextWidget(
-            title: "Delivery Partner:",
-            subTitle: orderModel.deliveryPartner,
-          ),
-        ),
-        SizedBox(
-          height: 10.h,
-        ),
-        Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15.w),
-            child: DeliveryRichTextWidget(
-                title: "Tracking Number :",
-                color: AppColors.red,
-                subTitle: orderModel.trackingNumber)),
-        SizedBox(
-          height: 15.h,
-        ),
-        OrderReceiverDetailsWidget(orderModel: orderModel),
-      ],
-    );
-  }
-}
-
-class OrderReceiverDetailsWidget extends StatelessWidget {
-  const OrderReceiverDetailsWidget({
-    super.key,
-    required this.orderModel,
-  });
-
-  final OrderModel orderModel;
-
-  @override
-  Widget build(BuildContext context) {
-    var orderController = Get.find<OrderController>();
-    return StreamBuilder(
-        stream: FirebaseFirestore.instance
-            .collection("users")
-            .doc(orderModel.orderBy)
-            .collection("useraddress")
-            .doc(orderModel.addressId)
-            .snapshots(),
-
-        // orderController.orderAddressSnapsot(
-        //     addressId: orderModel.addressId),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator();
-          } else if (snapshot.hasError) {
-            return Text(
-              "Error: ${snapshot.error}",
-              style: AppsTextStyle.titleTextStyle.copyWith(fontSize: 20),
-            );
-          }
-          if (snapshot.hasData) {
-            AddressModel addressModel =
-                AddressModel.fromMap(snapshot.data!.data()!);
-
-            return DelivaryCardWidget(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  DeliveryRichTextWidget(
-                    title: "Receiver:",
-                    subTitle: addressModel.name!,
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  DeliveryRichTextWidget(
-                    title: "Phone Number:",
-                    subTitle: "0${addressModel.phone!}",
-                    color: AppColors.red,
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  Text(addressModel.completeaddress!,
-                      style: AppsTextStyle.mediumNormalText
-                          .copyWith(color: Theme.of(context).hintColor))
-                ],
-              ),
-            );
-          }
-          return Text(
-            "No Address is Avaiable",
-            style: AppsTextStyle.titleTextStyle.copyWith(fontSize: 20),
-          );
-        });
-  }
-}
-
-class DeliveryRichTextWidget extends StatelessWidget {
-  const DeliveryRichTextWidget({
-    super.key,
-    required this.title,
-    required this.subTitle,
-    this.color,
-  });
-
-  final String title;
-  final String subTitle;
-  final Color? color;
-
-  @override
-  Widget build(BuildContext context) {
-    return RichText(
-      text: TextSpan(
-        children: [
-          TextSpan(
-            text: title,
-            style: AppsTextStyle.mediumBoldText,
-          ),
-          WidgetSpan(
-              child: SizedBox(
-            width: 10.w,
-          )),
-          TextSpan(
-              text: subTitle,
-              style: AppsTextStyle.mediumNormalText.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: color ?? Theme.of(context).primaryColor)),
-        ],
-      ),
-    );
-  }
-}
-
-class DelivaryCardWidget extends StatelessWidget {
-  const DelivaryCardWidget({
-    super.key,
-    required this.child,
-  });
-
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        width: 1.sw,
-        padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 20.w),
-        decoration: BoxDecoration(
-            color: Theme.of(context).cardColor,
-            borderRadius: BorderRadius.circular(10.r)),
-        child: child);
-  }
-}
-
-class DeliveryEstimationCard extends StatelessWidget {
-  const DeliveryEstimationCard({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final orderModel = Provider.of<OrderModel>(context, listen: false);
-
-    return Container(
-      decoration: BoxDecoration(
-          color: AppColors.deepGreen,
-          borderRadius: BorderRadius.circular(15.r)),
-      height: 0.27.sh,
-      width: 1.sw,
-      padding: EdgeInsets.symmetric(
-        horizontal: 20.w,
-        vertical: 30.h,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text("On The way From Dhaka!", //28
-              style: AppsTextStyle.largeBoldText
-                  .copyWith(color: AppColors.white, fontSize: 24)),
-          SizedBox(
-            height: 10.h,
-          ),
-          Text("Estimated Delivery Date is",
-              style: AppsTextStyle.titleTextStyle.copyWith(
-                color: AppColors.white,
-              )),
-          SizedBox(
-            height: 20.h,
-          ),
-          // Text(
-          //   AppsFunction.formatDeliveryDate(datetime: orderModel.deliveryDate),
-          //   style: AppsTextStyle.titleTextStyle
-          //       .copyWith(color: AppColors.white, fontSize: 28.sp),
-          // ),
-        ],
-      ),
-    );
-  }
-}
 
 
 /*

@@ -6,4 +6,5 @@ class ImagesAsset {
   static String runningOrderImages = "asset/gridicon/order.png";
   static String completeOrderImages = "asset/gridicon/complete.png";
   static String error = "asset/empty/empty.png";
+  static String singleError = "asset/empty/single.png";
 }

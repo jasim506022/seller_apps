@@ -27,6 +27,7 @@ class OrderDeliveryPage extends StatefulWidget {
 class _OrderDeliveryPageState extends State<OrderDeliveryPage> {
   late OrderModel orderModel;
 
+/*
   Map<String, Map<String, String>> orderStatusData = {
     "normal": {
       "imageAsset": "asset/order/readyfordeliver.png",
@@ -41,41 +42,32 @@ class _OrderDeliveryPageState extends State<OrderDeliveryPage> {
       "title": "Order Delivery Complete",
     },
   };
-/*
-  void _showOrderCompleteDialog() {
-    showDialog(
-        context: context,
-        builder: (context) => const ShowErrorDialogWidget(
-            title: "Order Complete",
-            message: "Order Already HandOver to User"));
-  }
 
-*/
 
   Widget _buildOrderStatusContainer(String orderStatus) {
-    final statusData = orderStatusData[orderStatus];
+    // final statusData = orderStatusData[orderStatus];
 
-    if (statusData == null) {
-      return const SizedBox.shrink(); // Return empty widget for invalid status
-    }
+    // if (statusData == null) {
+    //   return const SizedBox.shrink(); // Return empty widget for invalid status
+    // }
 
-    final imageAsset = statusData["imageAsset"]!;
-    final title = statusData["title"]!;
+    // final imageAsset = statusData["imageAsset"]!;
+    // final title = statusData["title"]!;
 
-    return OrderStatusWidget(
-      imageAsset: imageAsset,
-      title: title,
-      onTap: () {
-        if (orderStatus == "complete") {
-          // _showOrderCompleteDialog();
-          Get.dialog(const ShowErrorDialogWidget(
-              title: "Order Complete",
-              message: "Order Already HandOver to User"));
-        } else {
-          _handleOrderUpdate(orderStatus);
-        }
-      },
-    );
+    // return OrderStatusWidget(
+    //   imageAsset: imageAsset,
+    //   title: title,
+    //   onTap: () {
+    //     if (orderStatus == "complete") {
+    //       // _showOrderCompleteDialog();
+    //       Get.dialog(const ShowErrorDialogWidget(
+    //           title: "Order Complete",
+    //           message: "Order Already HandOver to User"));
+    //     } else {
+    //       _handleOrderUpdate(orderStatus);
+    //     }
+    //   },
+    // );
   }
 
   void _handleOrderUpdate(String currentStatus) {
@@ -90,7 +82,7 @@ class _OrderDeliveryPageState extends State<OrderDeliveryPage> {
     if (currentStatus == "normal") _updateOrderStatus("delivery");
     if (currentStatus == "delivery") _updateOrderStatus("complete");
   }
-
+*/
   void _updateOrderStatus(String status) async {
     await FirebaseFirestore.instance
         .collection("orders")
@@ -144,7 +136,10 @@ class _OrderDeliveryPageState extends State<OrderDeliveryPage> {
                 SizedBox(
                   height: 10.h,
                 ),
-                _buildOrderStatusContainer(orderModel.status),
+                // _buildOrderStatusContainer(orderModel.status),
+                OrderStatusWidget(
+                  orderModel: orderModel,
+                ),
                 SizedBox(
                   height: 15.h,
                 ),

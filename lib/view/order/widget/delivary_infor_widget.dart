@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import '../../../model/order_model.dart';
 import '../../../res/apps_color.dart';
 import '../../../widget/background_shape_widget.dart';
-import '../delivery_page.dart';
 import 'delivery_rich_text_widget.dart';
 
 class DeliveryInfoWidget extends StatelessWidget {

@@ -246,7 +246,14 @@ Flutter Auth Firebase Snapshot
         .doc(addressId)
         .snapshots();
   }
+
+  @override
+  Future<void> signOutApp() async {
+    firebaseAuth.signOut();
+  }
 }
+
+
 
 /*
 FirebaseFirestore.instance

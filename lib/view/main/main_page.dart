@@ -28,7 +28,7 @@ class _MainPageState extends State<MainPage> {
     const HomePage(),
     const ProductPage(),
     const SearchPage(),
-    const ProfilePage(),
+    const ProfileScreen(),
   ];
 
   @override

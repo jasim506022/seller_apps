@@ -58,4 +58,6 @@ abstract class BaseFirebaseService {
 
   Stream<DocumentSnapshot<Map<String, dynamic>>> userDeliveryAddressSnapshot(
       {required String userId, required String addressId});
+
+  Future<void> signOutApp();
 }

@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:seller_apps/view/other/pushnotification.dart';
-import 'package:seller_apps/widget/show_error_dialog_widget.dart';
 
 import '../../model/order_model.dart';
 import 'widget/delivary_infor_widget.dart';
@@ -136,7 +134,6 @@ class _OrderDeliveryPageState extends State<OrderDeliveryPage> {
                 SizedBox(
                   height: 10.h,
                 ),
-                // _buildOrderStatusContainer(orderModel.status),
                 OrderStatusWidget(
                   orderModel: orderModel,
                 ),

@@ -1,24 +1,129 @@
-import 'dart:io';
-
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:provider/provider.dart';
-
+import '../../res/apps_color.dart';
 import '../../res/routes/routes_name.dart';
-import '../../const/const.dart';
-import '../../const/gobalcolor.dart';
-import '../../const/textstyle.dart';
-import '../../model/profilemodel.dart';
-import '../../service/database/firebasedatabase.dart';
-import '../../service/provider/theme_provider.dart';
-import '../../widget/custom_show_dialog_widget.dart';
-import 'editprofilepage.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import '../../controller/profile_controller.dart';
+import '../../res/app_function.dart';
+import 'widget/profile_custom_list_title_widget.dart';
+import 'widget/profile_header_widget.dart';
+import 'widget/theme_change_widget.dart';
 
+class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  final profileController = Get.find<ProfileController>();
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Profile"),
+        actions: [
+          IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.settings_outlined,
+                size: 25.h,
+                color: Theme.of(context).primaryColor,
+              ))
+        ],
+      ),
+      body: Column(
+        children: [
+          const ProifleHeaderWidget(),
+          Expanded(
+            child: ListView(
+              children: [
+                Divider(
+                  height: 10.h,
+                  color: Theme.of(context).hintColor,
+                  thickness: 2,
+                ),
+                _buildProfileMenuItems(context),
+                const ThemeChangeWidget(),
+                ProfileCustomListTitleWidget(
+                  showTrailing: false,
+                  icon: Icons.exit_to_app,
+                  title: 'Sign Out',
+                  iconColor: AppColors.red,
+                  onTap: () async {
+                    if (!(await AppsFunction.verifyInternetStatus())) {
+                      profileController.signOut();
+                    }
+                  },
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Dynamically build list of profile menu items
+  Widget _buildProfileMenuItems(BuildContext context) {
+    final List<Map<String, dynamic>> menuItems = [
+      {
+        "icon": Icons.info_outline,
+        "title": 'About',
+        "route": RoutesName.completeOrderPage //RoutesName.editProfileScreen
+      },
+      {
+        "icon": Icons.home_outlined,
+        "title": 'Home',
+        "route": RoutesName.mainPage,
+        "argument": 0
+      },
+      {
+        "icon": Icons.reorder,
+        "title": 'My Orders',
+        "route": RoutesName.orderPage
+      },
+      {
+        "icon": Icons.access_time,
+        "title": 'History',
+        "route": RoutesName.mainPage //RoutesName.historyPage
+      },
+      {
+        "icon": Icons.search,
+        "title": 'Search',
+        "route": RoutesName.mainPage,
+        "argument": 2
+      },
+    ];
+
+    return Column(
+      children: menuItems.map((item) {
+        return ProfileCustomListTitleWidget(
+          icon: item['icon'],
+          title: item['title'],
+          onTap: () async {
+            if (!(await AppsFunction.verifyInternetStatus())) {
+              if (item['argument'] is int) {
+                Get.offAndToNamed(item['route'], arguments: item['argument']);
+              } else {
+                Get.toNamed(item['route']);
+              }
+            }
+          },
+        );
+      }).toList(),
+    );
+  }
+
+  // Build theme switcher widget
+}
+
+
+
+
+
+/*
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
@@ -338,3 +443,5 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 }
+
+*/

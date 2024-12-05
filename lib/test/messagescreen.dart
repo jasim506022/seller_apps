@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class MessageScreen extends StatefulWidget {
   final String id;
-  const MessageScreen({Key? key, required this.id}) : super(key: key);
+  const MessageScreen({super.key, required this.id});
 
   @override
   State<MessageScreen> createState() => _MessageScreenState();

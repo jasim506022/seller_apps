@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:seller_apps/test/notificationapi.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();

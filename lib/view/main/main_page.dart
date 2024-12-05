@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:seller_apps/controller/profile_controller.dart';
 import '../../const/cart_function.dart';
-import '../../const/const.dart';
 import '../../const/gobalcolor.dart';
 import '../home/home_page.dart';
 import '../other/local_service.dart';

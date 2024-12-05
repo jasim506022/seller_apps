@@ -10,7 +10,6 @@ import '../../../res/apps_color.dart';
 import '../../../res/apps_text_style.dart';
 
 import '../../../widget/custom_round_action_button_widget.dart';
-import '../../search/widget/filter_dialog_widget.dart';
 
 class ProifleHeaderWidget extends StatelessWidget {
   const ProifleHeaderWidget({

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -173,6 +174,9 @@ class SearchControllers extends GetxController {
       return productController.repository
           .productSnapshots(category: selectedCategory.value);
     } on AppException catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
       // Handle application-specific exceptions here
       rethrow;
     }

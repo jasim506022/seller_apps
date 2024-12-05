@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -85,7 +86,11 @@ class AddProductController extends GetxController {
           msg: isUpdate
               ? "Succesfully update a New Product"
               : "Succesfully Upload a New Product");
-    } catch (e) {}
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+    }
   }
 
   // Build ProductModel for uploading

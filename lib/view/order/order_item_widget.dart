@@ -1,11 +1,4 @@
-import 'package:flutter/material.dart';
 
-import '../../const/const.dart';
-import '../../const/textstyle.dart';
-import '../../model/productsmodel.dart';
-import '../../service/database/firebasedatabase.dart';
-import '../loading_widget/loading_single_product_widget.dart';
-import 'delivery_cart_widget.dart';
 
 /*
 class OrderItemWidget extends StatelessWidget {

@@ -30,7 +30,7 @@ class DeliveryCartWidget extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ProductDetailsPage(
+              builder: (context) => const ProductDetailsPage(
                   // productModel: productModel,
                   // isDelivery: true,
                   ),

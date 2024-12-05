@@ -2,10 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:seller_apps/view/order/single_card_widget.dart';
 
-import '../../const/const.dart';
 import '../../const/gobalcolor.dart';
 import '../../model/productsmodel.dart';
-import 'delivery_page.dart';
 
 class CartOrderWidget extends StatefulWidget {
   const CartOrderWidget(

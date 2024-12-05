@@ -180,6 +180,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
       onTap: () {
         FocusScope.of(context).unfocus();
       },
+      // ignore: deprecated_member_use
       child: WillPopScope(onWillPop: () async {
         if (widget.isEdit) {
           return Future.value(stayOnScreenFunction(context));

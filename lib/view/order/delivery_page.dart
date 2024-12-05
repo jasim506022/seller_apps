@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../../model/order_model.dart';
@@ -81,6 +80,7 @@ class _OrderDeliveryPageState extends State<OrderDeliveryPage> {
     if (currentStatus == "delivery") _updateOrderStatus("complete");
   }
 */
+/*
   void _updateOrderStatus(String status) async {
     await FirebaseFirestore.instance
         .collection("orders")
@@ -94,7 +94,7 @@ class _OrderDeliveryPageState extends State<OrderDeliveryPage> {
         .update({"status": status});
     setState(() {});
   }
-
+*/
   @override
   void initState() {
     orderModel = Get.arguments;

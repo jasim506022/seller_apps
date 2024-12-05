@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../res/routes/routes_name.dart';
-import '../../const/const.dart';
 import '../../const/global.dart';
 import '../../const/gobalcolor.dart';
 import '../../const/textstyle.dart';
@@ -114,8 +113,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     if (index == onboardModeList.length - 1) {
                       await onBoardingInfo();
                       if (mounted) {
-                        Navigator.pushReplacementNamed(
-                            context, RoutesName.signPage);
+                        // Navigator.pushReplacementNamed(
+                        //     context, RoutesName.signPage);
                       }
                     }
                     _pageController.nextPage(

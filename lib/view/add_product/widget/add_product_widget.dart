@@ -117,7 +117,7 @@ class _AddProductWidgetState extends State<AddProductWidget> {
           DropdownCategoryWidget(
             list: categoryList,
             value: categoryController.getCategory,
-            onChangeds: (value) {
+            onChanged: (value) {
               addProductController.addChangeListener();
               categoryController.setCategory(category: value!.toString());
             },
@@ -138,7 +138,7 @@ class _AddProductWidgetState extends State<AddProductWidget> {
               ),
               Expanded(
                   child: DropdownCategoryWidget(
-                onChangeds: (value) {
+                onChanged: (value) {
                   addProductController.addChangeListener();
                   categoryController.setUnit(unit: value!.toString());
                 },

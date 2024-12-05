@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../const/utils.dart';
 import '../../res/app_function.dart';
+import '../../res/utils.dart';
 
 class DeliveryUserLoading extends StatelessWidget {
   const DeliveryUserLoading({super.key});
 
   @override
   Widget build(BuildContext context) {
-    Utils utils = Utils(context);
+    // Utils Utils = Utils(context);
     return Container(
         height: 0.155.sh,
         width: 1.sw,
@@ -18,12 +18,12 @@ class DeliveryUserLoading extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 20.w),
           child: Shimmer.fromColors(
-            baseColor: utils.baseShimmerColor,
-            highlightColor: utils.highlightShimmerColor,
+            baseColor: Utils.baseShimmerColor,
+            highlightColor: Utils.highlightShimmerColor,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                AppsFunction.circleShimmer(utils, 0.12.sh),
+                AppsFunction.circleShimmer(0.12.sh),
                 SizedBox(
                   width: 5.w,
                 ),
@@ -34,7 +34,7 @@ class DeliveryUserLoading extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         for (int i = 0; i <= 3; i++)
-                          AppsFunction.lineShimmer(utils, 15.h),
+                          AppsFunction.lineShimmer(15.h),
                       ],
                     ),
                   ),

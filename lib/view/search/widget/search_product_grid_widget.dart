@@ -11,19 +11,17 @@ import '../../../widget/product_widget.dart';
 class SearchProductGridWidget extends StatelessWidget {
   const SearchProductGridWidget({
     super.key,
-    required this.searchController,
   });
-
-  final SearchControllers searchController;
 
   @override
   Widget build(BuildContext context) {
+    var searchController = Get.find<SearchControllers>();
     return Obx(() {
-      final productList = _getProductList();
+      final productList = _getProductList(searchController);
 
       if (productList.isEmpty) {
         return EmptyWidget(
-          image: ImagesAsset.appLogoImage, //error
+          image: ImagesAsset.error,
           title: 'No Data Available',
         );
       }
@@ -45,7 +43,7 @@ class SearchProductGridWidget extends StatelessWidget {
     });
   }
 
-  List<ProductModel> _getProductList() {
+  List<ProductModel> _getProductList(SearchControllers searchController) {
     if (searchController.isFilterEnabled.value &&
         searchController.searchTextTEC.text.isEmpty) {
       return searchController.filterProductList;

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../res/utils.dart';
 import '../../res/apps_color.dart';
 import '../../res/routes/routes_name.dart';
-import '../../const/utils.dart';
+
 import '../../model/productsmodel.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -34,11 +35,11 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
 
   @override
   void didChangeDependencies() {
-    Utils utils = Utils(context);
+    // Utils Utils = Utils(context);
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: utils.green300,
+        statusBarColor: Utils.green300,
         statusBarBrightness: Brightness.dark,
         statusBarIconBrightness: Theme.of(context).brightness));
     super.didChangeDependencies();
@@ -210,9 +211,9 @@ ProductSelect selectMenu = ProductSelect.detele;
 class _ProductDetailsPageState extends State<ProductDetailsPage> {
   @override
   void didChangeDependencies() {
-    Utils utils = Utils(context);
+    Utils Utils = Utils(context);
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: utils.green300,
+        statusBarColor: Utils.green300,
         statusBarBrightness: Brightness.dark,
         statusBarIconBrightness: Theme.of(context).brightness));
     super.didChangeDependencies();
@@ -300,7 +301,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
   @override
   Widget build(BuildContext context) {
     Textstyle textstyle = Textstyle(context);
-    Utils utils = Utils(context);
+    Utils Utils = Utils(context);
     var mq = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -325,11 +326,11 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                 child: Stack(
                   children: [
                     buildCircle(-mq.height * .26, -mq.height * .7,
-                        mq.height * 1.2, utils.green100),
+                        mq.height * 1.2, Utils.green100),
                     buildCircle(-mq.height * .12, -mq.height * .32,
-                        mq.height * .67, utils.green200),
+                        mq.height * .67, Utils.green200),
                     buildCircle(
-                        0, -mq.height * .425, mq.height * .95, utils.green300),
+                        0, -mq.height * .425, mq.height * .95, Utils.green300),
                     Positioned(
                       child: Padding(
                         padding:

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../const/utils.dart';
+import '../../../res/utils.dart';
 import '../../../model/productsmodel.dart';
 import '../../../res/apps_color.dart';
 import 'image_swiper_widget.dart';
@@ -18,7 +18,6 @@ class DetailsPageImageSlideWithCartBridgeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Utils utils = Utils(context);
     return SizedBox(
       height: 320.h,
       width: 1.sw,
@@ -30,21 +29,21 @@ class DetailsPageImageSlideWithCartBridgeWidget extends StatelessWidget {
               'right': -300.00.w,
               'top': -350.00.h,
               'size': 650.00.h,
-              'color': utils.green100
+              'color': Utils.green100
             },
             {
               'left': -80.00.w,
               'right': -80.00.w,
               'top': -360.00.h,
               'size': 650.00.h,
-              'color': utils.green200
+              'color': Utils.green200
             },
             {
               'left': 0.00,
               'right': 0.00,
               'top': -150.00.w,
               'size': 300.00.h,
-              'color': utils.green300
+              'color': Utils.green300
             },
           ])
             Positioned(

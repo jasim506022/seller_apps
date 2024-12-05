@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'gobalcolor.dart';
-import 'utils.dart';
+import '../res/utils.dart';
 
 class Textstyle {
   BuildContext context;
@@ -53,9 +53,9 @@ class Textstyle {
       fontWeight: FontWeight.normal);
 
   TextStyle profileText() {
-    Utils utils = Utils(context);
+    // Utils utils = Utils(context);
     return GoogleFonts.poppins(
-      color: utils.profileTextColor,
+      color: Utils.profileTextColor,
       fontSize: 15,
       fontWeight: FontWeight.w700,
     );

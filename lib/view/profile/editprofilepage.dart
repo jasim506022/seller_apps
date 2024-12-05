@@ -10,12 +10,12 @@ import 'package:provider/provider.dart';
 import '../../const/const.dart';
 import '../../const/gobalcolor.dart';
 import '../../const/textstyle.dart';
-import '../../const/utils.dart';
+
+import '../../res/utils.dart';
 import '../../service/database/firebasedatabase.dart';
 import '../../service/provider/imageaddremoveprovider.dart';
 import '../../service/provider/loadingprovider.dart';
 import '../../widget/custom_show_dialog_widget.dart';
-import '../../widget/profile_photo_option_sheet_widget.dart';
 import '../../widget/text_field_form_widget.dart';
 import '../main/main_page.dart';
 import '../../model/profilemodel.dart';
@@ -150,7 +150,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   Widget _buildNonEditableProfileImage(
       ImageAddRemoveProvider imageAddRemoveProvider) {
-        var mq = MediaQuery.of(context).size;
+    var mq = MediaQuery.of(context).size;
     return Container(
       height: mq.height * 0.2,
       width: mq.height * 0.2,
@@ -174,7 +174,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   @override
   Widget build(BuildContext context) {
     var mq = MediaQuery.of(context).size;
-    Utils utils = Utils(context);
+    // Utils Utils = Utils(context);
     Textstyle textStyle = Textstyle(context);
     return GestureDetector(
       onTap: () {
@@ -292,7 +292,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                         children: [
                                           Icon(
                                             Icons.phone,
-                                            color: utils.profileTextColor,
+                                            color: Utils.profileTextColor,
                                           ),
                                           SizedBox(
                                             width: MediaQuery.of(context)
@@ -332,7 +332,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                                 style: GoogleFonts.poppins(
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.w600,
-                                                  color: utils.profileTextColor,
+                                                  color: Utils.profileTextColor,
                                                 ),
                                               ),
                                             )
@@ -341,8 +341,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                                 return "Text is Not Empty";
                                               },
                                               controller: _phoneTEC,
-                                              enabled: 
-                                              
+                                              enabled:
                                                   !widget.isEdit ? false : true,
                                               hintText: '',
                                             ),
@@ -387,7 +386,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     bool isEmail = false,
   }) {
     var mq = MediaQuery.of(context).size;
-    Utils utils = Utils(context);
+    // Utils Utils = Utils(context);
     Textstyle textStyle = Textstyle(context);
     return Column(
       children: [
@@ -395,7 +394,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
           children: [
             Icon(
               icon,
-              color: utils.profileTextColor,
+              color: Utils.profileTextColor,
             ),
             SizedBox(
               width: mq.width * .025,

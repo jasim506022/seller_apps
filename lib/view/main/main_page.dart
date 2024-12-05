@@ -10,8 +10,8 @@ import '../home/home_page.dart';
 import '../other/local_service.dart';
 import '../other/pushnotification.dart';
 import '../product/product_page.dart';
-import '../profile/profilepage.dart';
-import '../search/searchpage.dart';
+import '../profile/profile_screen.dart';
+import '../search/search_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({

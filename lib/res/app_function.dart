@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:intl/intl.dart';
 
-import '../const/utils.dart';
+import 'utils.dart';
 import '../data/response/app_data_exception.dart';
 
 import '../widget/show_alert_dialog_widget.dart';
@@ -98,9 +98,8 @@ class AppsFunction {
       bool obscureText = false,
       bool isEnable = true,
       required Function function}) {
-    Utils utils = Utils(Get.context!);
     return InputDecoration(
-        fillColor: isEnable ? AppColors.searchLightColor : utils.textFeildColor,
+        fillColor: isEnable ? AppColors.searchLightColor : Utils.textFeildColor,
         filled: true,
         hintText: hintText,
         border: OutlineInputBorder(
@@ -155,12 +154,12 @@ class AppsFunction {
     return calculateDiscountedPrice(productprice, discount);
   }
 
-  static Container lineShimmer(Utils utils, double height, [double? width]) {
+  static Container lineShimmer(double height, [double? width]) {
     return Container(
       height: height,
       width: width ?? 1.sw,
       decoration: BoxDecoration(
-          color: utils.widgetShimmerColor,
+          color: Utils.widgetShimmerColor,
           borderRadius: BorderRadius.circular(15.r)),
     );
   }
@@ -176,12 +175,12 @@ class AppsFunction {
         .format(DateTime.fromMillisecondsSinceEpoch(int.parse(orderTime)));
   }
 
-  static Container circleShimmer(Utils utils, double height) {
+  static Container circleShimmer(double height) {
     return Container(
       height: height,
       width: height,
       decoration: BoxDecoration(
-          color: utils.widgetShimmerColor, shape: BoxShape.circle),
+          color: Utils.widgetShimmerColor, shape: BoxShape.circle),
     );
   }
 

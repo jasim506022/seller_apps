@@ -1,7 +1,7 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
+
 import 'package:seller_apps/res/app_string.dart';
 
 import '../../../const/global.dart';
@@ -9,8 +9,7 @@ import '../../../res/app_function.dart';
 import '../../../res/apps_color.dart';
 import '../../../res/apps_text_style.dart';
 
-import '../../../res/routes/routes_name.dart';
-
+import '../../../widget/custom_round_action_button_widget.dart';
 import '../../search/widget/filter_dialog_widget.dart';
 
 class ProifleHeaderWidget extends StatelessWidget {
@@ -55,7 +54,7 @@ class ProifleHeaderWidget extends StatelessWidget {
         SizedBox(
           height: 8.h,
         ),
-        CustomRoundActionButton(
+        CustomRoundActionButtonWidget(
           title: "Edit Profile",
           onTap: () async {
             if (!(await AppsFunction.verifyInternetStatus())) {

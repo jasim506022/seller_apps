@@ -26,7 +26,7 @@ class ProductPage extends StatelessWidget {
             DropdownCategoryWidget(
               list: allCategoryList,
               value: categoryController.getCategory,
-              onChangeds: (value) {
+              onChanged: (value) {
                 categoryController.setCategory(category: value!.toString());
               },
             ),

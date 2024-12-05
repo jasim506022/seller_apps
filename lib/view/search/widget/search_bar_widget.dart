@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
-import '../../../const/utils.dart';
+import '../../../res/utils.dart';
 import '../../../controller/search_controller.dart';
 import '../../../res/app_function.dart';
 import '../../../res/apps_color.dart';
@@ -19,7 +19,6 @@ class SearchBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var searchController = Get.find<SearchControllers>();
-    Utils utils = Utils(context);
     return SizedBox(
       height: 0.1.sh,
       width: 1.sw,
@@ -29,7 +28,7 @@ class SearchBarWidget extends StatelessWidget {
               flex: 4,
               child: TextFormFieldWidget(
                 style: AppsTextStyle.mediumNormalText
-                    .copyWith(color: utils.getColor),
+                    .copyWith(color: Utils.getColor),
                 isUdateDecoration: true,
                 decoration: AppsFunction.inputDecoration(
                   hint: "Search Product Here",

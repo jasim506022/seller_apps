@@ -53,7 +53,7 @@ class OrderController extends GetxController {
       rethrow;
     }
   }
-/*
+
   Future<QuerySnapshot<Map<String, dynamic>>> sellerProductSnapshot(
       {required List<String> productList, required String sellerId}) async {
     try {
@@ -61,11 +61,14 @@ class OrderController extends GetxController {
           productList: productList, sellerId: sellerId);
     } catch (e) {
       if (e is AppException) {
-        AppsFunction.errorDialog(
+        Get.dialog(
+          ErrorDialogWidget(
             icon: IconAsset.warningIcon,
             title: e.title!,
             content: e.message,
-            buttonText: "Okay");
+            buttonText: "Okay",
+          ),
+        );
       }
       rethrow;
     }
@@ -77,11 +80,11 @@ class OrderController extends GetxController {
       return orderRepository.orderAddressSnapsot(addressId: addressId);
     } catch (e) {
       if (e is AppException) {
-        AppsFunction.errorDialog(
-            icon: IconAsset.warningIcon,
-            title: e.title!,
-            content: e.message,
-            buttonText: "Okay");
+        // AppsFunction.errorDialog(
+        //     icon: IconAsset.warningIcon,
+        //     title: e.title!,
+        //     content: e.message,
+        //     buttonText: "Okay");
       }
       rethrow;
     }
@@ -93,15 +96,13 @@ class OrderController extends GetxController {
       return orderRepository.sellerOrderSnapshot(sellerList: sellerList);
     } catch (e) {
       if (e is AppException) {
-        AppsFunction.errorDialog(
-            icon: IconAsset.warningIcon,
-            title: e.title!,
-            content: e.message,
-            buttonText: "Okay");
+        // AppsFunction.errorDialog(
+        //     icon: IconAsset.warningIcon,
+        //     title: e.title!,
+        //     content: e.message,
+        //     buttonText: "Okay");
       }
       rethrow;
     }
   }
-
-*/
 }

@@ -31,14 +31,21 @@ class OrderItemWidget extends StatelessWidget {
 
     List<int> separateQuantities =
         CartFunctions.separateOrderItemQuantities(orderModel.productIds);
+    List<String> listProductID =
+        CartFunctions.separteOrderProductIdList(orderModel.productIds);
 
     return FutureBuilder(
-      future:
-          //  sellerId == null
-          // ?
-          orderController.orderProductSnapshots(orderModel: orderModel),
-      //  : orderController.sellerProductSnapshot(
-      //        productList: listProductID, sellerId: sellerId!),
+      future: sellerId == null
+          ? orderController.orderProductSnapshots(orderModel: orderModel)
+          : orderController.sellerProductSnapshot(
+              productList: listProductID, sellerId: sellerId!),
+
+      //  FirebaseFirestore.instance
+      //     .collection("products")
+      //     .where("sellerId", isEqualTo: sellerId)
+      //     .where("productId", whereIn: listProductID)
+      //     .orderBy("publishDate", descending: true)
+      //     .get(),
 
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -65,9 +72,13 @@ class OrderItemWidget extends StatelessWidget {
               //         seperateQuantilies: separateQuantities,
               //       ),
               //     ));
-              // if (isCardDesign) {
-              //   Get.toNamed(RoutesName.deliveryScreen, arguments: orderModel);
-              // }
+              if (isCardDesign) {
+                Get.toNamed(RoutesName.delivaryPage, arguments: orderModel);
+              } else {
+                // Get.toNamed(RoutesName.detailsPage, arguments: {
+                //   "productModel":product
+                // });
+              }
             },
             child: isCardDesign
                 ? _buildCardDesign(context, snapshot, separateQuantities)

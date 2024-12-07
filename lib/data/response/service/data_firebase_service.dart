@@ -251,6 +251,37 @@ Flutter Auth Firebase Snapshot
   Future<void> signOutApp() async {
     firebaseAuth.signOut();
   }
+
+  @override
+  Future<QuerySnapshot<Map<String, dynamic>>> sellerProductSnapshot(
+      {required List<String> productList, required String sellerId}) async {
+    return FirebaseFirestore.instance
+        .collection("products")
+        .where("sellerId", isEqualTo: sellerId)
+        .where("productId", whereIn: productList)
+        .orderBy("publishDate", descending: true)
+        .get();
+  }
+
+  @override
+  Stream<DocumentSnapshot<Map<String, dynamic>>> orderAddressSnapsot(
+      {required String addressId}) {
+    return firebaseFirestore
+        .collection("users")
+        .doc(sharedPreference!.getString("uid"))
+        .collection("useraddress")
+        .doc(addressId)
+        .snapshots();
+  }
+
+  @override
+  Stream<QuerySnapshot<Map<String, dynamic>>> sellerOrderSnapshot(
+      {required List<String> sellerList}) {
+    return firebaseFirestore
+        .collection("seller")
+        .where("uid", whereIn: sellerList)
+        .snapshots();
+  }
 }
 
 

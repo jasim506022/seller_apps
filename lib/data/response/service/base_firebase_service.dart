@@ -60,4 +60,9 @@ abstract class BaseFirebaseService {
       {required String userId, required String addressId});
 
   Future<void> signOutApp();
+  Future<QuerySnapshot<Map<String, dynamic>>> sellerProductSnapshot(
+      {required List<String> productList, required String sellerId});
+
+  Stream<DocumentSnapshot<Map<String, dynamic>>> orderAddressSnapsot(
+      {required String addressId});
 }

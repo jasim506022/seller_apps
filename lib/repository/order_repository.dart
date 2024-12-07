@@ -27,7 +27,6 @@ class OrderRepository {
     }
   }
 
-/*
   Future<QuerySnapshot<Map<String, dynamic>>> sellerProductSnapshot(
       {required List<String> productList, required String sellerId}) async {
     try {
@@ -58,6 +57,4 @@ class OrderRepository {
       rethrow;
     }
   }
-
-*/
 }

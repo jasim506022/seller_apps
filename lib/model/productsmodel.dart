@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +14,7 @@ class ProductModel with ChangeNotifier {
   double? productrating;
   String? productdescription;
   Timestamp? publishDate;
-  double? discount;
+  num? discount;
   List<dynamic>? productimage;
   String? stutus;
 
@@ -55,7 +54,7 @@ class ProductModel with ChangeNotifier {
           ? map['productdescription'] as String
           : null,
       publishDate: map['publishDate'],
-      discount: map['discount'] != null ? map['discount'] as double : null,
+      discount: map['discount'] != null ? map['discount'] as num : null,
       productimage: map['productimage'],
       stutus: map['stutus'] != null ? map['stutus'] as String : null,
     );

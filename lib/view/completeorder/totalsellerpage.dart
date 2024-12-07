@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import '../../const/cart_function.dart';
 import '../../const/gobalcolor.dart';
 import '../../service/provider/totalamountprovider.dart';
-import '../order/completeorderpage.dart';
+import '../order/history_page.dart';
 
 class TotalSellPage extends StatefulWidget {
   const TotalSellPage({super.key});

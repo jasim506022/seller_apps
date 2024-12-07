@@ -87,7 +87,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       {
         "icon": Icons.access_time,
         "title": 'History',
-        "route": RoutesName.mainPage //RoutesName.historyPage
+        "route": RoutesName.completeOrderPage //RoutesName.historyPage
       },
       {
         "icon": Icons.search,

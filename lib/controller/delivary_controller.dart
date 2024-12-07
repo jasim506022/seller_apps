@@ -16,8 +16,8 @@ class DeliveryController extends GetxController {
       "title": "Thanks For send product to Admin",
     },
     "complete": {
-      "imageAsset": "asset/order/doneorder.png",
-      "title": "Order Delivery Complete",
+      "imageAsset": "asset/order/order complete.jpg",
+      "title": "Order has been successfully completed",
     },
   };
 

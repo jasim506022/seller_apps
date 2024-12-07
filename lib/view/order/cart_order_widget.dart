@@ -5,6 +5,7 @@ import 'package:seller_apps/view/order/single_card_widget.dart';
 import '../../const/gobalcolor.dart';
 import '../../model/productsmodel.dart';
 
+/*
 class CartOrderWidget extends StatefulWidget {
   const CartOrderWidget(
       {super.key,
@@ -66,3 +67,5 @@ class _CartOrderWidgetState extends State<CartOrderWidget> {
     );
   }
 }
+
+*/

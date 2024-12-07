@@ -7,18 +7,18 @@ import '../../model/address_model.dart';
 import '../../model/order_model.dart';
 import '../../res/apps_color.dart';
 
-import 'order_details_page.dart';
+import '../order/order_details_page.dart';
 import 'widget/delivary_infor_widget.dart';
 import 'widget/delivery_rich_text_widget.dart';
 import 'widget/delivery_user_profile_stream.dart';
-import 'order_delivery_locationn_widget.dart';
-import 'order_status_widget.dart';
+import '../order/order_delivery_locationn_widget.dart';
+import '../order/order_status_widget.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-import 'widget/order_item_widget.dart';
+import '../order/widget/order_item_widget.dart';
 
 class OrderDeliveryPage extends StatelessWidget {
   const OrderDeliveryPage({

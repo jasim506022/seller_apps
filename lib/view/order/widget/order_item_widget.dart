@@ -39,14 +39,6 @@ class OrderItemWidget extends StatelessWidget {
           ? orderController.orderProductSnapshots(orderModel: orderModel)
           : orderController.sellerProductSnapshot(
               productList: listProductID, sellerId: sellerId!),
-
-      //  FirebaseFirestore.instance
-      //     .collection("products")
-      //     .where("sellerId", isEqualTo: sellerId)
-      //     .where("productId", whereIn: listProductID)
-      //     .orderBy("publishDate", descending: true)
-      //     .get(),
-
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const LoadingSingleProductWidget();
@@ -62,23 +54,9 @@ class OrderItemWidget extends StatelessWidget {
         } else {
           return InkWell(
             onTap: () {
-              Get.toNamed(RoutesName.delivaryPage, arguments: orderModel);
-
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //       builder: (context) => DeliveryPage(
-              //         orderId: orderModel.orderId,
-              //         seperateQuantilies: separateQuantities,
-              //       ),
-              //     ));
               if (isCardDesign) {
                 Get.toNamed(RoutesName.delivaryPage, arguments: orderModel);
-              } else {
-                // Get.toNamed(RoutesName.detailsPage, arguments: {
-                //   "productModel":product
-                // });
-              }
+              } else {}
             },
             child: isCardDesign
                 ? _buildCardDesign(context, snapshot, separateQuantities)

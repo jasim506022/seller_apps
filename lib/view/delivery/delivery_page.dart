@@ -1,24 +1,17 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:seller_apps/res/apps_text_style.dart';
 
-import '../../controller/order_controller.dart';
-import '../../model/address_model.dart';
 import '../../model/order_model.dart';
-import '../../res/apps_color.dart';
 
-import '../order/order_details_page.dart';
 import 'widget/delivary_infor_widget.dart';
-import 'widget/delivery_rich_text_widget.dart';
 import 'widget/delivery_user_profile_stream.dart';
-import '../order/order_delivery_locationn_widget.dart';
-import '../order/order_status_widget.dart';
+import 'widget/delivery_order_locationn_widget.dart';
+import 'widget/order_status_widget.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-import '../order/widget/order_item_widget.dart';
+import 'widget/order_product_details.dart';
 
 class OrderDeliveryPage extends StatelessWidget {
   const OrderDeliveryPage({
@@ -75,177 +68,6 @@ class OrderDeliveryPage extends StatelessWidget {
   }
 }
 
-class OrderProductDetails extends StatelessWidget {
-  const OrderProductDetails({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final orderModel = Provider.of<OrderModel>(context, listen: false);
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              "Order ${orderModel.orderId}",
-              style: AppsTextStyle.largeBoldText,
-            ),
-            InkWell(
-              onTap: () {
-                Get.to(const OrderDetailsPage(), arguments: orderModel);
-              },
-              child: Text(
-                "Order Details >",
-                style:
-                    AppsTextStyle.mediumBoldText.copyWith(color: AppColors.red),
-              ),
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 15.h,
-        ),
-        Flexible(
-          child: ChangeNotifierProvider.value(
-            value: orderModel,
-            child: const OrderItemWidget(),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-/*
-
-class OrderStatusWidget extends StatelessWidget {
-  const OrderStatusWidget({
-    super.key,
-    required this.image,
-    required this.title,
-  });
-  final String image;
-  final String title;
-  @override
-  Widget build(BuildContext context) {
-    return DelivaryCardWidget(
-      child: Column(
-        children: [
-          Image.asset(image, height: 200.h, width: 1.sw),
-          SizedBox(
-            height: 15.h,
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 45.w, vertical: 15.h),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15.r),
-              color: AppColors.deepGreen,
-            ),
-            child: Text(
-              title,
-              style: AppsTextStyle.largestText.copyWith(color: AppColors.white),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-
-*/
-
-class DelivaryCardWidget extends StatelessWidget {
-  const DelivaryCardWidget({
-    super.key,
-    required this.child,
-  });
-
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        width: 1.sw,
-        padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 20.w),
-        decoration: BoxDecoration(
-            color: Theme.of(context).cardColor,
-            borderRadius: BorderRadius.circular(10.r)),
-        child: child);
-  }
-}
-
-class OrderReceiverDetailsWidget extends StatelessWidget {
-  const OrderReceiverDetailsWidget({
-    super.key,
-    required this.orderModel,
-  });
-
-  final OrderModel orderModel;
-
-  @override
-  Widget build(BuildContext context) {
-    var orderController = Get.find<OrderController>();
-    return StreamBuilder(
-        stream: FirebaseFirestore.instance
-            .collection("users")
-            .doc(orderModel.orderBy)
-            .collection("useraddress")
-            .doc(orderModel.addressId)
-            .snapshots(),
-
-        // orderController.orderAddressSnapsot(
-        //     addressId: orderModel.addressId),
-
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator();
-          } else if (snapshot.hasError) {
-            return Text(
-              "Error: ${snapshot.error}",
-              style: AppsTextStyle.mediumBoldText.copyWith(fontSize: 20),
-            );
-          }
-          if (snapshot.hasData) {
-            AddressModel addressModel =
-                AddressModel.fromMap(snapshot.data!.data()!);
-
-            return DelivaryCardWidget(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  DeliveryRichTextWidget(
-                    title: "Receiver:",
-                    subTitle: addressModel.name!,
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  DeliveryRichTextWidget(
-                    title: "Phone Number:",
-                    subTitle: "0${addressModel.phone!}",
-                    color: AppColors.red,
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  Text(addressModel.completeaddress!,
-                      style: AppsTextStyle.mediumNormalText
-                          .copyWith(color: Theme.of(context).hintColor))
-                ],
-              ),
-            );
-          }
-          return Text(
-            "No Address is Avaiable",
-            style: AppsTextStyle.mediumBoldText.copyWith(fontSize: 20),
-          );
-        });
-  }
-}
 
 /*
 FirebaseFirestore.instance

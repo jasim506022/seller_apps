@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../../model/order_model.dart';
 import '../../res/routes/routes_name.dart';
 import '../../widget/custom_round_action_button_widget.dart';
-import 'widget/delivery_user_profile_stream.dart';
+import '../delivery/widget/delivery_user_profile_stream.dart';
 import 'widget/order_seller_product_section_widget.dart';
 
 class OrderDetailsPage extends StatelessWidget {

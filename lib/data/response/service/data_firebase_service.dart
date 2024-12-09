@@ -274,7 +274,6 @@ Flutter Auth Firebase Snapshot
         .snapshots();
   }
 
-  @override
   Stream<QuerySnapshot<Map<String, dynamic>>> sellerOrderSnapshot(
       {required List<String> sellerList}) {
     return firebaseFirestore

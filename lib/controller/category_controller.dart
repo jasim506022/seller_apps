@@ -18,4 +18,11 @@ class CategoryController extends GetxController {
   void setUnit({required String unit}) {
     _unit.value = unit;
   }
+
+  final _status = statusList.first.obs;
+  String get getStatus => _status.value;
+
+  void setStatus({required String status}) {
+    _status.value = status;
+  }
 }

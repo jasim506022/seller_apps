@@ -9,7 +9,6 @@ class OrderScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const OrderStatusListWidget(
       appBarTitle: "Order Page",
-      orderStatus: "normal",
     );
   }
 }

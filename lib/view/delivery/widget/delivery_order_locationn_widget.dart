@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../controller/delivary_controller.dart';
-import '../../model/address_model.dart';
-import '../../model/order_model.dart';
-import '../../res/app_function.dart';
-import '../../res/apps_color.dart';
-import '../../res/apps_text_style.dart';
-import '../../widget/background_shape_widget.dart';
+import '../../../controller/delivary_controller.dart';
+import '../../../model/address_model.dart';
+import '../../../model/order_model.dart';
+import '../../../res/app_function.dart';
+import '../../../res/apps_color.dart';
+import '../../../res/apps_text_style.dart';
+import '../../../widget/background_shape_widget.dart';
 
 class OrderDeliveryLocationWidget extends StatelessWidget {
   const OrderDeliveryLocationWidget({

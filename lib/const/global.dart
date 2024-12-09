@@ -23,6 +23,8 @@ List<String> categoryList = <String>[
   "Candy & Chocolate",
 ];
 
+List<String> statusList = ["normal", "handover"];
+
 enum ProductSelect { detele, edit }
 
 const List<String> unitList = <String>[

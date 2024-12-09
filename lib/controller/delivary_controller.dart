@@ -1,23 +1,26 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:seller_apps/model/order_model.dart';
-import 'package:seller_apps/repository/delivary_repository.dart';
 
-import '../view/other/pushnotification.dart';
+import '../model/order_model.dart';
+import '../repository/delivary_repository.dart';
 
 class DeliveryController extends GetxController {
   Map<String, Map<String, String>> orderStatusData = {
     "normal": {
       "imageAsset": "asset/order/readyfordeliver.png",
-      "title": "Please Sent your product on Admin",
+      "title": "Please send your products to the admin",
+    },
+    "handover": {
+      "imageAsset": "asset/order/readyfordeliver.png",
+      "title": "Handover the product to the admin",
     },
     "delivery": {
       "imageAsset": "asset/order/readyfordeliver.png",
-      "title": "Thanks For send product to Admin",
+      "title": "Product ready for delivery",
     },
     "complete": {
       "imageAsset": "asset/order/order complete.jpg",
-      "title": "Order has been successfully completed",
+      "title": "The order has been successfully completed",
     },
   };
 
@@ -36,18 +39,19 @@ class DeliveryController extends GetxController {
         userId: orderModel.orderBy, addressId: orderModel.addressId);
   }
 
-  void handleOrderUpdate(String status, String orderId, String userId) {
-    final notification = PushNotification();
-    notification.sendNotificationUser(
-      "Bangladesh",
-      "Indian",
-      "Order status updated to $status",
-    );
+  // void handleOrderUpdate(String status, String orderId, String userId) {
+  //   final notification = PushNotification();
+  //   notification.sendNotificationUser(
+  //     "Bangladesh",
+  //     "Indian",
+  //     "Order status updated to $status",
+  //   );
 
-    if (status == "normal") updateOrderStatus("delivery", orderId, userId);
-    if (status == "delivery") updateOrderStatus("complete", orderId, userId);
-  }
+  //   if (status == "normal") updateOrderStatus("delivery", orderId, userId);
+  //   if (status == "delivery") updateOrderStatus("complete", orderId, userId);
+  // }
 
+/*
   Future<void> updateOrderStatus(
       String status, String orderId, String userId) async {
     await FirebaseFirestore.instance
@@ -62,4 +66,6 @@ class DeliveryController extends GetxController {
         .update({"status": status});
     update(); // Notify GetX listeners of changes
   }
+
+*/
 }

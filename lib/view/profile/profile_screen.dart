@@ -69,9 +69,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget _buildProfileMenuItems(BuildContext context) {
     final List<Map<String, dynamic>> menuItems = [
       {
-        "icon": Icons.info_outline,
+        "icon": Icons.person,
         "title": 'About',
-        "route": RoutesName.completeOrderPage //RoutesName.editProfileScreen
+        "route": RoutesName.editProfilePage //RoutesName.editProfileScreen
       },
       {
         "icon": Icons.home_outlined,

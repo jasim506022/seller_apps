@@ -17,7 +17,6 @@ import 'const/const.dart';
 import 'const/global.dart';
 import 'const/gobalcolor.dart';
 
-
 import 'service/provider/dropvalueselectallprovider.dart';
 
 import 'service/provider/loadingprovider.dart';
@@ -26,7 +25,7 @@ import 'service/provider/theme_provider.dart';
 import 'service/provider/totalamountprovider.dart';
 
 void main() async {
-  WidgetsFlutterBinding. ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   sharedPreference = await SharedPreferences.getInstance();
   FirebaseMessaging.onBackgroundMessage(firebaseMessingbackground);

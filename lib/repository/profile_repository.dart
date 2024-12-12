@@ -15,6 +15,14 @@ class ProfileRepository {
     }
   }
 
+  Future<void> updateUserData({required Map<String, dynamic> map}) async {
+    try {
+      await _dataFirebaseService.updateUserData(map: map);
+    } catch (e) {
+      AppsFunction.handleException(e);
+    }
+  }
+
   Future<void> signOut() async {
     try {
       await _dataFirebaseService.signOutApp();

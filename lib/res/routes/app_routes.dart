@@ -7,6 +7,7 @@ import 'package:seller_apps/view/delivery/delivery_page.dart';
 import 'package:seller_apps/view/order/order_page.dart';
 import 'package:seller_apps/view/product/product_details_page.dart';
 import 'package:seller_apps/view/product/product_page.dart';
+import 'package:seller_apps/view/profile/editprofilepage.dart';
 
 import '../../view/auth/forget_password_page.dart';
 import '../../view/auth/sign_in_page.dart';
@@ -58,7 +59,7 @@ class AppRoutes {
           page: () => const TotalSellPage(),
         ),
         GetPage(
-          name: RoutesName.runningOrder,
+          name: RoutesName.orderPage,
           page: () => const OrderScreen(),
         ),
         GetPage(
@@ -68,6 +69,10 @@ class AppRoutes {
         GetPage(
           name: RoutesName.delivaryPage,
           page: () => const OrderDeliveryPage(),
+        ),
+        GetPage(
+          name: RoutesName.editProfilePage,
+          page: () => const EditProfilePage(),
         ),
       ];
 }

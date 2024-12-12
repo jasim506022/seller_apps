@@ -281,7 +281,17 @@ Flutter Auth Firebase Snapshot
         .where("uid", whereIn: sellerList)
         .snapshots();
   }
+
+  @override
+  Future<void> updateUserData({required Map<String, dynamic> map}) async {
+    FirebaseFirestore.instance
+        .collection("seller")
+        .doc(sharedPreference!.getString("uid")!)
+        .update(map);
+  }
 }
+
+
 
 
 

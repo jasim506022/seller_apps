@@ -60,6 +60,7 @@ Auth String
   static String nameSharedPreference = "name";
   static String imageurlSharedPreference = "imageurl";
   static String phoneSharedPreference = "phone";
+  static String earningSharedPreference = "earning";
 
   //
   static String uploadYourProduct = "Upload Your Product";

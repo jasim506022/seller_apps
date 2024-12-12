@@ -65,4 +65,5 @@ abstract class BaseFirebaseService {
 
   Stream<DocumentSnapshot<Map<String, dynamic>>> orderAddressSnapsot(
       {required String addressId});
+  Future<void> updateUserData({required Map<String, dynamic> map});
 }

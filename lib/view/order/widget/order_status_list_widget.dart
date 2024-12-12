@@ -46,40 +46,75 @@ class OrderStatusListWidget extends StatelessWidget {
                   },
                 ),
               ),
-            Expanded(
-              child: Obx(
-                () => StreamBuilder(
-                  stream: orderController.orderSnapshots(
-                      orderStatus: orderStatus ?? categoryController.getStatus),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const LoadingListSingleProductWidget();
-                    } else if (!snapshot.hasData ||
-                        snapshot.data!.docs.isEmpty ||
-                        snapshot.hasError) {
-                      return EmptyWidget(
-                        image: ImagesAsset.error,
-                        title: snapshot.hasError
-                            ? 'Error Occurred: ${snapshot.error}'
-                            : 'No Data Available',
-                      );
-                    } else if (snapshot.hasData) {
-                      return ListView.builder(
-                        itemCount: snapshot.data!.docs.length,
-                        itemBuilder: (context, index) {
-                          final orderModel = OrderModel.fromMap(
-                              snapshot.data!.docs[index].data());
-                          return ChangeNotifierProvider.value(
-                            value: orderModel,
-                            child: const OrderItemWidget(isCardDesign: true),
-                          );
-                        },
-                      );
-                    } else {
-                      return const LoadingListSingleProductWidget();
-                    }
-                  },
+            if (orderStatus == null)
+              Expanded(
+                child: Obx(
+                  () => StreamBuilder(
+                    stream: orderController.orderSnapshots(
+                        orderStatus: categoryController.getStatus),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const LoadingListSingleProductWidget();
+                      } else if (!snapshot.hasData ||
+                          snapshot.data!.docs.isEmpty ||
+                          snapshot.hasError) {
+                        return EmptyWidget(
+                          image: ImagesAsset.error,
+                          title: snapshot.hasError
+                              ? 'Error Occurred: ${snapshot.error}'
+                              : 'No Data Available',
+                        );
+                      } else if (snapshot.hasData) {
+                        return ListView.builder(
+                          itemCount: snapshot.data!.docs.length,
+                          itemBuilder: (context, index) {
+                            final orderModel = OrderModel.fromMap(
+                                snapshot.data!.docs[index].data());
+                            return ChangeNotifierProvider.value(
+                              value: orderModel,
+                              child: const OrderItemWidget(isCardDesign: true),
+                            );
+                          },
+                        );
+                      } else {
+                        return const LoadingListSingleProductWidget();
+                      }
+                    },
+                  ),
                 ),
+              ),
+            Expanded(
+              child: StreamBuilder(
+                stream:
+                    orderController.orderSnapshots(orderStatus: orderStatus!),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const LoadingListSingleProductWidget();
+                  } else if (!snapshot.hasData ||
+                      snapshot.data!.docs.isEmpty ||
+                      snapshot.hasError) {
+                    return EmptyWidget(
+                      image: ImagesAsset.error,
+                      title: snapshot.hasError
+                          ? 'Error Occurred: ${snapshot.error}'
+                          : 'No Data Available',
+                    );
+                  } else if (snapshot.hasData) {
+                    return ListView.builder(
+                      itemCount: snapshot.data!.docs.length,
+                      itemBuilder: (context, index) {
+                        final orderModel = OrderModel.fromMap(
+                            snapshot.data!.docs[index].data());
+                        return ChangeNotifierProvider.value(
+                          value: orderModel,
+                          child: const OrderItemWidget(isCardDesign: true),
+                        );
+                      },
+                    );
+                  } else {
+                    return const LoadingListSingleProductWidget();
+                  }
+                },
               ),
             ),
           ],

@@ -19,18 +19,18 @@ class ProfileController extends GetxController {
   final ProfileRepository repository;
 
   var image = "".obs;
-  TextEditingController nameTEC = TextEditingController();
-  TextEditingController addressTEC = TextEditingController();
-  TextEditingController phoneTEC = TextEditingController();
-  TextEditingController emailTEC = TextEditingController();
+  var nameTEC = TextEditingController();
+  var addressTEC = TextEditingController();
+  var phoneTEC = TextEditingController();
+  var emailTEC = TextEditingController();
 
   var isChange = false.obs;
 
   var profileModel = ProfileModel().obs;
   ProfileController({required this.repository});
 
-  SelectImageController selectImageController = Get.find();
-  SignUpRepository signUpRepository = SignUpRepository();
+  var selectImageController = Get.find<SelectImageController>();
+  var signUpRepository = SignUpRepository();
 
   // Understand This Code
   Future<void> updateUserData() async {
@@ -98,7 +98,6 @@ class ProfileController extends GetxController {
       var snapshot = await repository.getUserInformationSnapshot();
       if (snapshot.exists && snapshot.data() != null) {
         profileModel.value = ProfileModel.fromMap(snapshot.data()!);
-
         if (profileModel.value.status == AppString.approved) {
           _saveProfileToSharedPreferences();
           _updateTextControllers();
@@ -132,6 +131,7 @@ class ProfileController extends GetxController {
         noOnPress: () {
           isChange.value = false;
           Get.close(2);
+          selectImageController.selectPhoto.value = null;
         },
         yesOnPress: () => Get.back()));
   }

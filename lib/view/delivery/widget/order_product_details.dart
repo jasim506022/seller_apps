@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:seller_apps/res/routes/app_routes.dart';
+import 'package:seller_apps/res/routes/routes_name.dart';
 
 import '../../../model/order_model.dart';
 import '../../../res/apps_color.dart';
@@ -29,7 +31,7 @@ class OrderProductDetails extends StatelessWidget {
             ),
             InkWell(
               onTap: () {
-                Get.to(const OrderDetailsPage(), arguments: orderModel);
+                Get.toNamed(RoutesName.orderDetailsPage, arguments: orderModel);
               },
               child: Text(
                 "Order Details >",

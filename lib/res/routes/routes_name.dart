@@ -15,5 +15,6 @@ class RoutesName {
   static const String detailsPage = '/detailsPage';
   static const String delivaryPage = '/delivaryPage';
   static const String editProfilePage = '/editProfilePage';
+  static const String orderDetailsPage = '/orderDetailsPage';
   static const String example = '/example';
 }

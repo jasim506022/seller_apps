@@ -4,10 +4,11 @@ import 'package:seller_apps/view/add_product/add_product_page.dart';
 import 'package:seller_apps/view/main/main_page.dart';
 import 'package:seller_apps/view/order/history_page.dart';
 import 'package:seller_apps/view/delivery/delivery_page.dart';
+import 'package:seller_apps/view/order/order_details_page.dart';
 import 'package:seller_apps/view/order/order_page.dart';
 import 'package:seller_apps/view/product/product_details_page.dart';
 import 'package:seller_apps/view/product/product_page.dart';
-import 'package:seller_apps/view/profile/editprofilepage.dart';
+import 'package:seller_apps/view/profile/edit_profile_page.dart';
 
 import '../../view/auth/forget_password_page.dart';
 import '../../view/auth/sign_in_page.dart';
@@ -73,6 +74,10 @@ class AppRoutes {
         GetPage(
           name: RoutesName.editProfilePage,
           page: () => const EditProfilePage(),
+        ),
+        GetPage(
+          name: RoutesName.orderDetailsPage,
+          page: () => const OrderDetailsPage(),
         ),
       ];
 }

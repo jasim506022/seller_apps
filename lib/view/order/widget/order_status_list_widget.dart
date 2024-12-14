@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -41,83 +42,56 @@ class OrderStatusListWidget extends StatelessWidget {
                 child: DropdownCategoryWidget(
                   list: statusList,
                   value: statusList.first,
-                  onChanged: (p0) {
-                    categoryController.setStatus(status: p0!);
+                  onChanged: (value) {
+                    categoryController.setStatus(status: value!);
                   },
                 ),
               ),
             if (orderStatus == null)
               Expanded(
                 child: Obx(
-                  () => StreamBuilder(
-                    stream: orderController.orderSnapshots(
-                        orderStatus: categoryController.getStatus),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const LoadingListSingleProductWidget();
-                      } else if (!snapshot.hasData ||
-                          snapshot.data!.docs.isEmpty ||
-                          snapshot.hasError) {
-                        return EmptyWidget(
-                          image: ImagesAsset.error,
-                          title: snapshot.hasError
-                              ? 'Error Occurred: ${snapshot.error}'
-                              : 'No Data Available',
-                        );
-                      } else if (snapshot.hasData) {
-                        return ListView.builder(
-                          itemCount: snapshot.data!.docs.length,
-                          itemBuilder: (context, index) {
-                            final orderModel = OrderModel.fromMap(
-                                snapshot.data!.docs[index].data());
-                            return ChangeNotifierProvider.value(
-                              value: orderModel,
-                              child: const OrderItemWidget(isCardDesign: true),
-                            );
-                          },
-                        );
-                      } else {
-                        return const LoadingListSingleProductWidget();
-                      }
-                    },
-                  ),
+                  () => _buildOrderList(
+                      orderController, categoryController.getStatus),
                 ),
               ),
-            Expanded(
-              child: StreamBuilder(
-                stream:
-                    orderController.orderSnapshots(orderStatus: orderStatus!),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const LoadingListSingleProductWidget();
-                  } else if (!snapshot.hasData ||
-                      snapshot.data!.docs.isEmpty ||
-                      snapshot.hasError) {
-                    return EmptyWidget(
-                      image: ImagesAsset.error,
-                      title: snapshot.hasError
-                          ? 'Error Occurred: ${snapshot.error}'
-                          : 'No Data Available',
-                    );
-                  } else if (snapshot.hasData) {
-                    return ListView.builder(
-                      itemCount: snapshot.data!.docs.length,
-                      itemBuilder: (context, index) {
-                        final orderModel = OrderModel.fromMap(
-                            snapshot.data!.docs[index].data());
-                        return ChangeNotifierProvider.value(
-                          value: orderModel,
-                          child: const OrderItemWidget(isCardDesign: true),
-                        );
-                      },
-                    );
-                  } else {
-                    return const LoadingListSingleProductWidget();
-                  }
-                },
-              ),
-            ),
+            if (orderStatus != null)
+              Expanded(child: _buildOrderList(orderController, orderStatus!)),
           ],
         ));
+  }
+
+  StreamBuilder<QuerySnapshot<Map<String, dynamic>>> _buildOrderList(
+      OrderController orderController, String orderStatus) {
+    return StreamBuilder(
+      stream: orderController.orderSnapshots(orderStatus: orderStatus),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const LoadingListSingleProductWidget();
+        } else if (!snapshot.hasData ||
+            snapshot.data!.docs.isEmpty ||
+            snapshot.hasError) {
+          return EmptyWidget(
+            image: ImagesAsset.error,
+            title: snapshot.hasError
+                ? 'Error Occurred: ${snapshot.error}'
+                : 'No Data Available',
+          );
+        } else if (snapshot.hasData) {
+          return ListView.builder(
+            itemCount: snapshot.data!.docs.length,
+            itemBuilder: (context, index) {
+              final orderModel =
+                  OrderModel.fromMap(snapshot.data!.docs[index].data());
+              return ChangeNotifierProvider.value(
+                value: orderModel,
+                child: const OrderItemWidget(isCardDesign: true),
+              );
+            },
+          );
+        } else {
+          return const LoadingListSingleProductWidget();
+        }
+      },
+    );
   }
 }

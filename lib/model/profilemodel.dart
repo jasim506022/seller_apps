@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:seller_apps/const/global.dart';
 import 'package:seller_apps/res/app_string.dart';
 
@@ -22,27 +21,7 @@ class ProfileModel {
     this.uid,
   });
 
-  ProfileModel copyWith({
-    String? address,
-    double? earnings,
-    String? email,
-    String? imageurl,
-    String? name,
-    String? phone,
-    String? status,
-    String? uid,
-  }) {
-    return ProfileModel(
-      address: address ?? this.address,
-      earnings: earnings ?? this.earnings,
-      email: email ?? this.email,
-      imageurl: imageurl ?? this.imageurl,
-      name: name ?? this.name,
-      phone: phone ?? this.phone,
-      status: status ?? this.status,
-      uid: uid ?? this.uid,
-    );
-  }
+
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{

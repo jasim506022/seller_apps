@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import 'package:seller_apps/res/app_string.dart';
-
+import '../../../const/const.dart';
 import '../../../const/global.dart';
 import '../../../res/app_function.dart';
+import '../../../res/app_string.dart';
 import '../../../res/apps_color.dart';
 import '../../../res/apps_text_style.dart';
 
@@ -21,7 +21,7 @@ class ProifleHeaderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 0.18.sh,
+        height: 153.h,
         width: 1.sw,
         color: Theme.of(context).cardColor,
         child: Padding(
@@ -34,7 +34,7 @@ class ProifleHeaderWidget extends StatelessWidget {
               ),
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10.w),
+                  padding: EdgeInsets.symmetric(vertical: defaulHieighSpace.h),
                   child: _buildProfileDetails(),
                 ),
               )
@@ -53,7 +53,7 @@ class ProifleHeaderWidget extends StatelessWidget {
         Text(sharedPreference!.getString(AppString.emailSharedPreference)!,
             style: AppsTextStyle.subTitleTextStyle),
         SizedBox(
-          height: 8.h,
+          height: defaulHieighSpace,
         ),
         CustomRoundActionButtonWidget(
           title: "Edit Profile",
@@ -69,8 +69,8 @@ class ProifleHeaderWidget extends StatelessWidget {
 
   Container _buildProfileImage() {
     return Container(
-        height: .15.sh,
-        width: .15.sh,
+        height: 130.h,
+        width: 130.h,
         decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.all(color: AppColors.red, width: 3.w)),

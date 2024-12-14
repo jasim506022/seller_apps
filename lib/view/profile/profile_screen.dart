@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seller_apps/const/const.dart';
 import '../../res/apps_color.dart';
 import '../../res/routes/routes_name.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -40,7 +41,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: ListView(
               children: [
                 Divider(
-                  height: 10.h,
+                  height: defaulHieighSpace,
                   color: Theme.of(context).hintColor,
                   thickness: 2,
                 ),

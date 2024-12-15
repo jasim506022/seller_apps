@@ -42,7 +42,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    Utils utils = Utils();
+    ThemeUtils utils = ThemeUtils();
     return PopScope(
         canPop: false,
         onPopInvoked: (didPop) async {
@@ -148,7 +148,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     );
   }
 
-  _buildFormField(Utils utils) {
+  _buildFormField(ThemeUtils utils) {
     return Form(
         key: key,
         child: Column(
@@ -321,7 +321,7 @@ class AboutDataItem extends StatelessWidget {
           width: 1.sw,
           padding: EdgeInsets.all(15.r),
           decoration: BoxDecoration(
-            color: Utils.textFeildColor, //utils.textFeildColor,
+            color: ThemeUtils.textFieldColor, //utils.textFeildColor,
             borderRadius: BorderRadius.circular(15.r),
           ),
           child: Text(

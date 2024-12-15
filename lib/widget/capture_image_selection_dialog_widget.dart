@@ -25,8 +25,7 @@ class _CaptureImageSelectionDialogWidgetState
       backgroundColor: Theme.of(context).cardColor,
       title: Text(
         "Selected Image",
-        style:
-            AppsTextStyle.titleTextStyle.copyWith(color: AppColors.greenColor),
+        style: AppsTextStyle.titleTextStyle.copyWith(color: AppColors.green),
       ),
       children: [
         SimpleDialogOption(

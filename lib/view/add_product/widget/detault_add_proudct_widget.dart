@@ -31,14 +31,14 @@ class DetaultAddProductWidget extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                     padding:
                         EdgeInsets.symmetric(horizontal: 30.w, vertical: 10.h),
-                    backgroundColor: AppColors.greenColor,
+                    backgroundColor: AppColors.green,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.r))),
                 onPressed: () {
                   showDialog(
                     context: context,
-                    builder: (context) => const CaptureImageSelectionDialogWidget(
-                        ),
+                    builder: (context) =>
+                        const CaptureImageSelectionDialogWidget(),
                   );
                 },
                 child: Text("Add New Product",

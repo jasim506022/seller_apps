@@ -69,4 +69,7 @@ Auth String
   static String runningOrder = "Running Order";
   static String completeOrder = "Complete Order";
   static String searchHint = "Search...........";
+
+  //
+  static String onBoarding = 'onBoarding';
 }

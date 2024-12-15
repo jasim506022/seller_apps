@@ -20,7 +20,7 @@ class CustomAuthButtonWidget extends StatelessWidget {
       width: 1.sw,
       child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.greenColor,
+            backgroundColor: AppColors.green,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15.r),
             ),

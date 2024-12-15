@@ -22,7 +22,7 @@ class ProductDiscountWidget extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border.all(color: AppColors.red, width: .5.w),
           borderRadius: BorderRadius.circular(15.r),
-          color: AppColors.lightred.withOpacity(.2),
+          color: AppColors.lightRed.withOpacity(.2),
         ),
         child: Text(
           "$discount% Off",

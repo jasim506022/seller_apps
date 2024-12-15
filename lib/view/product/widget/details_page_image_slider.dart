@@ -29,21 +29,21 @@ class DetailsPageImageSlideWithCartBridgeWidget extends StatelessWidget {
               'right': -300.00.w,
               'top': -350.00.h,
               'size': 650.00.h,
-              'color': Utils.green100
+              'color': ThemeUtils.green100
             },
             {
               'left': -80.00.w,
               'right': -80.00.w,
               'top': -360.00.h,
               'size': 650.00.h,
-              'color': Utils.green200
+              'color': ThemeUtils.green200
             },
             {
               'left': 0.00,
               'right': 0.00,
               'top': -150.00.w,
               'size': 300.00.h,
-              'color': Utils.green300
+              'color': ThemeUtils.green300
             },
           ])
             Positioned(
@@ -108,7 +108,7 @@ class DetailsPageImageSlideWithCartBridgeWidget extends StatelessWidget {
         height: 50.h,
         width: 50.h,
         decoration:
-            BoxDecoration(color: AppColors.greenColor, shape: BoxShape.circle),
+            BoxDecoration(color: AppColors.green, shape: BoxShape.circle),
         child: widget);
   }
 }

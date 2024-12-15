@@ -29,8 +29,8 @@ class LoadingSingleProductWidget extends StatelessWidget {
             color: Theme.of(context).cardColor,
             borderRadius: BorderRadius.circular(20.r)),
         child: Shimmer.fromColors(
-          baseColor: Utils.baseShimmerColor,
-          highlightColor: Utils.highlightShimmerColor,
+          baseColor: ThemeUtils.shimmerBaseColor,
+          highlightColor: ThemeUtils.shimmerHighlightColor,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [

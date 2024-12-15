@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:seller_apps/res/apps_color.dart';
+import 'package:seller_apps/res/apps_text_style.dart';
 
 import '../../res/app_constants.dart';
 import '../../res/routes/routes_name.dart';
-import '../../const/textstyle.dart';
 import '../../model/onboardmodel.dart';
 
 class OnboardingPage extends StatefulWidget {
@@ -35,7 +35,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
         statusBarColor: AppColors.white,
         statusBarIconBrightness: Brightness.dark));
-    Textstyle textstyle = Textstyle(context);
+
     var mq = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: AppColors.white,
@@ -50,7 +50,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
               },
               child: Text(
                 "Skip",
-                style: textstyle.largestText.copyWith(color: AppColors.black),
+                style: AppsTextStyle.titleTextStyle.copyWith(color: AppColors.black),
               )),
           SizedBox(
             width: mq.width * .022,

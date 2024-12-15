@@ -28,7 +28,7 @@ class SearchBarWidget extends StatelessWidget {
               flex: 4,
               child: TextFormFieldWidget(
                 style: AppsTextStyle.mediumNormalText
-                    .copyWith(color: Utils.getColor),
+                    .copyWith(color: ThemeUtils.baseTextColor),
                 isUdateDecoration: true,
                 decoration: AppsFunction.inputDecoration(
                   hint: "Search Product Here",
@@ -45,7 +45,7 @@ class SearchBarWidget extends StatelessWidget {
               },
               icon: Icon(
                 FontAwesomeIcons.sliders,
-                color: AppColors.greenColor,
+                color: AppColors.green,
               ))
         ],
       ),

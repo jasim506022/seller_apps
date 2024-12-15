@@ -22,8 +22,8 @@ class LoadingProductWidget extends StatelessWidget {
         height: 1.sh,
         width: .1.sw,
         child: Shimmer.fromColors(
-          baseColor: Utils.baseShimmerColor,
-          highlightColor: Utils.highlightShimmerColor,
+          baseColor: ThemeUtils.shimmerBaseColor,
+          highlightColor: ThemeUtils.shimmerHighlightColor,
           child: SingleChildScrollView(
             child: Column(
               children: [

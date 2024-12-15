@@ -110,7 +110,7 @@ class ProductWidget extends StatelessWidget {
               width: 1.sw,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15.r),
-                color: AppColors.greenColor,
+                color: AppColors.green,
               ),
               child: Text(
                 "Edit/Update",

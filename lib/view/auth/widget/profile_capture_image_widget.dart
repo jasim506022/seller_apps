@@ -34,7 +34,7 @@ class ProfileImageCaptureWidget extends StatelessWidget {
           return CircleAvatar(
             radius: 0.2.sw,
             backgroundImage: imageFile == null ? null : FileImage(imageFile),
-            backgroundColor: AppColors.backgroundLightColor,
+            backgroundColor: AppColors.backgroundLight,
             child: imageFile == null
                 ? Icon(
                     Icons.add_photo_alternate,

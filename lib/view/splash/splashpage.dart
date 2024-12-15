@@ -4,11 +4,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:seller_apps/res/apps_text_style.dart';
 
 import '../../res/app_constants.dart';
 import '../../res/apps_color.dart';
 import '../../res/routes/routes_name.dart';
-import '../../const/textstyle.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -52,7 +52,7 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    Textstyle textstyle = Textstyle(context);
+   
     var mq = MediaQuery.of(context).size;
     return Material(
       child: Stack(
@@ -78,8 +78,8 @@ class _SplashPageState extends State<SplashPage> {
                   width: mq.height * .176,
                 ),
                 Text("Grocery Apps",
-                    style: textstyle.largestText
-                        .copyWith(color: AppColors.greenColor, fontSize: 22)),
+                    style: AppsTextStyle.largeTitleTextStyle
+                        .copyWith(color: AppColors.green, fontSize: 22)),
               ],
             ),
           )

@@ -23,8 +23,8 @@ class LoadingSimilierWidget extends StatelessWidget {
           margin: EdgeInsets.only(left: 15.w),
           color: Theme.of(context).cardColor,
           child: Shimmer.fromColors(
-            baseColor: Utils.baseShimmerColor,
-            highlightColor: Utils.highlightShimmerColor,
+            baseColor: ThemeUtils.shimmerBaseColor,
+            highlightColor: ThemeUtils.shimmerHighlightColor,
             child: Column(
               children: [
                 AppsFunction.lineShimmer(70.h),

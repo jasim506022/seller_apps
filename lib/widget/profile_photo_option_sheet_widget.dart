@@ -77,10 +77,10 @@ class ProfilePhotoOptionSheetWidget extends StatelessWidget {
               padding: EdgeInsets.all(10.r),
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  border: Border.all(color: AppColors.greenColor)),
+                  border: Border.all(color: AppColors.green)),
               child: Icon(
                 icon,
-                color: AppColors.greenColor,
+                color: AppColors.green,
               ),
             ),
             SizedBox(
@@ -89,7 +89,7 @@ class ProfilePhotoOptionSheetWidget extends StatelessWidget {
             Text(
               title,
               style: AppsTextStyle.buttonTextStyle
-                  .copyWith(color: AppColors.greenColor),
+                  .copyWith(color: AppColors.green),
             ),
           ],
         ),

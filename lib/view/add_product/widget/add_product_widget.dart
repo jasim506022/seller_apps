@@ -58,7 +58,7 @@ class _AddProductWidgetState extends State<AddProductWidget> {
                   },
                   icon: Icon(
                     Icons.cloud_upload,
-                    color: AppColors.greenColor,
+                    color: AppColors.green,
                   ),
                 )
               ],
@@ -83,7 +83,7 @@ class _AddProductWidgetState extends State<AddProductWidget> {
                             ),
                             ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                    backgroundColor: AppColors.greenColor,
+                                    backgroundColor: AppColors.green,
                                     padding: EdgeInsets.symmetric(
                                         horizontal: 20.h, vertical: 10.w)),
                                 onPressed: () {

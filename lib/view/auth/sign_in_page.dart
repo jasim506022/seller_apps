@@ -34,7 +34,7 @@ class _SigninPageState extends State<SigninPage> {
   void didChangeDependencies() {
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
-          statusBarColor: AppColors.backgroundLightColor,
+          statusBarColor: AppColors.backgroundLight,
           statusBarIconBrightness: Brightness.dark),
     );
     super.didChangeDependencies();

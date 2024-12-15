@@ -6,33 +6,37 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:seller_apps/res/routes/app_routes.dart';
+import 'package:seller_apps/res/app_string.dart';
 
-import 'package:seller_apps/service/provider/imageaddremoveprovider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'binding/initial_binding.dart';
 import 'res/app_constants.dart';
 import 'res/apps_color.dart';
+import 'res/routes/app_routes.dart';
 import 'res/routes/routes_name.dart';
 
-import 'service/provider/dropvalueselectallprovider.dart';
-
-import 'service/provider/loadingprovider.dart';
-import 'service/provider/searchprovider.dart';
 import 'service/provider/theme_provider.dart';
-import 'service/provider/totalamountprovider.dart';
 
 void main() async {
+  // Ensures Flutter widgets are properly initialized before using them
   WidgetsFlutterBinding.ensureInitialized();
+  // Initialize Firebase
   await Firebase.initializeApp();
+  // Get shared preferences instance for local storage
   AppConstants.sharedPreference = await SharedPreferences.getInstance();
-  FirebaseMessaging.onBackgroundMessage(firebaseMessingbackground);
-  AppConstants.isViewed = AppConstants.sharedPreference!.getInt('onBoarding');
+  // Set up a handler for Firebase background messages
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  // Retrieve onboarding view status from shared preferences
+  AppConstants.isViewed =
+      AppConstants.sharedPreference!.getInt(AppString.onBoarding);
+  // Launch the application
   runApp(const MyApp());
 }
 
-Future<void> firebaseMessingbackground(RemoteMessage message) async {
+// Handles Firebase background messages
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   if (kDebugMode) {
     print("Handling a background message ${message.data}");
     print("Handling a background message ${message.notification!.title}");
@@ -46,47 +50,33 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
+      // Set the design size for responsive layout
       designSize: const Size(450, 851), //582
       builder: (context, child) => MultiProvider(
         providers: [
           ChangeNotifierProvider(
             create: (context) {
-              return CateoryDropValueProvider();
-            },
-          ),
-          ChangeNotifierProvider(
-            create: (context) {
-              return SearchProvider();
-            },
-          ),
-          ChangeNotifierProvider(
-            create: (context) {
-              return ImageAddRemoveProvider();
-            },
-          ),
-          ChangeNotifierProvider(
-            create: (context) {
               return ThemeProvider();
-            },
-          ),
-          ChangeNotifierProvider(
-            create: (context) {
-              return TotalAmountProvider();
-            },
-          ),
-          ChangeNotifierProvider(
-            create: (context) {
-              return LoadingProvider();
             },
           ),
         ],
         child: Consumer<ThemeProvider>(
+          // Use Consumer to rebuild the app when the theme changes
+
           builder: (context, themeProvder, child) {
             return GetMaterialApp(
+              // Set up initial bindings for dependency injection
+
               initialBinding: InitialBinding(),
               debugShowCheckedModeBanner: false,
-              theme: themeData(themeProvder),
+              // Dynamically apply themes based on ThemeProvider
+
+              theme: _buildAppTheme(themeProvder),
+              // Set the initial route of the application
+
               initialRoute: RoutesName.initailRoutes,
+              // Define all application routes
+
               getPages: AppRoutes.appRoutes(),
             );
           },
@@ -95,55 +85,77 @@ class MyApp extends StatelessWidget {
     );
   }
 
-  ThemeData themeData(ThemeProvider themeProvder) {
-    return ThemeData(
-        iconTheme: IconThemeData(
-            color:
-                themeProvder.getDarkTheme ? AppColors.white : AppColors.black),
-        appBarTheme: AppBarTheme(
-          iconTheme: IconThemeData(
-              color: themeProvder.getDarkTheme
-                  ? AppColors.white
-                  : AppColors.black),
-          backgroundColor: themeProvder.getDarkTheme
-              ? AppColors.backgroundDarkColor
-              : AppColors.backgroundLightColor,
-          titleTextStyle: GoogleFonts.roboto(
-              color:
-                  themeProvder.getDarkTheme ? AppColors.white : AppColors.black,
-              fontSize: 18,
-              fontWeight: FontWeight.bold),
-          centerTitle: true,
-        ),
-        // Scaffold Background Color
-        scaffoldBackgroundColor: themeProvder.getDarkTheme
-            ? AppColors.backgroundDarkColor
-            : AppColors.backgroundLightColor,
-        //Card Color
-        cardColor: themeProvder.getDarkTheme
-            ? AppColors.cardDarkColor
-            : AppColors.white,
-        //CanvasColor
-        canvasColor: themeProvder.getDarkTheme
-            ? AppColors.cardDarkColor
-            : AppColors.searchLightColor,
-        // Indicator Color
-        indicatorColor: themeProvder.getDarkTheme
-            ? AppColors.indicatorColorDarkColor
-            : AppColors.indicatorColorightColor,
+// Helper method to configure the app theme
+  ThemeData _buildAppTheme(ThemeProvider themeProvider) {
+    // Determine if the app is in dark theme mode
+    var isDarkTheme = themeProvider.getDarkTheme;
 
-        // Hint Color
-        hintColor: themeProvder.getDarkTheme
-            ? AppColors.hintDark
-            : AppColors.hintLight,
-        //brightness
-        // brightness:
-        //     themeProvder.getDarkTheme ? Brightness.light : Brightness.dark,
-        // Primary
-        primaryColor:
-            themeProvder.getDarkTheme ? AppColors.white : AppColors.black);
+    return ThemeData(
+      // Configure icon colors based on the theme
+      iconTheme: IconThemeData(
+        color: isDarkTheme ? AppColors.white : AppColors.black,
+      ),
+
+      // Configure AppBar styling
+      appBarTheme: AppBarTheme(
+        // Set icon colors for the AppBar
+        iconTheme: IconThemeData(
+          color: isDarkTheme ? AppColors.white : AppColors.black,
+        ),
+        // Set background color for the AppBar
+        backgroundColor:
+            isDarkTheme ? AppColors.backgroundDark : AppColors.backgroundLight,
+        // Set title text styling
+        titleTextStyle: GoogleFonts.roboto(
+          color: isDarkTheme ? AppColors.white : AppColors.black,
+          fontSize: 18.sp, // Responsive font size using ScreenUtil
+          fontWeight: FontWeight.bold,
+        ),
+        // Center the AppBar title
+        centerTitle: true,
+      ),
+
+      // Configure scaffold background color
+      scaffoldBackgroundColor:
+          isDarkTheme ? AppColors.backgroundDark : AppColors.backgroundLight,
+
+      // Configure card color
+      cardColor: isDarkTheme ? AppColors.cardDark : AppColors.white,
+
+      // Configure canvas color (e.g., for dialogs and sidebars)
+      canvasColor:
+          isDarkTheme ? AppColors.cardDark : AppColors.searchLightColor,
+
+      // Configure indicator color (e.g., progress indicators)
+      indicatorColor: isDarkTheme
+          ? AppColors.indicatorColorDarkColor
+          : AppColors.indicatorColorightColor,
+
+      // Configure hint text color (e.g., placeholder text)
+      hintColor: isDarkTheme ? AppColors.hintDark : AppColors.hintLight,
+
+      // Configure the primary color (e.g., buttons and highlights)
+      primaryColor: isDarkTheme ? AppColors.white : AppColors.black,
+    );
   }
 }
+
+
+///Benefits of Comments:
+/*
+Better Understanding: Developers can quickly grasp the purpose of each block.
+Maintainability: Easier to modify or extend the functionality.
+Clarity: Clearly highlights the role of third-party integrations like Firebase, SharedPreferences, and providers.
+
+Organized the ThemeData setup into its own private _buildAppTheme method for better separation of concerns
+
+Added safe access (?) for shared preferences initialization.
+
+
+
+
+*/
+///
 
 
 

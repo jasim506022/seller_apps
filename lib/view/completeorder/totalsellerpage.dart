@@ -38,8 +38,8 @@ class _TotalSellPageState extends State<TotalSellPage> {
               child: Container(
             height: 0.4.sh,
             width: 0.4.sh,
-            decoration: BoxDecoration(
-                color: AppColors.greenColor, shape: BoxShape.circle),
+            decoration:
+                BoxDecoration(color: AppColors.green, shape: BoxShape.circle),
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

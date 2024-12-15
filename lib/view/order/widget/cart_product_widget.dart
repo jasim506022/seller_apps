@@ -75,18 +75,18 @@ class CartProductWidget extends StatelessWidget {
                 children: [
                   Text("$quantity * ",
                       style: AppsTextStyle.mediumNormalText
-                          .copyWith(color: AppColors.greenColor)),
+                          .copyWith(color: AppColors.green)),
                   Text(
                       "${AppsFunction.productPrice(productModel.productprice!, productModel.discount!.toDouble())}",
                       style: AppsTextStyle.mediumNormalText
-                          .copyWith(color: AppColors.greenColor)),
+                          .copyWith(color: AppColors.green)),
                 ],
               ),
               const Spacer(),
               Text(
                   "= ৳. ${AppsFunction.productPriceWithQuantity(productModel.productprice!, productModel.discount!.toDouble(), quantity).toStringAsFixed(2)}",
                   style: AppsTextStyle.largeBoldText
-                      .copyWith(color: AppColors.greenColor)),
+                      .copyWith(color: AppColors.green)),
             ],
           ),
         ],

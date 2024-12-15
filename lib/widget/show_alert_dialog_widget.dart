@@ -53,7 +53,7 @@ class CustomAlertDialogWidget extends StatelessWidget {
           onPressed: yesOnPress,
         ),
         OutlinedTextButtonWidget(
-            color: AppColors.greenColor,
+            color: AppColors.green,
             title: "No",
             onPressed: noOnPress ??
                 () {

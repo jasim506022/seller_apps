@@ -25,7 +25,7 @@ class CustomDialogWidget extends StatelessWidget {
       title: Text(
         title,
         style: GoogleFonts.poppins(
-          color: AppColors.greenColor,
+          color: AppColors.green,
           fontSize: 16,
           fontWeight: FontWeight.bold,
         ),

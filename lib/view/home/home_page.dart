@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: AppColors.greenColor,
+        statusBarColor: AppColors.green,
         statusBarBrightness: Brightness.light,
         statusBarIconBrightness: Brightness.light));
     return SafeArea(
@@ -31,7 +31,7 @@ class HomePage extends StatelessWidget {
             Container(
               height: 1.sh,
               width: 1.sw,
-              color: AppColors.backgroundLightHomePage,
+              color: AppColors.backgroundHomePageLight,
             ),
             //aspectRaation
 
@@ -41,7 +41,7 @@ class HomePage extends StatelessWidget {
                 height: 0.35.sh,
                 width: 1.sw,
                 decoration: BoxDecoration(
-                  color: AppColors.greenColor,
+                  color: AppColors.green,
                   borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(60.r),
                       bottomRight: Radius.circular(60.r)),

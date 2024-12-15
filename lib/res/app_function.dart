@@ -99,7 +99,8 @@ class AppsFunction {
       bool isEnable = true,
       required Function function}) {
     return InputDecoration(
-        fillColor: isEnable ? AppColors.searchLightColor : Utils.textFeildColor,
+        fillColor:
+            isEnable ? AppColors.searchLightColor : ThemeUtils.textFieldColor,
         filled: true,
         hintText: hintText,
         border: OutlineInputBorder(
@@ -159,7 +160,7 @@ class AppsFunction {
       height: height,
       width: width ?? 1.sw,
       decoration: BoxDecoration(
-          color: Utils.widgetShimmerColor,
+          color: ThemeUtils.shimmerWidgetColor,
           borderRadius: BorderRadius.circular(15.r)),
     );
   }
@@ -180,7 +181,7 @@ class AppsFunction {
       height: height,
       width: height,
       decoration: BoxDecoration(
-          color: Utils.widgetShimmerColor, shape: BoxShape.circle),
+          color: ThemeUtils.shimmerWidgetColor, shape: BoxShape.circle),
     );
   }
 

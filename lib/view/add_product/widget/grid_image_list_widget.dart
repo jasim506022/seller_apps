@@ -23,7 +23,7 @@ class GridImageListWidget extends StatelessWidget {
         margin: EdgeInsets.all(5.r),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15.r),
-          border: Border.all(color: AppColors.greenColor, width: 3.h),
+          border: Border.all(color: AppColors.green, width: 3.h),
         ),
         child: GridView.builder(
           itemCount: addProductController.productImageFile.length,

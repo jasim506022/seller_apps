@@ -39,7 +39,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: Utils.green300,
+        statusBarColor: ThemeUtils.green300,
         statusBarBrightness: Brightness.dark,
         statusBarIconBrightness: Theme.of(context).brightness));
     super.didChangeDependencies();

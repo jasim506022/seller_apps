@@ -30,12 +30,10 @@ class RichTextWidget extends StatelessWidget {
               if (!(await AppsFunction.verifyInternetStatus())) {
                 function();
               }
-           
             },
           text: colorText,
           style: AppsTextStyle.buttonTextStyle.copyWith(
-              decoration: TextDecoration.underline,
-              color: AppColors.greenColor))
+              decoration: TextDecoration.underline, color: AppColors.green))
     ]));
   }
 }

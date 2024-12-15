@@ -18,8 +18,8 @@ class DeliveryUserLoading extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 20.w),
           child: Shimmer.fromColors(
-            baseColor: Utils.baseShimmerColor,
-            highlightColor: Utils.highlightShimmerColor,
+            baseColor: ThemeUtils.shimmerBaseColor,
+            highlightColor: ThemeUtils.shimmerHighlightColor,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

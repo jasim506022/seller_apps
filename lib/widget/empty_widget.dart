@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:seller_apps/res/apps_text_style.dart';
 
-import '../const/textstyle.dart';
 
 class EmptyWidget extends StatelessWidget {
   const EmptyWidget({
@@ -32,7 +32,7 @@ class EmptyWidget extends StatelessWidget {
                 height: mq.height * .353,
                 width: mq.height * .289,
                 alignment: Alignment.center,
-                child: Text(title, style: Textstyle.emptyTestStyle),
+                child: Text(title, style: AppsTextStyle.emptyTestStyle),
               ),
             ),
           )

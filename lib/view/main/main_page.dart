@@ -106,41 +106,41 @@ class _MainPageState extends State<MainPage> {
           SalomonBottomBarItem(
               activeIcon: Icon(
                 Icons.home,
-                color: AppColors.greenColor,
+                color: AppColors.green,
               ),
               icon: const Icon(Icons.home_outlined),
               title: const Text(
                 "Home",
               ),
-              selectedColor: AppColors.greenColor,
+              selectedColor: AppColors.green,
               unselectedColor: Theme.of(context).indicatorColor),
           SalomonBottomBarItem(
               activeIcon: Icon(
                 Icons.favorite_border,
-                color: AppColors.greenColor,
+                color: AppColors.green,
               ),
               icon: const Icon(Icons.favorite_border_outlined),
               title: const Text("Likes"),
               unselectedColor: Theme.of(context).indicatorColor,
-              selectedColor: AppColors.greenColor),
+              selectedColor: AppColors.green),
           SalomonBottomBarItem(
               activeIcon: Icon(
                 Icons.search,
-                color: AppColors.greenColor,
+                color: AppColors.green,
               ),
               icon: const Icon(Icons.search_outlined),
               title: const Text("Search"),
               unselectedColor: Theme.of(context).indicatorColor,
-              selectedColor: AppColors.greenColor),
+              selectedColor: AppColors.green),
           SalomonBottomBarItem(
               activeIcon: Icon(
                 Icons.person,
-                color: AppColors.greenColor,
+                color: AppColors.green,
               ),
               icon: const Icon(Icons.person_outline),
               unselectedColor: Theme.of(context).indicatorColor,
               title: const Text("Profile"),
-              selectedColor: AppColors.greenColor),
+              selectedColor: AppColors.green),
         ],
       ),
       body: bottomNavigatorWidget[indexValue ?? currentIndex],

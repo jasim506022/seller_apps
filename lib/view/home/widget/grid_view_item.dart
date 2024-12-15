@@ -32,7 +32,7 @@ class GridViewItem extends StatelessWidget {
                 image,
                 height: 70.h,
                 width: 70.h,
-                color: AppColors.greenColor,
+                color: AppColors.green,
               ),
               SizedBox(
                 height: 10.h,

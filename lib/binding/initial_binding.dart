@@ -5,6 +5,7 @@ import 'package:seller_apps/controller/forget_password_controller.dart';
 import 'package:seller_apps/repository/forget_password_repository.dart';
 
 import '../controller/loading_controller.dart';
+import '../controller/onboarding_controller.dart';
 import '../controller/order_controller.dart';
 import '../controller/product_controller.dart';
 import '../controller/profile_controller.dart';
@@ -12,6 +13,7 @@ import '../controller/search_controller.dart';
 import '../controller/select_image_controller.dart';
 import '../controller/sign_in_controller.dart';
 import '../controller/sign_up_controller.dart';
+import '../controller/splash_controller.dart';
 import '../repository/delivary_repository.dart';
 import '../repository/order_repository.dart';
 import '../repository/product_repository.dart';
@@ -19,14 +21,23 @@ import '../repository/profile_repository.dart';
 import '../repository/select_image_repository.dart';
 import '../repository/sign_in_repository.dart';
 import '../repository/sign_up_repository.dart';
+import '../repository/splash_repository.dart';
 
 class InitialBinding extends Bindings {
   @override
   void dependencies() {
+    Get.lazyPut<SplashRepository>(() => SplashRepository());
+
+    Get.lazyPut<SplashController>(
+        () => SplashController(repository: Get.find<SplashRepository>()));
+
+    Get.lazyPut<OnboardingController>(() => OnboardingController());
+
     Get.lazyPut<SignInRepository>(() => SignInRepository());
 
     Get.lazyPut<SignInController>(
         () => SignInController(repository: Get.find<SignInRepository>()));
+
     Get.put<LoadingController>(LoadingController());
 
     Get.lazyPut<SelectImageRepository>(() => SelectImageRepository());

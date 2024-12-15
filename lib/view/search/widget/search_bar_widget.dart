@@ -43,7 +43,7 @@ class SearchBarWidget extends StatelessWidget {
                 FocusScope.of(context).unfocus();
                 Get.dialog(const FilterDialogWidget());
               },
-              icon: Icon(
+              icon: const Icon(
                 FontAwesomeIcons.sliders,
                 color: AppColors.green,
               ))

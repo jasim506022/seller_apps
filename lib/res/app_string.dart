@@ -72,4 +72,6 @@ Auth String
 
   //
   static String onBoarding = 'onBoarding';
+  static String appsName = "Grocery Apps";
+  static String skip = "Skip";
 }

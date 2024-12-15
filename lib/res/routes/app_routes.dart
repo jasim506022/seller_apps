@@ -13,8 +13,8 @@ import 'package:seller_apps/view/profile/edit_profile_page.dart';
 import '../../view/auth/forget_password_page.dart';
 import '../../view/auth/sign_in_page.dart';
 import '../../view/auth/sign_up_page.dart';
-import '../../view/splash/onboardingpage.dart';
-import '../../view/splash/splashpage.dart';
+import '../../view/splash/onboarding_screen.dart';
+import '../../view/splash/splash_screen.dart';
 import 'routes_name.dart';
 
 class AppRoutes {
@@ -25,7 +25,7 @@ class AppRoutes {
         ),
         GetPage(
           name: RoutesName.onBaordingPage,
-          page: () => const OnboardingPage(),
+          page: () => const OnboardingScreen(),
         ),
         GetPage(
           name: RoutesName.signPage,

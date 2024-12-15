@@ -1,12 +1,73 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:seller_apps/res/apps_color.dart';
-import 'package:seller_apps/res/apps_text_style.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-import '../../res/app_constants.dart';
-import '../../res/routes/routes_name.dart';
+import '../../controller/onboarding_controller.dart';
 import '../../model/onboardmodel.dart';
+import '../../res/app_string.dart';
+import '../../res/apps_color.dart';
+import '../../res/apps_text_style.dart';
+import 'widget/onboard_widget.dart';
+
+
+
+class OnboardingScreen extends StatelessWidget {
+  const OnboardingScreen({super.key});
+
+  // @override
+  @override
+  Widget build(BuildContext context) {
+    final controller = Get.find<OnboardingController>();
+
+    // Set the system UI overlay for status bar (light/dark icons)
+
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+        statusBarColor: AppColors.white,
+        statusBarIconBrightness: Brightness.dark));
+
+    return Scaffold(
+      backgroundColor: AppColors.white,
+      appBar: AppBar(
+        backgroundColor: AppColors.white,
+        elevation: 0.0,
+        actions: [
+          TextButton(
+              onPressed: () {
+                controller.skipOnboarding();
+              },
+              child: Text(
+                AppString.skip,
+                style: AppsTextStyle.largeBoldText
+                    .copyWith(color: AppColors.black),
+              )),
+          SizedBox(
+            width: 10.w,
+          )
+        ],
+      ),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20.w),
+        child: PageView.builder(
+          controller: controller.pageController,
+          itemCount: onboardModeList.length,
+          physics: const NeverScrollableScrollPhysics(),
+          onPageChanged: (index) => controller.currentIndex.value = index,
+          itemBuilder: (context, index) {
+            var item = onboardModeList[index];
+            return OnboardingWidget(item: item);
+          },
+        ),
+      ),
+    );
+  }
+}
+
+
+
+
+
+/*
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
@@ -27,16 +88,15 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
   Future<void> onBoardingInfo() async {
     int isViewed = 0;
-    await AppConstants.sharedPreference!.setInt("onBoarding", isViewed);
+    await AppConstants.sharedPreference!.setInt(AppString.onBoarding, isViewed);
   }
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
         statusBarColor: AppColors.white,
         statusBarIconBrightness: Brightness.dark));
 
-    var mq = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
@@ -49,16 +109,17 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 Navigator.pushReplacementNamed(context, RoutesName.signPage);
               },
               child: Text(
-                "Skip",
-                style: AppsTextStyle.titleTextStyle.copyWith(color: AppColors.black),
+                AppString.skip,
+                style: AppsTextStyle.largeBoldText
+                    .copyWith(color: AppColors.black),
               )),
           SizedBox(
-            width: mq.width * .022,
+            width: 10.w,
           )
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: mq.height * .044),
+        padding: EdgeInsets.symmetric(horizontal: 20.w),
         child: PageView.builder(
           controller: _pageController,
           itemCount: onboardModeList.length,
@@ -70,11 +131,11 @@ class _OnboardingPageState extends State<OnboardingPage> {
               children: [
                 Image.asset(
                   onboardModeList[index].img,
-                  height: mq.height * .411,
+                  height: 350.h,
                   fit: BoxFit.fill,
                 ),
                 SizedBox(
-                  height: mq.height * .013,
+                  height: AppConstants.defaultHeightSpace,
                   child: ListView.builder(
                     itemCount: onboardModeList.length,
                     shrinkWrap: true,
@@ -84,15 +145,14 @@ class _OnboardingPageState extends State<OnboardingPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Container(
-                            height: mq.height * .01,
-                            width: mq.height * .01,
-                            margin: const EdgeInsets.symmetric(horizontal: 3),
+                            height: 10.h,
+                            width: 10.h,
+                            margin: EdgeInsets.symmetric(horizontal: 3.h),
                             decoration: BoxDecoration(
                                 color: currentIndex == index
                                     ? AppColors.red
-                                    : AppColors.brown,
-                                borderRadius:
-                                    BorderRadius.circular(mq.height * .01)),
+                                    : AppColors.black,
+                                borderRadius: BorderRadius.circular(10.r)),
                           ),
                         ],
                       );
@@ -102,17 +162,12 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 Text(
                   onboardModeList[index].text,
                   textAlign: TextAlign.center,
-                  style: GoogleFonts.inter(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.black),
+                  style: AppsTextStyle.largeTitleTextStyle
+                      .copyWith(fontSize: 30.sp),
                 ),
                 Text(onboardModeList[index].desc,
                     textAlign: TextAlign.center,
-                    style: GoogleFonts.inter(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.black)),
+                    style: AppsTextStyle.mediumBoldText),
                 InkWell(
                   onTap: () async {
                     if (index == onboardModeList.length - 1) {
@@ -127,27 +182,22 @@ class _OnboardingPageState extends State<OnboardingPage> {
                         curve: Curves.bounceIn);
                   },
                   child: Container(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: mq.width * .066,
-                        vertical: mq.height * .015),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 30.w, vertical: 15.h),
                     decoration: BoxDecoration(
                         color: AppColors.black,
-                        borderRadius: BorderRadius.circular(mq.width * .033)),
+                        borderRadius: BorderRadius.circular(15.r)),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
                           "Next",
-                          style: GoogleFonts.inter(
-                              fontSize: 18,
-                              fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.bold,
-                              color: AppColors.white),
+                          style: AppsTextStyle.buttonTextStyle,
                         ),
                         SizedBox(
-                          width: mq.width * .04,
+                          width: 10.w,
                         ),
-                        Icon(
+                        const Icon(
                           Icons.arrow_forward_sharp,
                           color: AppColors.white,
                         )
@@ -163,3 +213,5 @@ class _OnboardingPageState extends State<OnboardingPage> {
     );
   }
 }
+
+*/

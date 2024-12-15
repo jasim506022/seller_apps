@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:seller_apps/controller/profile_controller.dart';
 import '../../const/cart_function.dart';
-import '../../const/gobalcolor.dart';
+import '../../res/apps_color.dart';
 import '../home/home_page.dart';
 import '../other/local_service.dart';
 import '../other/pushnotification.dart';
@@ -106,41 +106,41 @@ class _MainPageState extends State<MainPage> {
           SalomonBottomBarItem(
               activeIcon: Icon(
                 Icons.home,
-                color: greenColor,
+                color: AppColors.greenColor,
               ),
               icon: const Icon(Icons.home_outlined),
               title: const Text(
                 "Home",
               ),
-              selectedColor: greenColor,
+              selectedColor: AppColors.greenColor,
               unselectedColor: Theme.of(context).indicatorColor),
           SalomonBottomBarItem(
               activeIcon: Icon(
                 Icons.favorite_border,
-                color: greenColor,
+                color: AppColors.greenColor,
               ),
               icon: const Icon(Icons.favorite_border_outlined),
               title: const Text("Likes"),
               unselectedColor: Theme.of(context).indicatorColor,
-              selectedColor: greenColor),
+              selectedColor: AppColors.greenColor),
           SalomonBottomBarItem(
               activeIcon: Icon(
                 Icons.search,
-                color: greenColor,
+                color: AppColors.greenColor,
               ),
               icon: const Icon(Icons.search_outlined),
               title: const Text("Search"),
               unselectedColor: Theme.of(context).indicatorColor,
-              selectedColor: greenColor),
+              selectedColor: AppColors.greenColor),
           SalomonBottomBarItem(
               activeIcon: Icon(
                 Icons.person,
-                color: greenColor,
+                color: AppColors.greenColor,
               ),
               icon: const Icon(Icons.person_outline),
               unselectedColor: Theme.of(context).indicatorColor,
               title: const Text("Profile"),
-              selectedColor: greenColor),
+              selectedColor: AppColors.greenColor),
         ],
       ),
       body: bottomNavigatorWidget[indexValue ?? currentIndex],

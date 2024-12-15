@@ -16,7 +16,7 @@ class AppsTextStyle {
 
   // Title Text Style
   static TextStyle get titleTextStyle => GoogleFonts.poppins(
-      color: theme.primaryColor, fontSize: 18.sp, fontWeight: FontWeight.w700);
+      color: theme.primaryColor, fontSize: 18.sp, fontWeight: FontWeight.w800);
 
 // Large Normal Text
   static TextStyle get largeNormalText => GoogleFonts.poppins(

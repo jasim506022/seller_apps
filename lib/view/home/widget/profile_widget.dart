@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:seller_apps/res/apps_color.dart';
 
-import '../../../const/global.dart';
+import '../../../res/app_constants.dart';
 import '../../../res/app_string.dart';
 import '../../../res/apps_text_style.dart';
 
@@ -28,7 +28,7 @@ class ProfileWidget extends StatelessWidget {
                     backgroundColor: AppColors.white,
                   ),
                   errorWidget: (context, url, error) => const Icon(Icons.error),
-                  imageUrl: sharedPreference!
+                  imageUrl: AppConstants.sharedPreference!
                       .getString(AppString.imageurlSharedPreference)!,
                   fit: BoxFit.cover,
                 ),
@@ -42,12 +42,14 @@ class ProfileWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  sharedPreference!.getString(AppString.nameSharedPreference)!,
+                  AppConstants.sharedPreference!
+                      .getString(AppString.nameSharedPreference)!,
                   style: AppsTextStyle.largeTitleTextStyle
                       .copyWith(color: AppColors.white),
                 ),
                 Text(
-                  sharedPreference!.getString(AppString.nameSharedPreference)!,
+                  AppConstants.sharedPreference!
+                      .getString(AppString.nameSharedPreference)!,
                   style: AppsTextStyle.mediumBoldText
                       .copyWith(color: AppColors.white),
                 ),

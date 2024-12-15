@@ -12,9 +12,9 @@ import 'package:seller_apps/model/profilemodel.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../const/cart_function.dart';
-import '../../const/const.dart';
-import '../../const/global.dart';
+
 import '../../model/productsmodel.dart';
+import '../../res/app_constants.dart';
 import '../../widget/show_error_dialog_widget.dart';
 
 class FirebaseDatabase {
@@ -39,7 +39,7 @@ class FirebaseDatabase {
   static User get user => auth.currentUser!;
 
   // Seller Uid
-  static String selleruid = sharedPreference!.getString("uid")!;
+  static String selleruid = AppConstants.sharedPreference!.getString("uid")!;
 
   // instance of Firebase Storeage Reference
   static Reference storageRef = FirebaseStorage.instance.ref();
@@ -99,7 +99,7 @@ class FirebaseDatabase {
 
         return await auth.signInWithCredential(credential);
       } else {
-        globalMethod.flutterToast(msg: "No Internet Connection");
+        // globalMethod.flutterToast(msg: "No Internet Connection");
       }
     } catch (e) {
       showDialog(
@@ -269,7 +269,7 @@ class FirebaseDatabase {
   static Stream<DocumentSnapshot<Map<String, dynamic>>> addressSnapsot() {
     return FirebaseFirestore.instance
         .collection("users")
-        .doc(sharedPreference!.getString("uid"))
+        .doc(AppConstants.sharedPreference!.getString("uid"))
         .snapshots();
 
     //

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:seller_apps/res/apps_color.dart';
 
+import '../../res/app_constants.dart';
 import '../../res/routes/routes_name.dart';
-import '../../const/global.dart';
-import '../../const/gobalcolor.dart';
 import '../../const/textstyle.dart';
 import '../../model/onboardmodel.dart';
 
@@ -27,19 +27,20 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
   Future<void> onBoardingInfo() async {
     int isViewed = 0;
-    await sharedPreference!.setInt("onBoarding", isViewed);
+    await AppConstants.sharedPreference!.setInt("onBoarding", isViewed);
   }
 
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: white, statusBarIconBrightness: Brightness.dark));
+        statusBarColor: AppColors.white,
+        statusBarIconBrightness: Brightness.dark));
     Textstyle textstyle = Textstyle(context);
     var mq = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: white,
+      backgroundColor: AppColors.white,
       appBar: AppBar(
-        backgroundColor: white,
+        backgroundColor: AppColors.white,
         elevation: 0.0,
         actions: [
           TextButton(
@@ -49,7 +50,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
               },
               child: Text(
                 "Skip",
-                style: textstyle.largestText.copyWith(color: black),
+                style: textstyle.largestText.copyWith(color: AppColors.black),
               )),
           SizedBox(
             width: mq.width * .022,
@@ -87,7 +88,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             width: mq.height * .01,
                             margin: const EdgeInsets.symmetric(horizontal: 3),
                             decoration: BoxDecoration(
-                                color: currentIndex == index ? red : brown,
+                                color: currentIndex == index
+                                    ? AppColors.red
+                                    : AppColors.brown,
                                 borderRadius:
                                     BorderRadius.circular(mq.height * .01)),
                           ),
@@ -100,14 +103,16 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   onboardModeList[index].text,
                   textAlign: TextAlign.center,
                   style: GoogleFonts.inter(
-                      fontSize: 30, fontWeight: FontWeight.bold, color: black),
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.black),
                 ),
                 Text(onboardModeList[index].desc,
                     textAlign: TextAlign.center,
                     style: GoogleFonts.inter(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: black)),
+                        color: AppColors.black)),
                 InkWell(
                   onTap: () async {
                     if (index == onboardModeList.length - 1) {
@@ -126,7 +131,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                         horizontal: mq.width * .066,
                         vertical: mq.height * .015),
                     decoration: BoxDecoration(
-                        color: black,
+                        color: AppColors.black,
                         borderRadius: BorderRadius.circular(mq.width * .033)),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
@@ -137,14 +142,14 @@ class _OnboardingPageState extends State<OnboardingPage> {
                               fontSize: 18,
                               fontStyle: FontStyle.normal,
                               fontWeight: FontWeight.bold,
-                              color: white),
+                              color: AppColors.white),
                         ),
                         SizedBox(
                           width: mq.width * .04,
                         ),
                         Icon(
                           Icons.arrow_forward_sharp,
-                          color: white,
+                          color: AppColors.white,
                         )
                       ],
                     ),

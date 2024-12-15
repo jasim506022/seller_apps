@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../const/global.dart';
 import '../../controller/category_controller.dart';
+import '../../res/app_constants.dart';
 import '../../widget/drop_down_category_widget.dart';
 import 'widget/product_list_widget.dart';
 
@@ -24,7 +24,7 @@ class ProductPage extends StatelessWidget {
         child: Column(
           children: [
             DropdownCategoryWidget(
-              list: allCategoryList,
+              list: AppConstants.allCategoryList,
               value: categoryController.getCategory,
               onChanged: (value) {
                 categoryController.setCategory(category: value!.toString());

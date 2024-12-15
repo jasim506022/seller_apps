@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../const/global.dart';
+import '../../res/app_constants.dart';
 
 class ImageAddRemoveProvider with ChangeNotifier {
   // Use for Image List
@@ -40,7 +40,8 @@ class ImageAddRemoveProvider with ChangeNotifier {
   }
 
   // Cateogry
-  String _categoryName = categoryList.first;
+
+  String _categoryName = AppConstants.categoryList.first;
 
   // get Category Item
   String get getCategory => _categoryName;
@@ -52,7 +53,7 @@ class ImageAddRemoveProvider with ChangeNotifier {
   }
 
   // Unit
-  String _unit = unitList.first;
+  String _unit = AppConstants.unitList.first;
 
   // getUnit
   String get getUnit => _unit;

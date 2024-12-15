@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 import '../../const/cart_function.dart';
-import '../../const/gobalcolor.dart';
+import '../../res/apps_color.dart';
 import '../../service/provider/totalamountprovider.dart';
 import '../order/history_page.dart';
 
@@ -38,8 +38,8 @@ class _TotalSellPageState extends State<TotalSellPage> {
               child: Container(
             height: 0.4.sh,
             width: 0.4.sh,
-            decoration:
-                BoxDecoration(color: greenColor, shape: BoxShape.circle),
+            decoration: BoxDecoration(
+                color: AppColors.greenColor, shape: BoxShape.circle),
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -48,7 +48,7 @@ class _TotalSellPageState extends State<TotalSellPage> {
                   Text(
                     "Tk. ${value.amount.toStringAsFixed(2)}",
                     style: TextStyle(
-                        color: white,
+                        color: AppColors.white,
                         fontSize: 50,
                         fontWeight: FontWeight.bold),
                   ),
@@ -67,12 +67,12 @@ class _TotalSellPageState extends State<TotalSellPage> {
                       padding: EdgeInsets.symmetric(
                           horizontal: 40.h, vertical: 15.h),
                       decoration: BoxDecoration(
-                          color: white,
+                          color: AppColors.white,
                           borderRadius: BorderRadius.circular(10)),
                       child: Text(
                         "Details",
                         style: TextStyle(
-                            color: black,
+                            color: AppColors.black,
                             fontSize: 18,
                             fontWeight: FontWeight.bold),
                       ),

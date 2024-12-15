@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import '../service/provider/theme_provider.dart';
-import '../const/gobalcolor.dart';
 import 'apps_color.dart';
 
 class Utils {
@@ -30,22 +29,25 @@ class Utils {
   static Color get green200 =>
       getTheme ? Colors.green.shade700 : Colors.green.shade200;
 
-  static Color? get green50 => getTheme ? cardDarkColor : Colors.green[50];
+  static Color? get green50 =>
+      getTheme ? AppColors.cardDarkColor : Colors.green[50];
 
   static Color? get profileTextColor =>
       getTheme ? Colors.white54 : Colors.black54;
 
   static Color? get bottomTotalBill =>
-      getTheme ? cardDarkColor : greenColor.withOpacity(.1);
+      getTheme ? AppColors.cardDarkColor : AppColors.greenColor.withOpacity(.1);
 
-  static Color? get categoryUnselectBackground =>
-      getTheme ? cardDarkColor : const Color.fromARGB(255, 238, 236, 236);
+  static Color? get categoryUnselectBackground => getTheme
+      ? AppColors.cardDarkColor
+      : const Color.fromARGB(255, 238, 236, 236);
 
   static Color? get categoryUnSelectTextColor =>
-      getTheme ? white.withOpacity(.7) : black;
+      getTheme ? AppColors.white.withOpacity(.7) : AppColors.black;
 
-  static Color? get categorySelectBackground => getTheme ? greenColor : black;
+  static Color? get categorySelectBackground =>
+      getTheme ? AppColors.greenColor : AppColors.black;
 
   static Color? get backgroundCutilsolor =>
-      getTheme ? backgroundDarkColor : const Color(0xfff2f2f8);
+      getTheme ? AppColors.backgroundDarkColor : const Color(0xfff2f2f8);
 }

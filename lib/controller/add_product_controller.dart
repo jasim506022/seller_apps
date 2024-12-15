@@ -5,9 +5,9 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:seller_apps/res/routes/routes_name.dart';
 
-import '../const/global.dart';
 import '../model/productsmodel.dart';
 import '../repository/add_product_repository.dart';
+import '../res/app_constants.dart';
 import '../res/app_function.dart';
 import '../widget/show_alert_dialog_widget.dart';
 import 'category_controller.dart';
@@ -97,8 +97,8 @@ class AddProductController extends GetxController {
   ProductModel _buildProductModel(bool isUpdate, List<String> imageUrls) {
     return ProductModel(
       productId: productId,
-      sellerId: sharedPreference!.getString("uid"),
-      sellerName: sharedPreference!.getString("name"),
+      sellerId: AppConstants.sharedPreference!.getString("uid"),
+      sellerName: AppConstants.sharedPreference!.getString("name"),
       productname: nameTEC.text.trim(),
       productcategory: categoryController.getCategory,
       productprice: double.tryParse(priceTEC.text.trim()) ?? 0.0,
@@ -167,8 +167,8 @@ class AddProductController extends GetxController {
     ratingTEC.clear();
     descriptionTEC.clear();
     categoryController
-      ..setCategory(category: categoryList.first)
-      ..setUnit(unit: unitList.first);
+      ..setCategory(category: AppConstants.categoryList.first)
+      ..setUnit(unit: AppConstants.unitList.first);
     productImageFile.value = [];
   }
 }

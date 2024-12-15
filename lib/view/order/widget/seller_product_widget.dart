@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:seller_apps/const/global.dart';
 import 'package:seller_apps/res/app_string.dart';
 
 import '../../../model/order_model.dart';
+import '../../../res/app_constants.dart';
 import '../../../res/apps_color.dart';
 import '../../../res/apps_text_style.dart';
 import 'order_item_widget.dart';
@@ -36,7 +36,7 @@ class SellerOrderProductWidget extends StatelessWidget {
               children: [
                 const TextSpan(text: "Seller Name:\t"),
                 TextSpan(
-                  text: sharedPreference!
+                  text: AppConstants.sharedPreference!
                               .getString(AppString.uidSharedPreference) ==
                           sellerId
                       ? "My Product"

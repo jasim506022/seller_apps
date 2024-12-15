@@ -1,5 +1,6 @@
-import 'package:seller_apps/const/global.dart';
 import 'package:seller_apps/res/app_string.dart';
+
+import '../res/app_constants.dart';
 
 class ProfileModel {
   String? address;
@@ -21,8 +22,6 @@ class ProfileModel {
     this.uid,
   });
 
-
-
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'address': address,
@@ -32,21 +31,24 @@ class ProfileModel {
       'name': name,
       'phone': phone,
       'status': AppString.approved,
-      'uid': sharedPreference!.getString(AppString.uidSharedPreference),
+      'uid': AppConstants.sharedPreference!
+          .getString(AppString.uidSharedPreference),
     };
   }
 
   Map<String, dynamic> toMapProfileEdit() {
     return <String, dynamic>{
       'address': address,
-      'earnings':
-          sharedPreference!.getDouble(AppString.earningSharedPreference),
-      'email': sharedPreference!.getString(AppString.emailSharedPreference),
+      'earnings': AppConstants.sharedPreference!
+          .getDouble(AppString.earningSharedPreference),
+      'email': AppConstants.sharedPreference!
+          .getString(AppString.emailSharedPreference),
       'imageurl': imageurl,
       'name': name,
       'phone': phone,
       'status': AppString.approved,
-      'uid': sharedPreference!.getString(AppString.uidSharedPreference),
+      'uid': AppConstants.sharedPreference!
+          .getString(AppString.uidSharedPreference),
     };
   }
 

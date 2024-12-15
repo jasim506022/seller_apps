@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
+import '../../res/app_constants.dart';
+import '../../res/apps_color.dart';
 import '../../res/routes/routes_name.dart';
-import '../../const/const.dart';
-import '../../const/gobalcolor.dart';
 import '../../const/textstyle.dart';
 
 class SplashPage extends StatefulWidget {
@@ -26,7 +26,7 @@ class _SplashPageState extends State<SplashPage> {
         if (currentUser != null) {
           Get.offNamed(RoutesName.mainPage);
         } else {
-          if (isviewed != 0) {
+          if (AppConstants.isViewed != 0) {
             Get.offNamed(RoutesName.onBaordingPage);
           } else {
             Get.offNamed(RoutesName.signPage);
@@ -79,7 +79,7 @@ class _SplashPageState extends State<SplashPage> {
                 ),
                 Text("Grocery Apps",
                     style: textstyle.largestText
-                        .copyWith(color: greenColor, fontSize: 22)),
+                        .copyWith(color: AppColors.greenColor, fontSize: 22)),
               ],
             ),
           )

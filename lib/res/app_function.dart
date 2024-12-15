@@ -118,7 +118,7 @@ class AppsFunction {
                 },
                 icon: Icon(
                   Icons.password,
-                  color: obscureText ? AppColors.hintLightColor : AppColors.red,
+                  color: obscureText ? AppColors.hintLight : AppColors.red,
                 ))
             : null,
         contentPadding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 20.h),

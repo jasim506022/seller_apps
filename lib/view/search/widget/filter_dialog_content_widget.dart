@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../const/global.dart';
 import '../../../controller/search_controller.dart';
+import '../../../res/app_constants.dart';
 import '../../../res/apps_color.dart';
 import '../../../res/apps_text_style.dart';
 import '../../../widget/custom_round_action_button_widget.dart';
@@ -46,8 +46,8 @@ class FilterDialogContentWidget extends StatelessWidget {
             height: 10.h,
           ),
           DropdownCategoryWidget(
-            value: allCategoryList[0],
-            list: allCategoryList,
+            value: AppConstants.allCategoryList[0],
+            list: AppConstants.allCategoryList,
             onChanged: (category) {
               searchController.setCategory(category!);
             },

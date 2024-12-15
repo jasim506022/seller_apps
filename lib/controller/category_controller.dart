@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 
-import '../const/global.dart';
+import '../res/app_constants.dart';
 
 class CategoryController extends GetxController {
-  final _category = categoryList.first.obs;
+  final _category = AppConstants.categoryList.first.obs;
 
   String get getCategory => _category.value;
 
@@ -11,7 +11,7 @@ class CategoryController extends GetxController {
     _category.value = category;
   }
 
-  final _unit = unitList.first.obs;
+  final _unit = AppConstants.unitList.first.obs;
 
   String get getUnit => _unit.value;
 
@@ -19,7 +19,7 @@ class CategoryController extends GetxController {
     _unit.value = unit;
   }
 
-  final _status = statusList.first.obs;
+  final _status = AppConstants.statusList.first.obs;
   String get getStatus => _status.value;
 
   void setStatus({required String status}) {

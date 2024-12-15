@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:seller_apps/res/app_constants.dart';
 
-import '../../../const/global.dart';
 import '../../../controller/product_controller.dart';
 import '../../../model/productsmodel.dart';
 import '../../../res/app_function.dart';
@@ -18,11 +18,11 @@ class PopupButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   var productController = Get.find<ProductController>();
-    return PopupMenuButton<ProductSelect>(
+    var productController = Get.find<ProductController>();
+    return PopupMenuButton<ProductAction>(
       color: Theme.of(context).cardColor,
       iconColor: Colors.white,
-      onSelected: (ProductSelect product) async {
+      onSelected: (ProductAction product) async {
         if (product.name == "detele") {
           if (!(await AppsFunction.verifyInternetStatus())) {
             productController.deleteProductSnapshot(
@@ -36,13 +36,13 @@ class PopupButtonWidget extends StatelessWidget {
         }
       },
       itemBuilder: (BuildContext context) {
-        return <PopupMenuItem<ProductSelect>>[
+        return <PopupMenuItem<ProductAction>>[
           PopupMenuItem(
-            value: ProductSelect.detele,
+            value: ProductAction.delete,
             child: Text("Delete", style: AppsTextStyle.mediumBoldText),
           ),
           PopupMenuItem(
-              value: ProductSelect.edit,
+              value: ProductAction.edit,
               child: Text("Edit", style: AppsTextStyle.mediumBoldText)),
         ];
       },

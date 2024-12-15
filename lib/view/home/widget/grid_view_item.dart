@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:seller_apps/res/apps_text_style.dart';
 
-import '../../../const/gobalcolor.dart';
+import '../../../res/apps_color.dart';
 
 class GridViewItem extends StatelessWidget {
   const GridViewItem({
@@ -32,7 +32,7 @@ class GridViewItem extends StatelessWidget {
                 image,
                 height: 70.h,
                 width: 70.h,
-                color: greenColor,
+                color: AppColors.greenColor,
               ),
               SizedBox(
                 height: 10.h,

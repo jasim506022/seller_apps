@@ -3,10 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../../const/global.dart';
 import '../../../controller/add_product_controller.dart';
 import '../../../controller/category_controller.dart';
 
+import '../../../res/app_constants.dart';
 import '../../../res/app_function.dart';
 import '../../../res/apps_color.dart';
 import '../../../res/apps_text_style.dart';
@@ -115,7 +115,7 @@ class _AddProductWidgetState extends State<AddProductWidget> {
       child: Column(
         children: [
           DropdownCategoryWidget(
-            list: categoryList,
+            list: AppConstants.categoryList,
             value: categoryController.getCategory,
             onChanged: (value) {
               addProductController.addChangeListener();
@@ -142,7 +142,7 @@ class _AddProductWidgetState extends State<AddProductWidget> {
                   addProductController.addChangeListener();
                   categoryController.setUnit(unit: value!.toString());
                 },
-                list: unitList,
+                list: AppConstants.unitList,
                 value: categoryController.getUnit,
               )),
             ],

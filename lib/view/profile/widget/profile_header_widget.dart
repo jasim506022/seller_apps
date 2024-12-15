@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../const/const.dart';
-import '../../../const/global.dart';
+import '../../../res/app_constants.dart';
 import '../../../res/app_function.dart';
 import '../../../res/app_string.dart';
 import '../../../res/apps_color.dart';
@@ -34,7 +33,8 @@ class ProifleHeaderWidget extends StatelessWidget {
               ),
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: defaulHieighSpace.h),
+                  padding: EdgeInsets.symmetric(
+                      vertical: AppConstants.defaultHeightSpace.h),
                   child: _buildProfileDetails(),
                 ),
               )
@@ -48,12 +48,17 @@ class ProifleHeaderWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Text(sharedPreference!.getString(AppString.nameSharedPreference)!,
-            maxLines: 1, style: AppsTextStyle.titleTextStyle),
-        Text(sharedPreference!.getString(AppString.emailSharedPreference)!,
+        Text(
+            AppConstants.sharedPreference!
+                .getString(AppString.nameSharedPreference)!,
+            maxLines: 1,
+            style: AppsTextStyle.titleTextStyle),
+        Text(
+            AppConstants.sharedPreference!
+                .getString(AppString.emailSharedPreference)!,
             style: AppsTextStyle.subTitleTextStyle),
         SizedBox(
-          height: defaulHieighSpace,
+          height: AppConstants.defaultHeightSpace,
         ),
         CustomRoundActionButtonWidget(
           title: "Edit Profile",
@@ -76,7 +81,7 @@ class ProifleHeaderWidget extends StatelessWidget {
             border: Border.all(color: AppColors.red, width: 3.w)),
         child: ClipOval(
           child: FancyShimmerImage(
-            imageUrl: sharedPreference!
+            imageUrl: AppConstants.sharedPreference!
                 .getString(AppString.imageurlSharedPreference)!,
             errorWidget: const Icon(Icons.error),
           ),

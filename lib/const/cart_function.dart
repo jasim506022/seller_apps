@@ -2,12 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:seller_apps/const/global.dart';
 import 'package:seller_apps/service/database/firebasedatabase.dart';
 import 'package:seller_apps/model/productsmodel.dart';
 
+import '../res/app_constants.dart';
 import '../service/provider/totalamountprovider.dart';
-import 'const.dart';
 
 class CartFunctions {
   static List<ProductModel> allProductList = [];
@@ -30,7 +29,7 @@ class CartFunctions {
       for (var i = 0; i < seller.docs.length; i++) {
         FirebaseFirestore.instance
             .collection("seller")
-            .doc(sharedPreference!.getString("uid")!)
+            .doc(AppConstants.sharedPreference!.getString("uid")!)
             .collection("products")
             .where("productId",
                 whereIn: CartFunctions.separteOrderProductIdList(
@@ -42,11 +41,13 @@ class CartFunctions {
           for (var p = 0; p < event.docs.length; p++) {
             Future.delayed(Duration.zero, () {
               Provider.of<TotalAmountProvider>(context, listen: false)
-                  .setAmount(
-                      amount: listItem[p] *
-                          globalMethod.discountedPrice(
-                              event.docs[p]['productprice'],
-                              event.docs[p]['discount']));
+                  .setAmount(amount: 0
+                      // amount: listItem[p] *
+                      //    AppConstants. globalMethod.discountedPrice(
+                      //         event.docs[p]['productprice'],
+                      //         event.docs[p]['discount'])
+
+                      );
             });
             if (kDebugMode) {
               print(listItem[p] * event.docs[p]['productprice']);
@@ -73,7 +74,8 @@ class CartFunctions {
       print(itemSellerDetails);
     }
     for (var i = 0; i < itemSellerDetails.length; i++) {
-      if (itemSellerDetails[i] == sharedPreference!.getString("uid")) {
+      if (itemSellerDetails[i] ==
+          AppConstants.sharedPreference!.getString("uid")) {
         itemNumber.add(userCartList[i + 1]);
       }
     }

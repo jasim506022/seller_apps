@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:seller_apps/res/routes/routes_name.dart';
-import 'package:seller_apps/const/gobalcolor.dart';
+
+import '../res/apps_color.dart';
 
 class CustomDialogWidget extends StatelessWidget {
   final String title;
@@ -24,7 +25,7 @@ class CustomDialogWidget extends StatelessWidget {
       title: Text(
         title,
         style: GoogleFonts.poppins(
-          color: greenColor,
+          color: AppColors.greenColor,
           fontSize: 16,
           fontWeight: FontWeight.bold,
         ),

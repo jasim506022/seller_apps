@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:seller_apps/res/app_string.dart';
 
-import '../../const/global.dart';
-
+import '../../res/app_constants.dart';
 import '../../res/apps_color.dart';
 import '../../res/utils.dart';
 
@@ -93,7 +92,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
             ClipOval(
               child: FancyShimmerImage(
                 imageUrl: profileController.profileModel.value.imageurl ??
-                    sharedPreference!
+                    AppConstants.sharedPreference!
                         .getString(AppString.imageurlSharedPreference)!,
               ),
             ),
@@ -110,7 +109,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               ? ClipOval(
                   child: FancyShimmerImage(
                   imageUrl: profileController.profileModel.value.imageurl ??
-                      sharedPreference!
+                      AppConstants.sharedPreference!
                           .getString(AppString.imageurlSharedPreference)!,
                 ))
               : CircleAvatar(backgroundImage: FileImage(image)));

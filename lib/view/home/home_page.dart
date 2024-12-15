@@ -11,8 +11,6 @@ import '../../res/apps_color.dart';
 import '../../res/apps_text_style.dart';
 import '../../res/routes/routes_name.dart';
 
-import '../../const/gobalcolor.dart';
-
 import 'widget/grid_view_item.dart';
 import 'widget/profile_widget.dart';
 
@@ -22,7 +20,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: greenColor,
+        statusBarColor: AppColors.greenColor,
         statusBarBrightness: Brightness.light,
         statusBarIconBrightness: Brightness.light));
     return SafeArea(
@@ -43,7 +41,7 @@ class HomePage extends StatelessWidget {
                 height: 0.35.sh,
                 width: 1.sw,
                 decoration: BoxDecoration(
-                  color: greenColor,
+                  color: AppColors.greenColor,
                   borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(60.r),
                       bottomRight: Radius.circular(60.r)),

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../const/global.dart';
 import '../model/app_exception.dart';
 import '../model/profilemodel.dart';
 import '../repository/profile_repository.dart';
 import '../repository/sign_up_repository.dart';
 import '../res/app_asset/icon_asset.dart';
+import '../res/app_constants.dart';
 import '../res/app_function.dart';
 import '../res/app_string.dart';
 import '../res/routes/routes_name.dart';
@@ -139,16 +139,17 @@ class ProfileController extends GetxController {
   Future<void> _saveProfileToSharedPreferences() async {
     var profile = profileModel.value;
     final prefsTasks = [
-      sharedPreference!.setString(AppString.uidSharedPreference, profile.uid!),
-      sharedPreference!
+      AppConstants.sharedPreference!
+          .setString(AppString.uidSharedPreference, profile.uid!),
+      AppConstants.sharedPreference!
           .setString(AppString.emailSharedPreference, profile.email!),
-      sharedPreference!
+      AppConstants.sharedPreference!
           .setString(AppString.nameSharedPreference, profile.name!),
-      sharedPreference!
+      AppConstants.sharedPreference!
           .setString(AppString.imageurlSharedPreference, profile.imageurl!),
-      sharedPreference!
+      AppConstants.sharedPreference!
           .setString(AppString.phoneSharedPreference, profile.phone!),
-      sharedPreference!.setDouble(
+      AppConstants.sharedPreference!.setDouble(
           AppString.earningSharedPreference, profile.earnings!.toDouble()),
     ];
     await Future.wait(prefsTasks);
@@ -169,10 +170,10 @@ class ProfileController extends GetxController {
         content: 'Do you want to sign out?',
         yesOnPress: () async {
           try {
-            await sharedPreference?.setString(
-                AppString.imageurlSharedPreference, "");
-            await sharedPreference?.setString(
-                AppString.nameSharedPreference, "");
+            await AppConstants.sharedPreference
+                ?.setString(AppString.imageurlSharedPreference, "");
+            await AppConstants.sharedPreference
+                ?.setString(AppString.nameSharedPreference, "");
 
             await repository.signOut();
             AppsFunction.flutterToast(msg: "Successfully Signed Out");

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../const/gobalcolor.dart';
 import '../../../controller/add_product_controller.dart';
+import '../../../res/apps_color.dart';
 import 'single_image_remove_widget.dart';
 
 class GridImageListWidget extends StatelessWidget {
@@ -23,7 +23,7 @@ class GridImageListWidget extends StatelessWidget {
         margin: EdgeInsets.all(5.r),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15.r),
-          border: Border.all(color: greenColor, width: 3.h),
+          border: Border.all(color: AppColors.greenColor, width: 3.h),
         ),
         child: GridView.builder(
           itemCount: addProductController.productImageFile.length,

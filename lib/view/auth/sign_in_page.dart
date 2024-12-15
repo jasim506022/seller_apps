@@ -156,7 +156,7 @@ class _SigninPageState extends State<SigninPage> {
           },
           child: Text(AppString.forgetPassword,
               style: AppsTextStyle.mediumBoldText.copyWith(
-                color: AppColors.hintLightColor,
+                color: AppColors.hintLight,
               )),
         ));
   }

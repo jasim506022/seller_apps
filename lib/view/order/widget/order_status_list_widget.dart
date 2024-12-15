@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:seller_apps/const/global.dart';
 import 'package:seller_apps/controller/category_controller.dart';
 import 'package:seller_apps/widget/drop_down_category_widget.dart';
 
 import '../../../controller/order_controller.dart';
 import '../../../model/order_model.dart';
 import '../../../res/app_asset/image_asset.dart';
+import '../../../res/app_constants.dart';
 import '../../../widget/empty_widget.dart';
 import '../../loading_widget/loading_list_single_product_widget.dart';
 import 'order_item_widget.dart';
@@ -40,8 +40,8 @@ class OrderStatusListWidget extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15.h),
                 child: DropdownCategoryWidget(
-                  list: statusList,
-                  value: statusList.first,
+                  list: AppConstants.statusList,
+                  value: AppConstants.statusList.first,
                   onChanged: (value) {
                     categoryController.setStatus(status: value!);
                   },

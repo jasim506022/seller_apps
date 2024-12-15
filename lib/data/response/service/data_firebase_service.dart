@@ -5,11 +5,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:seller_apps/const/global.dart';
 import 'package:seller_apps/res/app_string.dart';
 
 import '../../../model/productsmodel.dart';
 import '../../../model/profilemodel.dart';
+import '../../../res/app_constants.dart';
 import 'base_firebase_service.dart';
 
 class DataFirebaseService implements BaseFirebaseService {
@@ -130,7 +130,7 @@ Flutter Auth Firebase Snapshot
         "${imageFile!.name}_${DateTime.now().millisecondsSinceEpoch}";
 
     final ref = firebaseStorage.ref().child(
-        "sellers/${sharedPreference!.getString(AppString.uidSharedPreference)}${sharedPreference!.getString(AppString.nameSharedPreference)}_images/$uniqueImageName");
+        "sellers/${AppConstants.sharedPreference!.getString(AppString.uidSharedPreference)}${AppConstants.sharedPreference!.getString(AppString.nameSharedPreference)}_images/$uniqueImageName");
 
     UploadTask uploadTask = ref.putFile(File(imageFile.path));
     TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() {});
@@ -140,9 +140,9 @@ Flutter Auth Firebase Snapshot
   @override
   Future<void> uploadProductSnapshot(
       {required ProductModel productModel, required bool isUpdate}) async {
-    final seller = firebaseFirestore
-        .collection("seller")
-        .doc(sharedPreference!.getString(AppString.uidSharedPreference));
+    final seller = firebaseFirestore.collection("seller").doc(AppConstants
+        .sharedPreference!
+        .getString(AppString.uidSharedPreference));
 
     var sellerProductDoc =
         seller.collection("products").doc(productModel.productId);
@@ -163,7 +163,8 @@ Flutter Auth Firebase Snapshot
       {required String category}) {
     var collectionRef = firebaseFirestore
         .collection("seller")
-        .doc(sharedPreference!.getString(AppString.uidSharedPreference))
+        .doc(AppConstants.sharedPreference!
+            .getString(AppString.uidSharedPreference))
         .collection("products");
     var query = collectionRef.orderBy("publishDate", descending: true);
 
@@ -176,7 +177,8 @@ Flutter Auth Firebase Snapshot
 
   @override
   Future<void> deleteProductSnapshot({required String productId}) async {
-    final sellerId = sharedPreference?.getString(AppString.uidSharedPreference);
+    final sellerId =
+        AppConstants.sharedPreference?.getString(AppString.uidSharedPreference);
     final sellerRef = firebaseFirestore.collection("seller").doc(sellerId);
 
     sellerRef.collection("products").doc(productId).delete();
@@ -190,7 +192,7 @@ Flutter Auth Firebase Snapshot
       {required ProductModel productModel}) {
     return FirebaseFirestore.instance
         .collection("seller")
-        .doc(sharedPreference!.getString("uid")!)
+        .doc(AppConstants.sharedPreference!.getString("uid")!)
         .collection("products")
         .where("productId", isNotEqualTo: productModel.productId)
         .where("productcategory", isEqualTo: productModel.productcategory)
@@ -203,7 +205,7 @@ Flutter Auth Firebase Snapshot
   @override
   Stream<QuerySnapshot<Map<String, dynamic>>> orderSnapshots(
       {required String orderStatus}) {
-    String selleruid = sharedPreference!.getString("uid")!;
+    String selleruid = AppConstants.sharedPreference!.getString("uid")!;
     return
         // firebaseFirestore
         //     .collection("users")
@@ -224,7 +226,7 @@ Flutter Auth Firebase Snapshot
       {required List<String> productIDList}) {
     return firebaseFirestore
         .collection("seller")
-        .doc(sharedPreference!.getString("uid")!)
+        .doc(AppConstants.sharedPreference!.getString("uid")!)
         .collection("products")
         .where("productId", whereIn: productIDList)
         .get();
@@ -268,7 +270,7 @@ Flutter Auth Firebase Snapshot
       {required String addressId}) {
     return firebaseFirestore
         .collection("users")
-        .doc(sharedPreference!.getString("uid"))
+        .doc(AppConstants.sharedPreference!.getString("uid"))
         .collection("useraddress")
         .doc(addressId)
         .snapshots();
@@ -286,7 +288,7 @@ Flutter Auth Firebase Snapshot
   Future<void> updateUserData({required Map<String, dynamic> map}) async {
     FirebaseFirestore.instance
         .collection("seller")
-        .doc(sharedPreference!.getString("uid")!)
+        .doc(AppConstants.sharedPreference!.getString("uid")!)
         .update(map);
   }
 }

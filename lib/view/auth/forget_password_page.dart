@@ -22,6 +22,7 @@ class ForgetPasswordScreen extends StatefulWidget {
 class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   var forgetPasswordController = Get.find<ForgetPasswordController>();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  Widget verticalSpace(double height) => SizedBox(height: height.h);
 
   @override
   Widget build(BuildContext context) {
@@ -37,14 +38,16 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                // Page Header
                 AppSignInPageIntro(
                   title: "${AppString.forgetPassword}?",
                   description: AppString.entreEmailAddressForResetPassword,
                 ),
+                // Forget Password Form
+
                 _buildForgetPasswordForm(),
-                SizedBox(
-                  height: 10.h,
-                ),
+                verticalSpace(10),
+                // Reset Password Button
                 CustomAuthButtonWidget(
                   onPressed: () async {
                     if (!_formKey.currentState!.validate()) return;
@@ -54,9 +57,8 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                   },
                   title: AppString.resetPassword,
                 ),
-                SizedBox(
-                  height: 10.h,
-                ),
+                verticalSpace(10),
+                // Sign In Navigation
                 RichTextWidget(
                   colorText: AppString.signIn,
                   function: () async {

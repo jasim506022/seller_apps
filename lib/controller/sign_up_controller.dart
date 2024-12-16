@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:seller_apps/res/app_string.dart';
@@ -17,15 +18,18 @@ import 'select_image_controller.dart';
 class SignUpController extends GetxController {
   final SignUpRepository repository;
 
+  // Controllers for dependencies
   LoadingController loadingController = Get.find();
   SelectImageController selectImageController = Get.find();
 
+  // TextEditingControllers for input fields
   final TextEditingController phontET = TextEditingController();
   final TextEditingController nameET = TextEditingController();
   final TextEditingController emailET = TextEditingController();
   final TextEditingController passwordET = TextEditingController();
   final TextEditingController confirmpasswordET = TextEditingController();
 
+  // Constructor
   SignUpController({required this.repository});
 
   Future<void> createNewUserButton() async {
@@ -40,19 +44,13 @@ class SignUpController extends GetxController {
       var user = await repository.createUserWithEmilandPasword(
           email: emailET.text.trim(), password: passwordET.text.trim());
 
-      ProfileModel profileModel = ProfileModel(
-          name: nameET.text.trim(),
-          earnings: 0.0,
-          status: "approved",
-          email: emailET.text.trim(),
-          phone: phontET.text.trim(),
-          uid: user.user!.uid,
-          address: "",
-          imageurl: userProfileImageUrl);
+      // Prepare ProfileModel
+      ProfileModel profileModel = userProfileModel(user, userProfileImageUrl);
 
+      // Upload user profile data
       repository.uploadUserProfile(
           profileModel: profileModel, documentId: user.user!.uid);
-      clearFields();
+      clearInputFields();
       Get.offNamed(RoutesName.mainPage);
       AppsFunction.flutterToast(msg: AppString.signupSuccessfull);
       selectImageController.selectPhoto.value = null;
@@ -67,6 +65,22 @@ class SignUpController extends GetxController {
       loadingController.setLoading(false);
     }
   }
+
+// User Profile Model
+  ProfileModel userProfileModel(
+      UserCredential user, String userProfileImageUrl) {
+    return ProfileModel(
+        name: nameET.text.trim(),
+        earnings: 0.0,
+        status: "approved",
+        email: emailET.text.trim(),
+        phone: phontET.text.trim(),
+        uid: user.user!.uid,
+        address: "",
+        imageurl: userProfileImageUrl);
+  }
+
+  /// Validates user input and shows appropriate error messages
 
   bool _validateInput() {
     if (selectImageController.selectPhoto.value == null) {
@@ -97,7 +111,9 @@ class SignUpController extends GetxController {
     );
   }
 
-  clearFields() {
+  /// Clears input fields after successful signup
+
+  clearInputFields() {
     passwordET.clear();
     emailET.clear();
     phontET.clear();

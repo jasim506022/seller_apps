@@ -13,15 +13,13 @@ import 'loading_controller.dart';
 class ForgetPasswordController extends GetxController {
   final TextEditingController emailET = TextEditingController();
 
- 
-
   final ForgetPasswordRepository repository;
 
   LoadingController loadingController = Get.find();
 
   ForgetPasswordController({required this.repository});
 
-   void cleanTextField() {
+  void cleanTextField() {
     emailET.clear();
   }
 
@@ -29,7 +27,7 @@ class ForgetPasswordController extends GetxController {
     try {
       loadingController.setLoading(true);
       repository.forgetPasswordSnapshot(email: emailET.text.trim());
-      AppsFunction.flutterToast(msg: "Sending a mail. Please Check ur Email");
+      AppsFunction.flutterToast(msg: AppString.sendingMail);
       Get.toNamed(RoutesName.signPage);
     } catch (e) {
       if (e is AppException) {

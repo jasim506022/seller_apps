@@ -27,15 +27,16 @@ class ProfileImageCaptureWidget extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
             shape: BoxShape.circle,
-            border: Border.all(color: AppColors.grey, width: 3.w)),
+            border: Border.all(color: AppColors.red, width: 3.w)),
         child: Obx(() {
-          var imageFile =
+          var selectedPhoto =
               signUpController.selectImageController.selectPhoto.value;
           return CircleAvatar(
             radius: 0.2.sw,
-            backgroundImage: imageFile == null ? null : FileImage(imageFile),
+            backgroundImage:
+                selectedPhoto != null ? FileImage(selectedPhoto) : null,
             backgroundColor: AppColors.backgroundLight,
-            child: imageFile == null
+            child: selectedPhoto == null
                 ? Icon(
                     Icons.add_photo_alternate,
                     size: 0.2.sw,

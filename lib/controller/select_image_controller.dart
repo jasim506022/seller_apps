@@ -15,8 +15,6 @@ class SelectImageController extends GetxController {
   SelectImageController({required this.repository});
   var selectPhoto = Rx<File?>(null);
 
-  
-
   void selectImage({required ImageSource imageSource}) async {
     try {
       var image = await repository.captureImageSingle(imageSource: imageSource);

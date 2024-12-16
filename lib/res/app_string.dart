@@ -28,6 +28,7 @@ Auth String
   static String phoneNumber = "Phone Number";
   static String enterPhone = 'Please enter your phone number';
   static String validPhoneNumber = 'Please Give Valid Phone number';
+  static String sendingMail = "Sending a mail. Please Check ur Email";
 
   //
   static String signInSuccessfully = "Sign in Successfully";

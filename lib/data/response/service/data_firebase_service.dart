@@ -69,13 +69,20 @@ Flutter Auth Firebase Snapshot
   }
 
   @override
-  Future<String> uploadUserImgeUrl({required File file}) async {
+  Future<String> uploadUserImgeUrl(
+      {required File file, bool isProfile = false}) async {
     String fileName = "ju_grocery_${DateTime.now().millisecondsSinceEpoch}";
-    Reference storageRef = firebaseStorage
-        .ref()
-        .child("seller")
-        // .child(firebaseAuth.currentUser!.uid)
-        .child(fileName);
+    Reference storageRef;
+    if (isProfile) {
+      storageRef = firebaseStorage
+          .ref()
+          .child("seller")
+          .child(firebaseAuth.currentUser!.uid)
+          .child(fileName);
+    } else {
+      storageRef = firebaseStorage.ref().child("seller").child(fileName);
+    }
+
     UploadTask uploadTask = storageRef.putFile(file);
     TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() {});
     return taskSnapshot.ref.getDownloadURL();

@@ -15,11 +15,12 @@ class ProfilePhotoOptionSheetWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Widget verticalSpace(double height) => SizedBox(height: height.h);
     return Padding(
       padding: EdgeInsets.all(20.0.r),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: MainAxisSize.min, // Shrink to fit content
         children: [
           Align(
             alignment: Alignment.center,
@@ -31,14 +32,12 @@ class ProfilePhotoOptionSheetWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(2.r)),
             ),
           ),
-          SizedBox(height: 10.h),
+          verticalSpace(10),
           Align(
               alignment: Alignment.center,
               child: Text(AppString.selectPhoto,
                   style: AppsTextStyle.titleTextStyle)),
-          SizedBox(
-            height: 10.h,
-          ),
+          verticalSpace(10),
           _selectPhotoOption()
         ],
       ),

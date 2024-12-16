@@ -47,9 +47,7 @@ class ShowAlertDialogWidget extends StatelessWidget {
   Row _buildTitleRow() {
     return Row(
       children: [
-        Expanded(
-          child: Text(title, style: AppsTextStyle.titleTextStyle),
-        ),
+        Text(title, style: AppsTextStyle.titleTextStyle),
         SizedBox(width: 10.w),
         Container(
           padding: EdgeInsets.all(5.r),

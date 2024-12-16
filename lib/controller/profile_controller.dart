@@ -124,16 +124,16 @@ class ProfileController extends GetxController {
       Get.back();
       return;
     }
-    Get.dialog(CustomAlertDialogWidget(
+    Get.dialog(ShowAlertDialogWidget(
         icon: Icons.question_mark_rounded,
         title: "Save Changed?",
         content: 'do you want to save change?',
-        noOnPress: () {
+        onNoPressed: () {
           isChange.value = false;
           Get.close(2);
           selectImageController.selectPhoto.value = null;
         },
-        yesOnPress: () => Get.back()));
+        onYesPressed: () => Get.back()));
   }
 
   Future<void> _saveProfileToSharedPreferences() async {
@@ -164,11 +164,11 @@ class ProfileController extends GetxController {
   }
 
   Future<void> signOut() async {
-    Get.dialog(CustomAlertDialogWidget(
+    Get.dialog(ShowAlertDialogWidget(
         icon: Icons.delete,
         title: "Sign Out",
         content: 'Do you want to sign out?',
-        yesOnPress: () async {
+        onYesPressed: () async {
           try {
             await AppConstants.sharedPreference
                 ?.setString(AppString.imageurlSharedPreference, "");

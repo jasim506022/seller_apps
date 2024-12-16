@@ -4,6 +4,7 @@ import 'package:seller_apps/res/app_string.dart';
 
 import '../../res/app_constants.dart';
 import '../../res/apps_color.dart';
+import '../../res/internet_utilis.dart';
 import '../../res/utils.dart';
 
 import '../../widget/profile_photo_option_sheet_widget.dart';
@@ -58,7 +59,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     ? IconButton(
                         onPressed: () async {
                           if (!key.currentState!.validate()) return;
-                          if (!(await AppsFunction.verifyInternetStatus())) {
+                          if (!(await NetworkUtili.verifyInternetStatus())) {
                             profileController.updateUserData();
                           }
                         },

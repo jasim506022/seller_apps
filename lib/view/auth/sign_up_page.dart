@@ -9,6 +9,7 @@ import '../../res/app_function.dart';
 
 import '../../res/app_string.dart';
 import '../../res/apps_text_style.dart';
+import '../../res/internet_utilis.dart';
 import '../../widget/custom_auth_button_widget.dart';
 import '../../widget/rich_text_widget.dart';
 import '../../widget/text_field_form_widget.dart';
@@ -33,7 +34,7 @@ class _SignUpPageState extends State<SignUpPage> {
       child: GestureDetector(
         onTap: () async {
           FocusScope.of(context).unfocus();
-          AppsFunction.verifyInternetStatus();
+          NetworkUtili.verifyInternetStatus();
         },
         child: Scaffold(
           body: SingleChildScrollView(
@@ -64,7 +65,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     CustomAuthButtonWidget(
                       onPressed: () async {
                         if (!formKeySignUp.currentState!.validate()) return;
-                        if (!(await AppsFunction.verifyInternetStatus())) {
+                        if (!(await NetworkUtili.verifyInternetStatus())) {
                           signUpController.createNewUserButton();
                         }
                       },
@@ -77,7 +78,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         simpleText: AppString.alreadyCreateAccount,
                         colorText: AppString.signIn,
                         function: () async {
-                          if (!(await AppsFunction.verifyInternetStatus())) {
+                          if (!(await NetworkUtili.verifyInternetStatus())) {
                             Get.back();
                             signUpController.clearFields();
                           }

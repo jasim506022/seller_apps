@@ -7,9 +7,9 @@ import '../../../controller/add_product_controller.dart';
 import '../../../controller/category_controller.dart';
 
 import '../../../res/app_constants.dart';
-import '../../../res/app_function.dart';
 import '../../../res/apps_color.dart';
 import '../../../res/apps_text_style.dart';
+import '../../../res/internet_utilis.dart';
 import '../../../widget/drop_down_category_widget.dart';
 import '../../../widget/text_field_form_widget.dart';
 import 'grid_image_list_widget.dart';
@@ -50,13 +50,13 @@ class _AddProductWidgetState extends State<AddProductWidget> {
                 IconButton(
                   onPressed: () async {
                     if (_keyForm.currentState!.validate()) {
-                      if (!(await AppsFunction.verifyInternetStatus())) {
+                      if (!(await NetworkUtili.verifyInternetStatus())) {
                         addProductController.uploadProduct(
                             isUpdate: widget.isUpdate!);
                       }
                     }
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.cloud_upload,
                     color: AppColors.green,
                   ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:seller_apps/res/app_string.dart';
 
-import '../model/onboardmodel.dart';
+import '../model/onboard_model.dart';
 import '../res/app_constants.dart';
 import '../res/routes/routes_name.dart';
 
@@ -20,7 +20,7 @@ class OnboardingController extends GetxController {
 
   /// Navigates to the next page in the onboarding sequence
   void nextPage() async {
-    if (currentIndex.value == onboardModeList.length - 1) {
+    if (currentIndex.value == onboardingData.length - 1) {
       await skipOnboarding();
     } else {
       pageController.nextPage(

@@ -4,13 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../controller/onboarding_controller.dart';
-import '../../model/onboardmodel.dart';
+import '../../model/onboard_model.dart';
 import '../../res/app_string.dart';
 import '../../res/apps_color.dart';
 import '../../res/apps_text_style.dart';
 import 'widget/onboard_widget.dart';
-
-
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
@@ -50,11 +48,11 @@ class OnboardingScreen extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 20.w),
         child: PageView.builder(
           controller: controller.pageController,
-          itemCount: onboardModeList.length,
+          itemCount: onboardingData.length,
           physics: const NeverScrollableScrollPhysics(),
           onPageChanged: (index) => controller.currentIndex.value = index,
           itemBuilder: (context, index) {
-            var item = onboardModeList[index];
+            var item = onboardingData[index];
             return OnboardingWidget(item: item);
           },
         ),

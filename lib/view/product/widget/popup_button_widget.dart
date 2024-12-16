@@ -4,8 +4,8 @@ import 'package:seller_apps/res/app_constants.dart';
 
 import '../../../controller/product_controller.dart';
 import '../../../model/productsmodel.dart';
-import '../../../res/app_function.dart';
 import '../../../res/apps_text_style.dart';
+import '../../../res/internet_utilis.dart';
 import '../../../res/routes/routes_name.dart';
 
 class PopupButtonWidget extends StatelessWidget {
@@ -24,12 +24,12 @@ class PopupButtonWidget extends StatelessWidget {
       iconColor: Colors.white,
       onSelected: (ProductAction product) async {
         if (product.name == "detele") {
-          if (!(await AppsFunction.verifyInternetStatus())) {
+          if (!(await NetworkUtili.verifyInternetStatus())) {
             productController.deleteProductSnapshot(
                 productId: productModel.productId!);
           }
         } else {
-          if (!(await AppsFunction.verifyInternetStatus())) {
+          if (!(await NetworkUtili.verifyInternetStatus())) {
             Get.toNamed(RoutesName.uploadProduct,
                 arguments: {"isUpdate": true, "productModel": productModel});
           }

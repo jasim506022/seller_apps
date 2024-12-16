@@ -33,10 +33,11 @@ class InitialBinding extends Bindings {
 
     Get.lazyPut<OnboardingController>(() => OnboardingController());
 
-    Get.lazyPut<SignInRepository>(() => SignInRepository());
+    Get.lazyPut<SignInRepository>(() => SignInRepository(), fenix: true);
 
     Get.lazyPut<SignInController>(
-        () => SignInController(repository: Get.find<SignInRepository>()));
+        () => SignInController(repository: Get.find<SignInRepository>()),
+        fenix: true);
 
     Get.put<LoadingController>(LoadingController());
 

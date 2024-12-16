@@ -8,4 +8,8 @@ class ImagesAsset {
   static String error = "asset/empty/empty.png";
   static String singleError = "asset/empty/single.png";
   static String splashPageBg = "asset/image/splash.png";
+
+  static const String groceryImage = "assets/onboard/grocery.png";
+  static const String allGroceryImage = "assets/onboard/all_grocery.png";
+  static const String deliveryImage = "assets/onboard/delivery.png";
 }

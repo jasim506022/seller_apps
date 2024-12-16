@@ -42,11 +42,11 @@ class ProductController extends GetxController {
 
   Future<void> deleteProductSnapshot({required String productId}) async {
     Get.dialog(
-      CustomAlertDialogWidget(
+      ShowAlertDialogWidget(
         title: "Are You want to Delete",
         content:
             "Do you Want to Delete The Product Produc. If you delete the Product it can not be undo",
-        yesOnPress: () async {
+        onYesPressed: () async {
           try {
             await repository.deleteProductSnapshot(productId: productId);
 

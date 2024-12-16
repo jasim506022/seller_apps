@@ -146,12 +146,12 @@ class AddProductController extends GetxController {
     if (isUpdateChange.value == false) {
       Get.back();
     } else {
-      Get.dialog(CustomAlertDialogWidget(
+      Get.dialog(ShowAlertDialogWidget(
         icon: Icons.question_mark_rounded,
         title: "Save Changed?",
         content: 'do you want to save change?',
-        yesOnPress: () => Get.back(),
-        noOnPress: () {
+        onYesPressed: () => Get.back(),
+        onNoPressed: () {
           clearInputField();
           isUpdateChange.value = false;
           Get.close(2);

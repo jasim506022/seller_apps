@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../controller/sign_up_controller.dart';
-import '../../../res/app_function.dart';
 import '../../../res/apps_color.dart';
+import '../../../res/internet_utilis.dart';
 import '../../../widget/profile_photo_option_sheet_widget.dart';
 
 class ProfileImageCaptureWidget extends StatelessWidget {
@@ -18,7 +18,7 @@ class ProfileImageCaptureWidget extends StatelessWidget {
 
     return InkWell(
       onTap: () async {
-        if (!(await AppsFunction.verifyInternetStatus())) {
+        if (!(await NetworkUtili.verifyInternetStatus())) {
           Get.bottomSheet(
               backgroundColor: AppColors.white,
               const ProfilePhotoOptionSheetWidget());

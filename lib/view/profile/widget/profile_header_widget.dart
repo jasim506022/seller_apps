@@ -4,11 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../res/app_constants.dart';
-import '../../../res/app_function.dart';
 import '../../../res/app_string.dart';
 import '../../../res/apps_color.dart';
 import '../../../res/apps_text_style.dart';
 
+import '../../../res/internet_utilis.dart';
 import '../../../res/routes/routes_name.dart';
 import '../../../widget/custom_round_action_button_widget.dart';
 
@@ -63,7 +63,7 @@ class ProifleHeaderWidget extends StatelessWidget {
         CustomRoundActionButtonWidget(
           title: "Edit Profile",
           onTap: () async {
-            if (!(await AppsFunction.verifyInternetStatus())) {
+            if (!(await NetworkUtili.verifyInternetStatus())) {
               Get.toNamed(RoutesName.editProfilePage, arguments: true);
             }
           },

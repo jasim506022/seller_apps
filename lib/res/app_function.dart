@@ -7,7 +7,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:intl/intl.dart';
 
 import 'utils.dart';
@@ -28,45 +27,20 @@ class AppsFunction {
 
 // Show Back Dialog
   static Future<bool?> showBackDialog() {
-    return Get.dialog(CustomAlertDialogWidget(
+    return Get.dialog(ShowAlertDialogWidget(
       icon: Icons.question_mark_rounded,
       title: AppString.exit,
       content: AppString.exitApps,
-      yesOnPress: () {
+      onYesPressed: () {
         Get.back(result: true);
       },
-      noOnPress: () {
+      onNoPressed: () {
         Get.back(result: false);
       },
     ));
   }
 
-  static Future<bool> verifyInternetStatus() async {
-    bool checkInternet = await AppsFunction.internetChecking();
-    if (checkInternet) {
-      AppsFunction.showNoInternetSnackbar();
-    }
-    return checkInternet;
-  }
-
-  static Future<bool> internetChecking() async {
-    final List<ConnectivityResult> connectivityResult =
-        await (Connectivity().checkConnectivity());
-
-    return connectivityResult.contains(ConnectivityResult.none);
-  }
-
-  static SnackbarController showNoInternetSnackbar() {
-    return Get.snackbar(
-        'No Internet', 'Please check your internet settings and try again.',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: AppColors.black.withOpacity(.7),
-        colorText: AppColors.white,
-        duration: const Duration(seconds: 1),
-        margin: EdgeInsets.zero,
-        borderRadius: 0);
-  }
-
+ 
   static flutterToast({required String msg}) {
     Fluttertoast.showToast(
         msg: msg,

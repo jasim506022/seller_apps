@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../controller/onboarding_controller.dart';
-import '../../../model/onboardmodel.dart';
+import '../../../model/onboard_model.dart';
 import '../../../res/app_constants.dart';
 import '../../../res/apps_color.dart';
 
@@ -18,7 +18,7 @@ class DotIndicatorWidget extends StatelessWidget {
     return SizedBox(
       height: AppConstants.defaultHeightSpace,
       child: ListView.builder(
-        itemCount: onboardModeList.length,
+        itemCount: onboardingData.length,
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {

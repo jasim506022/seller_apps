@@ -7,6 +7,7 @@ import '../model/productsmodel.dart';
 import '../res/app_function.dart';
 import '../res/apps_color.dart';
 import '../res/apps_text_style.dart';
+import '../res/internet_utilis.dart';
 import '../res/routes/routes_name.dart';
 import 'product_image_widget.dart';
 
@@ -21,7 +22,7 @@ class ProductWidget extends StatelessWidget {
 
     return InkWell(
       onTap: () async {
-        if (!(await AppsFunction.verifyInternetStatus())) {
+        if (!(await NetworkUtili.verifyInternetStatus())) {
           Get.toNamed(RoutesName.detailsPage,
               arguments: {"productModel": productModel});
         }
@@ -33,7 +34,7 @@ class ProductWidget extends StatelessWidget {
           decoration: BoxDecoration(
               color: Theme.of(context).cardColor,
               borderRadius: BorderRadius.circular(20.r),
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(
                   color: AppColors.white,
                   spreadRadius: .08,
@@ -97,7 +98,7 @@ class ProductWidget extends StatelessWidget {
         ),
         InkWell(
             onTap: () async {
-              if (!(await AppsFunction.verifyInternetStatus())) {
+              if (!(await NetworkUtili.verifyInternetStatus())) {
                 Get.toNamed(RoutesName.uploadProduct, arguments: {
                   "isUpdate": true,
                   "productModel": productModel

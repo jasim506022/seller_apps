@@ -6,6 +6,7 @@ import 'package:seller_apps/controller/forget_password_controller.dart';
 import '../../res/app_function.dart';
 import '../../res/app_string.dart';
 
+import '../../res/internet_utilis.dart';
 import '../../widget/custom_auth_button_widget.dart';
 import '../../widget/rich_text_widget.dart';
 import '../../widget/text_field_form_widget.dart';
@@ -38,7 +39,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
               children: [
                 AppSignInPageIntro(
                   title: "${AppString.forgetPassword}?",
-                  subTitle: AppString.entreEmailAddressForResetPassword,
+                  description: AppString.entreEmailAddressForResetPassword,
                 ),
                 _buildForgetPasswordForm(),
                 SizedBox(
@@ -47,7 +48,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                 CustomAuthButtonWidget(
                   onPressed: () async {
                     if (!_formKey.currentState!.validate()) return;
-                    if (!(await AppsFunction.verifyInternetStatus())) {
+                    if (!(await NetworkUtili.verifyInternetStatus())) {
                       forgetPasswordController.sendPasswordResetRequest();
                     }
                   },

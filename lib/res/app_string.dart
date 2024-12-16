@@ -52,6 +52,8 @@ Auth String
       "Please Enter your mail address to reset you password";
   static String resetPassword = "Reset Password";
   static String youdontWantToReset = "If you don't want to reset Password? ";
+  static String loginWithGmailTitle =
+      "Loading for sign with Gmail \n Pleasing Waiting........";
 
 //
   static String approved = "approved";
@@ -74,4 +76,13 @@ Auth String
   static String onBoarding = 'onBoarding';
   static String appsName = "Grocery Apps";
   static String skip = "Skip";
+  static String welcome = "Welcome";
+  static String fresshFruis = "Fresh Fruits & Vegetables";
+  static String quickDelivery = "Quick & Fast Delivery";
+  static String firstOnboardingDescription =
+      "Welcome to best online grocery store. Here you will find all the groceries at one place.";
+  static String secondOnboardingDescription =
+      "Buy farm fresh fruits & vegetables online at the best & affordable prices.";
+  static String thirdOnboardingDescription =
+      "We offers speedy delivery of your groceries, bathroom supplies, baby care products, pet care items, stationary, etc within 30minutes at your doorstep.";
 }

@@ -5,8 +5,8 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import '../../../model/productsmodel.dart';
-import '../../../res/app_function.dart';
 import '../../../res/apps_text_style.dart';
+import '../../../res/internet_utilis.dart';
 import '../../../res/routes/routes_name.dart';
 
 class SimilarProductWidget extends StatelessWidget {
@@ -20,7 +20,7 @@ class SimilarProductWidget extends StatelessWidget {
 
     return InkWell(
       onTap: () async {
-        if (!(await AppsFunction.verifyInternetStatus())) {
+        if (!(await NetworkUtili.verifyInternetStatus())) {
           Get.offAndToNamed(
             RoutesName.detailsPage,
             arguments: {"productModel": productModel},

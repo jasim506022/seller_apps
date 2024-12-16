@@ -8,39 +8,32 @@ class AppSignInPageIntro extends StatelessWidget {
   const AppSignInPageIntro({
     super.key,
     required this.title,
-    required this.subTitle,
+    required this.description,
   });
 
   final String title;
-  final String subTitle;
+  final String description;
 
   @override
   Widget build(BuildContext context) {
+    Widget verticalSpace(double height) => SizedBox(height: height.h);
     return Column(
       children: [
-        SizedBox(
-          height: 50.h,
-        ),
+        verticalSpace(50),
         Image.asset(
           ImagesAsset.appLogoImage,
           height: 140.h,
           width: 140.h,
         ),
-        SizedBox(
-          height: 10.h,
-        ),
+        verticalSpace(10),
         Text(title, style: AppsTextStyle.largeTitleTextStyle),
-        SizedBox(
-          height: 10.h,
-        ),
+        verticalSpace(10),
         Text(
-          subTitle,
+          description,
           textAlign: TextAlign.center,
           style: AppsTextStyle.largeNormalText,
         ),
-        SizedBox(
-          height: 40.h,
-        ),
+        verticalSpace(40),
       ],
     );
   }

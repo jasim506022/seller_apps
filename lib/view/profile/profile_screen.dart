@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import '../../res/app_constants.dart';
 import '../../res/apps_color.dart';
+import '../../res/internet_utilis.dart';
 import '../../res/routes/routes_name.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../controller/profile_controller.dart';
-import '../../res/app_function.dart';
 import 'widget/profile_custom_list_title_widget.dart';
 import 'widget/profile_header_widget.dart';
 import 'widget/theme_change_widget.dart';
@@ -53,7 +53,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   title: 'Sign Out',
                   iconColor: AppColors.red,
                   onTap: () async {
-                    if (!(await AppsFunction.verifyInternetStatus())) {
+                    if (!(await NetworkUtili.verifyInternetStatus())) {
                       profileController.signOut();
                     }
                   },
@@ -104,7 +104,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           icon: item['icon'],
           title: item['title'],
           onTap: () async {
-            if (!(await AppsFunction.verifyInternetStatus())) {
+            if (!(await NetworkUtili.verifyInternetStatus())) {
               if (item['argument'] is int) {
                 Get.offAndToNamed(item['route'], arguments: item['argument']);
               } else {

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -16,7 +17,7 @@ class ProductListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  var productController = Get.find<ProductController>();
+    var productController = Get.find<ProductController>();
     return Obx(() => StreamBuilder(
           stream: productController.productSnapshots(),
           builder: (context, snapshot) {
@@ -27,35 +28,41 @@ class ProductListWidget extends StatelessWidget {
                 snapshot.data!.docs.isEmpty ||
                 snapshot.hasError) {
               return EmptyWidget(
-                image: ImagesAsset.appLogoImage, //ImagesAsset.error
+                image: ImagesAsset.error,
                 title: snapshot.hasError
                     ? 'Error Occure: ${snapshot.error}'
                     : 'No Data Available',
               );
             }
             if (snapshot.hasData) {
-              return GridView.builder(
-                shrinkWrap: true,
-                physics: const AlwaysScrollableScrollPhysics(),
-                itemCount: snapshot.data!.docs.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: .76, //78
-                  crossAxisSpacing: 8,
-                  mainAxisSpacing: 8,
-                ),
-                itemBuilder: (context, index) {
-                  ProductModel productModel =
-                      ProductModel.fromMap(snapshot.data!.docs[index].data());
-                  return ChangeNotifierProvider.value(
-                    value: productModel,
-                    child: const ProductWidget(),
-                  );
-                },
-              );
+              return _buildProductGrid(snapshot);
             }
             return const LoadingListProductWidget();
           },
         ));
+  }
+
+  /// Builds the product grid when data is available
+  GridView _buildProductGrid(
+      AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+    return GridView.builder(
+      shrinkWrap: true,
+      physics: const AlwaysScrollableScrollPhysics(),
+      itemCount: snapshot.data!.docs.length,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: .76,
+        crossAxisSpacing: 8,
+        mainAxisSpacing: 8,
+      ),
+      itemBuilder: (context, index) {
+        ProductModel productModel =
+            ProductModel.fromMap(snapshot.data!.docs[index].data());
+        return ChangeNotifierProvider.value(
+          value: productModel,
+          child: const ProductWidget(),
+        );
+      },
+    );
   }
 }

@@ -8,7 +8,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'package:seller_apps/model/profilemodel.dart';
+import 'package:seller_apps/model/profile_model.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../const/cart_function.dart';

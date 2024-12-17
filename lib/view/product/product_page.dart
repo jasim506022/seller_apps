@@ -25,10 +25,13 @@ class ProductPage extends StatelessWidget {
           children: [
             DropdownCategoryWidget(
               list: AppConstants.allCategoryList,
-              value: categoryController.getCategory,
+              value: categoryController.category,
               onChanged: (value) {
-                categoryController.setCategory(category: value!.toString());
+                categoryController.setCategory(value!.toString());
               },
+            ),
+            SizedBox(
+              height: 10.h,
             ),
             const Expanded(child: ProductListWidget())
           ],

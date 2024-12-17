@@ -116,10 +116,10 @@ class _AddProductWidgetState extends State<AddProductWidget> {
         children: [
           DropdownCategoryWidget(
             list: AppConstants.categoryList,
-            value: categoryController.getCategory,
+            value: categoryController.category,
             onChanged: (value) {
               addProductController.addChangeListener();
-              categoryController.setCategory(category: value!.toString());
+              categoryController.setCategory( value!.toString());
             },
           ),
           _buildTextField(
@@ -140,10 +140,10 @@ class _AddProductWidgetState extends State<AddProductWidget> {
                   child: DropdownCategoryWidget(
                 onChanged: (value) {
                   addProductController.addChangeListener();
-                  categoryController.setUnit(unit: value!.toString());
+                  categoryController.setUnit( value!.toString());
                 },
                 list: AppConstants.unitList,
-                value: categoryController.getUnit,
+                value: categoryController.unit,
               )),
             ],
           ),

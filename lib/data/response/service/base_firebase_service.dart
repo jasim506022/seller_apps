@@ -6,7 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../model/productsmodel.dart';
-import '../../../model/profilemodel.dart';
+import '../../../model/profile_model.dart';
 
 abstract class BaseFirebaseService {
   FirebaseAuth get firebaseAuth;

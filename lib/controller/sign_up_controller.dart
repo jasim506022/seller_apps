@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:seller_apps/res/app_string.dart';
 
 import '../model/app_exception.dart';
-import '../model/profilemodel.dart';
+import '../model/profile_model.dart';
 
 import '../repository/sign_up_repository.dart';
 import '../res/app_asset/icon_asset.dart';

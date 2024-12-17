@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../model/app_exception.dart';
-import '../model/profilemodel.dart';
+import '../model/profile_model.dart';
 import '../repository/sign_in_repository.dart';
 import '../res/app_asset/icon_asset.dart';
 import '../res/app_function.dart';
@@ -51,8 +53,8 @@ class SignInController extends GetxController {
         email: emailET.text,
         password: passwordET.text,
       );
+     
       // Navigate to the main page on successful login.
-
       Get.offNamed(RoutesName.mainPage);
       // Clear input fields and show a success message.
 
@@ -132,8 +134,27 @@ class SignInController extends GetxController {
         phone: user.phoneNumber,
         uid: user.uid,
         address: "",
+        
         imageurl: user.photoURL);
   }
+
+
+  Future<String?> getFCMToken() async {
+  try {
+    // Request permission for iOS devices
+    NotificationSettings settings = await FirebaseMessaging.instance.requestPermission();
+    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+      // Retrieve the token
+      String? token = await FirebaseMessaging.instance.getToken();
+      return token;
+    } else {
+      print("Permission denied for notifications.");
+    }
+  } catch (e) {
+    print("Error retrieving FCM token: $e");
+  }
+  return null;
+}
 }
 
 /*

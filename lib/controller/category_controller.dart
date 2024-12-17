@@ -1,28 +1,19 @@
 import 'package:get/get.dart';
-
 import '../res/app_constants.dart';
 
 class CategoryController extends GetxController {
-  final _category = AppConstants.categoryList.first.obs;
+  // Private Observables
+  final RxString _category = AppConstants.categoryList.first.obs;
+  final RxString _unit = AppConstants.unitList.first.obs;
+  final RxString _status = AppConstants.statusList.first.obs;
 
-  String get getCategory => _category.value;
+  // Getters
+  String get category => _category.value;
+  String get unit => _unit.value;
+  String get status => _status.value;
 
-  void setCategory({required String category}) {
-    _category.value = category;
-  }
-
-  final _unit = AppConstants.unitList.first.obs;
-
-  String get getUnit => _unit.value;
-
-  void setUnit({required String unit}) {
-    _unit.value = unit;
-  }
-
-  final _status = AppConstants.statusList.first.obs;
-  String get getStatus => _status.value;
-
-  void setStatus({required String status}) {
-    _status.value = status;
-  }
+  // Setters
+  void setCategory(String category) => _category.value = category;
+  void setUnit(String unit) => _unit.value = unit;
+  void setStatus(String status) => _status.value = status;
 }

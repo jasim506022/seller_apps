@@ -11,9 +11,14 @@ class DropdownCategoryWidget extends StatelessWidget {
     required this.list,
   });
 
+  /// Current selected value in the dropdown.
+
   final String? value;
 
+  /// Callback triggered when the dropdown value changes.
   final void Function(String?)? onChanged;
+
+  /// List of dropdown items.
   final List<String> list;
 
   @override
@@ -22,14 +27,8 @@ class DropdownCategoryWidget extends StatelessWidget {
       decoration: InputDecoration(
         fillColor: Theme.of(context).cardColor,
         filled: true,
-        enabledBorder: OutlineInputBorder(
-            borderSide:
-                BorderSide(color: Theme.of(context).primaryColor, width: 1),
-            borderRadius: BorderRadius.circular(15.r)),
-        focusedBorder: OutlineInputBorder(
-            borderSide:
-                BorderSide(color: Theme.of(context).primaryColor, width: 1),
-            borderRadius: BorderRadius.circular(15.r)),
+        enabledBorder: _buildBorder(context),
+        focusedBorder: _buildBorder(context),
         contentPadding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 15.h),
       ),
       value: value,
@@ -41,6 +40,17 @@ class DropdownCategoryWidget extends StatelessWidget {
         return DropdownMenuItem<String>(value: value, child: Text(value));
       }).toList(),
       onChanged: onChanged,
+    );
+  }
+
+  /// Builds a rounded border for the input field.
+  OutlineInputBorder _buildBorder(BuildContext context) {
+    return OutlineInputBorder(
+      borderSide: BorderSide(
+        color: Theme.of(context).primaryColor,
+        width: 1,
+      ),
+      borderRadius: BorderRadius.circular(15.r),
     );
   }
 }

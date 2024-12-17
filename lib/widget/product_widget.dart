@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:seller_apps/res/utils.dart';
 
 import '../model/productsmodel.dart';
 import '../res/app_function.dart';
@@ -34,9 +35,9 @@ class ProductWidget extends StatelessWidget {
           decoration: BoxDecoration(
               color: Theme.of(context).cardColor,
               borderRadius: BorderRadius.circular(20.r),
-              boxShadow: const [
+              boxShadow: [
                 BoxShadow(
-                  color: AppColors.white,
+                  color: Theme.of(context).scaffoldBackgroundColor,
                   spreadRadius: .08,
                 )
               ]),

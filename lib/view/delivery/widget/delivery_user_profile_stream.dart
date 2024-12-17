@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../controller/delivary_controller.dart';
-import '../../../model/profilemodel.dart';
+import '../../../model/profile_model.dart';
 import '../../../res/app_asset/image_asset.dart';
 import '../../../res/apps_color.dart';
 import '../../../res/apps_text_style.dart';

@@ -1,8 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../model/app_exception.dart';
-import '../model/profilemodel.dart';
+import '../model/profile_model.dart';
 import '../repository/profile_repository.dart';
 import '../repository/sign_up_repository.dart';
 import '../res/app_asset/icon_asset.dart';
@@ -17,12 +20,19 @@ import 'select_image_controller.dart';
 
 class ProfileController extends GetxController {
   final ProfileRepository repository;
+  @override
+  void onInit() {
+    super.onInit();
+    fetchProfile();
+  }
 
   var image = "".obs;
   var nameTEC = TextEditingController();
   var addressTEC = TextEditingController();
   var phoneTEC = TextEditingController();
   var emailTEC = TextEditingController();
+
+  var isLoading = false.obs;
 
   var isChange = false.obs;
 
@@ -93,6 +103,83 @@ class ProfileController extends GetxController {
     }
   }
 
+  Future<DocumentSnapshot<Map<String, dynamic>>> getData() {
+    return repository.getUserInformationSnapshot();
+  }
+
+  void fetchProfile() async {
+    try {
+      // Attempt to get data from SharedPreferences
+      final imageUrl = AppConstants.sharedPreference
+          ?.getString(AppString.imageurlSharedPreference);
+      final name = AppConstants.sharedPreference
+          ?.getString(AppString.nameSharedPreference);
+      final email = AppConstants.sharedPreference
+          ?.getString(AppString.emailSharedPreference);
+
+      if (imageUrl != null && name != null && email != null) {
+        // If SharedPreferences has data, use it
+        profileModel.value = ProfileModel(
+          imageurl: imageUrl,
+          name: name,
+          email: email,
+        );
+      } else {
+        // If not, fetch data from the server or other sources
+        isLoading.value = true;
+
+        final fetchedData = await getData(); // Simulated API call
+        final dataMap = fetchedData.data();
+
+        if (dataMap != null) {
+          profileModel.value = ProfileModel.fromMap(dataMap);
+        } else {
+          throw Exception("No data returned from API");
+        }
+      }
+    } catch (e) {
+      // Log error in debug mode
+      if (kDebugMode) {
+        print("Error fetching profile: $e");
+      }
+    } finally {
+      // Ensure loading indicator is stopped
+      isLoading.value = false;
+    }
+  }
+
+/*
+  void fetchProfile() async {
+    try {
+      var image = AppConstants.sharedPreference!
+          .getString(AppString.imageurlSharedPreference);
+      var name = AppConstants.sharedPreference!
+          .getString(AppString.nameSharedPreference);
+      var email = AppConstants.sharedPreference!
+          .getString(AppString.emailSharedPreference);
+
+      if (image != null && name != null && email != null) {
+        profileModel.value = ProfileModel(
+          imageurl: image,
+          name: name,
+          email: email,
+        );
+      } else {
+        isLoading.value = true;
+
+        var fetchedData = await getData(); // Simulated API call
+        profileModel.value = ProfileModel.fromMap(fetchedData.data()!);
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error fetching profile: $e");
+      }
+    } finally {
+      isLoading.value = false;
+    }
+  }
+*/
+
   Future<void> getUserInformationSnapshot() async {
     try {
       var snapshot = await repository.getUserInformationSnapshot();
@@ -101,6 +188,12 @@ class ProfileController extends GetxController {
         if (profileModel.value.status == AppString.approved) {
           _saveProfileToSharedPreferences();
           _updateTextControllers();
+          var token = await getFCMToken();
+          print(token);
+          FirebaseFirestore.instance
+              .collection("seller")
+              .doc(profileModel.value.uid)
+              .update({"token": token});
         }
       }
     } catch (e) {
@@ -174,13 +267,40 @@ class ProfileController extends GetxController {
                 ?.setString(AppString.imageurlSharedPreference, "");
             await AppConstants.sharedPreference
                 ?.setString(AppString.nameSharedPreference, "");
-
+            FirebaseFirestore.instance
+                .collection("seller")
+                .doc(profileModel.value.uid)
+                .update({"token": ""});
             await repository.signOut();
             AppsFunction.flutterToast(msg: "Successfully Signed Out");
+
             Get.offAllNamed(RoutesName.signPage);
           } catch (e) {
             AppsFunction.handleException(e);
           }
         }));
   }
+
+  Future<String?> getFCMToken() async {
+    try {
+      // Request permission for iOS devices
+      NotificationSettings settings =
+          await FirebaseMessaging.instance.requestPermission();
+      if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+        // Retrieve the token
+        String? token = await FirebaseMessaging.instance.getToken();
+        return token;
+      } else {
+        print("Permission denied for notifications.");
+      }
+    } catch (e) {
+      print("Error retrieving FCM token: $e");
+    }
+    return null;
+  }
 }
+
+
+/*
+Used safe navigation (?.) for AppConstants.sharedPreference to avoid null checks.
+*/

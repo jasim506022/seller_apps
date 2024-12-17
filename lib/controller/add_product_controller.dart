@@ -100,9 +100,9 @@ class AddProductController extends GetxController {
       sellerId: AppConstants.sharedPreference!.getString("uid"),
       sellerName: AppConstants.sharedPreference!.getString("name"),
       productname: nameTEC.text.trim(),
-      productcategory: categoryController.getCategory,
+      productcategory: categoryController.category,
       productprice: double.tryParse(priceTEC.text.trim()) ?? 0.0,
-      productunit: categoryController.getUnit,
+      productunit: categoryController.unit,
       productrating: double.tryParse(ratingTEC.text.trim()) ?? 0.0,
       productdescription: descriptionTEC.text.trim(),
       publishDate: isUpdate
@@ -167,8 +167,8 @@ class AddProductController extends GetxController {
     ratingTEC.clear();
     descriptionTEC.clear();
     categoryController
-      ..setCategory(category: AppConstants.categoryList.first)
-      ..setUnit(unit: AppConstants.unitList.first);
+      ..setCategory( AppConstants.categoryList.first)
+      ..setUnit( AppConstants.unitList.first);
     productImageFile.value = [];
   }
 }

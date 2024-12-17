@@ -22,8 +22,7 @@ class ProductController extends GetxController {
 
   Stream<QuerySnapshot<Map<String, dynamic>>> productSnapshots() {
     try {
-      return repository.productSnapshots(
-          category: categoryController.getCategory);
+      return repository.productSnapshots(category: categoryController.category);
     } catch (e) {
       if (e is AppException) {
         Get.dialog(

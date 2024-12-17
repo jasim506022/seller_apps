@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../model/profilemodel.dart';
+import '../../../model/profile_model.dart';
 import '../../../res/app_function.dart';
 import '../../../res/apps_color.dart';
 import '../../../res/apps_text_style.dart';

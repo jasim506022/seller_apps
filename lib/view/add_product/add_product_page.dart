@@ -54,8 +54,8 @@ class _AddProductPageState extends State<AddProductPage> {
     addProductController.discountTEC.text = model.discount?.toString() ?? "";
 
     addProductController.categoryController
-      ..setCategory(category: model.productcategory ?? "")
-      ..setUnit(unit: model.productunit ?? "");
+      ..setCategory( model.productcategory ?? "")
+      ..setUnit( model.productunit ?? "");
 
     // Load existing product images into the observable list
     addProductController.productImageFile.value = model.productimage ?? [];

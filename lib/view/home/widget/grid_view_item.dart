@@ -9,16 +9,16 @@ class GridViewItem extends StatelessWidget {
     super.key,
     required this.image,
     required this.text,
-    required this.function,
+    required this.onTap,
   });
   final String image;
   final String text;
-  final VoidCallback function;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: function,
+      onTap: onTap,
       child: Container(
           padding: EdgeInsets.all(8.r),
           decoration: BoxDecoration(
@@ -37,7 +37,11 @@ class GridViewItem extends StatelessWidget {
               SizedBox(
                 height: 10.h,
               ),
-              Text(text, style: AppsTextStyle.titleTextStyle)
+              Text(
+                text,
+                style: AppsTextStyle.titleTextStyle,
+                textAlign: TextAlign.center,
+              )
             ],
           )),
     );

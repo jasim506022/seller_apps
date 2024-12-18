@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:seller_apps/res/app_string.dart';
 
 import '../../../model/profile_model.dart';
 import '../../../res/app_function.dart';
@@ -24,24 +25,7 @@ class DeliveryUserProfileDetailsWidget extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              height: 90.h,
-              width: 90.h,
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(color: AppColors.red, width: 2.h)),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(50.h),
-                child: CachedNetworkImage(
-                  fit: BoxFit.cover,
-                  imageUrl: userProfile.imageurl!,
-                  placeholder: (context, url) => CircularProgressIndicator(
-                    backgroundColor: AppColors.white,
-                  ),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
-                ),
-              ),
-            ),
+            _buildProfileImage(),
             SizedBox(width: 15.w),
             Expanded(
               child: Padding(
@@ -55,11 +39,11 @@ class DeliveryUserProfileDetailsWidget extends StatelessWidget {
                       1: FlexColumnWidth(8),
                     },
                     children: [
-                      _buildTableRow(context, "Name", userProfile.name!),
-                      _buildTableRow(context, "Email", userProfile.email!),
-                      _buildTableRow(context, "Phone", userProfile.phone!),
-                      _buildTableRow(
-                          context, "Order", AppsFunction.formatDate(orderId)),
+                      _buildTableRow(AppString.name, userProfile.name!),
+                      _buildTableRow(AppString.email, userProfile.email!),
+                      _buildTableRow(AppString.phone, userProfile.phone!),
+                      _buildTableRow(AppString.orderDate,
+                          AppsFunction.formatDate(orderId)),
                     ],
                   )),
             )
@@ -69,7 +53,28 @@ class DeliveryUserProfileDetailsWidget extends StatelessWidget {
     );
   }
 
-  TableRow _buildTableRow(BuildContext context, String title, String value) {
+  Container _buildProfileImage() {
+    return Container(
+      height: 90.h,
+      width: 90.h,
+      decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          border: Border.all(color: AppColors.red, width: 2.h)),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(50.h),
+        child: CachedNetworkImage(
+          fit: BoxFit.cover,
+          imageUrl: userProfile.imageurl!,
+          placeholder: (context, url) => const CircularProgressIndicator(
+            backgroundColor: AppColors.white,
+          ),
+          errorWidget: (context, url, error) => const Icon(Icons.error),
+        ),
+      ),
+    );
+  }
+
+  TableRow _buildTableRow(String title, String value) {
     return TableRow(
       children: [
         TableCell(

@@ -113,7 +113,7 @@ class SearchControllers extends GetxController {
     filterProductList
       ..clear()
       ..addAll(allProductList.where((productModel) {
-        final double effectivePrice = AppsFunction.productPrice(
+        final double effectivePrice = AppsFunction.getDiscountedPrice(
           productModel.productprice ?? 0.0,
           productModel.discount?.toDouble() ?? 0.0,
         );

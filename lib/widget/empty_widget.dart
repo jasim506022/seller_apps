@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:seller_apps/res/apps_text_style.dart';
-
 
 class EmptyWidget extends StatelessWidget {
   const EmptyWidget({
@@ -14,23 +14,22 @@ class EmptyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var mq = MediaQuery.of(context).size;
     return Center(
       child: Stack(
         children: [
           Image.asset(
             image,
-            height: mq.height * .65,
-            width: mq.width * .7,
+            height: 550.h,
+            width: 320.w,
           ),
           Positioned(
-            top: mq.height * .1411,
-            left: mq.width * .289,
-            right: mq.width * .089,
+            top: 120.h,
+            left: 130.w,
+            right: 40.w,
             child: Center(
               child: Container(
-                height: mq.height * .353,
-                width: mq.height * .289,
+                height: 300.h,
+                width: 130.w,
                 alignment: Alignment.center,
                 child: Text(title, style: AppsTextStyle.emptyTestStyle),
               ),

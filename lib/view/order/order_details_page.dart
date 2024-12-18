@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:seller_apps/res/app_string.dart';
 
 import '../../model/order_model.dart';
 import '../../res/routes/routes_name.dart';
@@ -18,8 +19,8 @@ class OrderDetailsPage extends StatelessWidget {
     OrderModel orderModel = Get.arguments;
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Order Details",
+        title: Text(
+          AppString.orderDetails,
         ),
       ),
       body: Padding(

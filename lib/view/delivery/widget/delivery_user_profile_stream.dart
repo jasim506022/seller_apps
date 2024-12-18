@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:seller_apps/res/app_string.dart';
 
 import '../../../controller/delivary_controller.dart';
 import '../../../model/profile_model.dart';
@@ -30,7 +31,7 @@ class DeliveryUserProfileStream extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 5.h),
           child: Text(
-            "User Details: ",
+            "${AppString.userDetails}:  ",
             style: AppsTextStyle.largeBoldText.copyWith(color: AppColors.red),
           ),
         ),
@@ -51,7 +52,7 @@ class DeliveryUserProfileStream extends StatelessWidget {
               } else if (usersnapshots.hasError) {
                 return SingleEmptyWidget(
                   image: ImagesAsset.singleError,
-                  title: 'Error Found: ${usersnapshots.error}',
+                  title: '${AppString.errorOccurred} ${usersnapshots.error}',
                 );
               }
               return const DeliveryUserLoading();

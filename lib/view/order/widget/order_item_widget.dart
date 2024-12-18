@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:seller_apps/res/app_string.dart';
 
 import '../../../const/cart_function.dart';
 import '../../../controller/order_controller.dart';
@@ -13,7 +14,7 @@ import '../../../res/routes/routes_name.dart';
 import '../../../widget/dot_line_printer.dart';
 import '../../../widget/empty_widget.dart';
 import '../../loading_widget/loading_single_product_widget.dart';
-import 'cart_product_widget.dart';
+import 'order_product_widget.dart';
 
 class OrderItemWidget extends StatelessWidget {
   const OrderItemWidget({
@@ -46,10 +47,10 @@ class OrderItemWidget extends StatelessWidget {
             snapshot.data!.docs.isEmpty ||
             snapshot.hasError) {
           return EmptyWidget(
-            image: ImagesAsset.appLogoImage, //error
+            image: ImagesAsset.error, //error
             title: snapshot.hasError
-                ? 'Error Occurred: ${snapshot.error}'
-                : 'No Data Available',
+                ? '${AppString.errorOccurred} ${snapshot.error}'
+                : AppString.noDataAvaiable,
           );
         } else {
           return InkWell(
@@ -97,7 +98,7 @@ class OrderItemWidget extends StatelessWidget {
             ProductModel.fromMap(snapshot.data!.docs[index].data());
         return ChangeNotifierProvider.value(
           value: model,
-          child: CartProductWidget(
+          child: OrderProductWidget(
             quantity: quantities[index],
           ),
         );

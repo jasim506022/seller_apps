@@ -104,4 +104,20 @@ Auth String
   static String successfullySignout = "Successfully Signed Out";
   static String permissionDenied = "Permission denied for notifications.";
   static String fcmTokenError = "Error retrieving FCM token:";
+  static String orderPage = "Order Page";
+  static String noDataAvaiable = "No Data Available";
+  static String errorOccurred = "Error Occurred:";
+  static String historyPage = "History Page";
+  static String orderDelivery = "Order Delivery";
+  static String userDetails = "User Details";
+  static String orderDate = "or.Date";
+  static String deliveryAddress = "Delivery Address";
+  static String addresNoteFound = "Address Not Found";
+  static String estimatedDelivery = "Estimated Delivery Date is";
+  static String complete = "complete";
+  static String orderComplete = "Order Complete";
+  static String deliveryPartner = "Delivery Partner";
+  static String trackingNumber = "Tracking Number";
+  static String order = "Order";
+  static String orderDetails = "Order Details";
 }

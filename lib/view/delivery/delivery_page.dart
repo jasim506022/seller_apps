@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seller_apps/res/app_string.dart';
 
 import '../../model/order_model.dart';
 
@@ -23,8 +24,8 @@ class OrderDeliveryPage extends StatelessWidget {
     OrderModel orderModel = Get.arguments;
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Order Delivery ",
+        title: Text(
+          AppString.orderDelivery,
         ),
       ),
       body: Padding(

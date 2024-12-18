@@ -285,6 +285,7 @@ Flutter Auth Firebase Snapshot
 
   Stream<QuerySnapshot<Map<String, dynamic>>> sellerOrderSnapshot(
       {required List<String> sellerList}) {
+    print(sellerList.length);
     return firebaseFirestore
         .collection("seller")
         .where("uid", whereIn: sellerList)

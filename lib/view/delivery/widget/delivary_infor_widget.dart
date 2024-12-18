@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:seller_apps/res/app_string.dart';
 
 import '../../../model/order_model.dart';
 import '../../../res/apps_color.dart';
@@ -23,17 +24,17 @@ class DeliveryInfoWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               DeliveryRichTextWidget(
-                title: "Delivery Partner:",
-                subTitle: orderModel.deliveryPartner,
-                color: AppColors.deepGreen,
+                title: "${AppString.deliveryPartner}: ",
+                description: orderModel.deliveryPartner,
+                color: AppColors.green,
               ),
               SizedBox(
                 height: 15.h,
               ),
               DeliveryRichTextWidget(
-                  title: "Tracking Number :",
+                  title: "${AppString.trackingNumber} :",
                   color: AppColors.red,
-                  subTitle: orderModel.trackingNumber)
+                  description: orderModel.trackingNumber)
             ],
           ),
         ),

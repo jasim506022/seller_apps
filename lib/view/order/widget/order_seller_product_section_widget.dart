@@ -18,11 +18,10 @@ class OrderSellerProductListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var orderController = Get.find<OrderController>();
-
     return StreamBuilder(
       stream: orderController.sellerOrderSnapshot(
           sellerList:
-              CartFunctions.separateOrderSellerCartList(orderModel.productIds)),
+              CartFunctions.separateOrderSellerCartList(orderModel.seller)),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const LoadingSingleProductWidget();
@@ -34,12 +33,17 @@ class OrderSellerProductListWidget extends StatelessWidget {
           return const Center(
               child: Text('No products available or an error occurred.'));
         }
+        if (snapshot.hasData) {
+          print(snapshot.data!.docs);
+        }
 
         return ListView.builder(
           shrinkWrap: true, // understand this
           physics: const NeverScrollableScrollPhysics(),
           itemCount: snapshot.data!.docs.length,
           itemBuilder: (context, index) {
+            print(snapshot.data!.docs[index]["name"]);
+            print(snapshot.data!.docs[index]["uid"]);
             var sellerName = snapshot.data!.docs[index]["name"];
             var sellerId = snapshot.data!.docs[index]["uid"];
             return SellerOrderProductWidget(

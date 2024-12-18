@@ -119,6 +119,7 @@ class AppsFunction {
     }
   }
 
+/*
   static double calculateDiscountedPrice(num productprice, double discount) {
     return productprice - (productprice * discount / 100);
   }
@@ -126,6 +127,29 @@ class AppsFunction {
 //Product Price
   static double productPrice(num productprice, double discount) {
     return calculateDiscountedPrice(productprice, discount);
+  }
+
+  //Product Price
+  static double productPriceWithQuantity(
+      num productprice, double discount, int quantity) {
+    return calculateDiscountedPrice(productprice, discount) * quantity;
+  }
+
+*/
+  /// Calculates the discounted price of a product based on its original price and discount percentage.
+  static double calculateDiscountedPrice(num productPrice, double discount) {
+    return productPrice - (productPrice * discount / 100);
+  }
+
+  /// Returns the discounted price of a product.
+  static double getDiscountedPrice(num productPrice, double discount) {
+    return calculateDiscountedPrice(productPrice, discount);
+  }
+
+  /// Returns the total price for a given quantity of a product, including discount.
+  static double calculateTotalPriceWithQuantity(
+      num productPrice, double discount, int quantity) {
+    return calculateDiscountedPrice(productPrice, discount) * quantity;
   }
 
   static Container lineShimmer(double height, [double? width]) {
@@ -136,12 +160,6 @@ class AppsFunction {
           color: ThemeUtils.shimmerWidgetColor,
           borderRadius: BorderRadius.circular(15.r)),
     );
-  }
-
-  //Product Price
-  static double productPriceWithQuantity(
-      num productprice, double discount, int quantity) {
-    return calculateDiscountedPrice(productprice, discount) * quantity;
   }
 
   static String formatDate(String orderTime) {

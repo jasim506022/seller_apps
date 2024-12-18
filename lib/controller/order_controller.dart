@@ -80,11 +80,14 @@ class OrderController extends GetxController {
       return orderRepository.orderAddressSnapsot(addressId: addressId);
     } catch (e) {
       if (e is AppException) {
-        // AppsFunction.errorDialog(
-        //     icon: IconAsset.warningIcon,
-        //     title: e.title!,
-        //     content: e.message,
-        //     buttonText: "Okay");
+        Get.dialog(
+          ErrorDialogWidget(
+            icon: IconAsset.warningIcon,
+            title: e.title!,
+            content: e.message,
+            buttonText: "Okay",
+          ),
+        );
       }
       rethrow;
     }
@@ -92,15 +95,19 @@ class OrderController extends GetxController {
 
   Stream<QuerySnapshot<Map<String, dynamic>>> sellerOrderSnapshot(
       {required List<String> sellerList}) {
+    print(sellerList.length);
     try {
       return orderRepository.sellerOrderSnapshot(sellerList: sellerList);
     } catch (e) {
       if (e is AppException) {
-        // AppsFunction.errorDialog(
-        //     icon: IconAsset.warningIcon,
-        //     title: e.title!,
-        //     content: e.message,
-        //     buttonText: "Okay");
+        Get.dialog(
+          ErrorDialogWidget(
+            icon: IconAsset.warningIcon,
+            title: e.title!,
+            content: e.message,
+            buttonText: "Okay",
+          ),
+        );
       }
       rethrow;
     }

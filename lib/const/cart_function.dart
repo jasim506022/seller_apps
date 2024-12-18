@@ -58,9 +58,10 @@ class CartFunctions {
     });
   }
 
-  static separateOrderSellerCartList(productIds) {
+/*
+  static separateOrderSellerCartList(List<dynamic> productIds) {
     List<String> userCartList = List<String>.from(productIds);
-    List<String> itemSellerDetails = [];
+    Set<String> itemSellerDetails = {};
     List<String> itemNumber = [];
     for (int i = 1; i < userCartList.length; i++) {
       String item = userCartList[i].toString();
@@ -81,7 +82,11 @@ class CartFunctions {
     }
     return itemSellerDetails;
   }
+*/
 
+  static List<String> separateOrderSellerCartList(List<dynamic> seller) {
+    return [for (var item in seller) item.toString().split(":")[0]];
+  }
 /*
 // Seperator Oorder Product Id List
   static separteOrderProductIdList(productIds) {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:seller_apps/res/app_string.dart';
 import 'package:seller_apps/res/routes/routes_name.dart';
 
 import '../../../model/order_model.dart';
@@ -24,7 +25,7 @@ class OrderProductDetails extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "Order ${orderModel.orderId}",
+              "${AppString.order} ${orderModel.orderId}",
               style: AppsTextStyle.largeBoldText,
             ),
             InkWell(
@@ -32,7 +33,7 @@ class OrderProductDetails extends StatelessWidget {
                 Get.toNamed(RoutesName.orderDetailsPage, arguments: orderModel);
               },
               child: Text(
-                "Order Details >",
+                "${AppString.orderDetails} >",
                 style:
                     AppsTextStyle.mediumBoldText.copyWith(color: AppColors.red),
               ),

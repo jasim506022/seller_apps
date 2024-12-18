@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:seller_apps/res/utils.dart';
 
 import '../model/productsmodel.dart';
 import '../res/app_function.dart';
@@ -73,7 +72,7 @@ class ProductWidget extends StatelessWidget {
         Row(
           children: [
             Text(
-              "৳. ${AppsFunction.productPrice(productModel.productprice!, productModel.discount!.toDouble())}",
+              "৳. ${AppsFunction.getDiscountedPrice(productModel.productprice!, productModel.discount!.toDouble())}",
               style: AppsTextStyle.largeBoldText.copyWith(color: AppColors.red),
             ),
             SizedBox(

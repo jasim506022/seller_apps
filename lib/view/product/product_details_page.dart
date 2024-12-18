@@ -115,7 +115,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                 children: [
                   TextSpan(
                     text:
-                        "৳. ${AppsFunction.productPrice(productModel.productprice!, productModel.discount!.toDouble())} ",
+                        "৳. ${AppsFunction.getDiscountedPrice(productModel.productprice!, productModel.discount!.toDouble())} ",
                     style: AppsTextStyle.titleTextStyle
                         .copyWith(color: AppColors.red),
                   ),

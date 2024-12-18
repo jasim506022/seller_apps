@@ -10,7 +10,6 @@ class DeliveryUserLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Utils Utils = Utils(context);
     return Container(
         height: 0.155.sh,
         width: 1.sw,

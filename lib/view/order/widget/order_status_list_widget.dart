@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:seller_apps/controller/category_controller.dart';
-import 'package:seller_apps/widget/drop_down_category_widget.dart';
+import 'package:seller_apps/res/app_string.dart';
 
+import '../../../controller/category_controller.dart';
 import '../../../controller/order_controller.dart';
 import '../../../model/order_model.dart';
 import '../../../res/app_asset/image_asset.dart';
 import '../../../res/app_constants.dart';
+import '../../../widget/drop_down_category_widget.dart';
 import '../../../widget/empty_widget.dart';
 import '../../loading_widget/loading_list_single_product_widget.dart';
 import 'order_item_widget.dart';
@@ -41,9 +42,9 @@ class OrderStatusListWidget extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 15.h),
                 child: DropdownCategoryWidget(
                   list: AppConstants.statusList,
-                  value: AppConstants.statusList.first,
+                  value: categoryController.status,
                   onChanged: (value) {
-                    categoryController.setStatus( value!);
+                    categoryController.setStatus(value!);
                   },
                 ),
               ),
@@ -73,8 +74,8 @@ class OrderStatusListWidget extends StatelessWidget {
           return EmptyWidget(
             image: ImagesAsset.error,
             title: snapshot.hasError
-                ? 'Error Occurred: ${snapshot.error}'
-                : 'No Data Available',
+                ? '${AppString.errorOccurred} ${snapshot.error}'
+                : AppString.noDataAvaiable,
           );
         } else if (snapshot.hasData) {
           return ListView.builder(

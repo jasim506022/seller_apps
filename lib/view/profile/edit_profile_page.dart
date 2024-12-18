@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../res/app_string.dart';
 import '../../res/internet_utilis.dart';
 
-import '../../widget/loading_widget.dart';
 import '../../widget/text_field_form_widget.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -72,10 +71,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       onPressed: () async {
                         if (!key.currentState!.validate()) return;
                         if (!(await NetworkUtili.verifyInternetStatus())) {
-                          // profileController.updateProfile();
-                          Get.dialog(
-                              barrierDismissible: false,
-                              const LoadingWidget(message: "Profile Update"));
+                          profileController.updateProfile();
                         }
                       },
                       icon: const Icon(

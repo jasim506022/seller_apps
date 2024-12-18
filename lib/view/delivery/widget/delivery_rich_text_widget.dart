@@ -7,12 +7,12 @@ class DeliveryRichTextWidget extends StatelessWidget {
   const DeliveryRichTextWidget({
     super.key,
     required this.title,
-    required this.subTitle,
+    required this.description,
     this.color,
   });
 
   final String title;
-  final String subTitle;
+  final String description;
   final Color? color;
 
   @override
@@ -29,7 +29,7 @@ class DeliveryRichTextWidget extends StatelessWidget {
             width: 10.w,
           )),
           TextSpan(
-              text: subTitle,
+              text: description,
               style: AppsTextStyle.mediumBoldText
                   .copyWith(color: color ?? Theme.of(context).primaryColor)),
         ],

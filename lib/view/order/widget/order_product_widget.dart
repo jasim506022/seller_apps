@@ -8,8 +8,8 @@ import '../../../res/apps_color.dart';
 import '../../../res/apps_text_style.dart';
 import '../../../widget/product_image_widget.dart';
 
-class CartProductWidget extends StatelessWidget {
-  const CartProductWidget({super.key, required this.quantity});
+class OrderProductWidget extends StatelessWidget {
+  const OrderProductWidget({super.key, required this.quantity});
 
   final int quantity;
 
@@ -77,14 +77,14 @@ class CartProductWidget extends StatelessWidget {
                       style: AppsTextStyle.mediumNormalText
                           .copyWith(color: AppColors.green)),
                   Text(
-                      "${AppsFunction.productPrice(productModel.productprice!, productModel.discount!.toDouble())}",
+                      "${AppsFunction.getDiscountedPrice(productModel.productprice!, productModel.discount!.toDouble())}",
                       style: AppsTextStyle.mediumNormalText
                           .copyWith(color: AppColors.green)),
                 ],
               ),
               const Spacer(),
               Text(
-                  "= ৳. ${AppsFunction.productPriceWithQuantity(productModel.productprice!, productModel.discount!.toDouble(), quantity).toStringAsFixed(2)}",
+                  "= ৳. ${AppsFunction.calculateTotalPriceWithQuantity(productModel.productprice!, productModel.discount!.toDouble(), quantity).toStringAsFixed(2)}",
                   style: AppsTextStyle.largeBoldText
                       .copyWith(color: AppColors.green)),
             ],

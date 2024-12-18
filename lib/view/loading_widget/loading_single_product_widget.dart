@@ -20,7 +20,7 @@ class LoadingSingleProductWidget extends StatelessWidget {
         height: 160.h, //160
         width: .9.sw,
         decoration: BoxDecoration(
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                 color: AppColors.black,
                 spreadRadius: .05,
@@ -42,11 +42,10 @@ class LoadingSingleProductWidget extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      AppsFunction.lineShimmer(20.h),
-                      AppsFunction.lineShimmer(20.h),
-                      AppsFunction.lineShimmer(20.h),
-                    ],
+                    children: List.generate(3, (index) {
+                      return AppsFunction.lineShimmer(
+                          20.h); // Shimmer for text lines
+                    }),
                   ),
                 ),
               )

@@ -163,6 +163,7 @@ class _SignUpPageState extends State<SignUpPage> {
   // Validation for non-empty fields.
   String? _validateNonEmpty(String? value) {
     if (value == null || value.isEmpty) return AppString.enterName;
+    if (value.length < 6) return AppString.nameValid;
     return null;
   }
 

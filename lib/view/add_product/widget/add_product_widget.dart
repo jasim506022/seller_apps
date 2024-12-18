@@ -69,7 +69,7 @@ class _AddProductWidgetState extends State<AddProductWidget> {
                   () => ListView(
                     children: [
                       if (addProductController.loadingController.loading.value)
-                        LinearProgressIndicator(
+                        const LinearProgressIndicator(
                           backgroundColor: AppColors.red,
                         ),
                       Padding(
@@ -119,7 +119,7 @@ class _AddProductWidgetState extends State<AddProductWidget> {
             value: categoryController.category,
             onChanged: (value) {
               addProductController.addChangeListener();
-              categoryController.setCategory( value!.toString());
+              categoryController.setCategory(value!.toString());
             },
           ),
           _buildTextField(
@@ -140,7 +140,7 @@ class _AddProductWidgetState extends State<AddProductWidget> {
                   child: DropdownCategoryWidget(
                 onChanged: (value) {
                   addProductController.addChangeListener();
-                  categoryController.setUnit( value!.toString());
+                  categoryController.setUnit(value!.toString());
                 },
                 list: AppConstants.unitList,
                 value: categoryController.unit,

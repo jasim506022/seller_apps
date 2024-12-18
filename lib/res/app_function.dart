@@ -40,7 +40,6 @@ class AppsFunction {
     ));
   }
 
- 
   static flutterToast({required String msg}) {
     Fluttertoast.showToast(
         msg: msg,

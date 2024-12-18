@@ -43,31 +43,43 @@ class ProifleHeaderWidget extends StatelessWidget {
         ));
   }
 
-  Column _buildProfileDetails() {
+  // Build Profile Details Section
+  Widget _buildProfileDetails() {
+    final String name = AppConstants.sharedPreference!
+        .getString(AppString.nameSharedPreference)!;
+
+    final String email = AppConstants.sharedPreference!
+        .getString(AppString.emailSharedPreference)!;
+
+/*
+final String email = AppConstants.sharedPreference
+            ?.getString(AppString.emailSharedPreference)
+*/
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Text(
-            AppConstants.sharedPreference!
-                .getString(AppString.nameSharedPreference)!,
-            maxLines: 1,
-            style: AppsTextStyle.titleTextStyle),
-        Text(
-            AppConstants.sharedPreference!
-                .getString(AppString.emailSharedPreference)!,
-            style: AppsTextStyle.subTitleTextStyle),
-        SizedBox(
-          height: AppConstants.defaultHeightSpace,
+          name,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: AppsTextStyle.titleTextStyle,
         ),
+        Text(
+          email,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: AppsTextStyle.subTitleTextStyle,
+        ),
+        SizedBox(height: AppConstants.defaultHeightSpace),
         CustomRoundActionButtonWidget(
           title: "Edit Profile",
           onTap: () async {
-            if (!(await NetworkUtili.verifyInternetStatus())) {
+            if (!await NetworkUtili.verifyInternetStatus()) {
               Get.toNamed(RoutesName.editProfilePage, arguments: true);
             }
           },
-        )
+        ),
       ],
     );
   }

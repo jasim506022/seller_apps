@@ -10,9 +10,11 @@ import '../res/app_function.dart';
 class SignUpRepository {
   final _dataFirebaseService = DataFirebaseService();
 
-  Future<String> uploadUserImgeUrl({required File file}) async {
+  Future<String> uploadUserImgeUrl(
+      {required File file, bool isProfile = false}) async {
     try {
-      return _dataFirebaseService.uploadUserImgeUrl(file: file);
+      return _dataFirebaseService.uploadUserImgeUrl(
+          file: file, isProfile: isProfile);
     } catch (e) {
       AppsFunction.handleException(e);
       rethrow;

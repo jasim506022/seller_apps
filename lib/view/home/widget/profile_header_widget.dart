@@ -118,9 +118,8 @@ class ProfileHeaderWidget extends StatelessWidget {
     final profileController = Get.find<ProfileController>();
 
     return Obx(() {
-      if (profileController.isLoading.value) {
-        print("bangladesh");
-        return Center(
+      if (profileController.loadingController.loading.value) {
+        return const Center(
           child: CircularProgressIndicator(color: AppColors.deepGreen),
         );
       }
@@ -163,7 +162,7 @@ class UserProfileContent extends StatelessWidget {
                   imageUrl: imageUrl,
                   fit: BoxFit.cover,
                   placeholder: (context, url) =>
-                      CircularProgressIndicator(color: AppColors.white),
+                      const CircularProgressIndicator(color: AppColors.white),
                   errorWidget: (context, url, error) => Icon(Icons.error),
                 ),
               ),

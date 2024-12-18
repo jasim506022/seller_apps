@@ -17,6 +17,7 @@ Auth String
   static String validEmailAddress = 'Please Enter a Valid Email Address';
   static String yourName = 'Your Name';
   static String enterName = 'Please enter your name';
+  static String nameValid = 'Name must be longer than 2 characters';
   static String enterPassword = 'Please enter your Password';
   static String validPassword = 'Password Must be geather then 6 Characteris';
   static String password = "Password";
@@ -29,6 +30,9 @@ Auth String
   static String enterPhone = 'Please enter your phone number';
   static String validPhoneNumber = 'Please Give Valid Phone number';
   static String sendingMail = "Sending a mail. Please Check ur Email";
+  static String name = "Name";
+  static String phone = "Phone";
+  static String pleaseEnterAddress = "Please enter your Address";
 
   //
   static String signInSuccessfully = "Sign in Successfully";
@@ -86,4 +90,18 @@ Auth String
       "Buy farm fresh fruits & vegetables online at the best & affordable prices.";
   static String thirdOnboardingDescription =
       "We offers speedy delivery of your groceries, bathroom supplies, baby care products, pet care items, stationary, etc within 30minutes at your doorstep.";
+
+  static String editProfile = "Edit Profile";
+  static String about = "About";
+  static String address = "Address";
+  static String email = "Email";
+  static String givemPhoneNumbeer = "Please Give your Phone Numer";
+  static String pleaseWait = "Pleasing Waiting........";
+  static String profileUpdate = "Profile Update";
+  static String successfullyUpdate = "Profile updated successfully";
+  static String signOut = "Sign Out";
+  static String doYouwantSignout = "Do you want to sign out?";
+  static String successfullySignout = "Successfully Signed Out";
+  static String permissionDenied = "Permission denied for notifications.";
+  static String fcmTokenError = "Error retrieving FCM token:";
 }

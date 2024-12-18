@@ -31,7 +31,7 @@ class ShowAlertDialogWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Theme.of(context).dialogBackgroundColor,
+      backgroundColor: Theme.of(context).cardColor,
       title: _buildTitleRow(),
       content: Text(
         content,

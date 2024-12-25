@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../controller/sign_up_controller.dart';
+import '../../../controller/auth_controller.dart';
 import '../../../res/apps_color.dart';
 import '../../../res/internet_utilis.dart';
 import '../../../widget/profile_photo_option_sheet_widget.dart';
@@ -14,7 +14,7 @@ class ProfileImageCaptureWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var signUpController = Get.find<SignUpController>();
+    final authController = Get.find<AuthController>();
 
     return InkWell(
       onTap: () async {
@@ -30,7 +30,7 @@ class ProfileImageCaptureWidget extends StatelessWidget {
             border: Border.all(color: AppColors.red, width: 3.w)),
         child: Obx(() {
           var selectedPhoto =
-              signUpController.selectImageController.selectPhoto.value;
+              authController.selectImageController.selectPhoto.value;
           return CircleAvatar(
             radius: 0.2.sw,
             backgroundImage:

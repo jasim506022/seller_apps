@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seller_apps/res/app_string.dart';
 
 import '../../controller/search_controller.dart';
 import '../../model/productsmodel.dart';
@@ -19,9 +20,7 @@ class SearchPage extends StatelessWidget {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(
-            "Search Products",
-          ),
+          title: Text(AppString.searchProducts),
         ),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 10.w),

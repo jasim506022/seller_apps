@@ -8,41 +8,41 @@ import '../model/profile_model.dart';
 import '../res/app_function.dart';
 
 class SignUpRepository {
-  final _dataFirebaseService = DataFirebaseService();
+  // final _dataFirebaseService = DataFirebaseService();
 
-  Future<String> uploadUserImgeUrl(
-      {required File file, bool isProfile = false}) async {
-    try {
-      return _dataFirebaseService.uploadUserImgeUrl(
-          file: file, isProfile: isProfile);
-    } catch (e) {
-      AppsFunction.handleException(e);
-      rethrow;
-    }
-  }
+  // Future<String> uploadUserImgeUrl(
+  //     {required File file, bool isProfile = false}) async {
+  //   try {
+  //     return _dataFirebaseService.uploadUserImgeUrl(
+  //         file: file, isProfile: isProfile);
+  //   } catch (e) {
+  //     AppsFunction.handleException(e);
+  //     rethrow;
+  //   }
+  // }
 
-  Future<UserCredential> createUserWithEmilandPasword(
-      {required String email, required String password}) {
-    try {
-      return _dataFirebaseService.createUserWithEmilandPasword(
-          email: email, password: password);
-    } on FirebaseAuthException catch (e) {
-      AppsFunction.handleException(e);
-      rethrow;
-    } catch (e) {
-      AppsFunction.handleException(e);
-      throw OthersException(e.toString());
-    }
-  }
+  // Future<UserCredential> createUserWithEmilandPasword(
+  //     {required String email, required String password}) {
+  //   try {
+  //     return _dataFirebaseService.createUserWithEmilandPasword(
+  //         email: email, password: password);
+  //   } on FirebaseAuthException catch (e) {
+  //     AppsFunction.handleException(e);
+  //     rethrow;
+  //   } catch (e) {
+  //     AppsFunction.handleException(e);
+  //     throw OthersException(e.toString());
+  //   }
+  // }
 
-  Future<void> uploadUserProfile(
-      {required ProfileModel profileModel, required String documentId}) async {
-    try {
-      _dataFirebaseService.uploadUserProfile(
-          profileModel: profileModel, firebaseDocument: documentId);
-    } catch (e) {
-      AppsFunction.handleException(e);
-      rethrow;
-    }
-  }
+  // Future<void> uploadUserProfile(
+  //     {required ProfileModel profileModel, required String documentId}) async {
+  //   try {
+  //     _dataFirebaseService.uploadUserProfile(
+  //         profileModel: profileModel, firebaseDocument: documentId);
+  //   } catch (e) {
+  //     AppsFunction.handleException(e);
+  //     rethrow;
+  //   }
+  // }
 }

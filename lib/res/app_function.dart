@@ -40,6 +40,12 @@ class AppsFunction {
     ));
   }
 
+  // VerticalSpace
+  static SizedBox verticalSpace(double height) => SizedBox(height: height.h);
+
+  // VerticalSpace
+  static SizedBox horizontalSpace(double width) => SizedBox(width: width.w);
+
   static flutterToast({required String msg}) {
     Fluttertoast.showToast(
         msg: msg,
@@ -61,7 +67,7 @@ class AppsFunction {
           borderSide: const BorderSide(color: Color(0xff00B761), width: 1),
           borderRadius: BorderRadius.circular(15)),
       hintText: hint,
-      hintStyle: const TextStyle(color: Colors.grey),
+      hintStyle: TextStyle(color: Colors.grey),
     );
   }
 

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
+import '../../../res/app_string.dart';
 import '../../../res/utils.dart';
 import '../../../controller/search_controller.dart';
 import '../../../res/app_function.dart';
@@ -31,7 +32,7 @@ class SearchBarWidget extends StatelessWidget {
                     .copyWith(color: ThemeUtils.baseTextColor),
                 isUdateDecoration: true,
                 decoration: AppsFunction.inputDecoration(
-                  hint: "Search Product Here",
+                  hint: AppString.searchProductHere,
                 ),
                 controller: searchController.searchTextTEC,
                 onChanged: (text) {

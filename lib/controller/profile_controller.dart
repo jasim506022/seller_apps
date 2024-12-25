@@ -94,8 +94,8 @@ class ProfileController extends GetxController {
           LoadingWidget(message: AppString.profileUpdate));
 
       if (selectImageController.selectPhoto.value != null) {
-        image.value = await signUpRepository.uploadUserImgeUrl(
-            file: selectImageController.selectPhoto.value!, isProfile: true);
+        // image.value = await signUpRepository.uploadUserImgeUrl(
+        //     file: selectImageController.selectPhoto.value!, isProfile: true);
       }
 
       final updatedProfile = _buildProfileModel();

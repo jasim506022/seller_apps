@@ -30,4 +30,12 @@ class NetworkUtili {
         margin: EdgeInsets.zero,
         borderRadius: 0);
   }
+
+  /// A utility function to verify internet status before executing an action
+  static Future<void> verifyInternetAndExecute(
+      Future<void> Function() action) async {
+    if (!await verifyInternetStatus()) {
+      await action();
+    }
+  }
 }

@@ -8,7 +8,7 @@ class RoundButtonWidget extends StatelessWidget {
   const RoundButtonWidget({
     super.key,
     required this.title,
-    required this.onPress,
+    required this.onTap,
     this.buttonColors,
     this.width = 60,
     this.height = 50,
@@ -16,13 +16,13 @@ class RoundButtonWidget extends StatelessWidget {
 
   final String title;
   final double height, width;
-  final VoidCallback onPress;
+  final VoidCallback onTap;
   final Color? buttonColors;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onPress,
+      onTap: onTap,
       child: Container(
           height: height.h,
           width: width.w,

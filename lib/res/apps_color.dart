@@ -16,6 +16,7 @@ class AppColors {
 
   // Text and Hint Colors
   static const Color grey = Colors.grey;
+
   static const Color hintLight = Color(0xff686874); // hintLight
   static const Color hintDark = Color.fromARGB(255, 220, 220, 235); // hintDark
 
@@ -38,12 +39,12 @@ class AppColors {
     return isDarkMode ? backgroundDark : backgroundLight;
   }
 
-  static Color indicatorColorDarkColor = Colors.white54;
   static Color searchLightColor = const Color(0xfff3f3f4);
-  static Color indicatorColorightColor = Colors.black54;
+
+  // static Color indicatorColorDarkColor = Colors.white54;
+  // static Color indicatorColorightColor = Colors.black54;
 
   // utilies Color
-  
 }
 
 

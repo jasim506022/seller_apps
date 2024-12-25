@@ -1,0 +1,39 @@
+import 'app_function.dart';
+import 'app_string.dart';
+
+class Validators {
+  static String? validateEmail(String? email) {
+    if (email == null || email.isEmpty) {
+      return AppString.enterEmailAddress;
+    } else if (!AppsFunction.isValidEmail(email)) {
+      return AppString.validEmailAddress;
+    }
+    return null;
+  }
+
+  static String? validatePassword(String? password) {
+    if (password == null || password.isEmpty) {
+      return AppString.enterPassword;
+    } else if (password.length < 6) {
+      return AppString.validPassword;
+    }
+    return null;
+  }
+
+  // Validation for non-empty fields.
+  static String? validateNonEmpty(String? value) {
+    if (value == null || value.isEmpty) return AppString.enterName;
+    if (value.length < 4) return AppString.nameValid;
+    return null;
+  }
+
+  // Validation for confirm password field.
+  static String? validateConfirmPassword(String? value) {
+    if (value == null || value.isEmpty) {
+      return AppString.enterConfirmPassword;
+    } else if (value.length < 6) {
+      return AppString.validConfirmPassword;
+    }
+    return null;
+  }
+}

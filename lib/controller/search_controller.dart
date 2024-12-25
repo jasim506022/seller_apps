@@ -16,6 +16,7 @@ class SearchControllers extends GetxController {
   final TextEditingController minPriceTEC = TextEditingController(text: "0.00");
   final TextEditingController maxPriceTEC =
       TextEditingController(text: "10000.00");
+      
   final TextEditingController searchTextTEC = TextEditingController(text: "");
 
   // Observables for category selection, product lists, and flags

@@ -120,4 +120,17 @@ Auth String
   static String trackingNumber = "Tracking Number";
   static String order = "Order";
   static String orderDetails = "Order Details";
+  static String searchProducts = "Search Products";
+  static String searchProductHere = "Search Product Here";
+  static String filterSearch = "Filter Search";
+  static String productCategory = 'Product Category';
+  static String reset = "Reset";
+  static String close = "Close";
+  static String save = 'Save';
+
+
+
+
+  // Firebase 
+  static const firebaseCollection = "seller";
 }

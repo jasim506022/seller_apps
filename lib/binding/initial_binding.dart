@@ -1,7 +1,9 @@
 import 'package:get/get.dart';
+import 'package:seller_apps/controller/auth_controller.dart';
 import 'package:seller_apps/controller/category_controller.dart';
 import 'package:seller_apps/controller/delivary_controller.dart';
 import 'package:seller_apps/controller/forget_password_controller.dart';
+import 'package:seller_apps/repository/auth_reposity.dart';
 import 'package:seller_apps/repository/forget_password_repository.dart';
 
 import '../controller/loading_controller.dart';
@@ -33,10 +35,16 @@ class InitialBinding extends Bindings {
 
     Get.lazyPut<OnboardingController>(() => OnboardingController());
 
-    Get.lazyPut<SignInRepository>(() => SignInRepository(), fenix: true);
+    // Get.lazyPut<SignInRepository>(() => SignInRepository(), fenix: true);
 
-    Get.lazyPut<SignInController>(
-        () => SignInController(repository: Get.find<SignInRepository>()),
+    // Get.lazyPut<SignInController>(
+    //     () => SignInController(repository: Get.find<SignInRepository>()),
+    //     fenix: true);
+
+         Get.lazyPut<AuthReposity>(() => AuthReposity(), fenix: true);
+
+    Get.lazyPut<AuthController>(
+        () => AuthController(repository: Get.find<AuthReposity>()),
         fenix: true);
 
     Get.put<LoadingController>(LoadingController());
@@ -48,13 +56,13 @@ class InitialBinding extends Bindings {
 
     Get.lazyPut<SignUpRepository>(() => SignUpRepository());
 
-    Get.put<SignUpController>(
-        SignUpController(repository: Get.find<SignUpRepository>()));
+    // Get.put<SignUpController>(
+    //     SignUpController(repository: Get.find<SignUpRepository>()));
 
-    Get.lazyPut<ForgetPasswordRepository>(() => ForgetPasswordRepository());
+    // Get.lazyPut<ForgetPasswordRepository>(() => ForgetPasswordRepository());
 
-    Get.put<ForgetPasswordController>(ForgetPasswordController(
-        repository: Get.find<ForgetPasswordRepository>()));
+    // Get.put<ForgetPasswordController>(ForgetPasswordController(
+    //     repository: Get.find<ForgetPasswordRepository>()));
 
     Get.lazyPut<ProfileRepository>(() => ProfileRepository(), fenix: true);
 

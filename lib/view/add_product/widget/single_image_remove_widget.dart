@@ -46,7 +46,7 @@ class SingleImageRemove extends StatelessWidget {
             onTap: () => addProductController.removeProductImageFile(index),
             child: Container(
               padding: EdgeInsets.all(4.r),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: AppColors.white,
                 shape: BoxShape.circle,
               ),

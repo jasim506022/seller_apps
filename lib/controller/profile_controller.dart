@@ -1,12 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:seller_apps/repository/auth_reposity.dart';
 
 import '../model/app_exception.dart';
 import '../model/profile_model.dart';
 import '../repository/profile_repository.dart';
-import '../repository/sign_up_repository.dart';
 import '../res/app_asset/icon_asset.dart';
 import '../res/app_constants.dart';
 import '../res/app_function.dart';
@@ -20,10 +21,10 @@ import 'select_image_controller.dart';
 
 class ProfileController extends GetxController {
   final ProfileRepository repository;
-  final LoadingController loadingController = Get.find<LoadingController>();
+  final loadingController = Get.find<LoadingController>();
   final SelectImageController selectImageController =
       Get.find<SelectImageController>();
-  final SignUpRepository signUpRepository = SignUpRepository();
+  AuthReposity authReposity = AuthReposity();
 
   // Observables
   var profileModel = ProfileModel().obs;
@@ -67,7 +68,7 @@ class ProfileController extends GetxController {
         loadingController.loading.value = true;
 
         final fetchedData =
-            await repository.getUserInformationSnapshot(); // Simulated API call
+            await repository.fetchUserProfile(); // Simulated API call
         profileModel.value = ProfileModel.fromMap(fetchedData.data()!);
       }
     } catch (e) {
@@ -99,7 +100,7 @@ class ProfileController extends GetxController {
       }
 
       final updatedProfile = _buildProfileModel();
-      repository.updateUserData(map: updatedProfile.toMapProfileEdit());
+      repository.updateUserProfile(map: updatedProfile.toMapProfileEdit());
 
       isChanged.value = false;
 
@@ -134,8 +135,8 @@ class ProfileController extends GetxController {
             await prefs.setString(AppString.nameSharedPreference, "");
             await prefs.setString(AppString.emailSharedPreference, "");
 
-            await repository.updateUserData(map: {"token": ""});
-            await repository.signOut();
+            await repository.updateUserProfile(map: {"token": ""});
+            await authReposity.signOut();
             AppsFunction.flutterToast(msg: AppString.successfullySignout);
 
             Get.offAllNamed(RoutesName.signPage);
@@ -144,6 +145,7 @@ class ProfileController extends GetxController {
           }
         }));
   }
+
 
   ProfileModel _buildProfileModel() {
     return ProfileModel(
@@ -168,48 +170,22 @@ class ProfileController extends GetxController {
     }
   }
 
-  /*
-  void fetchProfile() async {
-    try {
-      var image = AppConstants.sharedPreference!
-          .getString(AppString.imageurlSharedPreference);
-      var name = AppConstants.sharedPreference!
-          .getString(AppString.nameSharedPreference);
-      var email = AppConstants.sharedPreference!
-          .getString(AppString.emailSharedPreference);
-
-      if (image != null && name != null && email != null) {
-        profileModel.value = ProfileModel(
-          imageurl: image,
-          name: name,
-          email: email,
-        );
-      } else {
-        isLoading.value = true;
-
-        var fetchedData = await getData(); // Simulated API call
-        profileModel.value = ProfileModel.fromMap(fetchedData.data()!);
-      }
-    } catch (e) {
-      if (kDebugMode) {
-        print("Error fetching profile: $e");
-      }
-    } finally {
-      isLoading.value = false;
-    }
+ 
+ 
+  Future<DocumentSnapshot<Map<String, dynamic>>> getData() {
+    return repository.fetchUserProfile();
   }
-*/
 
-  Future<void> getUserInformationSnapshot() async {
+  Future<void> fetchUserProfile() async {
     try {
-      var snapshot = await repository.getUserInformationSnapshot();
+      var snapshot = await repository.fetchUserProfile();
       if (snapshot.exists && snapshot.data() != null) {
         profileModel.value = ProfileModel.fromMap(snapshot.data()!);
         if (profileModel.value.status == AppString.approved) {
           _saveProfileToSharedPreferences();
           _updateTextControllers();
           var token = await getFCMToken();
-          await repository.updateUserData(map: {"token": token});
+          await repository.updateUserProfile(map: {"token": token});
         }
       }
     } catch (e) {
@@ -268,6 +244,7 @@ class ProfileController extends GetxController {
     await Future.wait(prefsTasks);
   }
 
+
   Future<String?> getFCMToken() async {
     try {
       // Request permission for iOS devices
@@ -285,9 +262,44 @@ class ProfileController extends GetxController {
     }
     return null;
   }
+
+
 }
 
 
+
+  /*
+  void fetchProfile() async {
+    try {
+      var image = AppConstants.sharedPreference!
+          .getString(AppString.imageurlSharedPreference);
+      var name = AppConstants.sharedPreference!
+          .getString(AppString.nameSharedPreference);
+      var email = AppConstants.sharedPreference!
+          .getString(AppString.emailSharedPreference);
+
+      if (image != null && name != null && email != null) {
+        profileModel.value = ProfileModel(
+          imageurl: image,
+          name: name,
+          email: email,
+        );
+      } else {
+        isLoading.value = true;
+
+        var fetchedData = await getData(); // Simulated API call
+        profileModel.value = ProfileModel.fromMap(fetchedData.data()!);
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error fetching profile: $e");
+      }
+    } finally {
+      isLoading.value = false;
+    }
+  }
+*/
+ 
 
 
 

@@ -98,7 +98,6 @@ class MyApp extends StatelessWidget {
     return ThemeData(
       iconTheme: IconThemeData(
           color: isDarkTheme ? AppColors.white : AppColors.black, size: 25),
-
       appBarTheme: AppBarTheme(
         iconTheme: IconThemeData(
           color: isDarkTheme ? AppColors.white : AppColors.black,
@@ -112,21 +111,21 @@ class MyApp extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-
       scaffoldBackgroundColor:
           isDarkTheme ? AppColors.backgroundDark : AppColors.backgroundLight,
-
+     
+      indicatorColor: Colors.red,
+      
       cardColor: isDarkTheme ? AppColors.cardDark : AppColors.white,
-
+      
       canvasColor:
           isDarkTheme ? AppColors.cardDark : AppColors.searchLightColor,
-
-      // indicatorColor: isDarkTheme
-      //     ? AppColors.indicatorColorDarkColor
-      //     : AppColors.indicatorColorightColor,
-
+      
+      unselectedWidgetColor:
+          isDarkTheme ? AppColors.indicatorDark : AppColors.indicatorLight,
+      
       hintColor: isDarkTheme ? AppColors.hintDark : AppColors.hintLight,
-
+      
       primaryColor: isDarkTheme ? AppColors.white : AppColors.black,
     );
   }

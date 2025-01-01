@@ -19,4 +19,6 @@ abstract class BaseAuthenticationService {
       {required ProfileModel profileModel, required String firebaseDocument});
 
   Future<void> forgetPasswordSnapshot({required String email});
+
+  Future<void> signOutApp();
 }

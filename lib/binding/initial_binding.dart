@@ -41,7 +41,7 @@ class InitialBinding extends Bindings {
     //     () => SignInController(repository: Get.find<SignInRepository>()),
     //     fenix: true);
 
-         Get.lazyPut<AuthReposity>(() => AuthReposity(), fenix: true);
+    Get.lazyPut<AuthReposity>(() => AuthReposity(), fenix: true);
 
     Get.lazyPut<AuthController>(
         () => AuthController(repository: Get.find<AuthReposity>()),
@@ -49,10 +49,13 @@ class InitialBinding extends Bindings {
 
     Get.put<LoadingController>(LoadingController());
 
-    Get.lazyPut<SelectImageRepository>(() => SelectImageRepository());
+    Get.lazyPut<SelectImageRepository>(() => SelectImageRepository(),
+        fenix: true);
 
-    Get.lazyPut<SelectImageController>(() =>
-        SelectImageController(repository: Get.find<SelectImageRepository>()));
+    Get.lazyPut<SelectImageController>(
+        () => SelectImageController(
+            repository: Get.find<SelectImageRepository>()),
+        fenix: true);
 
     Get.lazyPut<SignUpRepository>(() => SignUpRepository());
 

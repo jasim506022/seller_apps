@@ -48,7 +48,7 @@ class DataAuthenticationService extends BaseAuthenticationService {
     if (userId == null) return false;
 
     final userDoc = await _firebaseFirestore
-        .collection(AppString.firebaseCollection)
+        .collection(AppString.sellersCollection)
         .doc(userId)
         .get();
 
@@ -60,7 +60,7 @@ class DataAuthenticationService extends BaseAuthenticationService {
   Future<void> createUserGmail(
       {required User user, required ProfileModel profileModel}) async {
     _firebaseFirestore
-        .collection(AppString.firebaseCollection)
+        .collection(AppString.sellersCollection)
         .doc(user.uid)
         .set(profileModel.toMap());
   }
@@ -71,8 +71,8 @@ class DataAuthenticationService extends BaseAuthenticationService {
       {required File file, bool isProfile = false}) async {
     String fileName = "ju_grocery_${DateTime.now().millisecondsSinceEpoch}";
     final storagePath = isProfile
-        ? "${AppString.firebaseCollection}/${_firebaseAuth.currentUser!.uid}/$fileName"
-        : "${AppString.firebaseCollection}/$fileName";
+        ? "${AppString.sellersCollection}/${_firebaseAuth.currentUser!.uid}/profile/$fileName"
+        : "${AppString.sellersCollection}/profile/$fileName";
 
     final ref = _firebaseStorage.ref().child(storagePath);
     final uploadTask = ref.putFile(file);
@@ -96,7 +96,7 @@ class DataAuthenticationService extends BaseAuthenticationService {
       {required ProfileModel profileModel,
       required String firebaseDocument}) async {
     await _firebaseFirestore
-        .collection(AppString.firebaseCollection)
+        .collection(AppString.sellersCollection)
         .doc(firebaseDocument)
         .set(profileModel.toMap());
   }
@@ -105,5 +105,10 @@ class DataAuthenticationService extends BaseAuthenticationService {
   @override
   Future<void> forgetPasswordSnapshot({required String email}) async {
     _firebaseAuth.sendPasswordResetEmail(email: email);
+  }
+
+  @override
+  Future<void> signOutApp() async {
+    _firebaseAuth.signOut();
   }
 }

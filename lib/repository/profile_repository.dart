@@ -1,31 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../data/response/service/data_firebase_service.dart';
+import '../data/response/service/data_profile_service.dart';
 import '../res/app_function.dart';
 
 class ProfileRepository {
-  final _dataFirebaseService = DataFirebaseService();
-  Future<DocumentSnapshot<Map<String, dynamic>>>
-      getUserInformationSnapshot() async {
+  final profileService = DataProfileService();
+  Future<DocumentSnapshot<Map<String, dynamic>>> fetchUserProfile() async {
     try {
-      return _dataFirebaseService.getUserInformationSnapshot();
+      return profileService.fetchUserProfile();
     } catch (e) {
       AppsFunction.handleException(e);
       rethrow;
     }
   }
 
-  Future<void> updateUserData({required Map<String, dynamic> map}) async {
+  Future<void> updateUserProfile({required Map<String, dynamic> map}) async {
     try {
-      await _dataFirebaseService.updateUserData(map: map);
-    } catch (e) {
-      AppsFunction.handleException(e);
-    }
-  }
-
-  Future<void> signOut() async {
-    try {
-      await _dataFirebaseService.signOutApp();
+      await profileService.updateUserProfile(map: map);
     } catch (e) {
       AppsFunction.handleException(e);
     }

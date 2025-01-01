@@ -100,4 +100,12 @@ class AuthReposity {
       AppsFunction.handleException(e);
     }
   }
+
+  Future<void> signOut() async {
+    try {
+      await _authService.signOutApp();
+    } catch (e) {
+      AppsFunction.handleException(e);
+    }
+  }
 }

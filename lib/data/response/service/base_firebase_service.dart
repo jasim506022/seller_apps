@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -12,11 +11,8 @@ abstract class BaseFirebaseService {
   FirebaseStorage get firebaseStorage;
 
   User? getCurrentUser();
-  
-  
 
   //
-  Future<DocumentSnapshot<Map<String, dynamic>>> getUserInformationSnapshot();
   Future<List<String>> uploadImageStorage({required List<XFile> imageList});
 
   Future<void> uploadProductSnapshot(
@@ -44,11 +40,9 @@ abstract class BaseFirebaseService {
   Stream<DocumentSnapshot<Map<String, dynamic>>> userDeliveryAddressSnapshot(
       {required String userId, required String addressId});
 
-  Future<void> signOutApp();
   Future<QuerySnapshot<Map<String, dynamic>>> sellerProductSnapshot(
       {required List<String> productList, required String sellerId});
 
   Stream<DocumentSnapshot<Map<String, dynamic>>> orderAddressSnapsot(
       {required String addressId});
-  Future<void> updateUserData({required Map<String, dynamic> map});
 }

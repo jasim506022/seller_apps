@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:seller_apps/res/apps_text_style.dart';
+import 'package:seller_apps/res/internet_utilis.dart';
 
+import '../../../res/app_function.dart';
 import '../../../res/apps_color.dart';
+import '../../../res/apps_text_style.dart';
 
 class GridViewItem extends StatelessWidget {
   const GridViewItem({
@@ -18,7 +20,11 @@ class GridViewItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap,
+      onTap: () async {
+        if (!await NetworkUtili.verifyInternetStatus()) {
+          onTap;
+        }
+      },
       child: Container(
           padding: EdgeInsets.all(8.r),
           decoration: BoxDecoration(
@@ -34,9 +40,7 @@ class GridViewItem extends StatelessWidget {
                 width: 70.h,
                 color: AppColors.green,
               ),
-              SizedBox(
-                height: 10.h,
-              ),
+              AppsFunction.verticalSpace(10),
               Text(
                 text,
                 style: AppsTextStyle.titleTextStyle,

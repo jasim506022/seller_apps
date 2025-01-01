@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
-import 'package:seller_apps/controller/profile_controller.dart';
+
 import '../../const/cart_function.dart';
+import '../../controller/profile_controller.dart';
+import '../../res/app_string.dart';
 import '../../res/apps_color.dart';
 import '../home/home_page.dart';
 import '../other/local_service.dart';
@@ -33,16 +35,12 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     super.initState();
-    LocalServiceNotification.initializeuser(context);
-    PushNotification message = PushNotification();
-    message.requestNotificationPermission();
-    message.initMessageInforUser(context);
-    // message.getFcmToken();
-    // FirebaseDatabase.iniNotification();
-    // LocalServiceNotification.initialize(context);
+
+    _initializeNotifications();
     _initializeIndex();
     // globalMethod.getUsersharedPreference();
-    prifleController.getUserInformationSnapshot();
+    prifleController.fetchUserProfile();
+
     /*
     FirebaseMessaging.instance.getInitialMessage().then((message) {
       if (message != null) {
@@ -65,85 +63,94 @@ class _MainPageState extends State<MainPage> {
     });
     
     */
+
     CartFunctions.allProduct();
   }
 
-  int currentIndex = 0;
-  int? indexValue;
+  void _initializeNotifications() {
+    LocalServiceNotification.initializeuser(context);
+    PushNotification message = PushNotification();
+    message.requestNotificationPermission();
+    message.initMessageInforUser(context);
+    // message.getFcmToken();
+    // FirebaseDatabase.iniNotification();
+    // LocalServiceNotification.initialize(context);
+  }
+
+  int _currentIndex = 0;
+  // int? indexValue;
 
   void _initializeIndex() {
     int? data = Get.arguments;
     if (data != null) {
-      setState(() {
-        currentIndex = data;
-      });
+      setState(() => _currentIndex = data);
+    } else {
+      _currentIndex = 0;
     }
   }
 
-  // @override
-  // void didChangeDependencies() {
-  //   super.didChangeDependencies();
-  //   final dynamic data = ModalRoute.of(context)!.settings.arguments;
-  //   indexValue = data;
-  // }
+  @override
+  void didChangeDependencies() {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: AppColors.green,
+        statusBarIconBrightness: Theme.of(context).brightness));
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: Theme.of(context).scaffoldBackgroundColor,
-        statusBarBrightness: Brightness.light,
-        statusBarIconBrightness: Theme.of(context).brightness));
     return Scaffold(
       bottomNavigationBar: SalomonBottomBar(
         backgroundColor: Theme.of(context).cardColor,
-        currentIndex: indexValue ?? currentIndex,
+        currentIndex: _currentIndex,
         onTap: (i) {
-          setState(() {
-            currentIndex = i;
-          });
+          setState(() => _currentIndex = i);
         },
-        items: [
-          SalomonBottomBarItem(
-              activeIcon: Icon(
-                Icons.home,
-                color: AppColors.green,
-              ),
-              icon: const Icon(Icons.home_outlined),
-              title: const Text(
-                "Home",
-              ),
-              selectedColor: AppColors.green,
-              unselectedColor: Theme.of(context).indicatorColor),
-          SalomonBottomBarItem(
-              activeIcon: Icon(
-                Icons.favorite_border,
-                color: AppColors.green,
-              ),
-              icon: const Icon(Icons.favorite_border_outlined),
-              title: const Text("Likes"),
-              unselectedColor: Theme.of(context).indicatorColor,
-              selectedColor: AppColors.green),
-          SalomonBottomBarItem(
-              activeIcon: Icon(
-                Icons.search,
-                color: AppColors.green,
-              ),
-              icon: const Icon(Icons.search_outlined),
-              title: const Text("Search"),
-              unselectedColor: Theme.of(context).indicatorColor,
-              selectedColor: AppColors.green),
-          SalomonBottomBarItem(
-              activeIcon: Icon(
-                Icons.person,
-                color: AppColors.green,
-              ),
-              icon: const Icon(Icons.person_outline),
-              unselectedColor: Theme.of(context).indicatorColor,
-              title: const Text("Profile"),
-              selectedColor: AppColors.green),
-        ],
+        items: _buildBottomBarItemsList(),
       ),
-      body: bottomNavigatorWidget[indexValue ?? currentIndex],
+      body: bottomNavigatorWidget[_currentIndex],
     );
+  }
+
+  List<SalomonBottomBarItem> _buildBottomBarItemsList() {
+    return [
+      _buildBottomBarItem(
+          activeIcon: Icons.home,
+          icon: Icons.home_outlined,
+          title: AppString.home),
+      _buildBottomBarItem(
+        activeIcon: Icons.favorite_border,
+        icon: Icons.favorite_border_outlined,
+        title: AppString.products,
+      ),
+      _buildBottomBarItem(
+        activeIcon: Icons.search,
+        icon: Icons.search_outlined,
+        title: AppString.search,
+      ),
+      _buildBottomBarItem(
+        activeIcon: Icons.person,
+        icon: Icons.person_outline,
+        title: AppString.profile,
+      ),
+    ];
+  }
+
+  SalomonBottomBarItem _buildBottomBarItem({
+    required IconData activeIcon,
+    required IconData icon,
+    required String title,
+  }) {
+    return SalomonBottomBarItem(
+        activeIcon: Icon(
+          activeIcon,
+          color: AppColors.green,
+        ),
+        icon: Icon(icon),
+        title: Text(
+          title,
+        ),
+        selectedColor: AppColors.green,
+        unselectedColor: Theme.of(context).unselectedWidgetColor);
   }
 }

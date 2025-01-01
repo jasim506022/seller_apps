@@ -160,8 +160,8 @@ class AppsFunction {
 
   static Container lineShimmer(double height, [double? width]) {
     return Container(
-      height: height,
-      width: width ?? 1.sw,
+      height: height.h,
+      width: width?.w ?? 1.sw,
       decoration: BoxDecoration(
           color: ThemeUtils.shimmerWidgetColor,
           borderRadius: BorderRadius.circular(15.r)),
@@ -175,8 +175,8 @@ class AppsFunction {
 
   static Container circleShimmer(double height) {
     return Container(
-      height: height,
-      width: height,
+      height: height.h,
+      width: height.h,
       decoration: BoxDecoration(
           color: ThemeUtils.shimmerWidgetColor, shape: BoxShape.circle),
     );

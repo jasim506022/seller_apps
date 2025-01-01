@@ -36,7 +36,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   @override
   void initState() {
     isEditMode = Get.arguments ?? false;
-    profileController.getUserInformationSnapshot();
+    profileController.fetchUserProfile();
 
     super.initState();
   }

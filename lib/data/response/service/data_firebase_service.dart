@@ -3,12 +3,10 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:seller_apps/res/app_string.dart';
 
 import '../../../model/productsmodel.dart';
-import '../../../model/profile_model.dart';
 import '../../../res/app_constants.dart';
 import 'base_firebase_service.dart';
 
@@ -28,14 +26,7 @@ class DataFirebaseService implements BaseFirebaseService {
   }
 
 
-//
-  @override
-  Future<DocumentSnapshot<Map<String, dynamic>>> getUserInformationSnapshot() {
-    return firebaseFirestore
-        .collection("seller")
-        .doc(firebaseAuth.currentUser!.uid)
-        .get();
-  }
+
 
   @override
   Future<List<String>> uploadImageStorage(
@@ -173,10 +164,7 @@ class DataFirebaseService implements BaseFirebaseService {
         .snapshots();
   }
 
-  @override
-  Future<void> signOutApp() async {
-    firebaseAuth.signOut();
-  }
+ 
 
   @override
   Future<QuerySnapshot<Map<String, dynamic>>> sellerProductSnapshot(
@@ -209,13 +197,7 @@ class DataFirebaseService implements BaseFirebaseService {
         .snapshots();
   }
 
-  @override
-  Future<void> updateUserData({required Map<String, dynamic> map}) async {
-    FirebaseFirestore.instance
-        .collection("seller")
-        .doc(AppConstants.sharedPreference!.getString("uid")!)
-        .update(map);
-  }
+  
 }
 
 

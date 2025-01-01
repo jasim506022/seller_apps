@@ -128,9 +128,12 @@ Auth String
   static String close = "Close";
   static String save = 'Save';
 
+  // Firebase
+  static const sellersCollection = "seller";
 
-
-
-  // Firebase 
-  static const firebaseCollection = "seller";
+  // Main Page
+  static const home = "Home";
+  static const products = "Products";
+  static const search = "Search";
+  static const profile = "Profile";
 }

@@ -15,14 +15,14 @@ class GridViewItem extends StatelessWidget {
   });
   final String image;
   final String text;
-  final VoidCallback onTap;
+  final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
         if (!await NetworkUtili.verifyInternetStatus()) {
-          onTap;
+          onTap(); // what different between onTap and onTap()
         }
       },
       child: Container(

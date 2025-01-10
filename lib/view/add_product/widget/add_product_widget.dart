@@ -4,163 +4,189 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../controller/add_product_controller.dart';
-import '../../../controller/category_controller.dart';
 
 import '../../../res/app_constants.dart';
+import '../../../res/app_function.dart';
+import '../../../res/app_string.dart';
 import '../../../res/apps_color.dart';
-import '../../../res/apps_text_style.dart';
 import '../../../res/internet_utilis.dart';
+import '../../../res/validator.dart';
 import '../../../widget/drop_down_category_widget.dart';
+import '../../../widget/product_widget.dart';
 import '../../../widget/text_field_form_widget.dart';
 import 'grid_image_list_widget.dart';
 
-class AddProductWidget extends StatefulWidget {
-  const AddProductWidget({super.key, this.isUpdate});
-  final bool? isUpdate;
+class AddEditProductForm extends StatefulWidget {
+  const AddEditProductForm({super.key, required this.isUpdate});
+  final bool isUpdate;
   @override
-  State<AddProductWidget> createState() => _AddProductWidgetState();
+  State<AddEditProductForm> createState() => _AddEditProductFormState();
 }
 
-class _AddProductWidgetState extends State<AddProductWidget> {
-  final addProductController = Get.put(AddProductController());
-  final categoryController = Get.find<CategoryController>();
-  final GlobalKey<FormState> _keyForm = GlobalKey<FormState>();
+class _AddEditProductFormState extends State<AddEditProductForm> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final AddProductController addProductController =
+      Get.find<AddProductController>();
+
+  // bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        FocusScope.of(context).unfocus();
-      },
+      onTap: () => FocusScope.of(context).unfocus(),
       child: PopScope(
         canPop: false,
         onPopInvoked: (didPop) {
-          addProductController.handleBackNavigaion(didPop);
+          if (addProductController.loadingController.loading.value) {
+            AppsFunction.flutterToast(msg: AppString.waitUntilUpload);
+          } else {
+            addProductController.confirmUnsavedChangesOnBack(didPop);
+          }
         },
         child: Scaffold(
-            appBar: AppBar(
-              title: widget.isUpdate == true
-                  ? const Text(
-                      "Update Product",
-                    )
-                  : const Text(
-                      "Add New Product",
-                    ),
-              actions: [
-                IconButton(
-                  onPressed: () async {
-                    if (_keyForm.currentState!.validate()) {
-                      if (!(await NetworkUtili.verifyInternetStatus())) {
-                        addProductController.uploadProduct(
-                            isUpdate: widget.isUpdate!);
-                      }
-                    }
-                  },
-                  icon: const Icon(
-                    Icons.cloud_upload,
-                    color: AppColors.green,
-                  ),
-                )
-              ],
-            ),
+            appBar: _buildAppBar(),
             body: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
-                child: Obx(
-                  () => ListView(
-                    children: [
-                      if (addProductController.loadingController.loading.value)
-                        const LinearProgressIndicator(
-                          backgroundColor: AppColors.red,
-                        ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 8.w, vertical: 5.h),
-                        child: Column(
-                          children: [
-                            const GridImageListWidget(),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: AppColors.green,
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 20.h, vertical: 10.w)),
-                                onPressed: () {
-                                  addProductController
-                                      .uploadProductImage(ImageSource.gallery);
-                                },
-                                child: Text(
-                                  "Pick Image",
-                                  style: AppsTextStyle.buttonTextStyle,
-                                )),
-                            SizedBox(
-                              height: 20.h,
-                            ),
-                            _productForm(),
-                            SizedBox(height: 0.2.sh)
-                          ],
-                        ),
+                child: ListView(
+                  children: [
+                    Obx(() {
+                      return addProductController
+                              .loadingController.loading.value
+                          ? const LinearProgressIndicator(
+                              backgroundColor: AppColors.red,
+                            )
+                          : const SizedBox
+                              .shrink(); // Use this to avoid rendering anything when not loading.
+                    }),
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 8.w, vertical: 5.h),
+                      child: Column(
+                        children: [
+                          const GridImageListWidget(),
+                          AppsFunction.verticalSpace(10),
+                          _buildImagePickerButton(),
+                          AppsFunction.verticalSpace(20),
+                          _buildProductForm(),
+                          Obx(() {
+                            return addProductController
+                                    .loadingController.loading.value
+                                ? const LinearProgressIndicator(
+                                    backgroundColor: AppColors.red,
+                                  )
+                                : const SizedBox.shrink();
+                          }),
+                          AppsFunction.verticalSpace(120),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ))),
       ),
     );
   }
 
-  Form _productForm() {
+  AppBar _buildAppBar() {
+    return AppBar(
+      title: Text(
+          widget.isUpdate ? AppString.updateProduct : AppString.addNewProduct),
+      actions: [
+        IconButton(
+          onPressed: () async {
+            if (_formKey.currentState!.validate()) {
+              if (!(await NetworkUtili.verifyInternetStatus())) {
+                addProductController.uploadOrUpdateProduct(
+                    isUpdate: widget.isUpdate);
+                // setState(() {
+                //   // addProductController.loadingController.loading.value = false;
+
+                // });
+              }
+            }
+          },
+          icon: const Icon(
+            Icons.cloud_upload,
+            color: AppColors.green,
+          ),
+        )
+      ],
+    );
+  }
+
+  InkWell _buildImagePickerButton() {
+    return InkWell(
+      onTap: () {
+        addProductController.uploadProductImage(ImageSource.gallery);
+        // addProductController.isUpdateChange.value = true;
+        addProductController.isProductUpdated(true);
+      },
+      child: const CoustomButtonWidget(
+        title: AppString.pickImage,
+        width: 150,
+      ),
+    );
+  }
+
+  Form _buildProductForm() {
     return Form(
-      key: _keyForm,
+      key: _formKey,
       child: Column(
         children: [
-          DropdownCategoryWidget(
-            list: AppConstants.categoryList,
-            value: categoryController.category,
-            onChanged: (value) {
-              addProductController.addChangeListener();
-              categoryController.setCategory(value!.toString());
-            },
+          Obx(
+            () => DropdownCategoryWidget(
+              list: AppConstants.categoryList,
+              value: addProductController.categoryController.category.value,
+              onChanged: (value) {
+                addProductController.categoryController
+                    .setCategory(value!.toString());
+                addProductController.isProductUpdated(true);
+              },
+            ),
           ),
-          _buildTextField(
-              addProductController.nameTEC, 'Product Name', _validateName),
+          _buildTextField(addProductController.nameTEC, AppString.productName,
+              Validators.validateProductName),
           Row(
             children: [
               Expanded(
                 child: _buildTextField(
                     addProductController.priceTEC,
-                    'Product Price',
-                    (value) => _validateNotEmpty(value, 'Product Price'),
+                    AppString.price,
+                    (value) => Validators.validateProductNotEmpty(
+                        value, AppString.price),
                     TextInputType.number),
               ),
-              SizedBox(
-                width: 20.w,
-              ),
+              AppsFunction.horizontalSpace(20),
               Expanded(
-                  child: DropdownCategoryWidget(
-                onChanged: (value) {
-                  addProductController.addChangeListener();
-                  categoryController.setUnit(value!.toString());
-                },
-                list: AppConstants.unitList,
-                value: categoryController.unit,
+                  child: Obx(
+                () => DropdownCategoryWidget(
+                  onChanged: (value) {
+                    addProductController.categoryController
+                        .setUnit(value!.toString());
+                    addProductController.isProductUpdated(true);
+                  },
+                  list: AppConstants.unitList,
+                  value: addProductController.categoryController.unit.value,
+                ),
               )),
             ],
           ),
           _buildTextField(
               addProductController.discountTEC,
-              'Discount',
-              (value) => _validateNotEmpty(value, 'Discount'),
+              AppString.discount,
+              (value) =>
+                  Validators.validateProductNotEmpty(value, AppString.discount),
               TextInputType.number),
           _buildTextField(
               addProductController.ratingTEC,
-              'Rating',
-              (value) => _validateNotEmpty(value, 'Rating'),
+              AppString.ratting,
+              (value) =>
+                  Validators.validateProductNotEmpty(value, AppString.ratting),
               TextInputType.number),
           _buildTextField(
               addProductController.descriptionTEC,
-              'Description',
-              (value) => _validateNotEmpty(value, 'Description'),
+              AppString.description,
+              (value) => Validators.validateProductNotEmpty(
+                  value, AppString.description),
               TextInputType.text,
               null),
         ],
@@ -168,24 +194,11 @@ class _AddProductWidgetState extends State<AddProductWidget> {
     );
   }
 
-  String? _validateName(String? value) {
-    if (value == null || value.isEmpty) return "Please enter Product Name";
-    if (value.length <= 2) {
-      return "Product Name must be longer than 2 characters";
-    }
-    return null;
-  }
-
-  String? _validateNotEmpty(String? value, String fieldName) {
-    if (value == null || value.isEmpty) return "Please enter your $fieldName.";
-    return null;
-  }
-
   TextFormFieldWidget _buildTextField(TextEditingController controller,
       String hintText, String? Function(String?)? validator,
       [TextInputType text = TextInputType.text, int? maxLines = 1]) {
     return TextFormFieldWidget(
-      onChanged: (p0) => addProductController.addChangeListener(),
+      onChanged: (value) => addProductController.trackInputChanges(),
       validator: validator,
       controller: controller,
       hintText: hintText,

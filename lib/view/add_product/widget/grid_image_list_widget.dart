@@ -13,8 +13,7 @@ class GridImageListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var addProductController = Get.put(AddProductController());
-
+    var addProductController = Get.find<AddProductController>();
     return Obx(
       () => Container(
         height: 0.25.sh,
@@ -26,7 +25,7 @@ class GridImageListWidget extends StatelessWidget {
           border: Border.all(color: AppColors.green, width: 3.h),
         ),
         child: GridView.builder(
-          itemCount: addProductController.productImageFile.length,
+          itemCount: addProductController.selectedProductImagesList.length,
           itemBuilder: (context, index) {
             return SingleImageRemove(
               index: index,

@@ -13,8 +13,8 @@ class SingleImageRemove extends StatelessWidget {
   final int index;
   @override
   Widget build(BuildContext context) {
-    var addProductController = Get.put(AddProductController());
-    var image = addProductController.productImageFile[index];
+    var addProductController = Get.find<AddProductController>();
+    var image = addProductController.selectedProductImagesList[index];
     return Stack(
       children: [
         ClipRRect(

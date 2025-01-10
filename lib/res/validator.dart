@@ -36,4 +36,19 @@ class Validators {
     }
     return null;
   }
+
+  static String? validateProductNotEmpty(String? value, String fieldName) {
+    if (value == null || value.isEmpty) {
+      return "${AppString.pleaseEnterProduct} $fieldName.";
+    }
+    return null;
+  }
+
+  static String? validateProductName(String? value) {
+    if (value == null || value.isEmpty) return AppString.pleaseEnterProductName;
+    if (value.length <= 2) {
+      return AppString.productNameMustbe2Charactoer;
+    }
+    return null;
+  }
 }

@@ -57,7 +57,7 @@ class FilterDialogContentWidget extends StatelessWidget {
         Text(AppString.productCategory, style: AppsTextStyle.mediumBoldText),
         SizedBox(height: 10.h),
         DropdownCategoryWidget(
-          value: AppConstants.allCategoryList[0],
+          value: searchController.selectedCategory.value,
           list: AppConstants.allCategoryList,
           onChanged: (category) {
             if (category != null) {

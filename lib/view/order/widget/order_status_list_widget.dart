@@ -42,7 +42,7 @@ class OrderStatusListWidget extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 15.h),
                 child: DropdownCategoryWidget(
                   list: AppConstants.statusList,
-                  value: categoryController.status,
+                  value: categoryController.status.value,
                   onChanged: (value) {
                     categoryController.setStatus(value!);
                   },
@@ -52,7 +52,7 @@ class OrderStatusListWidget extends StatelessWidget {
               Expanded(
                 child: Obx(
                   () => _buildOrderList(
-                      orderController, categoryController.status),
+                      orderController, categoryController.status.value),
                 ),
               ),
             if (orderStatus != null)

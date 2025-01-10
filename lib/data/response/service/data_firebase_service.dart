@@ -25,27 +25,32 @@ class DataFirebaseService implements BaseFirebaseService {
     return firebaseAuth.currentUser;
   }
 
-
-
-
   @override
-  Future<List<String>> uploadImageStorage(
-      {required List<XFile> imageList}) async {
-    List<String> imageUrlList = [];
+  Future<List<String>> uploadImagesToStorage(
+      {required List<XFile> images, required String productID}) async {
+    List<String> uploadedImageUrls = [];
 
-    for (var image in imageList) {
-      await postImages(image)
-          .then((downLoadUrl) => imageUrlList.add(downLoadUrl));
+    for (var image in images) {
+      await uploadImage(image, productID)
+          .then((downLoadUrl) => uploadedImageUrls.add(downLoadUrl));
     }
-    return imageUrlList;
+    return uploadedImageUrls;
   }
 
-  Future<String> postImages(XFile? imageFile) async {
+  Future<String> uploadImage(XFile imageFile, String productId) async {
     final uniqueImageName =
-        "${imageFile!.name}_${DateTime.now().millisecondsSinceEpoch}";
+        "${imageFile.name}_${DateTime.now().millisecondsSinceEpoch}";
+    var sellerId =
+        AppConstants.sharedPreference?.getString(AppString.uidSharedPreference);
+    var sellerName = AppConstants.sharedPreference
+        ?.getString(AppString.nameSharedPreference);
 
-    final ref = firebaseStorage.ref().child(
-        "sellers/${AppConstants.sharedPreference!.getString(AppString.uidSharedPreference)}${AppConstants.sharedPreference!.getString(AppString.nameSharedPreference)}_images/$uniqueImageName");
+    // Define the storage path
+    final storagePath =
+        "${AppString.sellersCollection}/$sellerId/$sellerName/$productId/images/$uniqueImageName";
+
+    // Upload image to Firebase Storage
+    final ref = firebaseStorage.ref().child(storagePath);
 
     UploadTask uploadTask = ref.putFile(File(imageFile.path));
     TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() {});
@@ -53,22 +58,28 @@ class DataFirebaseService implements BaseFirebaseService {
   }
 
   @override
-  Future<void> uploadProductSnapshot(
+  Future<void> saveProductToDatabase(
       {required ProductModel productModel, required bool isUpdate}) async {
-    final seller = firebaseFirestore.collection("seller").doc(AppConstants
-        .sharedPreference!
-        .getString(AppString.uidSharedPreference));
+    final sellerDoc = firebaseFirestore
+        .collection(AppString.sellersCollection)
+        .doc(AppConstants.sharedPreference!
+            .getString(AppString.uidSharedPreference));
 
-    var sellerProductDoc =
-        seller.collection("products").doc(productModel.productId);
-    var globalProductDoc =
-        firebaseFirestore.collection("products").doc(productModel.productId);
+    // References to the product documents in seller and global collections
+
+    var sellerProductDoc = sellerDoc
+        .collection(AppString.productsCollection)
+        .doc(productModel.productId);
+    var globalProductDoc = firebaseFirestore
+        .collection(AppString.productsCollection)
+        .doc(productModel.productId);
+    final productData = productModel.toMap();
     if (isUpdate) {
-      sellerProductDoc.update(productModel.toMap());
-      globalProductDoc.update(productModel.toMap());
+      sellerProductDoc.update(productData);
+      globalProductDoc.update(productData);
     } else {
-      sellerProductDoc.set(productModel.toMap());
-      globalProductDoc.set(productModel.toMap());
+      sellerProductDoc.set(productData);
+      globalProductDoc.set(productData);
     }
   }
 
@@ -164,8 +175,6 @@ class DataFirebaseService implements BaseFirebaseService {
         .snapshots();
   }
 
- 
-
   @override
   Future<QuerySnapshot<Map<String, dynamic>>> sellerProductSnapshot(
       {required List<String> productList, required String sellerId}) async {
@@ -196,8 +205,6 @@ class DataFirebaseService implements BaseFirebaseService {
         .where("uid", whereIn: sellerList)
         .snapshots();
   }
-
-  
 }
 
 

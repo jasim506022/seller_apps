@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
+import 'package:seller_apps/controller/add_product_controller.dart';
 import 'package:seller_apps/controller/auth_controller.dart';
 import 'package:seller_apps/controller/category_controller.dart';
 import 'package:seller_apps/controller/delivary_controller.dart';
-import 'package:seller_apps/controller/forget_password_controller.dart';
+import 'package:seller_apps/repository/add_product_repository.dart';
 import 'package:seller_apps/repository/auth_reposity.dart';
-import 'package:seller_apps/repository/forget_password_repository.dart';
 
 import '../controller/loading_controller.dart';
 import '../controller/onboarding_controller.dart';
@@ -13,15 +13,13 @@ import '../controller/product_controller.dart';
 import '../controller/profile_controller.dart';
 import '../controller/search_controller.dart';
 import '../controller/select_image_controller.dart';
-import '../controller/sign_in_controller.dart';
-import '../controller/sign_up_controller.dart';
+
 import '../controller/splash_controller.dart';
 import '../repository/delivary_repository.dart';
 import '../repository/order_repository.dart';
 import '../repository/product_repository.dart';
 import '../repository/profile_repository.dart';
 import '../repository/select_image_repository.dart';
-import '../repository/sign_in_repository.dart';
 import '../repository/sign_up_repository.dart';
 import '../repository/splash_repository.dart';
 
@@ -45,6 +43,14 @@ class InitialBinding extends Bindings {
 
     Get.lazyPut<AuthController>(
         () => AuthController(repository: Get.find<AuthReposity>()),
+        fenix: true);
+
+    Get.lazyPut<AddProductRepository>(() => AddProductRepository(),
+        fenix: true);
+
+    Get.lazyPut<AddProductController>(
+        () =>
+            AddProductController(repository: Get.find<AddProductRepository>()),
         fenix: true);
 
     Get.put<LoadingController>(LoadingController());

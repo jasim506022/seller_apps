@@ -26,7 +26,9 @@ class GridViewList extends StatelessWidget {
           GridViewItem(
             image: ImagesAsset.allProductImage,
             text: AppString.allProduct,
-            onTap: () => Get.offAndToNamed(RoutesName.mainPage, arguments: 1),
+            onTap: () {
+              Get.offAndToNamed(RoutesName.mainPage, arguments: 1);
+            },
           ),
           GridViewItem(
               image: ImagesAsset.totalsalesImages,

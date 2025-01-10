@@ -12,10 +12,11 @@ abstract class BaseFirebaseService {
 
   User? getCurrentUser();
 
-  //
-  Future<List<String>> uploadImageStorage({required List<XFile> imageList});
+  //okay
+  Future<List<String>> uploadImagesToStorage(
+      {required List<XFile> images, required String productID});
 
-  Future<void> uploadProductSnapshot(
+  Future<void> saveProductToDatabase(
       {required ProductModel productModel, required bool isUpdate});
 
   //

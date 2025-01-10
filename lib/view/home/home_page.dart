@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:get/get.dart';
-import 'package:seller_apps/res/internet_utilis.dart';
 
 import '../../res/app_asset/image_asset.dart';
 import '../../res/app_function.dart';
@@ -82,9 +81,7 @@ class HomePage extends StatelessWidget {
         image: ImagesAsset.uploadProductImage,
         text: AppString.uploadYourProduct,
         onTap: () async {
-          if (!await NetworkUtili.verifyInternetStatus()) {
-            Get.toNamed(RoutesName.uploadProduct);
-          }
+          Get.toNamed(RoutesName.uploadProduct);
         },
       ),
     );

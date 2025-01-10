@@ -130,10 +130,49 @@ Auth String
 
   // Firebase
   static const sellersCollection = "seller";
+  static const productsCollection = "products";
 
   // Main Page
   static const home = "Home";
   static const products = "Products";
   static const search = "Search";
   static const profile = "Profile";
+
+  // argument;
+  static const isUpdate = "isUpdate";
+  static const productModel = "productModel";
+
+  // Title
+  static const updateProduct = "Update Product";
+  static const addNewProduct = "Add New Product";
+
+  //add Product
+  static const productName = 'Product Name';
+  static const pleaseEnterProduct = 'Please Enter Product';
+  static const discount = 'Discount';
+  static const ratting = 'Rating';
+  static const description = 'Description';
+  static const price = 'Price';
+  static const pickImage = "Pick Image";
+  static const pleaseEnterProductName = "Please enter Product Name";
+  static const productNameMustbe2Charactoer =
+      "Product Name must be longer than 2 characters";
+
+  // dialog
+  static const selectedImage = "Selected Image";
+  static const cancel = "Cancel";
+  static const captureImageWithCamera = "Capture image with Camera";
+  static const captureImageWithGallery = "Capture image with Gallery";
+  static const saveChanges = "Save Changes?";
+  static const saveMessage = 'Do you want to save your changes?';
+
+  // Toast
+  static const imageUploadFail = "Image upload failed. Please try again.";
+  static const selectOneImage = "Please Select at least One Image";
+  static const updateProductToastMessage = "Succesfully update a New Product";
+  static const uploadProductToastMessage = "Succesfully Upload a New Product";
+  static const waitUntilUpload = "Please Wait Until Upload";
+
+  //
+  static const available = "available";
 }

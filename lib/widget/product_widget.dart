@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../model/productsmodel.dart';
 import '../res/app_function.dart';
+import '../res/app_string.dart';
 import '../res/apps_color.dart';
 import '../res/apps_text_style.dart';
 import '../res/internet_utilis.dart';
@@ -100,28 +101,46 @@ class ProductWidget extends StatelessWidget {
             onTap: () async {
               if (!(await NetworkUtili.verifyInternetStatus())) {
                 Get.toNamed(RoutesName.uploadProduct, arguments: {
-                  "isUpdate": true,
-                  "productModel": productModel
+                  AppString.isUpdate: true,
+                  AppString.productModel: productModel
                 });
               }
             },
-            child: Container(
-              alignment: Alignment.center,
-              height: 45.h,
-              width: 1.sw,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15.r),
-                color: AppColors.green,
-              ),
-              child: Text(
-                "Edit/Update",
-                style: AppsTextStyle.buttonTextStyle,
-              ),
+            child: const CoustomButtonWidget(
+              title: "Edit/Update",
             )),
         SizedBox(
           height: 7.h,
         ),
       ],
+    );
+  }
+}
+
+class CoustomButtonWidget extends StatelessWidget {
+  const CoustomButtonWidget({
+    super.key,
+    this.width,
+    required this.title,
+  });
+
+  final double? width;
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.center,
+      height: 45.h,
+      width: width?.w ?? 1.sw,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15.r),
+        color: AppColors.green,
+      ),
+      child: Text(
+        title,
+        style: AppsTextStyle.buttonTextStyle,
+      ),
     );
   }
 }

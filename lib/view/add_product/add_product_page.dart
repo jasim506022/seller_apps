@@ -1,82 +1,58 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../controller/add_product_controller.dart';
 import '../../model/productsmodel.dart';
 
+import '../../res/app_function.dart';
+import '../../res/app_string.dart';
 import 'widget/add_product_widget.dart';
 import 'widget/detault_add_proudct_widget.dart';
 
-class AddProductPage extends StatefulWidget {
-  const AddProductPage({
+class ManageProductPage extends StatefulWidget {
+  const ManageProductPage({
     super.key,
-    //  this.isUpdate = false, this.productModel
   });
 
-  // bool? isUpdate;
-  // ProductModel? productModel;
-
   @override
-  State<AddProductPage> createState() => _AddProductPageState();
+  State<ManageProductPage> createState() => _ManageProductPageState();
 }
 
-class _AddProductPageState extends State<AddProductPage> {
+class _ManageProductPageState extends State<ManageProductPage> {
   late bool isUpdate;
-  var addProductController = Get.put(AddProductController());
+  final addProductController = Get.find<AddProductController>();
   late ProductModel productModel;
   @override
   void initState() {
     var data = Get.arguments;
 
-    // isUpdate = data == null ? false : data["isUpdate"] ?? false;
-    // Understand the code
-
-    isUpdate = data?["isUpdate"] ?? false;
+    isUpdate = data?[AppString.isUpdate] ?? false;
 
     if (isUpdate) {
-      productModel = data?["productModel"];
-      _populateProductFields(productModel);
+      productModel = data![AppString.productModel];
+      WidgetsBinding.instance.addPostFrameCallback(
+        (_) => addProductController.updateProductsField(productModel),
+      );
     }
 
     super.initState();
   }
 
-  // Populate fields in the controller for updating a product
-  void _populateProductFields(ProductModel model) {
-    addProductController.productModel.value = model;
-    addProductController.productId = model.productId ?? "";
-
-    addProductController.nameTEC.text = model.productname ?? "";
-    addProductController.priceTEC.text = model.productprice?.toString() ?? "";
-    addProductController.ratingTEC.text = model.productrating?.toString() ?? "";
-    addProductController.descriptionTEC.text = model.productdescription ?? "";
-    addProductController.discountTEC.text = model.discount?.toString() ?? "";
-
-    addProductController.categoryController
-      ..setCategory( model.productcategory ?? "")
-      ..setUnit( model.productunit ?? "");
-
-    // Load existing product images into the observable list
-    addProductController.productImageFile.value = model.productimage ?? [];
-  }
-
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: Theme.of(context).scaffoldBackgroundColor,
-        statusBarBrightness: Brightness.light,
-        statusBarIconBrightness: Theme.of(context).brightness));
+    AppsFunction.setSystemUIOverlayStyle(context);
 
     return Obx(() {
-      if (addProductController.productImageFile.isEmpty &&
-          isUpdate == false &&
-          !addProductController.isUpdateChange.value) {
-        return const DetaultAddProductWidget();
-      }
-      return AddProductWidget(
-        isUpdate: isUpdate,
-      );
+      final isPlaceholderVisible =
+          addProductController.selectedProductImagesList.isEmpty &&
+              !isUpdate &&
+              !addProductController.isProductUpdated.value;
+
+      return isPlaceholderVisible
+          ? const DefaultAddProductView()
+          : AddEditProductForm(
+              isUpdate: isUpdate,
+            );
     });
   }
 }

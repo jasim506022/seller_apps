@@ -96,6 +96,10 @@ class MyApp extends StatelessWidget {
     var isDarkTheme = themeProvider.getDarkTheme;
 
     return ThemeData(
+      dialogBackgroundColor: isDarkTheme ? AppColors.cardDark : AppColors.white,
+      // dialogTheme: DialogTheme(
+      //   backgroundColor: Colors.blue
+      // ),
       iconTheme: IconThemeData(
           color: isDarkTheme ? AppColors.white : AppColors.black, size: 25),
       appBarTheme: AppBarTheme(
@@ -113,19 +117,13 @@ class MyApp extends StatelessWidget {
       ),
       scaffoldBackgroundColor:
           isDarkTheme ? AppColors.backgroundDark : AppColors.backgroundLight,
-     
       indicatorColor: Colors.red,
-      
       cardColor: isDarkTheme ? AppColors.cardDark : AppColors.white,
-      
       canvasColor:
           isDarkTheme ? AppColors.cardDark : AppColors.searchLightColor,
-      
       unselectedWidgetColor:
           isDarkTheme ? AppColors.indicatorDark : AppColors.indicatorLight,
-      
       hintColor: isDarkTheme ? AppColors.hintDark : AppColors.hintLight,
-      
       primaryColor: isDarkTheme ? AppColors.white : AppColors.black,
     );
   }

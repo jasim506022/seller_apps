@@ -186,4 +186,11 @@ class AppsFunction {
     final date = DateTime.fromMillisecondsSinceEpoch(int.parse(datetime));
     return DateFormat("MMM d, yyyy").format(date);
   }
+
+  static void setSystemUIOverlayStyle(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: Theme.of(context).scaffoldBackgroundColor,
+        statusBarBrightness: Brightness.light,
+        statusBarIconBrightness: Theme.of(context).brightness));
+  }
 }

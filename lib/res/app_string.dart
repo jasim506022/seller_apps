@@ -145,6 +145,7 @@ Auth String
   // Title
   static const updateProduct = "Update Product";
   static const addNewProduct = "Add New Product";
+  static const productTitle = "Products";
 
   //add Product
   static const productName = 'Product Name';
@@ -165,6 +166,9 @@ Auth String
   static const captureImageWithGallery = "Capture image with Gallery";
   static const saveChanges = "Save Changes?";
   static const saveMessage = 'Do you want to save your changes?';
+  static const areYouWantDelete = "Are You want to Delete";
+  static const deleteMessage =
+      "Do you Want to Delete The Product Produc. If you delete the Product it can not be undo";
 
   // Toast
   static const imageUploadFail = "Image upload failed. Please try again.";
@@ -172,7 +176,17 @@ Auth String
   static const updateProductToastMessage = "Succesfully update a New Product";
   static const uploadProductToastMessage = "Succesfully Upload a New Product";
   static const waitUntilUpload = "Please Wait Until Upload";
+  static const deleteSuccessFully = "Delete Succesffully";
 
   //
   static const available = "available";
+  //
+  static const noDataAvailabe = 'No Data Available';
+  static const errorOccure = 'Error Occure';
+
+  //
+  static const currencyIcon = "৳.";
+  static const similarProducts = "Similar Products";
+  static const update = "Update";
+  static const delete = "Delete";
 }

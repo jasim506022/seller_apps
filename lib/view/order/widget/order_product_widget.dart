@@ -28,7 +28,7 @@ class OrderProductWidget extends StatelessWidget {
           ProductImageWidget(
             height: 100.h,
             width: 120.w,
-            imageHeith: 110.h,
+            imageHeight: 110.h,
             productModel: productModel,
           ),
           Expanded(

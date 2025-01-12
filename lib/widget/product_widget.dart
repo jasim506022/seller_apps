@@ -10,7 +10,10 @@ import '../res/apps_color.dart';
 import '../res/apps_text_style.dart';
 import '../res/internet_utilis.dart';
 import '../res/routes/routes_name.dart';
+import 'custom_button_widget.dart';
 import 'product_image_widget.dart';
+
+/*
 
 class ProductWidget extends StatelessWidget {
   const ProductWidget({
@@ -117,30 +120,92 @@ class ProductWidget extends StatelessWidget {
   }
 }
 
-class CoustomButtonWidget extends StatelessWidget {
-  const CoustomButtonWidget({
-    super.key,
-    this.width,
-    required this.title,
-  });
+*/
 
-  final double? width;
-  final String title;
+class ProductWidget extends StatelessWidget {
+  const ProductWidget({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      height: 45.h,
-      width: width?.w ?? 1.sw,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15.r),
-        color: AppColors.green,
+    final productModel = Provider.of<ProductModel>(context);
+    return InkWell(
+      onTap: () async {
+        if (!(await NetworkUtili.verifyInternetStatus())) {
+          Get.toNamed(RoutesName.productDetails, arguments: {
+            AppString.productModel: productModel,
+          });
+        }
+      },
+      child: Card(
+        color: Theme.of(context).cardColor,
+        elevation: 4,
+        child: SizedBox(
+          height: 1.sh,
+          width: 1.sw,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ProductImageWidget(
+                imageHeight: 90,
+                productModel: productModel,
+                height: 100,
+              ),
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 12.w),
+                  child: _buildProductDetails(productModel),
+                ),
+              )
+            ],
+          ),
+        ),
       ),
-      child: Text(
-        title,
-        style: AppsTextStyle.buttonTextStyle,
-      ),
+    );
+  }
+
+  Column _buildProductDetails(ProductModel productModel) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Text(
+              "${AppString.currencyIcon} ${AppsFunction.getDiscountedPrice(productModel.productprice!, productModel.discount!.toDouble())}",
+              style: AppsTextStyle.largeBoldText.copyWith(color: AppColors.red),
+            ),
+            AppsFunction.horizontalSpace(15),
+            Text(
+              productModel.productprice!.toString(),
+              style: AppsTextStyle.mediumText400lineThrough,
+            ),
+          ],
+        ),
+        AppsFunction.verticalSpace(2),
+        FittedBox(
+          child: Text(
+            productModel.productname!,
+            style: AppsTextStyle.largeBoldText,
+          ),
+        ),
+        AppsFunction.verticalSpace(5),
+        InkWell(
+          onTap: () async {
+            if (!(await NetworkUtili.verifyInternetStatus())) {
+              Get.toNamed(RoutesName.uploadProduct, arguments: {
+                AppString.isUpdate: true,
+                AppString.productModel: productModel
+              });
+            }
+          },
+          child: const CustomButtonWidget(
+            title: AppString.update,
+          ),
+        ),
+        AppsFunction.verticalSpace(7)
+      ],
     );
   }
 }

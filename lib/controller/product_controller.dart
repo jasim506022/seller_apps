@@ -18,41 +18,33 @@ class ProductController extends GetxController {
 
   ProductController({required this.repository});
 
-  final categoryController = Get.find<CategoryController>();
+  final categoryManagerController = Get.find<CategoryManagerController>();
 
+// Okay
   Stream<QuerySnapshot<Map<String, dynamic>>> productSnapshots() {
     try {
-      return repository.productSnapshots(category: categoryController.category.value);
+      return repository.productSnapshots(
+          category: categoryManagerController.selectedForAllCategory.value);
     } catch (e) {
-      if (e is AppException) {
-        Get.dialog(
-          ErrorDialogWidget(
-            icon: IconAsset.warningIcon,
-            title: e.title!,
-            content: e.message,
-            buttonText: AppString.okay,
-          ),
-        );
-      }
-
+      _handleException(e);
       rethrow;
     }
   }
 
-  Future<void> deleteProductSnapshot({required String productId}) async {
+  Future<void> showDeleteProductDialog({required String productId}) async {
     Get.dialog(
       ShowAlertDialogWidget(
-        title: "Are You want to Delete",
-        content:
-            "Do you Want to Delete The Product Produc. If you delete the Product it can not be undo",
+        title: AppString.areYouWantDelete,
+        content: AppString.deleteMessage,
         onYesPressed: () async {
           try {
             await repository.deleteProductSnapshot(productId: productId);
 
             Get.toNamed(RoutesName.mainPage, arguments: 0);
-            AppsFunction.flutterToast(msg: "Delete Succesffully");
-          } catch (error) {
-            AppsFunction.flutterToast(msg: "An Error Occured: $error");
+            AppsFunction.flutterToast(msg: AppString.deleteSuccessFully);
+          } catch (e) {
+            Get.back();
+            _handleException(e);
           }
         },
         icon: Icons.delete,
@@ -62,6 +54,28 @@ class ProductController extends GetxController {
 
   Stream<QuerySnapshot<Map<String, dynamic>>> similarProductSnapshot(
       {required ProductModel productModel}) {
-    return repository.similarProductSnapshot(productModel: productModel);
+    try {
+      return repository.similarProductSnapshot(productModel: productModel);
+    } catch (e) {
+      if (e is AppException) {
+        _handleException(e);
+      }
+
+      rethrow;
+    }
+  }
+
+  /// Handles exceptions by showing a dialog with error details
+  void _handleException(dynamic e) {
+    if (e is AppException) {
+      Get.dialog(
+        ErrorDialogWidget(
+          icon: IconAsset.warningIcon,
+          title: e.title!,
+          content: e.message,
+          buttonText: AppString.okay,
+        ),
+      );
+    }
   }
 }

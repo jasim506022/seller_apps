@@ -11,21 +11,21 @@ class ProductImageWidget extends StatelessWidget {
     super.key,
     required this.productModel,
     required this.height,
-    required this.width,
-    required this.imageHeith,
+    this.width,
+    required this.imageHeight,
   });
   final ProductModel productModel;
   final double height;
-  final double width;
-  final double imageHeith;
+  final double? width;
+  final double imageHeight;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         Container(
-          height: height,
-          width: width,
+          height: height.h,
+          width: width?.w ?? 1.sw,
           alignment: Alignment.center,
           margin: EdgeInsets.all(10.r),
           padding: EdgeInsets.all(20.r),
@@ -35,7 +35,7 @@ class ProductImageWidget extends StatelessWidget {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(10.r),
             child: FancyShimmerImage(
-              height: imageHeith,
+              height: imageHeight.h,
               boxFit: BoxFit.contain,
               imageUrl: productModel.productimage![0],
             ),

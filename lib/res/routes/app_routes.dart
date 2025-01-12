@@ -48,7 +48,7 @@ class AppRoutes {
           page: () => const ManageProductPage(),
         ),
         GetPage(
-          name: RoutesName.detailsPage,
+          name: RoutesName.productDetails,
           page: () => const ProductDetailsPage(),
         ),
         GetPage(

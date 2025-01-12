@@ -11,8 +11,8 @@ import '../../../res/app_string.dart';
 import '../../../res/apps_color.dart';
 import '../../../res/internet_utilis.dart';
 import '../../../res/validator.dart';
+import '../../../widget/custom_elevated_widget.dart';
 import '../../../widget/drop_down_category_widget.dart';
-import '../../../widget/product_widget.dart';
 import '../../../widget/text_field_form_widget.dart';
 import 'grid_image_list_widget.dart';
 
@@ -113,17 +113,14 @@ class _AddEditProductFormState extends State<AddEditProductForm> {
     );
   }
 
-  InkWell _buildImagePickerButton() {
-    return InkWell(
-      onTap: () {
+  Widget _buildImagePickerButton() {
+    return CustomElevatedButton(
+      onPressed: () {
         addProductController.uploadProductImage(ImageSource.gallery);
-        // addProductController.isUpdateChange.value = true;
+
         addProductController.isProductUpdated(true);
       },
-      child: const CoustomButtonWidget(
-        title: AppString.pickImage,
-        width: 150,
-      ),
+      title: AppString.pickImage,
     );
   }
 
@@ -133,12 +130,13 @@ class _AddEditProductFormState extends State<AddEditProductForm> {
       child: Column(
         children: [
           Obx(
-            () => DropdownCategoryWidget(
-              list: AppConstants.categoryList,
-              value: addProductController.categoryController.category.value,
+            () => DropdownWidget(
+              items: AppConstants.categories,
+              value: addProductController
+                  .categoryController.selectedCategory.value,
               onChanged: (value) {
                 addProductController.categoryController
-                    .setCategory(value!.toString());
+                    .updateCategory(value!.toString());
                 addProductController.isProductUpdated(true);
               },
             ),
@@ -158,14 +156,15 @@ class _AddEditProductFormState extends State<AddEditProductForm> {
               AppsFunction.horizontalSpace(20),
               Expanded(
                   child: Obx(
-                () => DropdownCategoryWidget(
+                () => DropdownWidget(
                   onChanged: (value) {
                     addProductController.categoryController
-                        .setUnit(value!.toString());
+                        .updateUnit(value!.toString());
                     addProductController.isProductUpdated(true);
                   },
-                  list: AppConstants.unitList,
-                  value: addProductController.categoryController.unit.value,
+                  items: AppConstants.units,
+                  value: addProductController
+                      .categoryController.selectedUnit.value,
                 ),
               )),
             ],

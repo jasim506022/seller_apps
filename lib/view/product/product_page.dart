@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 
 import '../../controller/category_controller.dart';
 import '../../res/app_constants.dart';
+import '../../res/app_function.dart';
+import '../../res/app_string.dart';
 import '../../widget/drop_down_category_widget.dart';
 import 'widget/product_list_widget.dart';
 
@@ -12,27 +14,23 @@ class ProductPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final categoryController = Get.find<CategoryController>();
+    final categoryController = Get.find<CategoryManagerController>();
     return Scaffold(
       appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: const Text(
-            "Products",
-          )),
+          title: const Text(AppString.productTitle)),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 4.h),
         child: Column(
           children: [
-            DropdownCategoryWidget(
-              list: AppConstants.allCategoryList,
-              value: categoryController.category.value,
+            DropdownWidget(
+              items: AppConstants.allCategories,
+              value: categoryController.selectedForAllCategory.value,
               onChanged: (value) {
-                categoryController.setCategory(value!.toString());
+                categoryController.updateAllCategory(value!.toString());
               },
             ),
-            SizedBox(
-              height: 10.h,
-            ),
+            AppsFunction.verticalSpace(10),
             const Expanded(child: ProductListWidget())
           ],
         ),

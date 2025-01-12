@@ -3,23 +3,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../res/apps_text_style.dart';
 
-class DropdownCategoryWidget extends StatelessWidget {
-  const DropdownCategoryWidget({
+class DropdownWidget extends StatelessWidget {
+  const DropdownWidget({
     super.key,
     this.onChanged,
-    this.value,
-    required this.list,
+    required this.value,
+    required this.items,
   });
 
-  /// Current selected value in the dropdown.
+  final String value;
 
-  final String? value;
-
-  /// Callback triggered when the dropdown value changes.
   final void Function(String?)? onChanged;
 
-  /// List of dropdown items.
-  final List<String> list;
+  final List<String> items;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +32,7 @@ class DropdownCategoryWidget extends StatelessWidget {
       style: AppsTextStyle.mediumBoldText,
       focusColor: Theme.of(context).primaryColor,
       elevation: 16,
-      items: list.map<DropdownMenuItem<String>>((String value) {
+      items: items.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(value: value, child: Text(value));
       }).toList(),
       onChanged: onChanged,
@@ -46,8 +42,7 @@ class DropdownCategoryWidget extends StatelessWidget {
   /// Builds a rounded border for the input field.
   OutlineInputBorder _buildBorder(BuildContext context) {
     return OutlineInputBorder(
-      borderSide: BorderSide(
-        color: Theme.of(context).primaryColor,
+      borderSide: const BorderSide(
         width: 1,
       ),
       borderRadius: BorderRadius.circular(15.r),

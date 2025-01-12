@@ -6,6 +6,8 @@ import 'package:provider/provider.dart';
 import '../../../controller/product_controller.dart';
 import '../../../model/productsmodel.dart';
 import '../../../res/app_asset/image_asset.dart';
+import '../../../res/app_function.dart';
+import '../../../res/app_string.dart';
 import '../../../widget/empty_widget.dart';
 import '../../../widget/product_widget.dart';
 import '../../loading_widget/loading_list_product_widget.dart';
@@ -30,8 +32,8 @@ class ProductListWidget extends StatelessWidget {
               return EmptyWidget(
                 image: ImagesAsset.error,
                 title: snapshot.hasError
-                    ? 'Error Occure: ${snapshot.error}'
-                    : 'No Data Available',
+                    ? '${AppString.errorOccure}: ${snapshot.error}'
+                    : AppString.noDataAvaiable,
               );
             }
             if (snapshot.hasData) {
@@ -49,12 +51,7 @@ class ProductListWidget extends StatelessWidget {
       shrinkWrap: true,
       physics: const AlwaysScrollableScrollPhysics(),
       itemCount: snapshot.data!.docs.length,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: .76,
-        crossAxisSpacing: 8,
-        mainAxisSpacing: 8,
-      ),
+      gridDelegate: AppsFunction.buildGridDelegate(),
       itemBuilder: (context, index) {
         ProductModel productModel =
             ProductModel.fromMap(snapshot.data!.docs[index].data());

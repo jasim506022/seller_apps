@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:seller_apps/res/app_string.dart';
 import '../../res/utils.dart';
 import '../../res/apps_color.dart';
 import '../../res/routes/routes_name.dart';
@@ -12,6 +13,7 @@ import '../../res/app_function.dart';
 import '../../res/apps_text_style.dart';
 import 'widget/details_page_image_slider.dart';
 import 'widget/list_similer_product_wiget.dart';
+import 'widget/product_details_widget.dart';
 
 class ProductDetailsPage extends StatefulWidget {
   const ProductDetailsPage({
@@ -29,20 +31,25 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
   @override
   void initState() {
     var arguments = Get.arguments;
-    productModel = arguments["productModel"];
+    productModel = arguments[AppString.productModel];
     super.initState();
   }
 
   @override
   void didChangeDependencies() {
-    // Utils Utils = Utils(context);
+    _statusBar();
+    super.didChangeDependencies();
+  }
+
+  void _statusBar() {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
         statusBarColor: ThemeUtils.green300,
         statusBarBrightness: Brightness.dark,
-        statusBarIconBrightness: Theme.of(context).brightness));
-    super.didChangeDependencies();
+        statusBarIconBrightness: Theme.of(context).brightness
+        
+        ));
   }
 
   @override
@@ -55,13 +62,10 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
         }
       },
       child: Scaffold(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         body: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(
-                height: 10.h,
-              ),
+              AppsFunction.verticalSpace(20),
               DetailsPageImageSlideWithCartBridgeWidget(
                 productModel: productModel,
               ),
@@ -71,20 +75,18 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _buildProductAllDetails(productModel),
+                    ProductDetailsWidget(
+                      productModel: productModel,
+                    ),
                     Text(
-                      "Similar Products",
+                      AppString.similarProducts,
                       style: AppsTextStyle.titleTextStyle,
                     ),
-                    SizedBox(
-                      height: 10.h,
-                    ),
+                    AppsFunction.verticalSpace(10),
                     SimilarProductList(
                       productModel: productModel,
                     ),
-                    SizedBox(
-                      height: 20.h,
-                    ),
+                    AppsFunction.verticalSpace(20),
                   ],
                 ),
               )
@@ -92,103 +94,6 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
           ),
         ),
       ),
-    );
-  }
-
-  Column _buildProductAllDetails(
-    ProductModel productModel,
-  ) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(productModel.productname!,
-            style: AppsTextStyle.largeBoldText.copyWith(fontSize: 20.sp)),
-        SizedBox(
-          height: 15.h,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            RichText(
-              text: TextSpan(
-                children: [
-                  TextSpan(
-                    text:
-                        "৳. ${AppsFunction.getDiscountedPrice(productModel.productprice!, productModel.discount!.toDouble())} ",
-                    style: AppsTextStyle.titleTextStyle
-                        .copyWith(color: AppColors.red),
-                  ),
-                  TextSpan(
-                    text: "${productModel.productunit} ",
-                    style: AppsTextStyle.smallBoldText,
-                  ),
-                ],
-              ),
-            ),
-            FittedBox(
-              child: RichText(
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                      text: "Discount: ${productModel.discount!}% ",
-                      style: AppsTextStyle.mediumBoldText
-                          .copyWith(color: AppColors.red),
-                    ),
-                    WidgetSpan(
-                        child: SizedBox(
-                      width: 10.w,
-                    )),
-                    TextSpan(
-                      text: "${productModel.productprice!}",
-                      style: AppsTextStyle.mediumBoldText.copyWith(
-                        color: AppColors.red,
-                        decoration: TextDecoration.lineThrough,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 15.h,
-        ),
-        Text(productModel.productdescription!,
-            textAlign: TextAlign.justify,
-            style: AppsTextStyle.mediumNormalText),
-        SizedBox(
-          height: 20.h,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Icon(Icons.star, color: AppColors.yellow),
-            RichText(
-              text: TextSpan(
-                  style: AppsTextStyle.rattingText.copyWith(
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  children: [
-                    const TextSpan(text: "( "),
-                    TextSpan(text: "${productModel.productrating!}"),
-                    TextSpan(
-                        text: " ${"Rattings"} ",
-                        style: AppsTextStyle.rattingText),
-                    TextSpan(
-                        text: ")",
-                        style: AppsTextStyle.rattingText.copyWith(
-                          color: Theme.of(context).primaryColor,
-                        )),
-                  ]),
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 20.h,
-        ),
-      ],
     );
   }
 }

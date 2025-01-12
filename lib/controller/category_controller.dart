@@ -1,19 +1,15 @@
 import 'package:get/get.dart';
 import '../res/app_constants.dart';
 
-class CategoryController extends GetxController {
+class CategoryManagerController extends GetxController {
   // Private Observables
-  final RxString category = AppConstants.categoryList.first.obs;
-  final RxString unit = AppConstants.unitList.first.obs;
-  final RxString status = AppConstants.statusList.first.obs;
+  final RxString selectedCategory = AppConstants.categories.first.obs;
+  final RxString selectedForAllCategory = AppConstants.allCategories.first.obs;
+  final RxString selectedUnit = AppConstants.units.first.obs;
+  final RxString selectedStatus = AppConstants.orderStatuses.first.obs;
 
-  // // Getters
-  // String get category => category.value;
-  // String get unit => _unit.value;
-  // String get status => _status.value;
-
-  // Setters
-  void setCategory(String category) => this.category.value = category;
-  void setUnit(String unit) => this.unit.value = unit;
-  void setStatus(String status) => this.status.value = status;
+  void updateCategory(String category) => selectedCategory(category);
+  void updateAllCategory(String category) => selectedForAllCategory(category);
+  void updateUnit(String unit) => selectedUnit(unit);
+  void updateStatus(String status) => selectedStatus(status);
 }

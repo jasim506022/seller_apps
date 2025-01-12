@@ -41,7 +41,7 @@ class ImageAddRemoveProvider with ChangeNotifier {
 
   // Cateogry
 
-  String _categoryName = AppConstants.categoryList.first;
+  String _categoryName = AppConstants.categories.first;
 
   // get Category Item
   String get getCategory => _categoryName;
@@ -53,7 +53,7 @@ class ImageAddRemoveProvider with ChangeNotifier {
   }
 
   // Unit
-  String _unit = AppConstants.unitList.first;
+  String _unit = AppConstants.units.first;
 
   // getUnit
   String get getUnit => _unit;

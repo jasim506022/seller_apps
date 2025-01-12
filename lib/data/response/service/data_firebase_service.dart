@@ -85,13 +85,13 @@ class DataFirebaseService implements BaseFirebaseService {
 
   //
   @override
-  Stream<QuerySnapshot<Map<String, dynamic>>> productSnapshots(
+  Stream<QuerySnapshot<Map<String, dynamic>>> fetchProductSnapshotsByCategory(
       {required String category}) {
     var collectionRef = firebaseFirestore
-        .collection("seller")
+        .collection(AppString.sellersCollection)
         .doc(AppConstants.sharedPreference!
             .getString(AppString.uidSharedPreference))
-        .collection("products");
+        .collection(AppString.productsCollection);
     var query = collectionRef.orderBy("publishDate", descending: true);
 
     if (category != "All") {
@@ -102,24 +102,32 @@ class DataFirebaseService implements BaseFirebaseService {
   }
 
   @override
-  Future<void> deleteProductSnapshot({required String productId}) async {
+  Future<void> deleteProductByIdSnapshot({required String productId}) async {
     final sellerId =
         AppConstants.sharedPreference?.getString(AppString.uidSharedPreference);
-    final sellerRef = firebaseFirestore.collection("seller").doc(sellerId);
 
-    sellerRef.collection("products").doc(productId).delete();
-    firebaseFirestore.collection("products").doc(productId).delete();
+    final sellerRef =
+        firebaseFirestore.collection(AppString.sellersCollection).doc(sellerId);
+
+    sellerRef.collection(AppString.productsCollection).doc(productId).delete();
+
+    firebaseFirestore
+        .collection(AppString.productsCollection)
+        .doc(productId)
+        .delete();
   }
 
   //
 
   @override
-  Stream<QuerySnapshot<Map<String, dynamic>>> similarProductSnapshot(
+  Stream<QuerySnapshot<Map<String, dynamic>>> fetchSimilarProducts(
       {required ProductModel productModel}) {
-    return FirebaseFirestore.instance
-        .collection("seller")
-        .doc(AppConstants.sharedPreference!.getString("uid")!)
-        .collection("products")
+    final sellerId =
+        AppConstants.sharedPreference?.getString(AppString.uidSharedPreference);
+    return firebaseFirestore
+        .collection(AppString.sellersCollection)
+        .doc(sellerId)
+        .collection(AppString.productsCollection)
         .where("productId", isNotEqualTo: productModel.productId)
         .where("productcategory", isEqualTo: productModel.productcategory)
         .snapshots();

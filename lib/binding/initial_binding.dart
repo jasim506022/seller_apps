@@ -79,7 +79,8 @@ class InitialBinding extends Bindings {
         () => ProfileController(repository: Get.find<ProfileRepository>()),
         fenix: true);
 
-    Get.lazyPut<CategoryController>(() => CategoryController(), fenix: true);
+    Get.lazyPut<CategoryManagerController>(() => CategoryManagerController(),
+        fenix: true);
     Get.lazyPut<SearchControllers>(() => SearchControllers());
 
     Get.lazyPut<ProductRepository>(() => ProductRepository(), fenix: true);

@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../res/app_function.dart';
 import '../../../res/utils.dart';
 import '../../../model/productsmodel.dart';
 import '../../../res/apps_color.dart';
 import 'image_swiper_widget.dart';
 import 'popup_button_widget.dart';
 
+/*
 class DetailsPageImageSlideWithCartBridgeWidget extends StatelessWidget {
   const DetailsPageImageSlideWithCartBridgeWidget({
     super.key,
@@ -110,5 +112,117 @@ class DetailsPageImageSlideWithCartBridgeWidget extends StatelessWidget {
         decoration:
             BoxDecoration(color: AppColors.green, shape: BoxShape.circle),
         child: widget);
+  }
+}
+
+*/
+
+class DetailsPageImageSlideWithCartBridgeWidget extends StatelessWidget {
+  const DetailsPageImageSlideWithCartBridgeWidget({
+    super.key,
+    required this.productModel,
+  });
+
+  final ProductModel productModel;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 320.h,
+      width: 1.sw,
+      child: Stack(
+        children: [
+          ..._buildBackgroundCircles(),
+          Positioned(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AppsFunction.verticalSpace(10),
+                  _buildTopBar(),
+                  DetailsImageSwiperWidget(images: productModel.productimage!),
+                  AppsFunction.verticalSpace(10),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // This method builds the background circles
+  List<Widget> _buildBackgroundCircles() {
+    List<Map<String, dynamic>> circleConfig = [
+      {
+        'left': -300.00.w,
+        'right': -300.00.w,
+        'top': -350.00.h,
+        'size': 650.00.h,
+        'color': ThemeUtils.green100
+      },
+      {
+        'left': -80.00.w,
+        'right': -80.00.w,
+        'top': -360.00.h,
+        'size': 650.00.h,
+        'color': ThemeUtils.green200
+      },
+      {
+        'left': 0.00,
+        'right': 0.00,
+        'top': -150.00.w,
+        'size': 300.00.h,
+        'color': ThemeUtils.green300
+      },
+    ];
+
+    return circleConfig.map((circle) {
+      return Positioned(
+        left: circle['left'],
+        right: circle['right'],
+        top: circle['top'],
+        child: Container(
+          height: circle['size'],
+          width: circle['size'],
+          decoration: BoxDecoration(
+            color: circle['color'],
+            shape: BoxShape.circle,
+          ),
+        ),
+      );
+    }).toList();
+  }
+
+  // This method builds the top bar with back and cart buttons
+  Widget _buildTopBar() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        InkWell(
+          onTap: () => Get.back(),
+          child: _buildCircularButton(
+            const Icon(Icons.arrow_back_ios, color: AppColors.white, size: 25),
+          ),
+        ),
+        InkWell(
+            onTap: () async {},
+            child: _buildCircularButton(
+                ProductActionPopupMenu(productModel: productModel)))
+      ],
+    );
+  }
+
+  Container _buildCircularButton(Widget widget) {
+    return Container(
+      height: 50.h,
+      width: 50.h,
+      decoration: const BoxDecoration(
+        color: AppColors.green,
+        shape: BoxShape.circle,
+      ),
+      child: widget,
+    );
   }
 }

@@ -16,38 +16,24 @@ class AppConstants {
   static final double defaultHeightSpace = 10.h;
 
   // Categories
-  static const List<String> allCategoryList = <String>[
-    "All",
+  static const categories = [
     "Fruits",
     "Vegetables",
     "Dairy & Egg",
     "Dry & Canned",
     "Drinks",
     "Meat & Fish",
-    "Candy & Chocolate",
+    "Candy & Chocolate"
   ];
 
-  static const List<String> categoryList = <String>[
-    "Fruits",
-    "Vegetables",
-    "Dairy & Egg",
-    "Dry & Canned",
-    "Drinks",
-    "Meat & Fish",
-    "Candy & Chocolate",
-  ];
+// If "All" is needed:
+  static const allCategories = ["All", ...categories];
 
 // Order Status
-  static const List<String> statusList = ["normal", "handover"];
+  static const List<String> orderStatuses = ["normal", "handover"];
 
   // Units
-  static const List<String> unitList = <String>[
-    "Per Kg",
-    "Per Dozen",
-    "Litter",
-    "Pc",
-    "Pcs",
-  ];
+  static const units = ["Per Kg", "Per Dozen", "Litter", "Pc", "Pcs"];
 }
 
 

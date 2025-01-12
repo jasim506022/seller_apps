@@ -16,23 +16,25 @@ class LoadingSimilierWidget extends StatelessWidget {
       itemCount: 5,
       scrollDirection: Axis.horizontal,
       itemBuilder: (context, index) {
-        return Container(
-          height: 130.h,
-          width: 100.w,
-          padding: EdgeInsets.all(10.r),
-          margin: EdgeInsets.only(left: 15.w),
+        return Card(
           color: Theme.of(context).cardColor,
-          child: Shimmer.fromColors(
-            baseColor: ThemeUtils.shimmerBaseColor,
-            highlightColor: ThemeUtils.shimmerHighlightColor,
-            child: Column(
-              children: [
-                AppsFunction.lineShimmer(70.h),
-                SizedBox(
-                  height: 8.h,
-                ),
-                AppsFunction.lineShimmer(10.h)
-              ],
+          elevation: 2,
+          child: Container(
+            height: 130.h,
+            width: 100.w,
+            padding: EdgeInsets.all(10.r),
+            margin: EdgeInsets.only(left: 15.w),
+            color: Theme.of(context).cardColor,
+            child: Shimmer.fromColors(
+              baseColor: ThemeUtils.shimmerBaseColor,
+              highlightColor: ThemeUtils.shimmerHighlightColor,
+              child: Column(
+                children: [
+                  AppsFunction.lineShimmer(70),
+                  AppsFunction.verticalSpace(5),
+                  AppsFunction.lineShimmer(10)
+                ],
+              ),
             ),
           ),
         );

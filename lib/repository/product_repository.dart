@@ -6,10 +6,12 @@ import '../res/app_function.dart';
 
 class ProductRepository {
   final _dataFirebaseService = DataFirebaseService();
+
   Stream<QuerySnapshot<Map<String, dynamic>>> productSnapshots(
       {required String category}) {
     try {
-      return _dataFirebaseService.productSnapshots(category: category);
+      return _dataFirebaseService.fetchProductSnapshotsByCategory(
+          category: category);
     } catch (e) {
       AppsFunction.handleException(e);
       rethrow;
@@ -17,12 +19,22 @@ class ProductRepository {
   }
 
   Future<void> deleteProductSnapshot({required String productId}) async {
-    await _dataFirebaseService.deleteProductSnapshot(productId: productId);
+    try {
+      await _dataFirebaseService.deleteProductByIdSnapshot(
+          productId: productId);
+    } catch (e) {
+      AppsFunction.handleException(e);
+    }
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> similarProductSnapshot(
       {required ProductModel productModel}) {
-    return _dataFirebaseService.similarProductSnapshot(
-        productModel: productModel);
+    try {
+      return _dataFirebaseService.fetchSimilarProducts(
+          productModel: productModel);
+    } catch (e) {
+      AppsFunction.handleException(e);
+      rethrow;
+    }
   }
 }

@@ -27,7 +27,7 @@ class AddProductController extends GetxController {
   // Dependencies
   AddProductRepository repository;
   final loadingController = Get.find<LoadingController>();
-  final categoryController = Get.find<CategoryController>();
+  final categoryController = Get.find<CategoryManagerController>();
   // var categoryController = Get.find<CategoryController>();
 
 //Reactive Variable
@@ -117,8 +117,8 @@ class AddProductController extends GetxController {
     discountTEC.text = model.discount!.toString();
     publishDate = model.publishDate ?? Timestamp.fromDate(DateTime.now());
     categoryController
-      ..setCategory(model.productcategory!)
-      ..setUnit(model.productunit!);
+      ..updateCategory(model.productcategory!)
+      ..updateUnit(model.productunit!);
 
     selectedProductImagesList.value = model.productimage!;
   }
@@ -132,9 +132,9 @@ class AddProductController extends GetxController {
       sellerName: AppConstants.sharedPreference!
           .getString(AppString.nameSharedPreference),
       productname: nameTEC.text.trim(),
-      productcategory: categoryController.category.value,
+      productcategory: categoryController.selectedCategory.value,
       productprice: double.tryParse(priceTEC.text.trim()),
-      productunit: categoryController.unit.value,
+      productunit: categoryController.selectedUnit.value,
       productrating: double.tryParse(ratingTEC.text.trim()),
       productdescription: descriptionTEC.text.trim(),
       publishDate: isUpdate ? publishDate : Timestamp.fromDate(DateTime.now()),
@@ -198,8 +198,8 @@ class AddProductController extends GetxController {
       element.clear;
     }
     categoryController
-      ..setCategory(AppConstants.categoryList.first)
-      ..setUnit(AppConstants.unitList.first);
+      ..updateCategory(AppConstants.categories.first)
+      ..updateUnit(AppConstants.units.first);
     selectedProductImagesList.clear();
     isProductUpdated(false);
   }

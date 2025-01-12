@@ -193,4 +193,13 @@ class AppsFunction {
         statusBarBrightness: Brightness.light,
         statusBarIconBrightness: Theme.of(context).brightness));
   }
+
+  static SliverGridDelegateWithFixedCrossAxisCount buildGridDelegate() {
+    return const SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: 2,
+      childAspectRatio: .76,
+      crossAxisSpacing: 8,
+      mainAxisSpacing: 8,
+    );
+  }
 }

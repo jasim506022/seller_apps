@@ -28,7 +28,7 @@ class OrderStatusListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var orderController = Get.find<OrderController>();
-    var categoryController = Get.find<CategoryController>();
+    var categoryController = Get.find<CategoryManagerController>();
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -40,11 +40,11 @@ class OrderStatusListWidget extends StatelessWidget {
             if (orderStatus == null)
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15.h),
-                child: DropdownCategoryWidget(
-                  list: AppConstants.statusList,
-                  value: categoryController.status.value,
+                child: DropdownWidget(
+                  items: AppConstants.orderStatuses,
+                  value: categoryController.selectedStatus.value,
                   onChanged: (value) {
-                    categoryController.setStatus(value!);
+                    categoryController.updateStatus(value!);
                   },
                 ),
               ),
@@ -52,7 +52,7 @@ class OrderStatusListWidget extends StatelessWidget {
               Expanded(
                 child: Obx(
                   () => _buildOrderList(
-                      orderController, categoryController.status.value),
+                      orderController, categoryController.selectedStatus.value),
                 ),
               ),
             if (orderStatus != null)

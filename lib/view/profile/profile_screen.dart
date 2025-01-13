@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import '../../res/app_constants.dart';
+import '../../res/app_string.dart';
 import '../../res/apps_color.dart';
 import '../../res/internet_utilis.dart';
 import '../../res/routes/routes_name.dart';
@@ -25,7 +25,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Profile"),
+        title: const Text(AppString.profile),
         actions: [
           IconButton(
               onPressed: () {},
@@ -52,7 +52,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ProfileCustomListTitleWidget(
                   showTrailing: false,
                   icon: Icons.exit_to_app,
-                  title: 'Sign Out',
+                  title: AppString.signOut,
                   iconColor: AppColors.red,
                   onTap: () async {
                     if (!(await NetworkUtili.verifyInternetStatus())) {

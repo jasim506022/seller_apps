@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:seller_apps/res/app_function.dart';
 
 import '../../../res/apps_text_style.dart';
 
@@ -20,9 +20,7 @@ class RowTextTitleWidget extends StatelessWidget {
         Icon(
           icon,
         ),
-        SizedBox(
-          width: 10.w,
-        ),
+        AppsFunction.horizontalSpace(10),
         Text(title, style: AppsTextStyle.largeBoldText)
       ],
     );

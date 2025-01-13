@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:seller_apps/res/app_string.dart';
 
 import '../../../model/order_model.dart';
+import '../../../res/app_function.dart';
 import '../../../res/apps_color.dart';
 import '../../../widget/background_shape_widget.dart';
 import 'delivery_rich_text_widget.dart';
@@ -28,9 +28,7 @@ class DeliveryInfoWidget extends StatelessWidget {
                 description: orderModel.deliveryPartner,
                 color: AppColors.green,
               ),
-              SizedBox(
-                height: 15.h,
-              ),
+              AppsFunction.verticalSpace(15),
               DeliveryRichTextWidget(
                   title: "${AppString.trackingNumber} :",
                   color: AppColors.red,
@@ -38,9 +36,7 @@ class DeliveryInfoWidget extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(
-          height: 10.h,
-        ),
+        AppsFunction.verticalSpace(15),
       ],
     );
   }

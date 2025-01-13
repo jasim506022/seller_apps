@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class OrderModel with ChangeNotifier {
   final String addressId;
-  final num totalamount;
+  final num totalAmount;
   final String orderBy;
   final List<String> productIds;
   final String paymentDetails;
@@ -17,7 +17,7 @@ class OrderModel with ChangeNotifier {
 
   OrderModel({
     required this.addressId,
-    required this.totalamount,
+    required this.totalAmount,
     required this.orderBy,
     required this.productIds,
     required this.paymentDetails,
@@ -35,7 +35,7 @@ class OrderModel with ChangeNotifier {
   factory OrderModel.fromMap(Map<String, dynamic> data) {
     return OrderModel(
       addressId: data['addressId'],
-      totalamount: data['totalamount'],
+      totalAmount: data['totalAmount'],
       orderBy: data['orderBy'],
       productIds: List<String>.from(data['productIds']),
       paymentDetails: data['paymentDetails'],
@@ -45,9 +45,9 @@ class OrderModel with ChangeNotifier {
       orderTime: data['orderTime'],
       isSuccess: data['isSuccess'],
       status: data['status'],
-      deliveryDate: data['deliverydate'],
-      deliveryPartner: data['deliverypartner'],
-      trackingNumber: data['trackingnumber'],
+      deliveryDate: data['deliveryDate'],
+      deliveryPartner: data['deliveryPartner'],
+      trackingNumber: data['trackingNumber'],
     );
   }
 
@@ -55,7 +55,7 @@ class OrderModel with ChangeNotifier {
   Map<String, dynamic> toMap() {
     return {
       "addressId": addressId,
-      "totalamount": totalamount,
+      "totalAmountt": totalAmount,
       "orderBy": orderBy,
       "productIds": productIds,
       "paymentDetails": paymentDetails,
@@ -64,9 +64,9 @@ class OrderModel with ChangeNotifier {
       "orderTime": orderTime,
       "isSuccess": isSuccess,
       "status": status,
-      "deliverydate": deliveryDate,
-      "deliverypartner": deliveryPartner,
-      "trackingnumber": trackingNumber,
+      "deliveryDate": deliveryDate,
+      "deliveryPartner": deliveryPartner,
+      "trackingNumber": trackingNumber,
     };
   }
 }

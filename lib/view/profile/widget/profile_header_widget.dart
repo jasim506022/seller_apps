@@ -2,6 +2,7 @@ import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:seller_apps/res/app_function.dart';
 
 import '../../../res/app_constants.dart';
 import '../../../res/app_string.dart';
@@ -28,9 +29,7 @@ class ProifleHeaderWidget extends StatelessWidget {
           child: Row(
             children: [
               _buildProfileImage(),
-              SizedBox(
-                width: 30.w,
-              ),
+              AppsFunction.horizontalSpace(30),
               Expanded(
                 child: Padding(
                   padding: EdgeInsets.symmetric(
@@ -73,7 +72,7 @@ final String email = AppConstants.sharedPreference
         ),
         SizedBox(height: AppConstants.defaultHeightSpace),
         CustomRoundActionButtonWidget(
-          title: "Edit Profile",
+          title: AppString.editProfile,
           onTap: () async {
             if (!await NetworkUtili.verifyInternetStatus()) {
               Get.toNamed(RoutesName.editProfilePage, arguments: true);

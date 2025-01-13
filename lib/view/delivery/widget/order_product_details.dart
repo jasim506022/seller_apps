@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:seller_apps/res/app_string.dart';
 import 'package:seller_apps/res/routes/routes_name.dart';
 
 import '../../../model/order_model.dart';
+import '../../../res/app_function.dart';
 import '../../../res/apps_color.dart';
 import '../../../res/apps_text_style.dart';
 import '../../order/widget/order_item_widget.dart';
@@ -40,9 +40,7 @@ class OrderProductDetails extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(
-          height: 15.h,
-        ),
+        AppsFunction.verticalSpace(15),
         Flexible(
           child: ChangeNotifierProvider.value(
             value: orderModel,

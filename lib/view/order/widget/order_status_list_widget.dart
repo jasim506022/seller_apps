@@ -31,9 +31,7 @@ class OrderStatusListWidget extends StatelessWidget {
     var categoryController = Get.find<CategoryManagerController>();
     return Scaffold(
         appBar: AppBar(
-          title: Text(
-            appBarTitle,
-          ),
+          title: Text(appBarTitle),
         ),
         body: Column(
           children: [
@@ -44,19 +42,24 @@ class OrderStatusListWidget extends StatelessWidget {
                   items: AppConstants.orderStatuses,
                   value: categoryController.selectedStatus.value,
                   onChanged: (value) {
-                    categoryController.updateStatus(value!);
+                    // categoryController.updateStatus(value!);
+                    if (value != null) {
+                      categoryController.updateStatus(value);
+                    }
                   },
                 ),
               ),
-            if (orderStatus == null)
-              Expanded(
-                child: Obx(
-                  () => _buildOrderList(
-                      orderController, categoryController.selectedStatus.value),
-                ),
-              ),
-            if (orderStatus != null)
-              Expanded(child: _buildOrderList(orderController, orderStatus!)),
+            // if (orderStatus == null)
+            //   Expanded(
+            //     child: Obx(
+            //       () => _buildOrderList(
+            //           orderController, categoryController.selectedStatus.value),
+            //     ),
+            //   ),
+            // if (orderStatus != null)
+            Expanded(
+                child: _buildOrderList(orderController,
+                    orderStatus ?? categoryController.selectedStatus.value)),
           ],
         ));
   }

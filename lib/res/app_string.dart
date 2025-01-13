@@ -146,6 +146,8 @@ Auth String
   static const updateProduct = "Update Product";
   static const addNewProduct = "Add New Product";
   static const productTitle = "Products";
+  
+
 
   //add Product
   static const productName = 'Product Name';
@@ -189,4 +191,6 @@ Auth String
   static const similarProducts = "Similar Products";
   static const update = "Update";
   static const delete = "Delete";
+  static const homePage = "Home Page";
+    // static const signOut = "Sign Out";
 }

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:seller_apps/res/app_string.dart';
 
 import '../../model/order_model.dart';
+import '../../res/app_function.dart';
 import '../../res/routes/routes_name.dart';
 import '../../widget/custom_round_action_button_widget.dart';
 import '../delivery/widget/delivery_user_profile_stream.dart';
@@ -19,9 +20,7 @@ class OrderDetailsPage extends StatelessWidget {
     OrderModel orderModel = Get.arguments;
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          AppString.orderDetails,
-        ),
+        title: Text(AppString.orderDetails),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
@@ -36,21 +35,17 @@ class OrderDetailsPage extends StatelessWidget {
               OrderSellerProductListWidget(
                 orderModel: orderModel,
               ),
-              SizedBox(
-                height: 10.h,
-              ),
+              AppsFunction.verticalSpace(10),
               Align(
                 alignment: Alignment.center,
                 child: CustomRoundActionButtonWidget(
                   onTap: () {
                     Get.offAndToNamed(RoutesName.mainPage, arguments: 0);
                   },
-                  title: "Home Page",
+                  title: AppString.homePage,
                 ),
               ),
-              SizedBox(
-                height: 100.h,
-              )
+              AppsFunction.verticalSpace(100),
             ],
           ),
         ),

@@ -23,9 +23,7 @@ class OrderDeliveryLocationWidget extends StatelessWidget {
     return Column(
       children: [
         _buildDeliveryAddressSection(),
-        SizedBox(
-          height: 10.h,
-        ),
+        AppsFunction.verticalSpace(10),
         _buildEstimatedDeliveryDateSection()
       ],
     );
@@ -40,9 +38,7 @@ class OrderDeliveryLocationWidget extends StatelessWidget {
             Text("${AppString.estimatedDelivery}: ",
                 style: AppsTextStyle.mediumBoldText
                     .copyWith(color: AppColors.white)),
-            SizedBox(
-              width: 10.w,
-            ),
+            AppsFunction.horizontalSpace(10),
             Expanded(
               child: Text(
                 orderModel.status == AppString.complete
@@ -67,9 +63,7 @@ class OrderDeliveryLocationWidget extends StatelessWidget {
             "${AppString.deliveryAddress}: ",
             style: AppsTextStyle.mediumBoldText,
           ),
-          SizedBox(
-            width: 15.w,
-          ),
+          AppsFunction.horizontalSpace(15),
           Expanded(
             child: StreamBuilder(
                 stream: delivaryController.userDeliveryAddressSnapshot(

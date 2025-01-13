@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:seller_apps/res/app_function.dart';
 import 'package:seller_apps/res/utils.dart';
 
 import '../../../res/apps_text_style.dart';
@@ -35,7 +36,7 @@ class AboutDataItem extends StatelessWidget {
             style: AppsTextStyle.textFieldInputTextStyle(),
           ),
         ),
-        SizedBox(height: 25.h),
+        AppsFunction.horizontalSpace(25),
       ],
     );
   }

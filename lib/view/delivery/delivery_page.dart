@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seller_apps/res/app_function.dart';
 import 'package:seller_apps/res/app_string.dart';
 
 import '../../model/order_model.dart';
@@ -36,28 +37,20 @@ class OrderDeliveryPage extends StatelessWidget {
               children: [
                 DeliveryUserProfileStream(
                     userId: orderModel.orderBy, orderId: orderModel.orderId),
-                SizedBox(
-                  height: 5.h,
-                ),
+                AppsFunction.verticalSpace(10),
                 OrderDeliveryLocationWidget(
                   orderModel: orderModel,
                 ),
-                SizedBox(
-                  height: 10.h,
-                ),
+                AppsFunction.verticalSpace(10),
                 ChangeNotifierProvider.value(
                   value: orderModel,
                   child: const DeliveryInfoWidget(),
                 ),
-                SizedBox(
-                  height: 10.h,
-                ),
+                AppsFunction.verticalSpace(10),
                 OrderStatusWidget(
                   orderModel: orderModel,
                 ),
-                SizedBox(
-                  height: 15.h,
-                ),
+                AppsFunction.verticalSpace(15),
                 ChangeNotifierProvider.value(
                   value: orderModel,
                   child: const OrderProductDetails(),

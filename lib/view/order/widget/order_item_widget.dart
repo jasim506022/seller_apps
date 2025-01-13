@@ -60,7 +60,7 @@ class OrderItemWidget extends StatelessWidget {
               } else {}
             },
             child: isCardDesign
-                ? _buildCardDesign(context, snapshot, separateQuantities)
+                ? _buildCardView(context, snapshot, separateQuantities)
                 : _buildListView(snapshot, separateQuantities),
           );
         }
@@ -68,7 +68,7 @@ class OrderItemWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildCardDesign(
+  Widget _buildCardView(
       BuildContext context, AsyncSnapshot snapshot, List<int> quantities) {
     return Card(
       color: Theme.of(context).cardColor,

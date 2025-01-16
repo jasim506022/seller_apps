@@ -1,5 +1,7 @@
 class ImagesAsset {
+  // App Logo
   static String appLogoImage = "asset/image/logo.png";
+
   static String uploadProductImage = "asset/image/additem.png";
   static String allProductImage = "asset/gridicon/addproduct.png";
   static String totalsalesImages = "asset/gridicon/sales.png";
@@ -7,9 +9,11 @@ class ImagesAsset {
   static String completeOrderImages = "asset/gridicon/complete.png";
   static String error = "asset/empty/empty.png";
   static String singleError = "asset/empty/single.png";
+  // Splash Page Bg
   static String splashPageBg = "asset/image/splash.png";
 
-  static const String groceryImage = "assets/onboard/grocery.png";
-  static const String allGroceryImage = "assets/onboard/all_grocery.png";
-  static const String deliveryImage = "assets/onboard/delivery.png";
+  // Onboarding Image
+  static const String groceryImage = "asset/onboard/grocery.png";
+  static const String allGroceryImage = "asset/onboard/all_grocery.png";
+  static const String deliveryImage = "asset/onboard/delivery.png";
 }

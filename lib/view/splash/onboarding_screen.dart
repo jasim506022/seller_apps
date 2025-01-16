@@ -8,7 +8,7 @@ import '../../model/onboard_model.dart';
 import '../../res/app_string.dart';
 import '../../res/apps_color.dart';
 import '../../res/apps_text_style.dart';
-import 'widget/onboard_widget.dart';
+import 'widget/onboarding_screen_content_widget.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
@@ -17,13 +17,7 @@ class OnboardingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.find<OnboardingController>();
-
-    // Set the system UI overlay for status bar (light/dark icons)
-
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-        statusBarColor: AppColors.white,
-        statusBarIconBrightness: Brightness.dark));
-
+    _setStatusBarStyle();
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
@@ -31,17 +25,12 @@ class OnboardingScreen extends StatelessWidget {
         elevation: 0.0,
         actions: [
           TextButton(
-              onPressed: () {
-                controller.skipOnboarding();
-              },
+              onPressed: () => controller.markOnboardingAsViewedAndNavigate(),
               child: Text(
                 AppString.skip,
                 style: AppsTextStyle.largeBoldText
                     .copyWith(color: AppColors.black),
               )),
-          SizedBox(
-            width: 10.w,
-          )
         ],
       ),
       body: Padding(
@@ -49,15 +38,19 @@ class OnboardingScreen extends StatelessWidget {
         child: PageView.builder(
           controller: controller.pageController,
           itemCount: onboardingData.length,
-          physics: const NeverScrollableScrollPhysics(),
-          onPageChanged: (index) => controller.currentIndex.value = index,
+          onPageChanged: (index) => controller.currentIndex(index),
           itemBuilder: (context, index) {
             var item = onboardingData[index];
-            return OnboardingWidget(item: item);
+            return OnboardingPageContentWidget(onboardingItem: item);
           },
         ),
       ),
     );
+  }
+
+  void _setStatusBarStyle() {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+        statusBarColor: AppColors.white, statusBarBrightness: Brightness.dark));
   }
 }
 

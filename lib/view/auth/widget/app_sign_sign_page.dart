@@ -26,7 +26,7 @@ class AppSignInPageIntro extends StatelessWidget {
           width: 140.h,
         ),
         AppsFunction.verticalSpace(10),
-        Text(title, style: AppsTextStyle.largeTitleTextStyle),
+        Text(title, style: AppsTextStyle.largeTitleTextStyleForOnBoarding),
         AppsFunction.verticalSpace(10),
         Text(
           description,

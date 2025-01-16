@@ -1,4 +1,3 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -48,7 +47,7 @@ class UserProfileContent extends StatelessWidget {
               children: [
                 Text(
                   name,
-                  style: AppsTextStyle.largeTitleTextStyle
+                  style: AppsTextStyle.largeTitleTextStyleForOnBoarding
                       .copyWith(color: AppColors.white),
                 ),
                 Text(

@@ -10,9 +10,16 @@ class AppsTextStyle {
 
   static ThemeData get theme => Theme.of(context);
 
+// Apps Logo
+  static TextStyle get appsLogoTextStyole => GoogleFonts.roboto(
+        color: AppColors.green,
+        fontSize: 24.sp,
+        fontWeight: FontWeight.w900,
+      );
+
   // Large  Title Text Style
-  static TextStyle get largeTitleTextStyle => GoogleFonts.roboto(
-      color: theme.primaryColor, fontSize: 22.sp, fontWeight: FontWeight.w900);
+  static TextStyle get largeTitleTextStyleForOnBoarding => GoogleFonts.roboto(
+      color: theme.primaryColor, fontSize: 30.sp, fontWeight: FontWeight.w900);
 
   // Title Text Style
   static TextStyle get titleTextStyle => GoogleFonts.poppins(
@@ -55,7 +62,7 @@ class AppsTextStyle {
 
   // Button Text Style
   static TextStyle get buttonTextStyle => GoogleFonts.poppins(
-      color: AppColors.white, fontWeight: FontWeight.bold, fontSize: 15.sp);
+      color: AppColors.white, fontWeight: FontWeight.bold, fontSize: 16.sp);
 
 // Hint Normal Text
   static TextStyle get hintTextStyle => GoogleFonts.poppins(
@@ -66,7 +73,7 @@ class AppsTextStyle {
 
 // Medium Text
   static TextStyle get mediumBoldText => GoogleFonts.poppins(
-      color: theme.primaryColor, fontSize: 14.sp, fontWeight: FontWeight.w800);
+      color: theme.primaryColor, fontSize: 14.16, fontWeight: FontWeight.w800);
 
 // others
   static TextStyle mediumText400lineThrough = GoogleFonts.roboto(

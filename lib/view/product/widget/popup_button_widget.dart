@@ -90,7 +90,7 @@ class ProductActionPopupMenu extends StatelessWidget {
 
         case ProductAction.update:
           Get.toNamed(
-            RoutesName.uploadProduct,
+            RoutesName.uploadAndUpdateProduct,
             arguments: {
               AppString.isUpdate: true,
               AppString.productModel: productModel,

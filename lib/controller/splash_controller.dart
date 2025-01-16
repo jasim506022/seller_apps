@@ -3,7 +3,11 @@ import 'package:get/get.dart';
 
 import '../../res/app_constants.dart';
 import '../../res/routes/routes_name.dart';
+import '../model/app_exception.dart';
 import '../repository/splash_repository.dart';
+import '../res/app_asset/icon_asset.dart';
+import '../res/app_string.dart';
+import '../view/auth/widget/error_dialog_widget.dart';
 
 class SplashController extends GetxController {
   SplashRepository repository;
@@ -20,33 +24,45 @@ class SplashController extends GetxController {
 
   // Logic for determining the next screen
   void _navigateToNextScreen() {
-    Future.delayed(
-      const Duration(seconds: 3),
-      () {
-        var currentUser = repository.getCurrentUser();
-        if (currentUser != null) {
-          Get.offNamed(RoutesName.mainPage);
-        } else {
-          if (AppConstants.isViewed != 0) {
-            Get.offNamed(RoutesName.onBaordingPage);
-          } else {
-            Get.offNamed(RoutesName.signPage);
-          }
-        }
-      },
-    );
+    try {
+      Future.delayed(
+        const Duration(seconds: 2),
+        () {
+          var currentUser = repository.getCurrentUser();
+
+          final route = currentUser != null
+              ? RoutesName.mainPage
+              : (AppConstants.isViewed != 0
+                  ? RoutesName.onBardingPpage
+                  : RoutesName.signPage);
+
+          Get.offNamed(route);
+        },
+      );
+    } catch (e) {
+      if (e is AppException) {
+        Get.dialog(
+        ErrorDialogWidget(
+          icon: IconAsset.warningIcon,
+          title: e.title!,
+          content: e.message,
+          buttonText: AppString.okay,
+        ),
+      );
+      }
+    }
   }
 
   @override
   void onClose() {
-    // Re-enable system UI overlays when splash screen is disposed
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: SystemUiOverlay.values);
     super.onClose();
   }
 
-  // Disable system UI overlays (e.g., status and navigation bars)
   void _configureUI() {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
+    SystemChrome.setEnabledSystemUIMode(
+      SystemUiMode.immersive,
+    );
   }
 }

@@ -77,8 +77,8 @@ Auth String
   static String completeOrder = "Complete Order";
   static String searchHint = "Search...........";
 
-  //
-  static String onBoarding = 'onBoarding';
+  // sharepare
+  static String onBoardingShareKey = 'onBoarding';
   static String appsName = "Grocery Apps";
   static String skip = "Skip";
   static String welcome = "Welcome";
@@ -146,8 +146,6 @@ Auth String
   static const updateProduct = "Update Product";
   static const addNewProduct = "Add New Product";
   static const productTitle = "Products";
-  
-
 
   //add Product
   static const productName = 'Product Name';
@@ -192,5 +190,8 @@ Auth String
   static const update = "Update";
   static const delete = "Delete";
   static const homePage = "Home Page";
-    // static const signOut = "Sign Out";
+  // static const signOut = "Sign Out";
+
+  //batton
+  static const next = "Next";
 }

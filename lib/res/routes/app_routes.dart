@@ -20,11 +20,11 @@ import 'routes_name.dart';
 class AppRoutes {
   static appRoutes() => [
         GetPage(
-          name: RoutesName.initailRoutes,
-          page: () => const SplashPage(),
+          name: RoutesName.splashPage,
+          page: () => const SplashScreen(),
         ),
         GetPage(
-          name: RoutesName.onBaordingPage,
+          name: RoutesName.onBardingPpage,
           page: () => const OnboardingScreen(),
         ),
         GetPage(
@@ -44,7 +44,7 @@ class AppRoutes {
           page: () => const MainPage(),
         ),
         GetPage(
-          name: RoutesName.uploadProduct,
+          name: RoutesName.uploadAndUpdateProduct,
           page: () => const ManageProductPage(),
         ),
         GetPage(

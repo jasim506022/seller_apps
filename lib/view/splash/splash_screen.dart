@@ -6,11 +6,10 @@ import '../../controller/splash_controller.dart';
 import '../../res/app_asset/icon_asset.dart';
 import '../../res/app_asset/image_asset.dart';
 import '../../res/app_string.dart';
-import '../../res/apps_color.dart';
 import '../../res/apps_text_style.dart';
 
-class SplashPage extends StatelessWidget {
-  const SplashPage({super.key});
+class SplashScreen extends StatelessWidget {
+  const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +25,11 @@ class SplashPage extends StatelessWidget {
             children: [
               Image.asset(
                 IconAsset.appIcon,
-                height: 150.h,
-                width: 150.h,
+                height: 120.h,
+                width: 120.h,
+                fit: BoxFit.fill,
               ),
-              Text(AppString.appsName,
-                  style: AppsTextStyle.largeTitleTextStyle
-                      .copyWith(color: AppColors.green, fontSize: 26.sp)),
+              Text(AppString.appsName, style: AppsTextStyle.appsLogoTextStyole),
             ],
           ),
         ),
@@ -39,9 +37,3 @@ class SplashPage extends StatelessWidget {
     );
   }
 }
-
-/*
-1. What is Page and Screen
-
-2. What is different Between Scaffood and Materiali
-*/

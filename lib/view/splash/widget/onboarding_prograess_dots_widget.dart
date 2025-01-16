@@ -7,8 +7,8 @@ import '../../../model/onboard_model.dart';
 import '../../../res/app_constants.dart';
 import '../../../res/apps_color.dart';
 
-class DotIndicatorWidget extends StatelessWidget {
-  const DotIndicatorWidget({
+class OnboardingProgressDotsWidget extends StatelessWidget {
+  const OnboardingProgressDotsWidget({
     super.key,
   });
 
@@ -26,10 +26,11 @@ class DotIndicatorWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Obx(
-                () => Container(
+                () => AnimatedContainer(
+                  duration: const Duration(milliseconds: 300),
                   height: 10.h,
-                  width: 10.h,
-                  margin: EdgeInsets.symmetric(horizontal: 3.h),
+                  width: controller.currentIndex.value == index ? 12.h : 10.h,
+                  margin: EdgeInsets.symmetric(horizontal: 4.w),
                   decoration: BoxDecoration(
                       color: controller.currentIndex.value == index
                           ? AppColors.red

@@ -33,7 +33,7 @@ void main() async {
 
   // Check onboarding status
   AppConstants.isViewed =
-      AppConstants.sharedPreference!.getInt(AppString.onBoarding);
+      AppConstants.sharedPreference!.getInt(AppString.onBoardingShareKey);
 
   // Start the app
   runApp(const MyApp());
@@ -79,7 +79,7 @@ class MyApp extends StatelessWidget {
               theme: _buildAppTheme(themeProvder),
               // Set the initial route of the application
 
-              initialRoute: RoutesName.initailRoutes,
+              initialRoute: RoutesName.splashPage,
               // Define all application routes
 
               getPages: AppRoutes.appRoutes(),

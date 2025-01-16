@@ -194,7 +194,7 @@ class ProductWidget extends StatelessWidget {
         InkWell(
           onTap: () async {
             if (!(await NetworkUtili.verifyInternetStatus())) {
-              Get.toNamed(RoutesName.uploadProduct, arguments: {
+              Get.toNamed(RoutesName.uploadAndUpdateProduct, arguments: {
                 AppString.isUpdate: true,
                 AppString.productModel: productModel
               });

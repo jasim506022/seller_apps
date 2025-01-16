@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:seller_apps/res/app_string.dart';
+
 
 import '../model/onboard_model.dart';
 import '../res/app_constants.dart';
+import '../res/app_string.dart';
 import '../res/routes/routes_name.dart';
 
 class OnboardingController extends GetxController {
@@ -11,17 +12,17 @@ class OnboardingController extends GetxController {
   var currentIndex = 0.obs;
 
   /// Marks the onboarding as viewed in shared preferences and navigates to the sign-in page
-  Future<void> skipOnboarding() async {
+  Future<void> markOnboardingAsViewedAndNavigate() async {
     AppConstants.isViewed = 0;
     AppConstants.sharedPreference!
-        .setInt(AppString.onBoarding, AppConstants.isViewed!);
+        .setInt(AppString.onBoardingShareKey, AppConstants.isViewed!);
     Get.offNamed(RoutesName.signPage);
   }
 
   /// Navigates to the next page in the onboarding sequence
-  void nextPage() async {
+  void navigateToNextPageOrSkip() async {
     if (currentIndex.value == onboardingData.length - 1) {
-      await skipOnboarding();
+      await markOnboardingAsViewedAndNavigate();
     } else {
       pageController.nextPage(
         duration: const Duration(milliseconds: 250),

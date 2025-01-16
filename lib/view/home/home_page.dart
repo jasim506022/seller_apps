@@ -81,7 +81,7 @@ class HomePage extends StatelessWidget {
         image: ImagesAsset.uploadProductImage,
         text: AppString.uploadYourProduct,
         onTap: () async {
-          Get.toNamed(RoutesName.uploadProduct);
+          Get.toNamed(RoutesName.uploadAndUpdateProduct);
         },
       ),
     );

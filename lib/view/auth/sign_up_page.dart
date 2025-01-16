@@ -50,7 +50,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   AppsFunction.verticalSpace(15),
                   Text(
                     AppString.adminRegistration,
-                    style: AppsTextStyle.largeTitleTextStyle,
+                    style: AppsTextStyle.largeTitleTextStyleForOnBoarding,
                   ),
                   AppsFunction.verticalSpace(10),
                   Text(

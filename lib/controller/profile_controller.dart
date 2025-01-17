@@ -146,7 +146,6 @@ class ProfileController extends GetxController {
         }));
   }
 
-
   ProfileModel _buildProfileModel() {
     return ProfileModel(
       address: addressTEC.text.trim(),
@@ -170,8 +169,6 @@ class ProfileController extends GetxController {
     }
   }
 
- 
- 
   Future<DocumentSnapshot<Map<String, dynamic>>> getData() {
     return repository.fetchUserProfile();
   }
@@ -181,7 +178,10 @@ class ProfileController extends GetxController {
       var snapshot = await repository.fetchUserProfile();
       if (snapshot.exists && snapshot.data() != null) {
         profileModel.value = ProfileModel.fromMap(snapshot.data()!);
+
         if (profileModel.value.status == AppString.approved) {
+          print(profileModel.value.uid);
+          print("Banglaedesh");
           _saveProfileToSharedPreferences();
           _updateTextControllers();
           var token = await getFCMToken();
@@ -244,7 +244,6 @@ class ProfileController extends GetxController {
     await Future.wait(prefsTasks);
   }
 
-
   Future<String?> getFCMToken() async {
     try {
       // Request permission for iOS devices
@@ -262,8 +261,6 @@ class ProfileController extends GetxController {
     }
     return null;
   }
-
-
 }
 
 

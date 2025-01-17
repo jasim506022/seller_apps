@@ -5,8 +5,8 @@ import '../res/app_function.dart';
 import '../res/apps_color.dart';
 import '../res/apps_text_style.dart';
 
-class NextActionButton extends StatelessWidget {
-  const NextActionButton({
+class NextActionButtonWidget extends StatelessWidget {
+  const NextActionButtonWidget({
     super.key,
     required this.onTap,
     required this.title,

@@ -40,7 +40,7 @@ class ErrorDialogWidget extends StatelessWidget {
               Image.asset(
                 icon,
                 height: 100.h,
-                width: 100.w,
+                width: 100.h,
               ),
               AppsFunction.verticalSpace(20),
               Text(

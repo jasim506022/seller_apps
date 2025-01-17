@@ -14,7 +14,7 @@ class SocialButtonWidget extends StatelessWidget {
     required this.title,
   });
 
-  final VoidCallback tap; 
+  final VoidCallback tap;
   final Color color;
   final String image;
   final String title;
@@ -22,7 +22,7 @@ class SocialButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: tap, 
+      onTap: tap,
       child: Container(
         alignment: Alignment.center,
         height: 60.h,
@@ -36,8 +36,8 @@ class SocialButtonWidget extends StatelessWidget {
           children: [
             Image.asset(
               image,
-              height: 0.04.sh,
-              width: 0.04.sh,
+              height: 34.h,
+              width: 34.h,
               color: AppColors.white,
             ),
             AppsFunction.horizontalSpace(10),

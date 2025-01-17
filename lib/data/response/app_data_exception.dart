@@ -174,6 +174,11 @@ class FirebaseAuthExceptions extends AppException {
         message = 'No user found with this email.';
         title = 'User Not Found';
         break;
+
+        case 'invalid-user-token':
+        message = 'The users token is invalid or expired';
+        title = 'Invalid User Token';
+        break;
       default:
         message = 'Please check your internet connection or other issues.';
         title = 'Error Occurred';

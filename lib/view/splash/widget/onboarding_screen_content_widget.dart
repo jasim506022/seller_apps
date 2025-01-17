@@ -6,7 +6,7 @@ import '../../../controller/onboarding_controller.dart';
 import '../../../model/onboard_model.dart';
 import '../../../res/app_string.dart';
 import '../../../res/apps_text_style.dart';
-import '../../../widget/next_action_button.dart';
+import '../../../widget/next_action_button_widget.dart';
 import 'onboarding_prograess_dots_widget.dart';
 
 class OnboardingPageContentWidget extends StatelessWidget {
@@ -35,7 +35,7 @@ class OnboardingPageContentWidget extends StatelessWidget {
         Text(onboardingItem.desc,
             textAlign: TextAlign.center,
             style: AppsTextStyle.mediumBoldText.copyWith(height: 2)),
-        NextActionButton(
+        NextActionButtonWidget(
           title: AppString.next,
           onTap: () {
             controller.navigateToNextPageOrSkip();

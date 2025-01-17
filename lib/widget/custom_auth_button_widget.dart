@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../res/apps_color.dart';
 import '../../../res/apps_text_style.dart';
 import '../controller/loading_controller.dart';
 
@@ -23,26 +22,13 @@ class CustomAuthButtonWidget extends StatelessWidget {
     return SizedBox(
       width: 1.sw, //
       child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.green,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15.r),
-          ),
-          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 20.h),
-        ),
         onPressed: onPressed,
         child: Obx(
           () => loadingController.loading.value
               ? const Center(
-                  child: CircularProgressIndicator(
-                    backgroundColor: AppColors.white,
-                  ),
+                  child: CircularProgressIndicator(),
                 )
-              : Text(
-                  title,
-                  style: AppsTextStyle.buttonTextStyle
-                      .copyWith(color: AppColors.white),
-                ),
+              : Text(title, style: AppsTextStyle.buttonTextStyle),
         ),
       ),
     );

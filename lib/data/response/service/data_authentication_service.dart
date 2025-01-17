@@ -30,6 +30,7 @@ class DataAuthenticationService extends BaseAuthenticationService {
   @override
   Future<UserCredential?> signWithGoogle() async {
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
     final GoogleSignInAuthentication? googleAuth =
         await googleUser?.authentication;
 
@@ -54,10 +55,11 @@ class DataAuthenticationService extends BaseAuthenticationService {
 
     return userDoc.exists;
   }
+  
 
   /// Create a new user document in Firestore using Gmail account
   @override
-  Future<void> createUserGmail(
+  Future<void> createNewUserWithGoogle(
       {required User user, required ProfileModel profileModel}) async {
     _firebaseFirestore
         .collection(AppString.sellersCollection)

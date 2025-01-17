@@ -96,7 +96,16 @@ class MyApp extends StatelessWidget {
     var isDarkTheme = themeProvider.getDarkTheme;
 
     return ThemeData(
-      dialogBackgroundColor: isDarkTheme ? AppColors.cardDark : AppColors.white,
+      dialogTheme: DialogTheme(
+          backgroundColor: isDarkTheme ? AppColors.cardDark : AppColors.white,
+          titleTextStyle: GoogleFonts.poppins(
+              color: isDarkTheme ? AppColors.white : AppColors.black,
+              fontSize: 20.sp,
+              fontWeight: FontWeight.bold),
+          contentTextStyle: GoogleFonts.poppins(
+              color: AppColors.black.withOpacity(.7),
+              fontSize: 16.sp,
+              fontWeight: FontWeight.normal)),
       // dialogTheme: DialogTheme(
       //   backgroundColor: Colors.blue
       // ),
@@ -114,6 +123,20 @@ class MyApp extends StatelessWidget {
           fontWeight: FontWeight.bold,
         ),
         centerTitle: true,
+      ),
+
+      elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+        backgroundColor: AppColors.green,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.r),
+        ),
+        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 20.h),
+      )),
+      progressIndicatorTheme: const ProgressIndicatorThemeData(
+        color: AppColors.white,
+        circularTrackColor: AppColors.red,
+        refreshBackgroundColor: AppColors.red,
       ),
       scaffoldBackgroundColor:
           isDarkTheme ? AppColors.backgroundDark : AppColors.backgroundLight,

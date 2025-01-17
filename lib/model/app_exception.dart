@@ -6,6 +6,6 @@ class AppException implements Exception {
 
   @override
   String toString() {
-    return 'AppException: message: $message, details: $title';
+    return 'AppException: message: $message, title: $title';
   }
 }

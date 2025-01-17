@@ -18,23 +18,27 @@ import '../../widget/custom_auth_button_widget.dart';
 import '../../widget/rich_text_widget.dart';
 
 import '../../widget/text_field_form_widget.dart';
-import 'widget/app_sign_sign_page.dart';
+import 'widget/app_sigin_in_page_intro_widget.dart';
 import 'widget/social_button_widget.dart';
 
-class SigninPage extends StatefulWidget {
-  const SigninPage({super.key});
+class SignInPage extends StatefulWidget {
+  const SignInPage({super.key});
 
   @override
-  State<SigninPage> createState() => _SigninPageState();
+  State<SignInPage> createState() => _SignInPageState();
 }
 
-class _SigninPageState extends State<SigninPage> {
+class _SignInPageState extends State<SignInPage> {
   final authController = Get.find<AuthController>();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
-  void initState() {
-    super.initState();
+  void didChangeDependencies() {
+    _setupStatusBar();
+    super.didChangeDependencies();
+  }
+
+  void _setupStatusBar() {
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
         statusBarColor: AppColors.backgroundLight,
@@ -53,19 +57,9 @@ class _SigninPageState extends State<SigninPage> {
   Widget build(BuildContext context) {
     return PopScope(
       canPop: false,
-      onPopInvoked: (didPop) async {
-        if (didPop) {
-          return;
-        }
-
-        final bool shouldPop = await authController.showExitDialog();
-        if (shouldPop) SystemNavigator.pop();
-      },
+      onPopInvoked: (didPop) async => await authController.exitApps(didPop),
       child: GestureDetector(
-        onTap: () async {
-          FocusScope.of(context).unfocus();
-          await NetworkUtili.verifyInternetStatus();
-        },
+        onTap: () => FocusScope.of(context).unfocus(),
         child: Scaffold(
           body: SingleChildScrollView(
             child: Padding(
@@ -73,7 +67,7 @@ class _SigninPageState extends State<SigninPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  AppSignInPageIntro(
+                  AppSignInPageIntroWidget(
                     title: AppString.adminLogin,
                     description: AppString.logInPageSubjectTitle,
                   ),
@@ -84,9 +78,9 @@ class _SigninPageState extends State<SigninPage> {
                   CustomAuthButtonWidget(
                     onPressed: () async {
                       if (!_formKey.currentState!.validate()) return;
-                      await NetworkUtili.verifyInternetAndExecute(() async {
-                        await authController.signIn();
-                      });
+
+                      await NetworkUtili.internetCheckingWFunction(
+                          function: () async => await authController.signIn());
                     },
                     title: AppString.signIn,
                   ),
@@ -97,9 +91,7 @@ class _SigninPageState extends State<SigninPage> {
                   AppsFunction.verticalSpace(25),
                   RichTextWidget(
                     colorText: AppString.createAccount,
-                    tap: () async {
-                      Get.toNamed(RoutesName.signupPage);
-                    },
+                    tap: () async => Get.toNamed(RoutesName.signupPage),
                     simpleText: AppString.dontHaveAccount,
                   ),
                   SizedBox(height: 0.12.sh),
@@ -127,11 +119,8 @@ class _SigninPageState extends State<SigninPage> {
         AppsFunction.horizontalSpace(10),
         Expanded(
           child: SocialButtonWidget(
-            tap: () async {
-              await NetworkUtili.verifyInternetAndExecute(() async {
-                await authController.signInWithGoogle();
-              });
-            },
+            tap: () async => await NetworkUtili.internetCheckingWFunction(
+                function: () async => await authController.signInWithGoogle()),
             color: AppColors.red,
             image: IconAsset.gmailIcon,
             title: AppString.gmail,
@@ -147,9 +136,8 @@ class _SigninPageState extends State<SigninPage> {
       alignment: Alignment.topRight,
       child: TextButton(
         onPressed: () async {
-          if (!await NetworkUtili.verifyInternetStatus()) {
-            Get.toNamed(RoutesName.forgetPassword);
-          }
+          NetworkUtili.internetCheckingWFunction(
+              function: () => Get.toNamed(RoutesName.forgetPassword));
         },
         child: Text(
           AppString.forgetPassword,
@@ -168,17 +156,21 @@ class _SigninPageState extends State<SigninPage> {
       child: Column(
         children: [
           TextFormFieldWidget(
+            icon: Icons.email_outlined,
+            label: AppString.email,
             hintText: AppString.emailAddress,
             controller: authController.emailController,
             validator: Validators.validateEmail,
             textInputType: TextInputType.emailAddress,
           ),
           TextFormFieldWidget(
+            label: AppString.password,
             isShowPassword: true,
             obscureText: true,
             validator: Validators.validatePassword,
             hintText: AppString.password,
             controller: authController.passwordController,
+            textInputAction: TextInputAction.done,
           ),
         ],
       ),

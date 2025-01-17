@@ -49,7 +49,7 @@ class AppsFunction {
   static flutterToast({required String msg}) {
     Fluttertoast.showToast(
         msg: msg,
-        toastLength: Toast.LENGTH_LONG,
+        toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
         backgroundColor: AppColors.red,
         textColor: AppColors.white,

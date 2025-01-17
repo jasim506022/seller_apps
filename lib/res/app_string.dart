@@ -7,6 +7,8 @@ Auth String
   static String exitApps = 'Are you sure you want to Exit this Apps?';
   static String yes = "Yes";
   static String no = "No";
+
+  
   static String adminLogin = "Welcome Admin Login";
   static String logInPageSubjectTitle =
       'Check our fresh viggies from Jasim Grocery';
@@ -37,7 +39,7 @@ Auth String
   //
   static String signInSuccessfully = "Sign in Successfully";
   static String okay = "Okay";
-  static String signIn = 'Sign In';
+
   static String withOr = "with Or";
   static String facebook = "Facebook";
   static String gmail = "Gmail";
@@ -177,6 +179,8 @@ Auth String
   static const uploadProductToastMessage = "Succesfully Upload a New Product";
   static const waitUntilUpload = "Please Wait Until Upload";
   static const deleteSuccessFully = "Delete Succesffully";
+  static const userDoesntExit = "User Doesn't Exit";
+  static const noImageSelect = "No Image Selected";
 
   //
   static const available = "available";
@@ -194,4 +198,5 @@ Auth String
 
   //batton
   static const next = "Next";
+  static String signIn = 'Sign In';
 }

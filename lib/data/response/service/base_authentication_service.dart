@@ -9,7 +9,7 @@ abstract class BaseAuthenticationService {
       {required String email, required String password});
   Future<UserCredential?> signWithGoogle();
   Future<bool> userExists();
-  Future<void> createUserGmail(
+  Future<void> createNewUserWithGoogle(
       {required User user, required ProfileModel profileModel});
 
   Future<String> uploadUserImgeUrl({required File file});

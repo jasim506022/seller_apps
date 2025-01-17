@@ -27,9 +27,7 @@ class RichTextWidget extends StatelessWidget {
       TextSpan(
           recognizer: TapGestureRecognizer()
             ..onTap = () async {
-              await NetworkUtili.verifyInternetAndExecute(() async {
-                tap();
-              });
+              await NetworkUtili.internetCheckingWFunction(function: tap);
             },
           text: colorText,
           style: AppsTextStyle.buttonTextStyle.copyWith(

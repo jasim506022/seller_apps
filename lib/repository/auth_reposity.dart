@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:seller_apps/data/response/service/data_authentication_service.dart';
 
 import '../data/response/app_data_exception.dart';
+import '../data/response/service/data_authentication_service.dart';
 import '../model/profile_model.dart';
 import '../res/app_function.dart';
 
@@ -43,10 +43,10 @@ class AuthReposity {
   }
 
   /// Creates a new user profile in Firestore using Google credentials.
-  Future<void> createUserWithGoogle(
+  Future<void> createNewUserWithGoogle(
       {required User user, required ProfileModel profileModel}) async {
     try {
-      await _authService.createUserGmail(
+      await _authService.createNewUserWithGoogle(
           user: user, profileModel: profileModel);
     } catch (e) {
       AppsFunction.handleException(e);

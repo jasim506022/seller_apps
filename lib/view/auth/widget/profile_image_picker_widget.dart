@@ -4,11 +4,10 @@ import 'package:get/get.dart';
 
 import '../../../controller/auth_controller.dart';
 import '../../../res/apps_color.dart';
-import '../../../res/internet_utilis.dart';
 import '../../../widget/profile_photo_option_sheet_widget.dart';
 
-class ProfileImageCaptureWidget extends StatelessWidget {
-  const ProfileImageCaptureWidget({
+class ProfileImagePickerWidget extends StatelessWidget {
+  const ProfileImagePickerWidget({
     super.key,
   });
 
@@ -17,13 +16,9 @@ class ProfileImageCaptureWidget extends StatelessWidget {
     final authController = Get.find<AuthController>();
 
     return InkWell(
-      onTap: () async {
-        if (!(await NetworkUtili.verifyInternetStatus())) {
-          Get.bottomSheet(
-              backgroundColor: AppColors.white,
-              const ProfilePhotoOptionSheetWidget());
-        }
-      },
+      onTap: () => Get.bottomSheet(
+          backgroundColor: AppColors.white,
+          const ProfilePhotoOptionSheetWidget()),
       child: Container(
         decoration: BoxDecoration(
             shape: BoxShape.circle,

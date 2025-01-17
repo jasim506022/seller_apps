@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../model/app_exception.dart';
@@ -53,17 +54,21 @@ class AuthController extends GetxController {
   }
 
   /// Signs in the user using email and password.
+  ///
   Future<void> signIn() async {
     try {
       loadingController.setLoading(true);
       await repository.loginWithEmailAndPassword(
-        email: emailController.text,
-        password: passwordController.text,
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
       );
 
-      _navigateToMainPage(AppString.signInSuccessfully);
-
-      clearInputFields();
+      if (await repository.isUserProfileExists()) {
+        _navigateToMainPage(AppString.signInSuccessfully);
+        clearInputFields();
+      } else {
+        AppsFunction.flutterToast(msg: AppString.userDoesntExit);
+      }
     } catch (e) {
       _handleError(e);
     } finally {
@@ -77,6 +82,7 @@ class AuthController extends GetxController {
       _showLoadingDialog();
 
       var userCredentialGmail = await repository.loginWithGoogle();
+
       Get.back();
 
       if (userCredentialGmail != null) {
@@ -86,7 +92,7 @@ class AuthController extends GetxController {
           var user = userCredentialGmail.user!;
           ProfileModel profileModel = buildUserProfile(user: user);
 
-          await repository.createUserWithGoogle(
+          await repository.createNewUserWithGoogle(
               user: user, profileModel: profileModel);
 
           _navigateToMainPage(AppString.signInSuccessfully);
@@ -125,26 +131,34 @@ class AuthController extends GetxController {
       clearInputFields();
 
       _navigateToMainPage(AppString.signupSuccessfull);
-      selectImageController.selectPhoto.value = null;
     } catch (e) {
       _handleError(e);
     } finally {
       loadingController.setLoading(false);
+      selectImageController.selectPhoto.value = null;
     }
   }
 
   /// Displays a dialog asking the user for confirmation to exit the app.
-  Future<bool> showExitDialog() async {
-    return await Get.dialog<bool>(
-          ShowAlertDialogWidget(
-            icon: Icons.question_mark_rounded,
-            title: AppString.exit,
-            content: AppString.exitApps,
-            onYesPressed: () => Get.back(result: true),
-            onNoPressed: () => Get.back(result: false),
-          ),
-        ) ??
-        false;
+  Future<void> exitApps(bool didPop) async {
+    if (!loadingController.loading.value) {
+      if (didPop) {
+        return;
+      }
+
+      final bool shouldPop = await Get.dialog<bool>(
+            ShowAlertDialogWidget(
+              icon: Icons.question_mark_rounded,
+              title: AppString.exit,
+              content: AppString.exitApps,
+              onYesPressed: () => Get.back(result: true),
+              onNoPressed: () => Get.back(result: false),
+            ),
+          ) ??
+          false;
+
+      if (shouldPop) SystemNavigator.pop();
+    }
   }
 
   ProfileModel buildUserProfile(

@@ -21,6 +21,8 @@ class TextFormFieldWidget extends StatefulWidget {
       this.validator,
       this.isUdateDecoration = false,
       this.decoration,
+      this.label,
+      this.icon,
       this.style});
   final String? hintText;
   final TextEditingController controller;
@@ -36,6 +38,9 @@ class TextFormFieldWidget extends StatefulWidget {
   final bool isUdateDecoration;
   final InputDecoration? decoration;
   final TextStyle? style;
+
+  final String? label;
+  final IconData? icon;
   @override
   State<TextFormFieldWidget> createState() => _TextFormFieldWidgetState();
 }
@@ -45,29 +50,37 @@ class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10.h),
-      child: TextFormField(
-          onChanged: widget.onChanged,
-          enabled: widget.enabled,
-          controller: widget.controller,
-          autofocus: widget.autofocus,
-          maxLines: widget.maxLines,
-          validator: widget.validator,
-          obscureText: widget.obscureText,
-          textInputAction: widget.textInputAction,
-          keyboardType: widget.textInputType,
-          style: widget.style ??
-              AppsTextStyle.textFieldInputTextStyle(widget.enabled),
-          decoration: widget.isUdateDecoration
-              ? widget.decoration
-              : AppsFunction.textFormFielddecoration(
-                  isEnable: widget.enabled,
-                  hintText: widget.hintText!,
-                  isShowPassword: widget.isShowPassword,
-                  obscureText: widget.obscureText,
-                  function: () {
-                    widget.obscureText = !widget.obscureText;
-                    setState(() {});
-                  })),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (widget.label != null)
+            Text(widget.label!, style: AppsTextStyle.labelTextStyle),
+          AppsFunction.verticalSpace(8),
+          TextFormField(
+              onChanged: widget.onChanged,
+              enabled: widget.enabled,
+              controller: widget.controller,
+              autofocus: widget.autofocus,
+              maxLines: widget.maxLines,
+              validator: widget.validator,
+              obscureText: widget.obscureText,
+              textInputAction: widget.textInputAction,
+              keyboardType: widget.textInputType,
+              style: widget.style ??
+                  AppsTextStyle.textFieldInputTextStyle(widget.enabled),
+              decoration: widget.isUdateDecoration
+                  ? widget.decoration
+                  : AppsFunction.textFormFielddecoration(
+                      isEnable: widget.enabled,
+                      hintText: widget.hintText!,
+                      isShowPassword: widget.isShowPassword,
+                      obscureText: widget.obscureText,
+                      function: () {
+                        widget.obscureText = !widget.obscureText;
+                        setState(() {});
+                      })),
+        ],
+      ),
     );
   }
 }

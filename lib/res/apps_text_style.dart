@@ -21,9 +21,41 @@ class AppsTextStyle {
   static TextStyle get largeTitleTextStyleForOnBoarding => GoogleFonts.roboto(
       color: theme.primaryColor, fontSize: 30.sp, fontWeight: FontWeight.w900);
 
+  static TextStyle get titleSignPageTextStyle => GoogleFonts.roboto(
+      color: theme.primaryColor,
+      fontSize: 28.sp,
+      fontWeight: FontWeight.w900,
+      height: 1.3,
+      letterSpacing: 1.2);
+
+  static TextStyle get labelTextStyle => GoogleFonts.poppins(
+        color: theme.primaryColor,
+        fontSize: 16.sp,
+        fontWeight: FontWeight.w700,
+      );
+
+// dialog title
+
+  // static TextStyle get titleDialogTextStyle => GoogleFonts.poppins(
+  //     color: theme.primaryColor, fontSize: 20.sp, fontWeight: FontWeight.bold);
+
+  // static TextStyle get contentDialogTextStyle => GoogleFonts.poppins(
+  //     color: AppColors.black.withOpacity(.7),
+  //     fontSize: 16.sp,
+  //     fontWeight: FontWeight.normal);
+
   // Title Text Style
+
   static TextStyle get titleTextStyle => GoogleFonts.poppins(
-      color: theme.primaryColor, fontSize: 18.sp, fontWeight: FontWeight.w800);
+      color: theme.primaryColor, fontSize: 20.sp, fontWeight: FontWeight.w800);
+
+// Description
+  static TextStyle get descrptionTextStyle => GoogleFonts.roboto(
+      color: AppColors.black.withOpacity(.7),
+      fontSize: 16.sp,
+      fontWeight: FontWeight.normal,
+      height: 1.6,
+      letterSpacing: 1.2);
 
 // Large Normal Text
   static TextStyle get largeNormalText => GoogleFonts.poppins(
@@ -73,7 +105,7 @@ class AppsTextStyle {
 
 // Medium Text
   static TextStyle get mediumBoldText => GoogleFonts.poppins(
-      color: theme.primaryColor, fontSize: 14.16, fontWeight: FontWeight.w800);
+      color: theme.primaryColor, fontSize: 16.sp, fontWeight: FontWeight.w700);
 
 // others
   static TextStyle mediumText400lineThrough = GoogleFonts.roboto(

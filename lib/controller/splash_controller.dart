@@ -42,13 +42,13 @@ class SplashController extends GetxController {
     } catch (e) {
       if (e is AppException) {
         Get.dialog(
-        ErrorDialogWidget(
-          icon: IconAsset.warningIcon,
-          title: e.title!,
-          content: e.message,
-          buttonText: AppString.okay,
-        ),
-      );
+          ErrorDialogWidget(
+            icon: IconAsset.warningIcon,
+            title: e.title!,
+            content: e.message,
+            buttonText: AppString.okay,
+          ),
+        );
       }
     }
   }

@@ -5,8 +5,8 @@ import 'package:seller_apps/res/app_function.dart';
 import '../../../res/app_asset/image_asset.dart';
 import '../../../res/apps_text_style.dart';
 
-class AppSignInPageIntro extends StatelessWidget {
-  const AppSignInPageIntro({
+class AppSignInPageIntroWidget extends StatelessWidget {
+  const AppSignInPageIntroWidget({
     super.key,
     required this.title,
     required this.description,
@@ -26,12 +26,12 @@ class AppSignInPageIntro extends StatelessWidget {
           width: 140.h,
         ),
         AppsFunction.verticalSpace(10),
-        Text(title, style: AppsTextStyle.largeTitleTextStyleForOnBoarding),
+        Text(title, style: AppsTextStyle.titleSignPageTextStyle),
         AppsFunction.verticalSpace(10),
         Text(
           description,
           textAlign: TextAlign.center,
-          style: AppsTextStyle.largeNormalText,
+          style: AppsTextStyle.descrptionTextStyle,
         ),
         AppsFunction.verticalSpace(40),
       ],

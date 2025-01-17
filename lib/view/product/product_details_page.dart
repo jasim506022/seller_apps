@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:seller_apps/res/app_string.dart';
 import '../../res/utils.dart';
-import '../../res/apps_color.dart';
 import '../../res/routes/routes_name.dart';
 
 import '../../model/productsmodel.dart';

@@ -5,7 +5,6 @@ import 'package:seller_apps/res/app_function.dart';
 import 'package:seller_apps/res/app_string.dart';
 
 import '../res/apps_color.dart';
-import '../res/apps_text_style.dart';
 import 'outlined_text_button_widget.dart';
 
 class ShowAlertDialogWidget extends StatelessWidget {
@@ -33,14 +32,9 @@ class ShowAlertDialogWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Theme.of(context).cardColor,
       title: _buildTitleRow(),
       content: Text(
         content,
-        textAlign: TextAlign.start,
-        style: AppsTextStyle.subTitleTextStyle.copyWith(
-          color: Theme.of(context).primaryColor,
-        ),
       ),
       actions: _buildActions(),
     );
@@ -49,12 +43,15 @@ class ShowAlertDialogWidget extends StatelessWidget {
   Row _buildTitleRow() {
     return Row(
       children: [
-        Text(title, style: AppsTextStyle.titleTextStyle),
+        Text(title),
         AppsFunction.horizontalSpace(10),
         Container(
           padding: EdgeInsets.all(5.r),
           decoration: BoxDecoration(color: iconColor, shape: BoxShape.circle),
-          child: Icon(icon, color: AppColors.white, size: 20.h),
+          child: Icon(
+            icon,
+            color: AppColors.white,
+          ),
         ),
       ],
     );

@@ -20,7 +20,6 @@ import '../repository/order_repository.dart';
 import '../repository/product_repository.dart';
 import '../repository/profile_repository.dart';
 import '../repository/select_image_repository.dart';
-import '../repository/sign_up_repository.dart';
 import '../repository/splash_repository.dart';
 
 class InitialBinding extends Bindings {
@@ -63,7 +62,7 @@ class InitialBinding extends Bindings {
             repository: Get.find<SelectImageRepository>()),
         fenix: true);
 
-    Get.lazyPut<SignUpRepository>(() => SignUpRepository());
+  
 
     // Get.put<SignUpController>(
     //     SignUpController(repository: Get.find<SignUpRepository>()));

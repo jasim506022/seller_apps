@@ -14,7 +14,7 @@ import '../../res/validator.dart';
 import '../../widget/custom_auth_button_widget.dart';
 import '../../widget/rich_text_widget.dart';
 import '../../widget/text_field_form_widget.dart';
-import 'widget/profile_capture_image_widget.dart';
+import 'widget/profile_image_picker_widget.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -25,19 +25,19 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   final authController = Get.find<AuthController>();
+
   final formKeySignUp = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return PopScope(
       onPopInvoked: (didPop) {
-        authController.clearInputFields();
+        if (!authController.loadingController.loading.value) {
+          authController.clearInputFields();
+        }
       },
       child: GestureDetector(
-        onTap: () async {
-          FocusScope.of(context).unfocus();
-          NetworkUtili.verifyInternetStatus();
-        },
+        onTap: () => FocusScope.of(context).unfocus(),
         child: Scaffold(
           body: SingleChildScrollView(
             child: Padding(
@@ -46,16 +46,16 @@ class _SignUpPageState extends State<SignUpPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   AppsFunction.verticalSpace(50),
-                  const ProfileImageCaptureWidget(),
+                  const ProfileImagePickerWidget(),
                   AppsFunction.verticalSpace(15),
                   Text(
                     AppString.adminRegistration,
-                    style: AppsTextStyle.largeTitleTextStyleForOnBoarding,
+                    style: AppsTextStyle.titleSignPageTextStyle,
                   ),
                   AppsFunction.verticalSpace(10),
                   Text(
                     AppString.logInPageSubjectTitle,
-                    style: AppsTextStyle.largeNormalText,
+                    style: AppsTextStyle.descrptionTextStyle,
                   ),
                   AppsFunction.verticalSpace(20),
                   _buildSignUpForm(),
@@ -63,9 +63,9 @@ class _SignUpPageState extends State<SignUpPage> {
                   CustomAuthButtonWidget(
                     onPressed: () async {
                       if (!formKeySignUp.currentState!.validate()) return;
-                      await NetworkUtili.verifyInternetAndExecute(() async {
-                        authController.registerUser();
-                      });
+                      await NetworkUtili.internetCheckingWFunction(
+                          function: () async =>
+                              await authController.registerUser());
                     },
                     title: AppString.signup,
                   ),
@@ -74,11 +74,13 @@ class _SignUpPageState extends State<SignUpPage> {
                     simpleText: AppString.alreadyCreateAccount,
                     colorText: AppString.signIn,
                     tap: () async {
-                      Get.back();
-                      authController.clearInputFields();
+                      if (!authController.loadingController.loading.value) {
+                        Get.back();
+                        authController.clearInputFields();
+                      }
                     },
                   ),
-                  SizedBox(height: .22.sh),
+                  AppsFunction.verticalSpace(150)
                 ],
               ),
             ),
@@ -93,8 +95,10 @@ class _SignUpPageState extends State<SignUpPage> {
     return Form(
       key: formKeySignUp,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TextFormFieldWidget(
+            label: AppString.name,
             hintText: AppString.yourName,
             controller: authController.nameController,
             validator: Validators.validateNonEmpty, // Validation method.
@@ -103,6 +107,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
           // Email
           TextFormFieldWidget(
+            label: AppString.email,
             hintText: AppString.emailAddress,
             controller: authController.emailController,
             validator: Validators.validateEmail,
@@ -111,14 +116,17 @@ class _SignUpPageState extends State<SignUpPage> {
 
           // Password
           TextFormFieldWidget(
+            label: AppString.password,
             obscureText: true,
             isShowPassword: true,
             validator: Validators.validatePassword,
             hintText: AppString.password,
+            textInputAction: TextInputAction.next,
             controller: authController.passwordController,
           ),
 
           TextFormFieldWidget(
+            label: AppString.passwordConfirm,
             obscureText: true,
             isShowPassword: true,
             validator: Validators.validateConfirmPassword,
@@ -127,6 +135,8 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
           AppsFunction.verticalSpace(10),
 
+          Text(AppString.phone, style: AppsTextStyle.labelTextStyle),
+          AppsFunction.verticalSpace(8),
           IntlPhoneField(
             textInputAction: TextInputAction.done,
             controller: authController.phoneController,

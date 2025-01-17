@@ -29,7 +29,7 @@ class AppRoutes {
         ),
         GetPage(
           name: RoutesName.signPage,
-          page: () => const SigninPage(),
+          page: () => const SignInPage(),
         ),
         GetPage(
           name: RoutesName.forgetPassword,

@@ -13,6 +13,17 @@ class NetworkUtili {
     return checkInternet;
   }
 
+  static Future<void> internetCheckingWFunction(
+      {required Function function}) async {
+    bool checkInternet = await internetChecking();
+    if (checkInternet) {
+      showNoInternetSnackbar();
+    } else {
+      function();
+    }
+    // return checkInternet;
+  }
+
   static Future<bool> internetChecking() async {
     final List<ConnectivityResult> connectivityResult =
         await (Connectivity().checkConnectivity());

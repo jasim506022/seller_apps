@@ -13,7 +13,7 @@ import '../res/app_constants.dart';
 import '../res/app_function.dart';
 import '../res/app_string.dart';
 import '../res/routes/routes_name.dart';
-import '../view/auth/widget/error_dialog_widget.dart';
+import '../widget/error_dialog_widget.dart';
 import '../widget/loading_widget.dart';
 import '../widget/show_alert_dialog_widget.dart';
 import 'loading_controller.dart';

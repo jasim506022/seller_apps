@@ -37,7 +37,7 @@ class ProfileImagePickerWidget extends StatelessWidget {
                     size: 0.2.sw,
                     color: AppColors.grey,
                   )
-                : null,
+                : const SizedBox.shrink(),
           );
         }),
       ),

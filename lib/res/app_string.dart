@@ -9,9 +9,23 @@ Auth String
   static String no = "No";
 
   
+  // Auth Page
   static String adminLogin = "Welcome Admin Login";
   static String logInPageSubjectTitle =
       'Check our fresh viggies from Jasim Grocery';
+       static String forgetPassword = "Forget Password";
+         static String withOr = "with Or";
+          static String facebook = "Facebook";
+  static String gmail = "Gmail";
+    static String createAccount = "Create Account";
+    static String dontHaveAccount = "Don't Have An Account? ";
+
+
+// TextField Label Text
+ static String email = "Email";
+   static String password = "Password";
+
+      
 
   // Textfleid String
   static String emailAddress = "Email Address";
@@ -22,12 +36,11 @@ Auth String
   static String nameValid = 'Name must be longer than 2 characters';
   static String enterPassword = 'Please enter your Password';
   static String validPassword = 'Password Must be geather then 6 Characteris';
-  static String password = "Password";
   static String enterConfirmPassword = 'Please enter your Confirm Password';
   static String validConfirmPassword =
       'Confirm Password Must be geather then 6 Characteris';
   static String passwordConfirm = "Confirm Password";
-  static String forgetPassword = "Forget Password";
+ 
   static String phoneNumber = "Phone Number";
   static String enterPhone = 'Please enter your phone number';
   static String validPhoneNumber = 'Please Give Valid Phone number';
@@ -40,11 +53,10 @@ Auth String
   static String signInSuccessfully = "Sign in Successfully";
   static String okay = "Okay";
 
-  static String withOr = "with Or";
-  static String facebook = "Facebook";
-  static String gmail = "Gmail";
-  static String createAccount = "Create Account";
-  static String dontHaveAccount = "Don't Have An Account? ";
+
+ 
+
+  
   static String adminRegistration = "Admin Registration";
   static String signup = 'Sign Up';
   static String alreadyCreateAccount = "Already Create An Account? ";
@@ -96,7 +108,7 @@ Auth String
   static String editProfile = "Edit Profile";
   static String about = "About";
   static String address = "Address";
-  static String email = "Email";
+ 
   static String givemPhoneNumbeer = "Please Give your Phone Numer";
   static String pleaseWait = "Pleasing Waiting........";
   static String profileUpdate = "Profile Update";
@@ -196,7 +208,7 @@ Auth String
   static const homePage = "Home Page";
   // static const signOut = "Sign Out";
 
-  //batton
+  //botton
   static const next = "Next";
   static String signIn = 'Sign In';
 }

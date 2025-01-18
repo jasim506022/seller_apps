@@ -40,6 +40,7 @@ class CartFunctions {
               (seller.docs[i].data())["productIds"]);
           for (var p = 0; p < event.docs.length; p++) {
             Future.delayed(Duration.zero, () {
+              // ignore: use_build_context_synchronously
               Provider.of<TotalAmountProvider>(context, listen: false)
                   .setAmount(amount: 0
                       // amount: listItem[p] *

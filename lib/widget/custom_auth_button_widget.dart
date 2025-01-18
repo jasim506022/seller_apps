@@ -20,7 +20,7 @@ class CustomAuthButtonWidget extends StatelessWidget {
     final loadingController = Get.find<LoadingController>();
 
     return SizedBox(
-      width: 1.sw, //
+      width: 1.sw,
       child: ElevatedButton(
         onPressed: onPressed,
         child: Obx(

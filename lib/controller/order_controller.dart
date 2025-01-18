@@ -6,7 +6,7 @@ import '../const/cart_function.dart';
 import '../model/app_exception.dart';
 import '../repository/order_repository.dart';
 import '../res/app_asset/icon_asset.dart';
-import '../view/auth/widget/error_dialog_widget.dart';
+import '../widget/error_dialog_widget.dart';
 
 class OrderController extends GetxController {
   OrderRepository orderRepository;

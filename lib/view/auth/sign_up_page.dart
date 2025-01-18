@@ -14,6 +14,7 @@ import '../../res/validator.dart';
 import '../../widget/custom_auth_button_widget.dart';
 import '../../widget/rich_text_widget.dart';
 import '../../widget/text_field_form_widget.dart';
+import 'widget/app_sigin_in_page_intro_widget.dart';
 import 'widget/profile_image_picker_widget.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -26,7 +27,7 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   final authController = Get.find<AuthController>();
 
-  final formKeySignUp = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -45,24 +46,16 @@ class _SignUpPageState extends State<SignUpPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  AppsFunction.verticalSpace(50),
-                  const ProfileImagePickerWidget(),
-                  AppsFunction.verticalSpace(15),
-                  Text(
-                    AppString.adminRegistration,
-                    style: AppsTextStyle.titleSignPageTextStyle,
+                  AppSignInPageIntroWidget(
+                    widget: const ProfileImagePickerWidget(),
+                    title: AppString.adminRegistration,
+                    description: AppString.logInPageSubjectTitle,
                   ),
-                  AppsFunction.verticalSpace(10),
-                  Text(
-                    AppString.logInPageSubjectTitle,
-                    style: AppsTextStyle.descrptionTextStyle,
-                  ),
-                  AppsFunction.verticalSpace(20),
                   _buildSignUpForm(),
                   AppsFunction.verticalSpace(15),
                   CustomAuthButtonWidget(
                     onPressed: () async {
-                      if (!formKeySignUp.currentState!.validate()) return;
+                      if (!formKey.currentState!.validate()) return;
                       await NetworkUtili.internetCheckingWFunction(
                           function: () async =>
                               await authController.registerUser());
@@ -93,7 +86,7 @@ class _SignUpPageState extends State<SignUpPage> {
   // Build the sign-up form with various input fields and validations.
   Form _buildSignUpForm() {
     return Form(
-      key: formKeySignUp,
+      key: formKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

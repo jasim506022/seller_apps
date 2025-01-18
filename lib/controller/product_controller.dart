@@ -9,7 +9,7 @@ import '../repository/product_repository.dart';
 import '../res/app_asset/icon_asset.dart';
 import '../res/app_function.dart';
 import '../res/app_string.dart';
-import '../view/auth/widget/error_dialog_widget.dart';
+import '../widget/error_dialog_widget.dart';
 import '../widget/show_alert_dialog_widget.dart';
 import 'category_controller.dart';
 

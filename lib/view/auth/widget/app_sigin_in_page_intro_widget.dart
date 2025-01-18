@@ -6,25 +6,25 @@ import '../../../res/app_asset/image_asset.dart';
 import '../../../res/apps_text_style.dart';
 
 class AppSignInPageIntroWidget extends StatelessWidget {
-  const AppSignInPageIntroWidget({
-    super.key,
-    required this.title,
-    required this.description,
-  });
+  const AppSignInPageIntroWidget(
+      {super.key, required this.title, required this.description, this.widget});
 
   final String title;
   final String description;
+
+  final Widget? widget;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         AppsFunction.verticalSpace(50),
-        Image.asset(
-          ImagesAsset.appLogoImage,
-          height: 140.h,
-          width: 140.h,
-        ),
+        widget ??
+            Image.asset(
+              ImagesAsset.appLogoImage,
+              height: 140.h,
+              width: 140.h,
+            ),
         AppsFunction.verticalSpace(10),
         Text(title, style: AppsTextStyle.titleSignPageTextStyle),
         AppsFunction.verticalSpace(10),

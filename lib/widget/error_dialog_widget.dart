@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../res/app_function.dart';
-import '../../../res/apps_color.dart';
-import '../../../res/apps_text_style.dart';
-import '../../../widget/round_button_widget.dart';
+import '../res/app_function.dart';
+import '../res/apps_color.dart';
+import '../res/apps_text_style.dart';
+import 'round_button_widget.dart';
 
 class ErrorDialogWidget extends StatelessWidget {
   final String icon;

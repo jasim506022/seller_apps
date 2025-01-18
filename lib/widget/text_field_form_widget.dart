@@ -22,7 +22,7 @@ class TextFormFieldWidget extends StatefulWidget {
       this.isUdateDecoration = false,
       this.decoration,
       this.label,
-      this.icon,
+     
       this.style});
   final String? hintText;
   final TextEditingController controller;
@@ -40,7 +40,7 @@ class TextFormFieldWidget extends StatefulWidget {
   final TextStyle? style;
 
   final String? label;
-  final IconData? icon;
+  
   @override
   State<TextFormFieldWidget> createState() => _TextFormFieldWidgetState();
 }

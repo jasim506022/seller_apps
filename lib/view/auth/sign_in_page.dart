@@ -94,7 +94,7 @@ class _SignInPageState extends State<SignInPage> {
                     tap: () async => Get.toNamed(RoutesName.signupPage),
                     simpleText: AppString.dontHaveAccount,
                   ),
-                  SizedBox(height: 0.12.sh),
+                  AppsFunction.verticalSpace(100)
                 ],
               ),
             ),
@@ -156,7 +156,6 @@ class _SignInPageState extends State<SignInPage> {
       child: Column(
         children: [
           TextFormFieldWidget(
-            icon: Icons.email_outlined,
             label: AppString.email,
             hintText: AppString.emailAddress,
             controller: authController.emailController,

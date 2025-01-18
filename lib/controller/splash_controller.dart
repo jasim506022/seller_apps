@@ -7,7 +7,7 @@ import '../model/app_exception.dart';
 import '../repository/splash_repository.dart';
 import '../res/app_asset/icon_asset.dart';
 import '../res/app_string.dart';
-import '../view/auth/widget/error_dialog_widget.dart';
+import '../widget/error_dialog_widget.dart';
 
 class SplashController extends GetxController {
   SplashRepository repository;

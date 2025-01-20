@@ -169,7 +169,7 @@ class ProfileController extends GetxController {
     }
   }
 
-  Future<DocumentSnapshot<Map<String, dynamic>>> getData() {
+  Future<DocumentSnapshot<Map<String, dynamic>>> getUserProfileData() {
     return repository.fetchUserProfile();
   }
 

@@ -1,10 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../res/app_function.dart';
 import '../../../res/apps_color.dart';
 import '../../../res/apps_text_style.dart';
+import '../../../widget/user_avatar_widget.dart';
 
 class UserProfileContent extends StatelessWidget {
   final String imageUrl;
@@ -25,35 +25,27 @@ class UserProfileContent extends StatelessWidget {
       children: [
         Row(
           children: [
-            Container(
-              decoration: BoxDecoration(
-                  border: Border.all(color: AppColors.yellow, width: 2),
-                  shape: BoxShape.circle),
-              height: 70.h,
-              width: 70.h,
-              child: ClipOval(
-                child: CachedNetworkImage(
-                  imageUrl: imageUrl,
-                  fit: BoxFit.cover,
-                  placeholder: (context, url) =>
-                      const CircularProgressIndicator(color: AppColors.white),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
-                ),
-              ),
+            UserAvatarWidget(
+              imageUrl: imageUrl,
+              height: 70,
             ),
             AppsFunction.horizontalSpace(15),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  name,
-                  style: AppsTextStyle.largeTitleTextStyleForOnBoarding
-                      .copyWith(color: AppColors.white),
+                FittedBox(
+                  child: Text(
+                    name,
+                    style: AppsTextStyle.titleHomeProfileheader
+                        .copyWith(color: AppColors.white),
+                  ),
                 ),
-                Text(
-                  email,
-                  style: AppsTextStyle.mediumBoldText
-                      .copyWith(color: AppColors.white),
+                FittedBox(
+                  child: Text(
+                    email,
+                    style: AppsTextStyle.mediumBoldText
+                        .copyWith(color: AppColors.white),
+                  ),
                 ),
               ],
             ),

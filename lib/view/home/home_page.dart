@@ -15,20 +15,16 @@ import '../../res/routes/routes_name.dart';
 import '../../res/utils.dart';
 import 'widget/grid_view_item.dart';
 import 'widget/grid_view_list_widget.dart';
-import 'widget/profile_header_widget.dart';
+import 'widget/home_profile_header_widget.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-        statusBarColor: AppColors.green,
-        statusBarBrightness: Brightness.light,
-        statusBarIconBrightness: Brightness.light));
+    _setStatusBar();
     return SafeArea(
       child: Scaffold(
-        // stack
         body: Stack(
           children: [
             Container(
@@ -55,13 +51,13 @@ class HomePage extends StatelessWidget {
                   child: Column(
                     children: [
                       AppsFunction.verticalSpace(10),
-                      const ProfileWidget(),
+                      const HomeProfileHeaderWidget(),
                       AppsFunction.verticalSpace(10),
                       _buildSearchProduct(context),
                       AppsFunction.verticalSpace(20),
                       _buildUploadProductButton(),
                       AppsFunction.verticalSpace(15),
-                      const Expanded(child: GridViewList()),
+                      const Expanded(child: DashboardGridView()),
                     ],
                   ),
                 ),
@@ -73,13 +69,20 @@ class HomePage extends StatelessWidget {
     );
   }
 
+  void _setStatusBar() {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+        statusBarColor: AppColors.green,
+        statusBarBrightness: Brightness.light,
+        statusBarIconBrightness: Brightness.light));
+  }
+
   SizedBox _buildUploadProductButton() {
     return SizedBox(
-      height: 0.18.sh,
+      height: 153.h,
       width: 1.sw,
       child: GridViewItem(
         image: ImagesAsset.uploadProductImage,
-        text: AppString.uploadYourProduct,
+        label: AppString.uploadYourProduct,
         onTap: () async {
           Get.toNamed(RoutesName.uploadAndUpdateProduct);
         },

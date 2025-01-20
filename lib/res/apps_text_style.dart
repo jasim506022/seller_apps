@@ -44,10 +44,19 @@ class AppsTextStyle {
   //     fontSize: 16.sp,
   //     fontWeight: FontWeight.normal);
 
+  
+    static TextStyle get titleHomeProfileheader => GoogleFonts.poppins(
+      color: theme.primaryColor, fontSize: 22.sp, fontWeight: FontWeight.w800);
+  
   // Title Text Style
+
+
 
   static TextStyle get titleTextStyle => GoogleFonts.poppins(
       color: theme.primaryColor, fontSize: 20.sp, fontWeight: FontWeight.w800);
+
+        static TextStyle get gridViewTextStyle => GoogleFonts.poppins(
+      color: theme.primaryColor, fontSize: 18.sp, fontWeight: FontWeight.w800);
 
 // Description
   static TextStyle get descrptionTextStyle => GoogleFonts.roboto(

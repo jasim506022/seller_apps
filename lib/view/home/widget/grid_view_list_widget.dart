@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../res/app_asset/image_asset.dart';
-import '../../../res/app_string.dart';
-import '../../../res/routes/routes_name.dart';
+
+import '../../../model/dashboard_grid_model.dart';
 import 'grid_view_item.dart';
 
-class GridViewList extends StatelessWidget {
-  const GridViewList({
+class DashboardGridView extends StatelessWidget {
+  const DashboardGridView({
     super.key,
   });
 
@@ -16,40 +15,28 @@ class GridViewList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: 1.sw,
-      child: GridView.count(
-        primary: false,
-        crossAxisSpacing: 20.w,
-        mainAxisSpacing: 15.h,
-        childAspectRatio: .95,
-        crossAxisCount: 2,
-        children: [
-          GridViewItem(
-            image: ImagesAsset.allProductImage,
-            text: AppString.allProduct,
+      child: GridView.builder(
+        itemCount: dashboardGridList.length,
+        itemBuilder: (context, index) {
+          final item = dashboardGridList[index];
+          return GridViewItem(
+            image: item.image,
+            label: item.text,
             onTap: () {
-              Get.offAndToNamed(RoutesName.mainPage, arguments: 1);
+              if (item.arguments != null) {
+                Get.offAndToNamed(item.route, arguments: item.arguments);
+              } else {
+                Get.toNamed(item.route);
+              }
             },
-          ),
-          GridViewItem(
-              image: ImagesAsset.totalsalesImages,
-              text: AppString.totalSales,
-              onTap: () => Get.toNamed(
-                    RoutesName.totalSales,
-                  )),
-          GridViewItem(
-            image: ImagesAsset.runningOrderImages,
-            text: AppString.runningOrder,
-            onTap: () => Get.toNamed(
-              RoutesName.runningOrder,
-            ),
-          ),
-          GridViewItem(
-              image: ImagesAsset.completeOrderImages,
-              text: AppString.completeOrder,
-              onTap: () => Get.toNamed(
-                    RoutesName.completeOrderPage,
-                  )),
-        ],
+          );
+        },
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisSpacing: 20.w,
+          mainAxisSpacing: 15.h,
+          childAspectRatio: .95,
+          crossAxisCount: 2,
+        ),
       ),
     );
   }

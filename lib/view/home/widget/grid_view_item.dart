@@ -10,20 +10,18 @@ class GridViewItem extends StatelessWidget {
   const GridViewItem({
     super.key,
     required this.image,
-    required this.text,
+    required this.label,
     required this.onTap,
   });
   final String image;
-  final String text;
+  final String label;
   final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        if (!await NetworkUtili.verifyInternetStatus()) {
-          onTap(); // what different between onTap and onTap()
-        }
+        NetworkUtili.internetCheckingWFunction(function: onTap());
       },
       child: Container(
           padding: EdgeInsets.all(8.r),
@@ -42,8 +40,8 @@ class GridViewItem extends StatelessWidget {
               ),
               AppsFunction.verticalSpace(10),
               Text(
-                text,
-                style: AppsTextStyle.titleTextStyle,
+                label,
+                style: AppsTextStyle.gridViewTextStyle,
                 textAlign: TextAlign.center,
               )
             ],

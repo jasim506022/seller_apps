@@ -3,15 +3,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../res/apps_text_style.dart';
 
-class DropdownWidget extends StatelessWidget {
-  const DropdownWidget({
+class CustomDropdownWidget extends StatelessWidget {
+  const CustomDropdownWidget({
     super.key,
-    this.onChanged,
+    this.onChanged, // Callback function triggered when an item is selected
     required this.value,
     required this.items,
   });
 
-  final String value;
+  final String value; // The selected value in the dropdown
 
   final void Function(String?)? onChanged;
 
@@ -28,13 +28,11 @@ class DropdownWidget extends StatelessWidget {
         contentPadding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 15.h),
       ),
       value: value,
-      // isExpanded: true,
       style: AppsTextStyle.mediumBoldText,
-      focusColor: Theme.of(context).primaryColor,
-      elevation: 16,
-      items: items.map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(value: value, child: Text(value));
-      }).toList(),
+      items: items
+          .map<DropdownMenuItem<String>>((String value) =>
+              DropdownMenuItem<String>(value: value, child: Text(value)))
+          .toList(),
       onChanged: onChanged,
     );
   }

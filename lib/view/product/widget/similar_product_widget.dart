@@ -22,19 +22,17 @@ class SimilarProductWidget extends StatelessWidget {
 
     return InkWell(
       onTap: () async {
-        if (!(await NetworkUtili.verifyInternetStatus())) {
+        NetworkUtili.internetCheckingWFunction(function: () {
           Get.offAndToNamed(
             RoutesName.productDetails,
             arguments: {AppString.productModel: productModel},
           );
-        }
+        });
       },
       child: Card(
-        color: Theme.of(context).cardColor,
-        elevation: 2,
         child: Container(
-          height: 150.h,
-          width: 100.w,
+          height: 160.h,
+          width: 120.w,
           padding: EdgeInsets.all(10.r),
           margin: EdgeInsets.only(left: 15.w),
           color: Theme.of(context).cardColor,
@@ -49,11 +47,11 @@ class SimilarProductWidget extends StatelessWidget {
                 ),
               ),
               AppsFunction.verticalSpace(10),
-              FittedBox(
-                  child: Text(productModel.productname!,
-                      textAlign: TextAlign.justify,
-                      style: AppsTextStyle.rattingText
-                          .copyWith(color: Theme.of(context).primaryColor))),
+              Text(productModel.productname!,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                  style: AppsTextStyle.rattingText
+                      .copyWith(color: Theme.of(context).primaryColor)),
             ],
           ),
         ),

@@ -20,7 +20,7 @@ abstract class BaseFirebaseService {
       {required ProductModel productModel, required bool isUpdate});
 
   //
-  Stream<QuerySnapshot<Map<String, dynamic>>> fetchProductSnapshotsByCategory(
+  Stream<QuerySnapshot<Map<String, dynamic>>> fetchCategoryProducts(
       {required String category});
 
   // Delete Product

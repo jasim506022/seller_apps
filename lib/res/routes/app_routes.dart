@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:seller_apps/view/completeorder/totalsellerpage.dart';
-import 'package:seller_apps/view/add_product/add_product_page.dart';
+import 'package:seller_apps/view/add_product/manage_product_page.dart';
 import 'package:seller_apps/view/main/main_page.dart';
 import 'package:seller_apps/view/order/history_page.dart';
 import 'package:seller_apps/view/delivery/delivery_page.dart';

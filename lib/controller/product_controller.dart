@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:seller_apps/res/routes/routes_name.dart';
 
 import '../model/app_exception.dart';
 import '../model/productsmodel.dart';
@@ -9,9 +8,10 @@ import '../repository/product_repository.dart';
 import '../res/app_asset/icon_asset.dart';
 import '../res/app_function.dart';
 import '../res/app_string.dart';
+import '../res/routes/routes_name.dart';
 import '../widget/error_dialog_widget.dart';
 import '../widget/show_alert_dialog_widget.dart';
-import 'category_controller.dart';
+import 'category_manager_controller.dart';
 
 class ProductController extends GetxController {
   final ProductRepository repository;
@@ -24,7 +24,7 @@ class ProductController extends GetxController {
   Stream<QuerySnapshot<Map<String, dynamic>>> productSnapshots() {
     try {
       return repository.productSnapshots(
-          category: categoryManagerController.selectedForAllCategory.value);
+          category: categoryManagerController.selectedAllCategory.value);
     } catch (e) {
       _handleException(e);
       rethrow;

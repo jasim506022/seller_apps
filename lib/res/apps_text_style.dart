@@ -34,6 +34,19 @@ class AppsTextStyle {
         fontWeight: FontWeight.w700,
       );
 
+  // Large Normal Text
+  static TextStyle get largeCustomBoldText => GoogleFonts.poppins(
+        fontSize: 18.sp,
+        color: theme.primaryColor,
+        fontWeight: FontWeight.w800,
+      );
+
+  static TextStyle mediumTextCustom400lineThrough = GoogleFonts.roboto(
+      decoration: TextDecoration.lineThrough,
+      color: const Color(0xffcecfd2),
+      fontSize: 16.sp,
+      fontWeight: FontWeight.w700);
+
 // dialog title
 
   // static TextStyle get titleDialogTextStyle => GoogleFonts.poppins(
@@ -44,18 +57,15 @@ class AppsTextStyle {
   //     fontSize: 16.sp,
   //     fontWeight: FontWeight.normal);
 
-  
-    static TextStyle get titleHomeProfileheader => GoogleFonts.poppins(
+  static TextStyle get titleHomeProfileheader => GoogleFonts.poppins(
       color: theme.primaryColor, fontSize: 22.sp, fontWeight: FontWeight.w800);
-  
+
   // Title Text Style
-
-
 
   static TextStyle get titleTextStyle => GoogleFonts.poppins(
       color: theme.primaryColor, fontSize: 20.sp, fontWeight: FontWeight.w800);
 
-        static TextStyle get gridViewTextStyle => GoogleFonts.poppins(
+  static TextStyle get gridViewTextStyle => GoogleFonts.poppins(
       color: theme.primaryColor, fontSize: 18.sp, fontWeight: FontWeight.w800);
 
 // Description

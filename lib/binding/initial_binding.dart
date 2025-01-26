@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:seller_apps/controller/add_product_controller.dart';
 import 'package:seller_apps/controller/auth_controller.dart';
-import 'package:seller_apps/controller/category_controller.dart';
+import 'package:seller_apps/controller/category_manager_controller.dart';
 import 'package:seller_apps/controller/delivary_controller.dart';
 import 'package:seller_apps/repository/add_product_repository.dart';
 import 'package:seller_apps/repository/auth_reposity.dart';
@@ -62,8 +62,6 @@ class InitialBinding extends Bindings {
             repository: Get.find<SelectImageRepository>()),
         fenix: true);
 
-  
-
     // Get.put<SignUpController>(
     //     SignUpController(repository: Get.find<SignUpRepository>()));
 
@@ -80,7 +78,7 @@ class InitialBinding extends Bindings {
 
     Get.lazyPut<CategoryManagerController>(() => CategoryManagerController(),
         fenix: true);
-    Get.lazyPut<SearchControllers>(() => SearchControllers());
+    Get.lazyPut<ProductSearchController>(() => ProductSearchController());
 
     Get.lazyPut<ProductRepository>(() => ProductRepository(), fenix: true);
     Get.lazyPut<ProductController>(

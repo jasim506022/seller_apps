@@ -5,12 +5,12 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:seller_apps/res/app_string.dart';
 
-import '../../../controller/category_controller.dart';
+import '../../../controller/category_manager_controller.dart';
 import '../../../controller/order_controller.dart';
 import '../../../model/order_model.dart';
 import '../../../res/app_asset/image_asset.dart';
 import '../../../res/app_constants.dart';
-import '../../../widget/drop_down_category_widget.dart';
+import '../../../widget/custom_drop_down_widget.dart';
 import '../../../widget/empty_widget.dart';
 import '../../loading_widget/loading_list_single_product_widget.dart';
 import 'order_item_widget.dart';
@@ -38,7 +38,7 @@ class OrderStatusListWidget extends StatelessWidget {
             if (orderStatus == null)
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15.h),
-                child: DropdownWidget(
+                child: CustomDropdownWidget(
                   items: AppConstants.orderStatuses,
                   value: categoryController.selectedStatus.value,
                   onChanged: (value) {

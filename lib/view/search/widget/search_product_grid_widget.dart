@@ -5,6 +5,8 @@ import 'package:provider/provider.dart';
 import '../../../controller/search_controller.dart';
 import '../../../model/productsmodel.dart';
 import '../../../res/app_asset/image_asset.dart';
+import '../../../res/app_function.dart';
+import '../../../res/app_string.dart';
 import '../../../widget/empty_widget.dart';
 import '../../../widget/product_widget.dart';
 
@@ -15,24 +17,21 @@ class SearchProductGridWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var searchController = Get.find<SearchControllers>();
+    var searchController = Get.find<ProductSearchController>();
     return Obx(() {
-      final productList = _getProductList(searchController);
+      final productList = _getFilteredProducts(searchController);
 
       if (productList.isEmpty) {
         return EmptyWidget(
           image: ImagesAsset.error,
-          title: 'No Data Available',
+          title: AppString.noDataAvaiable,
         );
       }
 
+      /// Builds the product grid using the filtered product list.
       return GridView.builder(
         itemCount: productList.length,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: .78,
-            crossAxisSpacing: 8,
-            mainAxisSpacing: 8),
+        gridDelegate: AppsFunction.buildGridDelegate(),
         itemBuilder: (context, index) {
           return ChangeNotifierProvider.value(
             value: productList[index],
@@ -43,15 +42,18 @@ class SearchProductGridWidget extends StatelessWidget {
     });
   }
 
-  List<ProductModel> _getProductList(SearchControllers searchController) {
-    if (searchController.isFilterEnabled.value &&
+  /// Filters the product list based on the current state of the search and filter controllers.
+
+  List<ProductModel> _getFilteredProducts(
+      ProductSearchController searchController) {
+    if (searchController.isFilterActive.value &&
         searchController.searchTextTEC.text.isEmpty) {
-      return searchController.filterProductList;
+      return searchController.filteredProducts;
     }
-    if (searchController.isSearchEnabled.value &&
+    if (searchController.isSearchActive.value &&
         searchController.searchTextTEC.text.isNotEmpty) {
-      return searchController.searchProductList;
+      return searchController.searchResults;
     }
-    return searchController.allProductList;
+    return searchController.allProducts;
   }
 }

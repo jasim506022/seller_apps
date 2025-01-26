@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shimmer/shimmer.dart';
 
 import '../../res/app_function.dart';
-import '../../res/utils.dart';
+import '../../widget/defaul_shimmer_widget.dart';
 
 class LoadingSimilierWidget extends StatelessWidget {
   const LoadingSimilierWidget({
@@ -16,25 +14,19 @@ class LoadingSimilierWidget extends StatelessWidget {
       itemCount: 5,
       scrollDirection: Axis.horizontal,
       itemBuilder: (context, index) {
-        return Card(
-          color: Theme.of(context).cardColor,
-          elevation: 2,
-          child: Container(
-            height: 130.h,
-            width: 100.w,
-            padding: EdgeInsets.all(10.r),
-            margin: EdgeInsets.only(left: 15.w),
-            color: Theme.of(context).cardColor,
-            child: Shimmer.fromColors(
-              baseColor: ThemeUtils.shimmerBaseColor,
-              highlightColor: ThemeUtils.shimmerHighlightColor,
-              child: Column(
-                children: [
-                  AppsFunction.lineShimmer(70),
-                  AppsFunction.verticalSpace(5),
-                  AppsFunction.lineShimmer(10)
-                ],
-              ),
+        return DefaultShimmerWidget(
+          height: 140,
+          width: 120,
+          widget: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                AppsFunction.lineShimmer(90),
+                AppsFunction.verticalSpace(10),
+                AppsFunction.lineShimmer(10),
+                AppsFunction.verticalSpace(10),
+                AppsFunction.lineShimmer(10)
+              ],
             ),
           ),
         );

@@ -13,7 +13,7 @@ import '../res/app_constants.dart';
 import '../res/app_function.dart';
 import '../res/routes/routes_name.dart';
 import '../widget/show_alert_dialog_widget.dart';
-import 'category_controller.dart';
+import 'category_manager_controller.dart';
 import 'loading_controller.dart';
 
 class AddProductController extends GetxController {

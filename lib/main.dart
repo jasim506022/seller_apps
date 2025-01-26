@@ -109,6 +109,12 @@ class MyApp extends StatelessWidget {
       // dialogTheme: DialogTheme(
       //   backgroundColor: Colors.blue
       // ),
+
+      cardTheme: CardTheme(
+        elevation: 2,
+        color: isDarkTheme ? AppColors.cardDark : AppColors.white,
+      ),
+
       iconTheme: IconThemeData(
           color: isDarkTheme ? AppColors.white : AppColors.black, size: 25),
       appBarTheme: AppBarTheme(
@@ -119,7 +125,7 @@ class MyApp extends StatelessWidget {
             isDarkTheme ? AppColors.backgroundDark : AppColors.backgroundLight,
         titleTextStyle: GoogleFonts.roboto(
           color: isDarkTheme ? AppColors.white : AppColors.black,
-          fontSize: 22.sp,
+          fontSize: 24.sp,
           fontWeight: FontWeight.bold,
         ),
         centerTitle: true,
@@ -148,6 +154,15 @@ class MyApp extends StatelessWidget {
           isDarkTheme ? AppColors.indicatorDark : AppColors.indicatorLight,
       hintColor: isDarkTheme ? AppColors.hintDark : AppColors.hintLight,
       primaryColor: isDarkTheme ? AppColors.white : AppColors.black,
+    );
+  }
+
+  OutlineInputBorder _buildBorder() {
+    return OutlineInputBorder(
+      borderSide: const BorderSide(
+        width: 1,
+      ),
+      borderRadius: BorderRadius.circular(15.r),
     );
   }
 }

@@ -85,7 +85,7 @@ class DataFirebaseService implements BaseFirebaseService {
 
   //
   @override
-  Stream<QuerySnapshot<Map<String, dynamic>>> fetchProductSnapshotsByCategory(
+  Stream<QuerySnapshot<Map<String, dynamic>>> fetchCategoryProducts(
       {required String category}) {
     var collectionRef = firebaseFirestore
         .collection(AppString.sellersCollection)

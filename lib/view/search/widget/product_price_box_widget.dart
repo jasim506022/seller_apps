@@ -13,7 +13,7 @@ class ProductPriceBoxWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var searchController = Get.find<SearchControllers>();
+    var searchController = Get.find<ProductSearchController>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

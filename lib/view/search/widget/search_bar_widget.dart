@@ -19,37 +19,44 @@ class SearchBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var searchController = Get.find<SearchControllers>();
     return SizedBox(
       height: 0.1.sh,
       width: 1.sw,
       child: Row(
-        children: [
-          Flexible(
-              flex: 4,
-              child: TextFormFieldWidget(
-                style: AppsTextStyle.mediumNormalText
-                    .copyWith(color: ThemeUtils.baseTextColor),
-                isUdateDecoration: true,
-                decoration: AppsFunction.inputDecoration(
-                  hint: AppString.searchProductHere,
-                ),
-                controller: searchController.searchTextTEC,
-                onChanged: (text) {
-                  searchController.updateProductList(text);
-                },
-              )),
-          IconButton(
-              onPressed: () {
-                FocusScope.of(context).unfocus();
-                Get.dialog(const FilterDialogWidget());
-              },
-              icon: const Icon(
-                FontAwesomeIcons.sliders,
-                color: AppColors.green,
-              ))
-        ],
+        children: [_buildSearchField(), _buildFilterButton(context)],
       ),
     );
+  }
+
+  /// Builds the filter button.
+  IconButton _buildFilterButton(BuildContext context) {
+    return IconButton(
+        onPressed: () {
+          FocusScope.of(context).unfocus();
+          Get.dialog(const FilterDialogWidget());
+        },
+        icon: const Icon(
+          FontAwesomeIcons.sliders,
+          color: AppColors.green,
+        ));
+  }
+
+  /// Builds the search input field.
+  Flexible _buildSearchField() {
+    var searchController = Get.find<ProductSearchController>();
+    return Flexible(
+        flex: 4,
+        child: TextFormFieldWidget(
+          style: AppsTextStyle.mediumNormalText
+              .copyWith(color: ThemeUtils.baseTextColor),
+          isUdateDecoration: true,
+          decoration: AppsFunction.inputDecoration(
+            hint: AppString.searchProductHere,
+          ),
+          controller: searchController.searchTextTEC,
+          onChanged: (text) {
+            searchController.searchProducts(text);
+          },
+        ));
   }
 }

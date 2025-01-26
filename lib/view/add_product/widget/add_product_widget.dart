@@ -12,7 +12,7 @@ import '../../../res/apps_color.dart';
 import '../../../res/internet_utilis.dart';
 import '../../../res/validator.dart';
 import '../../../widget/custom_elevated_widget.dart';
-import '../../../widget/drop_down_category_widget.dart';
+import '../../../widget/custom_drop_down_widget.dart';
 import '../../../widget/text_field_form_widget.dart';
 import 'grid_image_list_widget.dart';
 
@@ -130,7 +130,7 @@ class _AddEditProductFormState extends State<AddEditProductForm> {
       child: Column(
         children: [
           Obx(
-            () => DropdownWidget(
+            () => CustomDropdownWidget(
               items: AppConstants.categories,
               value: addProductController
                   .categoryController.selectedCategory.value,
@@ -156,7 +156,7 @@ class _AddEditProductFormState extends State<AddEditProductForm> {
               AppsFunction.horizontalSpace(20),
               Expanded(
                   child: Obx(
-                () => DropdownWidget(
+                () => CustomDropdownWidget(
                   onChanged: (value) {
                     addProductController.categoryController
                         .updateUnit(value!.toString());

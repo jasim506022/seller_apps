@@ -14,7 +14,7 @@ import '../../res/routes/routes_name.dart';
 
 import '../../res/utils.dart';
 import 'widget/grid_view_item.dart';
-import 'widget/grid_view_list_widget.dart';
+import 'widget/dashboard_grid_view.dart';
 import 'widget/home_profile_header_widget.dart';
 
 class HomePage extends StatelessWidget {

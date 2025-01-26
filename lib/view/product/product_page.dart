@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../controller/category_controller.dart';
+import '../../controller/category_manager_controller.dart';
 import '../../res/app_constants.dart';
 import '../../res/app_function.dart';
 import '../../res/app_string.dart';
-import '../../widget/drop_down_category_widget.dart';
+import '../../widget/custom_drop_down_widget.dart';
 import 'widget/product_list_widget.dart';
 
 class ProductPage extends StatelessWidget {
@@ -14,7 +14,7 @@ class ProductPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final categoryController = Get.find<CategoryManagerController>();
+    final categoryManagerController = Get.find<CategoryManagerController>();
     return Scaffold(
       appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -23,11 +23,13 @@ class ProductPage extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 4.h),
         child: Column(
           children: [
-            DropdownWidget(
+            CustomDropdownWidget(
               items: AppConstants.allCategories,
-              value: categoryController.selectedForAllCategory.value,
+              value: categoryManagerController.selectedAllCategory.value,
               onChanged: (value) {
-                categoryController.updateAllCategory(value!.toString());
+                if (value != null) {
+                  categoryManagerController.updateAllCategory(value.toString());
+                }
               },
             ),
             AppsFunction.verticalSpace(10),

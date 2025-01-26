@@ -10,8 +10,7 @@ class ProductRepository {
   Stream<QuerySnapshot<Map<String, dynamic>>> productSnapshots(
       {required String category}) {
     try {
-      return _dataFirebaseService.fetchProductSnapshotsByCategory(
-          category: category);
+      return _dataFirebaseService.fetchCategoryProducts(category: category);
     } catch (e) {
       AppsFunction.handleException(e);
       rethrow;

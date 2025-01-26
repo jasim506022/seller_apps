@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:seller_apps/res/app_string.dart';
 
 import '../../../model/productsmodel.dart';
 import '../../../res/app_function.dart';
+import '../../../res/app_string.dart';
 import '../../../res/apps_color.dart';
 import '../../../res/apps_text_style.dart';
 
@@ -18,7 +18,6 @@ class ProductDetailsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      // mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(productModel.productname!,
@@ -36,6 +35,7 @@ class ProductDetailsWidget extends StatelessWidget {
     );
   }
 
+  /// Builds the rating bar
   Row _buildRatingBar(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
@@ -63,6 +63,7 @@ class ProductDetailsWidget extends StatelessWidget {
     );
   }
 
+  /// Builds the price and discount details
   Row _buildPriceDetailsRow() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -72,7 +73,7 @@ class ProductDetailsWidget extends StatelessWidget {
             children: [
               TextSpan(
                 text:
-                    "${AppString.currencyIcon} ${AppsFunction.getDiscountedPrice(productModel.productprice!, productModel.discount!.toDouble())} ",
+                    "${AppString.currencyIcon} ${AppsFunction.getDiscountedPrice(productModel.productprice!, productModel.discount!.toDouble()).toStringAsFixed(2)} ",
                 style:
                     AppsTextStyle.titleTextStyle.copyWith(color: AppColors.red),
               ),
@@ -83,25 +84,23 @@ class ProductDetailsWidget extends StatelessWidget {
             ],
           ),
         ),
-        FittedBox(
-          child: RichText(
-            text: TextSpan(
-              children: [
-                TextSpan(
-                  text: "${AppString.discount}: ${productModel.discount!}% ",
-                  style: AppsTextStyle.mediumBoldText
-                      .copyWith(color: AppColors.red),
+        RichText(
+          text: TextSpan(
+            children: [
+              TextSpan(
+                text: "${AppString.discount}: ${productModel.discount!}% ",
+                style:
+                    AppsTextStyle.mediumBoldText.copyWith(color: AppColors.red),
+              ),
+              WidgetSpan(child: AppsFunction.horizontalSpace(10)),
+              TextSpan(
+                text: productModel.productprice!.toString(),
+                style: AppsTextStyle.mediumBoldText.copyWith(
+                  color: AppColors.red,
+                  decoration: TextDecoration.lineThrough,
                 ),
-                WidgetSpan(child: AppsFunction.horizontalSpace(10)),
-                TextSpan(
-                  text: productModel.productprice!.toString(),
-                  style: AppsTextStyle.mediumBoldText.copyWith(
-                    color: AppColors.red,
-                    decoration: TextDecoration.lineThrough,
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ],

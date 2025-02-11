@@ -13,7 +13,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../const/cart_function.dart';
 
-import '../../model/productsmodel.dart';
+import '../../model/product_model.dart';
 import '../../res/app_constants.dart';
 import '../../widget/show_error_dialog_widget.dart';
 

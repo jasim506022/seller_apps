@@ -19,21 +19,18 @@ import 'res/routes/routes_name.dart';
 import 'service/provider/theme_provider.dart';
 
 void main() async {
-  // Ensure Flutter widgets are initialized
+  // Ensure the widgets are bound to the platform and Firebase is initialized.
   WidgetsFlutterBinding.ensureInitialized();
-
-  // Initialize Firebase
   await Firebase.initializeApp();
 
-  // Load shared preferences for local storage
+  // Initialize SharedPreferences and retrieve the onboarding view status.
   AppConstants.sharedPreference = await SharedPreferences.getInstance();
 
-  // Configure background message handling for Firebase
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-
-  // Check onboarding status
+// Check onboarding status
   AppConstants.isViewed =
       AppConstants.sharedPreference!.getInt(AppString.onBoardingShareKey);
+  // Configure background message handling for Firebase
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   // Start the app
   runApp(const MyApp());
@@ -117,6 +114,8 @@ class MyApp extends StatelessWidget {
 
       iconTheme: IconThemeData(
           color: isDarkTheme ? AppColors.white : AppColors.black, size: 25),
+
+      // App Bar Theme (Modify)
       appBarTheme: AppBarTheme(
         iconTheme: IconThemeData(
           color: isDarkTheme ? AppColors.white : AppColors.black,
@@ -125,20 +124,25 @@ class MyApp extends StatelessWidget {
             isDarkTheme ? AppColors.backgroundDark : AppColors.backgroundLight,
         titleTextStyle: GoogleFonts.roboto(
           color: isDarkTheme ? AppColors.white : AppColors.black,
-          fontSize: 24.sp,
+          fontSize: 22.sp,
           fontWeight: FontWeight.bold,
         ),
         centerTitle: true,
       ),
 
+      // Divider (Modify)
+      dividerTheme: DividerThemeData(
+        color: isDarkTheme ? AppColors.hintDark : AppColors.hintLight,
+        thickness: 2,
+      ),
+
       elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-        backgroundColor: AppColors.green,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.r),
-        ),
-        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 20.h),
-      )),
+        style: ElevatedButton.styleFrom(
+            padding: EdgeInsets.zero,
+            backgroundColor: AppColors.green,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.r))),
+      ),
       progressIndicatorTheme: const ProgressIndicatorThemeData(
         color: AppColors.white,
         circularTrackColor: AppColors.red,
@@ -157,12 +161,12 @@ class MyApp extends StatelessWidget {
     );
   }
 
-  OutlineInputBorder _buildBorder() {
-    return OutlineInputBorder(
-      borderSide: const BorderSide(
-        width: 1,
-      ),
-      borderRadius: BorderRadius.circular(15.r),
-    );
-  }
+  // OutlineInputBorder _buildBorder() {
+  //   return OutlineInputBorder(
+  //     borderSide: const BorderSide(
+  //       width: 1,
+  //     ),
+  //     borderRadius: BorderRadius.circular(15.r),
+  //   );
+  // }
 }

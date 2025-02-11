@@ -1,7 +1,7 @@
 import 'package:image_picker/image_picker.dart';
 
 import '../data/response/service/data_firebase_service.dart';
-import '../model/productsmodel.dart';
+import '../model/product_model.dart';
 import '../res/app_function.dart';
 
 class AddProductRepository {

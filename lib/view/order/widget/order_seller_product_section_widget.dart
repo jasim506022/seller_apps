@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -19,7 +20,7 @@ class OrderSellerProductListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var orderController = Get.find<OrderController>();
     return StreamBuilder(
-      stream: orderController.sellerOrderSnapshot(
+      stream: orderController.fatchSellerOrder(
           sellerList:
               CartFunctions.separateOrderSellerCartList(orderModel.seller)),
       builder: (context, snapshot) {
@@ -34,7 +35,9 @@ class OrderSellerProductListWidget extends StatelessWidget {
               child: Text('No products available or an error occurred.'));
         }
         if (snapshot.hasData) {
-          print(snapshot.data!.docs);
+          if (kDebugMode) {
+            print(snapshot.data!.docs);
+          }
         }
 
         return ListView.builder(
@@ -42,8 +45,7 @@ class OrderSellerProductListWidget extends StatelessWidget {
           physics: const NeverScrollableScrollPhysics(),
           itemCount: snapshot.data!.docs.length,
           itemBuilder: (context, index) {
-            print(snapshot.data!.docs[index]["name"]);
-            print(snapshot.data!.docs[index]["uid"]);
+            
             var sellerName = snapshot.data!.docs[index]["name"];
             var sellerId = snapshot.data!.docs[index]["uid"];
             return SellerOrderProductWidget(

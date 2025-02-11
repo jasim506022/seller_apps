@@ -9,8 +9,10 @@ import '../../../widget/profile_photo_option_sheet_widget.dart';
 
 class ProfileImageSectionWidget extends StatelessWidget {
   final bool isEditMode;
+  final String imageUrl;
 
-  const ProfileImageSectionWidget({super.key, required this.isEditMode});
+  const ProfileImageSectionWidget(
+      {super.key, required this.isEditMode, required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -18,38 +20,20 @@ class ProfileImageSectionWidget extends StatelessWidget {
 
 // Return a stack with an editable image if `isEditMode` is true.
     // Otherwise, show the profile image in view-only mode.
-    return isEditMode
-        ? Stack(
-            children: [
-              // Observes changes to the selected photo in the controller.
-
-              Obx(() {
-                final image =
-                    profileController.selectImageController.selectPhoto.value;
-                return _buildProfileImage(
-                  child: image == null
-                      ? FancyShimmerImage(
-                          imageUrl:
-                              profileController.profileModel.value.imageurl!,
-                          errorWidget: const Icon(Icons.error),
-                        )
-                      : CircleAvatar(backgroundImage: FileImage(image)),
-                );
-              }),
-              Positioned(
-                bottom: 5,
-                right: 5,
-                child: _buildSelectImageButton(context),
-              ),
-            ],
-          )
-        : _buildProfileImage(
-            child: FancyShimmerImage(
-              imageUrl: profileController.profileModel.value.imageurl ?? "",
-              errorWidget: const Icon(Icons.error),
-            ),
-          );
+    return Stack(
+      children: [
+        Obx(() {
+          return _buildProfileImage(
+              child: _buildImageWidget(profileController));
+        }),
+        if (isEditMode)
+          Positioned(
+              bottom: 5, right: 5, child: _buildSelectImageButton(context)),
+      ],
+    );
   }
+
+  /// Builds the profile image view
 
   Widget _buildProfileImage({required Widget child}) {
     return Container(
@@ -63,18 +47,34 @@ class ProfileImageSectionWidget extends StatelessWidget {
     );
   }
 
+  /// Builds the image selection button
+
   Widget _buildSelectImageButton(BuildContext context) {
+    final profileController = Get.find<ProfileController>();
     return Container(
       decoration:
           BoxDecoration(color: Colors.red.shade400, shape: BoxShape.circle),
       child: IconButton(
         icon: const Icon(Icons.camera_alt, color: AppColors.white),
         onPressed: () {
+          profileController.isDataChanged(true);
           Get.bottomSheet(
               backgroundColor: Theme.of(context).cardColor,
               const ProfilePhotoOptionSheetWidget());
         },
       ),
     );
+  }
+
+  /// Builds the image widget depending on whether an image is selected
+  Widget _buildImageWidget(ProfileController profileController) {
+    final selectedImage =
+        profileController.selectImageController.selectPhoto.value;
+    return selectedImage == null
+        ? FancyShimmerImage(
+            imageUrl: imageUrl,
+            errorWidget: const Icon(Icons.error),
+          )
+        : CircleAvatar(backgroundImage: FileImage(selectedImage));
   }
 }

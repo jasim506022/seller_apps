@@ -31,7 +31,7 @@ final List<DashboardGridModel> dashboardGridList = [
   DashboardGridModel(
     image: ImagesAsset.runningOrderImages,
     text: AppString.runningOrder,
-    route: RoutesName.runningOrder,
+    route: RoutesName.orderPage,
   ),
   DashboardGridModel(
     image: ImagesAsset.completeOrderImages,

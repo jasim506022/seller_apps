@@ -3,14 +3,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-import '../model/productsmodel.dart';
+import '../model/product_model.dart';
 import '../res/app_function.dart';
 import '../res/app_string.dart';
 import '../res/apps_color.dart';
 import '../res/apps_text_style.dart';
-import '../res/internet_utilis.dart';
+import '../res/network_utilis.dart';
 import '../res/routes/routes_name.dart';
-import 'custom_button_widget.dart';
+import 'app_button..dart';
 import 'product_image_widget.dart';
 
 class ProductWidget extends StatelessWidget {
@@ -74,13 +74,11 @@ class ProductWidget extends StatelessWidget {
           style: AppsTextStyle.largeBoldText,
         ),
         AppsFunction.verticalSpace(5),
-        InkWell(
-          onTap: () {
+        AppButton(
+          onPressed: () {
             _navigateToPage(productModel, true);
           },
-          child: const CustomButtonWidget(
-            title: AppString.update,
-          ),
+          title: AppString.update,
         ),
         AppsFunction.verticalSpace(5)
       ],
@@ -90,6 +88,7 @@ class ProductWidget extends StatelessWidget {
   /// Handles navigation based on the action (product details or update).
   Future<void> _navigateToPage(ProductModel productModel,
       [bool isUpdate = false]) async {
+/*
     if (!(await NetworkUtili.verifyInternetStatus())) {
       final routeName = isUpdate
           ? RoutesName.uploadAndUpdateProduct
@@ -98,6 +97,8 @@ class ProductWidget extends StatelessWidget {
         AppString.productModel: productModel,
         if (isUpdate) AppString.isUpdate: true,
       });
+
     }
+    */
   }
 }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../model/app_exception.dart';
-import '../model/productsmodel.dart';
+import '../model/product_model.dart';
 import '../repository/product_repository.dart';
 import '../res/app_asset/icon_asset.dart';
 import '../res/app_function.dart';

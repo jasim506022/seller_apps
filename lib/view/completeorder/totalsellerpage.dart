@@ -18,6 +18,7 @@ class _TotalSellPageState extends State<TotalSellPage> {
   @override
   void initState() {
     Future.delayed(Duration.zero, () {
+      // ignore: use_build_context_synchronously
       Provider.of<TotalAmountProvider>(context, listen: false).setZeroAmount();
     });
     CartFunctions.allSellMoeny(context);
@@ -39,7 +40,7 @@ class _TotalSellPageState extends State<TotalSellPage> {
             height: 0.4.sh,
             width: 0.4.sh,
             decoration:
-                BoxDecoration(color: AppColors.green, shape: BoxShape.circle),
+                const BoxDecoration(color: AppColors.green, shape: BoxShape.circle),
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -47,7 +48,7 @@ class _TotalSellPageState extends State<TotalSellPage> {
                 children: [
                   Text(
                     "Tk. ${value.amount.toStringAsFixed(2)}",
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: AppColors.white,
                         fontSize: 50,
                         fontWeight: FontWeight.bold),
@@ -69,7 +70,7 @@ class _TotalSellPageState extends State<TotalSellPage> {
                       decoration: BoxDecoration(
                           color: AppColors.white,
                           borderRadius: BorderRadius.circular(10)),
-                      child: Text(
+                      child: const Text(
                         "Details",
                         style: TextStyle(
                             color: AppColors.black,

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:seller_apps/res/app_string.dart';
 
 import '../../../model/order_model.dart';
 import '../../../res/app_function.dart';
+import '../../../res/app_string.dart';
 import '../../../res/apps_color.dart';
 import '../../../widget/background_shape_widget.dart';
 import 'delivery_rich_text_widget.dart';

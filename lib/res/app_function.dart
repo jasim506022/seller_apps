@@ -67,7 +67,7 @@ class AppsFunction {
           borderSide: const BorderSide(color: Color(0xff00B761), width: 1),
           borderRadius: BorderRadius.circular(15)),
       hintText: hint,
-      hintStyle: TextStyle(color: Colors.grey),
+      hintStyle: const TextStyle(color: Colors.grey),
     );
   }
 

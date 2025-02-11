@@ -9,9 +9,10 @@ import '../../res/app_function.dart';
 
 import '../../res/app_string.dart';
 import '../../res/apps_text_style.dart';
-import '../../res/internet_utilis.dart';
+import '../../res/network_utilis.dart';
 import '../../res/validator.dart';
 import '../../widget/custom_auth_button_widget.dart';
+import '../../widget/phone_number_widget.dart';
 import '../../widget/rich_text_widget.dart';
 import '../../widget/text_field_form_widget.dart';
 import 'widget/app_sigin_in_page_intro_widget.dart';
@@ -32,6 +33,7 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
+      // ignore: deprecated_member_use
       onPopInvoked: (didPop) {
         if (!authController.loadingController.loading.value) {
           authController.clearInputFields();
@@ -56,8 +58,8 @@ class _SignUpPageState extends State<SignUpPage> {
                   CustomAuthButtonWidget(
                     onPressed: () async {
                       if (!formKey.currentState!.validate()) return;
-                      await NetworkUtili.internetCheckingWFunction(
-                          function: () async =>
+                      await NetworkUtils.executeWithInternetCheck(
+                          action: () async =>
                               await authController.registerUser());
                     },
                     title: AppString.signup,
@@ -94,7 +96,7 @@ class _SignUpPageState extends State<SignUpPage> {
             label: AppString.name,
             hintText: AppString.yourName,
             controller: authController.nameController,
-            validator: Validators.validateNonEmpty, // Validation method.
+            validator: Validators.validateNameEmpty, // Validation method.
             textInputType: TextInputType.name, // Keyboard type.
           ),
 
@@ -127,20 +129,11 @@ class _SignUpPageState extends State<SignUpPage> {
             controller: authController.confirmPasswordController,
           ),
           AppsFunction.verticalSpace(10),
-
-          Text(AppString.phone, style: AppsTextStyle.labelTextStyle),
-          AppsFunction.verticalSpace(8),
-          IntlPhoneField(
-            textInputAction: TextInputAction.done,
+          PhoneNumberWidget(
             controller: authController.phoneController,
-            style: AppsTextStyle.textFieldInputTextStyle(false),
-            decoration: AppsFunction.textFormFielddecoration(
-              hintText: AppString.phoneNumber,
-              function: () {},
-            ),
-            languageCode: "en",
-            initialCountryCode: 'BD',
+            textInputAction: TextInputAction.done,
           ),
+
           AppsFunction.verticalSpace(20),
         ],
       ),

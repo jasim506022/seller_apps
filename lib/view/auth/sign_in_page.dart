@@ -10,7 +10,7 @@ import '../../res/app_string.dart';
 import '../../res/apps_color.dart';
 import '../../res/apps_text_style.dart';
 
-import '../../res/internet_utilis.dart';
+import '../../res/network_utilis.dart';
 import '../../res/routes/routes_name.dart';
 import '../../res/validator.dart';
 import '../../widget/custom_auth_button_widget.dart';
@@ -57,6 +57,7 @@ class _SignInPageState extends State<SignInPage> {
   Widget build(BuildContext context) {
     return PopScope(
       canPop: false,
+      // ignore: deprecated_member_use
       onPopInvoked: (didPop) async => await authController.exitApps(didPop),
       child: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
@@ -78,9 +79,9 @@ class _SignInPageState extends State<SignInPage> {
                   CustomAuthButtonWidget(
                     onPressed: () async {
                       if (!_formKey.currentState!.validate()) return;
-
-                      await NetworkUtili.internetCheckingWFunction(
-                          function: () async => await authController.signIn());
+                      await authController.signIn();
+                      // await NetworkUtili.internetCheckingWFunction(
+                      //     function: () async => await authController.signIn());
                     },
                     title: AppString.signIn,
                   ),
@@ -110,7 +111,8 @@ class _SignInPageState extends State<SignInPage> {
       children: [
         Expanded(
           child: SocialButtonWidget(
-            tap: () async => NetworkUtili.verifyInternetStatus(),
+            tap: () async =>
+                NetworkUtils.executeWithInternetCheck(action: () {}),
             color: AppColors.blue,
             image: IconAsset.facebookIcon,
             title: AppString.facebook,
@@ -119,8 +121,8 @@ class _SignInPageState extends State<SignInPage> {
         AppsFunction.horizontalSpace(10),
         Expanded(
           child: SocialButtonWidget(
-            tap: () async => await NetworkUtili.internetCheckingWFunction(
-                function: () async => await authController.signInWithGoogle()),
+            tap: () async => await NetworkUtils.executeWithInternetCheck(
+                action: () async => await authController.signInWithGoogle()),
             color: AppColors.red,
             image: IconAsset.gmailIcon,
             title: AppString.gmail,
@@ -136,8 +138,8 @@ class _SignInPageState extends State<SignInPage> {
       alignment: Alignment.topRight,
       child: TextButton(
         onPressed: () async {
-          NetworkUtili.internetCheckingWFunction(
-              function: () => Get.toNamed(RoutesName.forgetPassword));
+          NetworkUtils.executeWithInternetCheck(
+              action: () => Get.toNamed(RoutesName.forgetPassword));
         },
         child: Text(
           AppString.forgetPassword,

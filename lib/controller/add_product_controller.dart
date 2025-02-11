@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:seller_apps/res/app_string.dart';
 
-import '../model/productsmodel.dart';
+import '../model/product_model.dart';
 import '../repository/add_product_repository.dart';
 import '../res/app_constants.dart';
 import '../res/app_function.dart';

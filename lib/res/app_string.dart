@@ -3,29 +3,42 @@ class AppString {
 Auth String
 */
   // Dialog String
-  static String exit = "Exit";
-  static String exitApps = 'Are you sure you want to Exit this Apps?';
-  static String yes = "Yes";
-  static String no = "No";
+  static const String exit = "Exit";
+  static const String exitApps = 'Are you sure you want to Exit this Apps?';
+  static const String yes = "Yes";
+  static const String no = "No";
+  static const saveChanges = "Save Changes?";
+  static String doYouwantSignout = "Do you want to sign out?";
+  static const selectedImage = "Selected Image";
+  static const cancel = "Cancel";
+  static const captureImageWithCamera = "Capture image with Camera";
+  static const captureImageWithGallery = "Capture image with Gallery";
 
-  
+  static const saveMessage = 'Do you want to save your changes?';
+  static const areYouWantDelete = "Are You want to Delete";
+  static const deleteMessage =
+      "Do you Want to Delete The Product Produc. If you delete the Product it can not be undo";
+  static String selectPhoto = "Select Photo";
+  static String camera = "Camera";
+  static String gallery = "Gallery";
+
   // Auth Page
   static String adminLogin = "Welcome Admin Login";
   static String logInPageSubjectTitle =
       'Check our fresh viggies from Jasim Grocery';
-       static String forgetPassword = "Forget Password";
-         static String withOr = "with Or";
-          static String facebook = "Facebook";
+  static String forgetPassword = "Forget Password";
+  static String withOr = "with Or";
+  static String facebook = "Facebook";
   static String gmail = "Gmail";
-    static String createAccount = "Create Account";
-    static String dontHaveAccount = "Don't Have An Account? ";
-
+  static String createAccount = "Create Account";
+  static String dontHaveAccount = "Don't Have An Account? ";
 
 // TextField Label Text
- static String email = "Email";
-   static String password = "Password";
-
-      
+  static String email = "Email";
+  static String password = "Password";
+  static String address = "Address";
+  static String phone = "Phone";
+  static String name = "Name";
 
   // Textfleid String
   static String emailAddress = "Email Address";
@@ -40,29 +53,21 @@ Auth String
   static String validConfirmPassword =
       'Confirm Password Must be geather then 6 Characteris';
   static String passwordConfirm = "Confirm Password";
- 
+
   static String phoneNumber = "Phone Number";
   static String enterPhone = 'Please enter your phone number';
   static String validPhoneNumber = 'Please Give Valid Phone number';
   static String sendingMail = "Sending a mail. Please Check ur Email";
-  static String name = "Name";
-  static String phone = "Phone";
   static String pleaseEnterAddress = "Please enter your Address";
 
   //
   static String signInSuccessfully = "Sign in Successfully";
   static String okay = "Okay";
 
-
- 
-
-  
   static String adminRegistration = "Admin Registration";
   static String signup = 'Sign Up';
   static String alreadyCreateAccount = "Already Create An Account? ";
-  static String selectPhoto = "Select Photo";
-  static String camera = "Camera";
-  static String gallery = "Gallery";
+
   static String signupSuccessfull = "Sign up Successfully";
   static String pleaseSelectPhoto = "Please Select a Photo";
   static String passwordMatch = "Password and Confirm Password do not match.";
@@ -105,21 +110,16 @@ Auth String
   static String thirdOnboardingDescription =
       "We offers speedy delivery of your groceries, bathroom supplies, baby care products, pet care items, stationary, etc within 30minutes at your doorstep.";
 
-  static String editProfile = "Edit Profile";
   static String about = "About";
-  static String address = "Address";
- 
+
   static String givemPhoneNumbeer = "Please Give your Phone Numer";
   static String pleaseWait = "Pleasing Waiting........";
   static String profileUpdate = "Profile Update";
   static String successfullyUpdate = "Profile updated successfully";
-  static String signOut = "Sign Out";
-  static String doYouwantSignout = "Do you want to sign out?";
-  static String successfullySignout = "Successfully Signed Out";
+
   static String permissionDenied = "Permission denied for notifications.";
   static String fcmTokenError = "Error retrieving FCM token:";
-  static String orderPage = "Order Page";
-  static String noDataAvaiable = "No Data Available";
+
   static String errorOccurred = "Error Occurred:";
   static String historyPage = "History Page";
   static String orderDelivery = "Order Delivery";
@@ -141,6 +141,8 @@ Auth String
   static String reset = "Reset";
   static String close = "Close";
   static String save = 'Save';
+  static String myOrder = 'My Orders';
+  static String off = "Off";
 
   // Firebase
   static const sellersCollection = "seller";
@@ -152,14 +154,19 @@ Auth String
   static const search = "Search";
   static const profile = "Profile";
 
+  // App Bar and Title
+  static const String editProfile = "Edit Profile";
+  static const String signOut = "Sign Out";
+  static const updateProduct = "Update Product";
+  static const addNewProduct = "Add New Product";
+  static const productTitle = "Products";
+  static const String orderPage = "Order Page";
+
   // argument;
   static const isUpdate = "isUpdate";
   static const productModel = "productModel";
 
   // Title
-  static const updateProduct = "Update Product";
-  static const addNewProduct = "Add New Product";
-  static const productTitle = "Products";
 
   //add Product
   static const productName = 'Product Name';
@@ -174,15 +181,6 @@ Auth String
       "Product Name must be longer than 2 characters";
 
   // dialog
-  static const selectedImage = "Selected Image";
-  static const cancel = "Cancel";
-  static const captureImageWithCamera = "Capture image with Camera";
-  static const captureImageWithGallery = "Capture image with Gallery";
-  static const saveChanges = "Save Changes?";
-  static const saveMessage = 'Do you want to save your changes?';
-  static const areYouWantDelete = "Are You want to Delete";
-  static const deleteMessage =
-      "Do you Want to Delete The Product Produc. If you delete the Product it can not be undo";
 
   // Toast
   static const imageUploadFail = "Image upload failed. Please try again.";
@@ -193,12 +191,17 @@ Auth String
   static const deleteSuccessFully = "Delete Succesffully";
   static const userDoesntExit = "User Doesn't Exit";
   static const noImageSelect = "No Image Selected";
+  static const noInternet = 'No Internet';
+  static const noInternetMessage =
+      'Please check your internet settings and try again.';
+  static String successfullySignout = "Successfully Signed Out";
 
   //
   static const available = "available";
-  //
-  static const noDataAvailabe = 'No Data Available';
+  // Firebase Message
+
   static const errorOccure = 'Error Occure';
+  static String noDataAvaiable = "No Data Available";
 
   //
   static const currencyIcon = "৳.";
@@ -211,4 +214,11 @@ Auth String
   //botton
   static const next = "Next";
   static String signIn = 'Sign In';
+  static String dark = "Dark";
+  static String light = "Light";
+  static const String pleaseEnterPrefix = "Please enter";
+
+  static String pleaseEnterField(String fieldName) {
+    return "$pleaseEnterPrefix $fieldName.";
+  }
 }

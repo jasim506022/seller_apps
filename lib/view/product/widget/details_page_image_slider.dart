@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 import '../../../res/app_function.dart';
 import '../../../res/utils.dart';
-import '../../../model/productsmodel.dart';
+import '../../../model/product_model.dart';
 import '../../../res/apps_color.dart';
 import 'image_swiper_widget.dart';
 import 'popup_button_widget.dart';

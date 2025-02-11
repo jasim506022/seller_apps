@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:seller_apps/service/database/firebasedatabase.dart';
-import 'package:seller_apps/model/productsmodel.dart';
+import 'package:seller_apps/model/product_model.dart';
 
 import '../res/app_constants.dart';
 import '../service/provider/totalamountprovider.dart';
@@ -155,7 +155,7 @@ class CartFunctions {
     return [for (var item in productIds.skip(1)) item.toString().split(":")[0]];
   }
 
-  static List<int> separateOrderItemQuantities(productIds) {
+  static List<int> separateOrderItemQuantities(List<dynamic> productIds) {
     List<String> listProductIds = List<String>.from(productIds);
     return [
       for (var item in listProductIds.skip(1))

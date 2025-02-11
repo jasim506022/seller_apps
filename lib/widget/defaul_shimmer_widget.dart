@@ -10,29 +10,31 @@ class DefaultShimmerWidget extends StatelessWidget {
       this.padding,
       required this.height,
       required this.widget,
+      this.useCard = true,
       this.width});
 
   final double? padding;
   final double height;
   final double? width;
   final Widget widget;
+  final bool useCard;
 
   @override
   Widget build(BuildContext context) {
+    Widget content = SizedBox(
+      height: height.h,
+      width: width?.w ?? 1.sw,
+      child: Shimmer.fromColors(
+          baseColor: ThemeUtils.shimmerBaseColor,
+          highlightColor: ThemeUtils.shimmerHighlightColor,
+          child: widget),
+    );
+
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: padding?.w ?? 0,
       ),
-      child: Card(
-        child: SizedBox(
-          height: height.h,
-          width: width?.w ?? 1.sw,
-          child: Shimmer.fromColors(
-              baseColor: ThemeUtils.shimmerBaseColor,
-              highlightColor: ThemeUtils.shimmerHighlightColor,
-              child: widget),
-        ),
-      ),
+      child: useCard ? Card(child: content) : content,
     );
   }
 }

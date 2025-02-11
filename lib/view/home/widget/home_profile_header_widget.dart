@@ -23,9 +23,11 @@ class HomeProfileHeaderWidget extends StatelessWidget {
     var email = AppConstants.sharedPreference
         ?.getString(AppString.emailSharedPreference);
 
-    if (image == null && name == null && email == null) {
+    if ((image == null || image.isEmpty) &&
+        (name == null || name.isEmpty) &&
+        (email == null || email.isEmpty)) {
       return FutureBuilder(
-        future: profileController.getUserProfileData(),
+        future: profileController.fetchUserProfile(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const LoadingProfileHeaderWidget();
@@ -36,9 +38,10 @@ class HomeProfileHeaderWidget extends StatelessWidget {
             if (data != null) {
               var profileModel = ProfileModel.fromMap(data);
               return UserProfileContent(
-                  imageUrl: profileModel.imageurl ?? "",
-                  name: profileModel.name ?? "Unknows User",
-                  email: profileModel.email ?? "No Email");
+                imageUrl: profileModel.imageurl!,
+                name: profileModel.name!,
+                email: profileModel.email!,
+              );
             }
           }
           return const LoadingProfileHeaderWidget();

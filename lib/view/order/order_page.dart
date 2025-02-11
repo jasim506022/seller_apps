@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:seller_apps/res/app_string.dart';
 
+import '../../res/app_string.dart';
 import 'widget/order_status_list_widget.dart';
 
 class OrderScreen extends StatelessWidget {
@@ -8,7 +8,7 @@ class OrderScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OrderStatusListWidget(
+    return const OrderStatusListWidget(
       appBarTitle: AppString.orderPage,
     );
   }

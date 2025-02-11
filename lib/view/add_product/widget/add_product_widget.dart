@@ -9,7 +9,7 @@ import '../../../res/app_constants.dart';
 import '../../../res/app_function.dart';
 import '../../../res/app_string.dart';
 import '../../../res/apps_color.dart';
-import '../../../res/internet_utilis.dart';
+import '../../../res/network_utilis.dart';
 import '../../../res/validator.dart';
 import '../../../widget/custom_elevated_widget.dart';
 import '../../../widget/custom_drop_down_widget.dart';
@@ -94,14 +94,18 @@ class _AddEditProductFormState extends State<AddEditProductForm> {
         IconButton(
           onPressed: () async {
             if (_formKey.currentState!.validate()) {
+              
+              /*
               if (!(await NetworkUtili.verifyInternetStatus())) {
                 addProductController.uploadOrUpdateProduct(
                     isUpdate: widget.isUpdate);
+
+
                 // setState(() {
                 //   // addProductController.loadingController.loading.value = false;
 
                 // });
-              }
+              */
             }
           },
           icon: const Icon(

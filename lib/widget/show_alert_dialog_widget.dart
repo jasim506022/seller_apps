@@ -32,7 +32,7 @@ class ShowAlertDialogWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: _buildTitleRow(),
+      title: _buildDialogHeader(),
       content: Text(
         content,
       ),
@@ -40,7 +40,9 @@ class ShowAlertDialogWidget extends StatelessWidget {
     );
   }
 
-  Row _buildTitleRow() {
+  /// Builds the alert dialog header with an icon and title.
+
+  Row _buildDialogHeader() {
     return Row(
       children: [
         Text(title),
@@ -56,6 +58,8 @@ class ShowAlertDialogWidget extends StatelessWidget {
       ],
     );
   }
+
+  /// Builds the action buttons for the dialog.
 
   List<Widget> _buildActions() {
     return [

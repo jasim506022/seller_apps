@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
-import '../../../model/productsmodel.dart';
+import '../../../model/product_model.dart';
 import '../../../res/app_function.dart';
+import '../../../res/app_string.dart';
 import '../../../res/apps_color.dart';
 import '../../../res/apps_text_style.dart';
 import '../../../widget/product_image_widget.dart';
@@ -19,33 +20,42 @@ class OrderProductWidget extends StatelessWidget {
     return Container(
       height: 110.h,
       width: 0.9.w,
-      decoration: BoxDecoration(
-          color: Theme.of(context).cardColor,
-          borderRadius: BorderRadius.circular(20.r)),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.r)),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ProductImageWidget(
-            height: 100.h,
-            width: 120.w,
-            imageHeight: 110.h,
+            height: 100,
+            width: 120,
+            imageHeight: 110,
             productModel: productModel,
           ),
-          Expanded(
-            child: _buildProductDetails(productModel, context),
-          )
+          Expanded(child: _buildProductDetails(context, productModel)),
         ],
       ),
     );
   }
 
   Padding _buildProductDetails(
-      ProductModel productModel, BuildContext context) {
+      BuildContext context, ProductModel productModel) {
+    final discountedPrice = AppsFunction.getDiscountedPrice(
+      productModel.productprice!,
+      productModel.discount!.toDouble(),
+    );
+
+    final totalPrice = AppsFunction.calculateTotalPriceWithQuantity(
+      productModel.productprice!,
+      productModel.discount!.toDouble(),
+      quantity,
+    ).toStringAsFixed(2);
+
     return Padding(
-      padding:
-          EdgeInsets.only(left: 20.w, right: 12.w, top: 15.h, bottom: 15.h),
+      padding: EdgeInsets.symmetric(
+        horizontal: 16.w,
+        vertical: 12.h,
+      ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           FittedBox(
@@ -54,37 +64,21 @@ class OrderProductWidget extends StatelessWidget {
               style: AppsTextStyle.largeBoldText,
             ),
           ),
-          SizedBox(
-            height: 5.h,
-          ),
           Row(
             children: [
-              Text(productModel.productunit!.toString(),
+              Text(productModel.productunit!,
                   style: AppsTextStyle.mediumBoldText.copyWith(
                     color: Theme.of(context).hintColor,
                   )),
             ],
           ),
-          SizedBox(
-            height: 5.h,
-          ),
           Row(
             children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text("$quantity * ",
-                      style: AppsTextStyle.mediumNormalText
-                          .copyWith(color: AppColors.green)),
-                  Text(
-                      "${AppsFunction.getDiscountedPrice(productModel.productprice!, productModel.discount!.toDouble())}",
-                      style: AppsTextStyle.mediumNormalText
-                          .copyWith(color: AppColors.green)),
-                ],
-              ),
+              Text("$quantity × $discountedPrice",
+                  style: AppsTextStyle.mediumNormalText
+                      .copyWith(color: AppColors.green)),
               const Spacer(),
-              Text(
-                  "= ৳. ${AppsFunction.calculateTotalPriceWithQuantity(productModel.productprice!, productModel.discount!.toDouble(), quantity).toStringAsFixed(2)}",
+              Text("= ${AppString.currencyIcon} $totalPrice",
                   style: AppsTextStyle.largeBoldText
                       .copyWith(color: AppColors.green)),
             ],

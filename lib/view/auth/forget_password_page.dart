@@ -6,7 +6,7 @@ import '../../controller/auth_controller.dart';
 import '../../res/app_function.dart';
 import '../../res/app_string.dart';
 
-import '../../res/internet_utilis.dart';
+import '../../res/network_utilis.dart';
 import '../../res/validator.dart';
 import '../../widget/custom_auth_button_widget.dart';
 import '../../widget/rich_text_widget.dart';
@@ -49,8 +49,8 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                   onPressed: () async {
                     if (!_formKey.currentState!.validate()) return;
 
-                    await NetworkUtili.internetCheckingWFunction(
-                        function: () async =>
+                    await NetworkUtils.executeWithInternetCheck(
+                        action: () async =>
                             await authController.resetPassword());
                   },
                   title: AppString.resetPassword,

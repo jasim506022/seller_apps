@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:seller_apps/res/internet_utilis.dart';
+import 'package:seller_apps/res/network_utilis.dart';
 
 import '../../../res/app_function.dart';
 import '../../../res/apps_color.dart';
@@ -21,7 +21,7 @@ class GridViewItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        NetworkUtili.internetCheckingWFunction(function: onTap());
+        NetworkUtils.executeWithInternetCheck(action: onTap());
       },
       child: Container(
           padding: EdgeInsets.all(8.r),

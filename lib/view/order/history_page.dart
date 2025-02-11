@@ -10,7 +10,7 @@ class CompleteOrderPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return OrderStatusListWidget(
       appBarTitle: AppString.historyPage,
-      orderStatus: "complete",
+      selectedOrderStatus: "complete",
     );
   }
 }

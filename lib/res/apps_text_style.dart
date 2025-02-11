@@ -10,6 +10,10 @@ class AppsTextStyle {
 
   static ThemeData get theme => Theme.of(context);
 
+  // Title Text Style (Modify)
+  static TextStyle get titleTextStyle => GoogleFonts.poppins(
+      color: theme.primaryColor, fontSize: 20.sp, fontWeight: FontWeight.w800);
+
 // Apps Logo
   static TextStyle get appsLogoTextStyole => GoogleFonts.roboto(
         color: AppColors.green,
@@ -27,7 +31,7 @@ class AppsTextStyle {
       fontWeight: FontWeight.w900,
       height: 1.3,
       letterSpacing: 1.2);
-
+// Modify Text
   static TextStyle get labelTextStyle => GoogleFonts.poppins(
         color: theme.primaryColor,
         fontSize: 16.sp,
@@ -60,11 +64,6 @@ class AppsTextStyle {
   static TextStyle get titleHomeProfileheader => GoogleFonts.poppins(
       color: theme.primaryColor, fontSize: 22.sp, fontWeight: FontWeight.w800);
 
-  // Title Text Style
-
-  static TextStyle get titleTextStyle => GoogleFonts.poppins(
-      color: theme.primaryColor, fontSize: 20.sp, fontWeight: FontWeight.w800);
-
   static TextStyle get gridViewTextStyle => GoogleFonts.poppins(
       color: theme.primaryColor, fontSize: 18.sp, fontWeight: FontWeight.w800);
 
@@ -82,7 +81,7 @@ class AppsTextStyle {
         color: theme.primaryColor,
         fontWeight: FontWeight.w400,
       );
-  // Large Normal Text
+  // Large Normal Text (Modify)
   static TextStyle get largeBoldText => GoogleFonts.poppins(
         fontSize: 16.sp,
         color: theme.primaryColor,
@@ -122,9 +121,9 @@ class AppsTextStyle {
         fontWeight: FontWeight.normal,
       );
 
-// Medium Text
+// Medium Text (Modify)
   static TextStyle get mediumBoldText => GoogleFonts.poppins(
-      color: theme.primaryColor, fontSize: 16.sp, fontWeight: FontWeight.w700);
+      color: theme.primaryColor, fontSize: 15.sp, fontWeight: FontWeight.w700);
 
 // others
   static TextStyle mediumText400lineThrough = GoogleFonts.roboto(

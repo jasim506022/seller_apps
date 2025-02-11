@@ -6,7 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:seller_apps/res/app_string.dart';
 
-import '../../../model/productsmodel.dart';
+import '../../../model/product_model.dart';
 import '../../../res/app_constants.dart';
 import 'base_firebase_service.dart';
 
@@ -207,23 +207,9 @@ class DataFirebaseService implements BaseFirebaseService {
 
   Stream<QuerySnapshot<Map<String, dynamic>>> sellerOrderSnapshot(
       {required List<String> sellerList}) {
-    print(sellerList.length);
     return firebaseFirestore
         .collection("seller")
         .where("uid", whereIn: sellerList)
         .snapshots();
   }
 }
-
-
-
-
-
-/*
-FirebaseFirestore.instance
-          .collection("seller")
-          .doc(seller)
-          .collection("products")
-          .where("productId", whereIn: listProductID)
-          .get()
-*/

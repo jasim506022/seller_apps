@@ -21,7 +21,7 @@ class Validators {
   }
 
   // Validation for non-empty fields.
-  static String? validateNonEmpty(String? value) {
+  static String? validateNameEmpty(String? value) {
     if (value == null || value.isEmpty) return AppString.enterName;
     if (value.length < 4) return AppString.nameValid;
     return null;
@@ -48,6 +48,13 @@ class Validators {
     if (value == null || value.isEmpty) return AppString.pleaseEnterProductName;
     if (value.length <= 2) {
       return AppString.productNameMustbe2Charactoer;
+    }
+    return null;
+  }
+
+  static String? validateNotEmpty(String? value, String fieldName) {
+    if (value == null || value.isEmpty) {
+      return AppString.pleaseEnterField(fieldName);
     }
     return null;
   }

@@ -31,7 +31,7 @@ class ShowErrorDialogWidget extends StatelessWidget {
           SizedBox(
             width: 15.h,
           ),
-          Icon(
+          const Icon(
             Icons.error_sharp,
             color: AppColors.red,
           )

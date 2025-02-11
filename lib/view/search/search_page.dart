@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../controller/search_controller.dart';
-import '../../model/productsmodel.dart';
+import '../../model/product_model.dart';
 import '../../res/app_string.dart';
 import '../loading_widget/loading_list_product_widget.dart';
 

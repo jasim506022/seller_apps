@@ -2,7 +2,7 @@ import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../model/productsmodel.dart';
+import '../model/product_model.dart';
 import '../res/apps_color.dart';
 import 'product_discount_widget.dart';
 

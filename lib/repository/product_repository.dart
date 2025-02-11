@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:seller_apps/model/productsmodel.dart';
+import 'package:seller_apps/model/product_model.dart';
 
 import '../data/response/service/data_firebase_service.dart';
 import '../res/app_function.dart';

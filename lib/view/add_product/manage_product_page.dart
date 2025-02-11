@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controller/add_product_controller.dart';
-import '../../model/productsmodel.dart';
+import '../../model/product_model.dart';
 
 import '../../res/app_function.dart';
 import '../../res/app_string.dart';

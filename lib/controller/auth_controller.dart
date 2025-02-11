@@ -16,7 +16,7 @@ import 'loading_controller.dart';
 import 'select_image_controller.dart';
 
 class AuthController extends GetxController {
-  final AuthReposity repository;
+  final AuthRepository repository;
   final LoadingController loadingController = Get.find();
   final SelectImageController selectImageController = Get.find();
 

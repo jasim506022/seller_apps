@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../res/apps_color.dart';
 import '../res/apps_text_style.dart';
-import '../res/internet_utilis.dart';
+import '../res/network_utilis.dart';
 
 class RichTextWidget extends StatelessWidget {
   const RichTextWidget({
@@ -27,7 +27,7 @@ class RichTextWidget extends StatelessWidget {
       TextSpan(
           recognizer: TapGestureRecognizer()
             ..onTap = () async {
-              await NetworkUtili.internetCheckingWFunction(function: tap);
+              await NetworkUtils.executeWithInternetCheck(action: tap);
             },
           text: colorText,
           style: AppsTextStyle.buttonTextStyle.copyWith(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../model/productsmodel.dart';
+import '../../model/product_model.dart';
 
 class SearchProvider extends ChangeNotifier {
   bool _isSearch = false;

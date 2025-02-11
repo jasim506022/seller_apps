@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../controller/product_controller.dart';
-import '../../../model/productsmodel.dart';
+import '../../../model/product_model.dart';
 import '../../../res/app_string.dart';
 import '../../../res/apps_text_style.dart';
-import '../../../res/internet_utilis.dart';
+import '../../../res/network_utilis.dart';
 import '../../../res/routes/routes_name.dart';
 
 class ProductActionPopupMenu extends StatelessWidget {
@@ -32,7 +32,7 @@ class ProductActionPopupMenu extends StatelessWidget {
   Future<void> _handleAction(
     ProductAction action,
   ) async {
-    NetworkUtili.internetCheckingWFunction(function: () async {
+    NetworkUtils.executeWithInternetCheck(action: () async {
       final ProductController productController = Get.find<ProductController>();
       switch (action) {
         case ProductAction.delete:

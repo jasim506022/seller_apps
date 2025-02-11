@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import '../../../controller/product_controller.dart';
-import '../../../model/productsmodel.dart';
+import '../../../model/product_model.dart';
 import '../../../res/app_asset/image_asset.dart';
 import '../../../res/app_function.dart';
 import '../../../res/app_string.dart';

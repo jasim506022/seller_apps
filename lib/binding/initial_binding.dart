@@ -38,10 +38,10 @@ class InitialBinding extends Bindings {
     //     () => SignInController(repository: Get.find<SignInRepository>()),
     //     fenix: true);
 
-    Get.lazyPut<AuthReposity>(() => AuthReposity(), fenix: true);
+    Get.lazyPut<AuthRepository>(() => AuthRepository(), fenix: true);
 
     Get.lazyPut<AuthController>(
-        () => AuthController(repository: Get.find<AuthReposity>()),
+        () => AuthController(repository: Get.find<AuthRepository>()),
         fenix: true);
 
     Get.lazyPut<AddProductRepository>(() => AddProductRepository(),
@@ -52,7 +52,7 @@ class InitialBinding extends Bindings {
             AddProductController(repository: Get.find<AddProductRepository>()),
         fenix: true);
 
-    Get.put<LoadingController>(LoadingController());
+    Get.put<LoadingController>(LoadingController(), permanent: true);
 
     Get.lazyPut<SelectImageRepository>(() => SelectImageRepository(),
         fenix: true);

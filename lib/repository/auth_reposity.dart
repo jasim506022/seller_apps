@@ -7,7 +7,7 @@ import '../data/response/service/data_authentication_service.dart';
 import '../model/profile_model.dart';
 import '../res/app_function.dart';
 
-class AuthReposity {
+class AuthRepository {
   final DataAuthenticationService _authService = DataAuthenticationService();
 
   /// Signs in a user using their email and password.

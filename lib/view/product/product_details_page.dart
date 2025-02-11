@@ -4,7 +4,7 @@ import 'package:seller_apps/res/app_string.dart';
 import '../../res/utils.dart';
 import '../../res/routes/routes_name.dart';
 
-import '../../model/productsmodel.dart';
+import '../../model/product_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../controller/product_controller.dart';

@@ -5,10 +5,10 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:seller_apps/res/app_function.dart';
 
-import '../../../model/productsmodel.dart';
+import '../../../model/product_model.dart';
 import '../../../res/app_string.dart';
 import '../../../res/apps_text_style.dart';
-import '../../../res/internet_utilis.dart';
+import '../../../res/network_utilis.dart';
 import '../../../res/routes/routes_name.dart';
 
 class SimilarProductWidget extends StatelessWidget {
@@ -22,7 +22,7 @@ class SimilarProductWidget extends StatelessWidget {
 
     return InkWell(
       onTap: () async {
-        NetworkUtili.internetCheckingWFunction(function: () {
+        NetworkUtils.executeWithInternetCheck(action: () {
           Get.offAndToNamed(
             RoutesName.productDetails,
             arguments: {AppString.productModel: productModel},

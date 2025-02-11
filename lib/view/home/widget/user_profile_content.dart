@@ -27,7 +27,7 @@ class UserProfileContent extends StatelessWidget {
           children: [
             UserAvatarWidget(
               imageUrl: imageUrl,
-              height: 70,
+              size: 70,
             ),
             AppsFunction.horizontalSpace(15),
             Column(

@@ -3,42 +3,46 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../res/apps_text_style.dart';
 
-class ProfileCustomListTitleWidget extends StatelessWidget {
-  const ProfileCustomListTitleWidget(
+/// A customizable profile list tile with an icon, title, and optional trailing icon.
+class ProfileOptionTileWidget extends StatelessWidget {
+  const ProfileOptionTileWidget(
       {super.key,
       required this.title,
       required this.icon,
       required this.onTap,
       this.iconColor,
-      this.showTrailing = true});
+      this.hasTrailingIcon = true});
 
   final String title;
   final IconData icon;
-  final VoidCallback onTap; // understand this code clear
+  final VoidCallback onTap;
   final Color? iconColor;
-  final bool showTrailing;
+  final bool hasTrailingIcon;
 
   @override
   Widget build(BuildContext context) {
+    final Color defaultColor = iconColor ?? Theme.of(context).primaryColor;
     return ListTile(
       onTap: onTap,
       leading: Icon(
         icon,
-        color: iconColor ?? Theme.of(context).primaryColor,
+        color: defaultColor,
         size: 25.h,
       ),
-      trailing: showTrailing
+      trailing: hasTrailingIcon
           ? IconButton(
               onPressed: onTap,
               icon: Icon(
                 Icons.arrow_forward_ios,
-                color: Theme.of(context).primaryColor,
                 size: 20.h,
               ))
           : null,
       title: Text(title,
-          style: AppsTextStyle.mediumBoldText
-              .copyWith(color: iconColor ?? Theme.of(context).primaryColor)),
+          style: AppsTextStyle.mediumBoldText.copyWith(color: defaultColor)),
     );
   }
 }
+
+/*
+#: Why onTap Work propperly Without use ();
+*/

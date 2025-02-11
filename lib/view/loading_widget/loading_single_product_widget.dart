@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shimmer/shimmer.dart';
 
 import '../../res/app_function.dart';
-import '../../res/apps_color.dart';
-import '../../res/utils.dart';
+
+import '../../widget/defaul_shimmer_widget.dart';
 
 class LoadingSingleProductWidget extends StatelessWidget {
   const LoadingSingleProductWidget({
@@ -13,8 +12,34 @@ class LoadingSingleProductWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Utils Utils = Utils(context);
-    return Padding(
+    return DefaultShimmerWidget(
+      height: 130,
+      padding: 15,
+      widget: Padding(
+        padding: EdgeInsets.all(8.r),
+        child: Row(
+          children: [
+            AppsFunction.lineShimmer(130.h, 130.h),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: List.generate(3, (index) {
+                    return AppsFunction.lineShimmer(
+                        15.h); // Shimmer for text lines
+                  }),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+
+/*
+    Padding(
       padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
       child: Container(
         height: 160.h, //160
@@ -54,5 +79,7 @@ class LoadingSingleProductWidget extends StatelessWidget {
         ),
       ),
     );
+ 
+ */
   }
 }

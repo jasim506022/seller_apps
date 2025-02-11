@@ -49,14 +49,3 @@ class OrderStatusWidget extends StatelessWidget {
     );
   }
 }
-
-/*
-  if (orderModel.status == "complete") {
-                  Get.dialog(const ShowErrorDialogWidget(
-                      title: "Order Complete",
-                      message: "Order Already HandOver to User"));
-                } else {
-                  controller.handleOrderUpdate(orderModel.status,
-                      orderModel.orderId, orderModel.orderBy);
-                }
-*/

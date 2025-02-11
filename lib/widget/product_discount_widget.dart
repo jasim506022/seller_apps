@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:seller_apps/res/app_string.dart';
 
 import '../res/apps_color.dart';
 import '../res/apps_text_style.dart';
@@ -25,7 +26,7 @@ class ProductDiscountWidget extends StatelessWidget {
           color: AppColors.lightRed.withOpacity(.2),
         ),
         child: Text(
-          "$discount% Off",
+          "$discount% ${AppString.off}",
           style: AppsTextStyle.smallBoldText.copyWith(
             color: AppColors.red,
           ),

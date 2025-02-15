@@ -13,7 +13,7 @@ class LoadingListProductWidget extends StatelessWidget {
     return GridView.builder(
       shrinkWrap: true,
       physics: const AlwaysScrollableScrollPhysics(),
-      gridDelegate: AppsFunction.buildGridDelegate(),
+      gridDelegate: AppsFunction.defaultProductGridDelegate(),
       itemCount: 20,
       itemBuilder: (context, index) {
         return const LoadingProductWidget();

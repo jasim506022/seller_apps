@@ -4,8 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'filter_dialog_content_widget.dart';
 
-class FilterDialogWidget extends StatelessWidget {
-  const FilterDialogWidget({super.key});
+/// **ProductFilterDialog**
+/// A reusable alert dialog widget for filtering products.
+class ProductFilterDialog extends StatelessWidget {
+  const ProductFilterDialog({super.key});
 
   @override
   Widget build(BuildContext context) {

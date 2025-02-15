@@ -30,7 +30,7 @@ class ProductSearchController extends GetxController {
 
   @override
   void onInit() {
-    initializeDefaults();
+    resetFilters();
     super.onInit();
   }
 
@@ -43,12 +43,13 @@ class ProductSearchController extends GetxController {
     super.onClose();
   }
 
-  void setProductList(List<ProductModel> products) {
+  /// Updates the product list.
+  void updateProductList(List<ProductModel> products) {
     allProducts.assignAll(products); // Clean way to update the list
   }
 
   // reset to Defaults default values for controllers and observables
-  void initializeDefaults() {
+  void resetFilters() {
     minPriceTEC.text = "0.00";
     maxPriceTEC.text = "10000.00";
     selectedCategory.value = "All";
@@ -58,7 +59,8 @@ class ProductSearchController extends GetxController {
   }
 
   // Set selected category
-  void selectCategory(String category) => selectedCategory.value = category;
+  void updateSelectedCategory(String category) =>
+      selectedCategory.value = category;
 
   // Search products based on input text
   void searchProducts(String text) {
@@ -81,8 +83,7 @@ class ProductSearchController extends GetxController {
     final double maxPrice = double.tryParse(maxPriceTEC.text) ?? 10000.00;
 
     if (minPrice > maxPrice) {
-      AppsFunction.flutterToast(
-          msg: 'Minimum price cannot exceed maximum price.');
+      AppsFunction.flutterToast(msg: AppString.minumeAndMaximum);
       return;
     }
 
@@ -105,7 +106,7 @@ class ProductSearchController extends GetxController {
   }
 
 // Retrieve product snapshots from Firestore
-  Stream<QuerySnapshot<Map<String, dynamic>>> productSnapshots() {
+  Stream<QuerySnapshot<Map<String, dynamic>>> fetchProductStream() {
     try {
       return productController.repository
           .productSnapshots(category: selectedCategory.value);

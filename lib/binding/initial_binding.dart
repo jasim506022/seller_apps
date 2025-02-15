@@ -10,7 +10,7 @@ import '../controller/onboarding_controller.dart';
 import '../controller/order_controller.dart';
 import '../controller/product_controller.dart';
 import '../controller/profile_controller.dart';
-import '../controller/search_controller.dart';
+import '../controller/product_search_controller.dart';
 import '../controller/select_image_controller.dart';
 
 import '../controller/splash_controller.dart';

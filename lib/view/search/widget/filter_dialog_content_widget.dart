@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:seller_apps/res/app_function.dart';
-import 'package:seller_apps/res/app_string.dart';
 
-import '../../../controller/search_controller.dart';
+import '../../../controller/product_search_controller.dart';
 import '../../../res/app_constants.dart';
+import '../../../res/app_function.dart';
+import '../../../res/app_string.dart';
 import '../../../res/apps_color.dart';
 import '../../../res/apps_text_style.dart';
-import '../../../widget/custom_round_action_button_widget.dart';
+import '../../../widget/app_button.dart';
 import '../../../widget/custom_drop_down_widget.dart';
 import 'product_price_box_widget.dart';
 
@@ -58,7 +58,7 @@ class FilterDialogContentWidget extends StatelessWidget {
           items: AppConstants.allCategories,
           onChanged: (category) {
             if (category != null) {
-              searchController.selectCategory(category);
+              searchController.updateSelectedCategory(category);
             }
           },
         ),
@@ -74,8 +74,9 @@ class FilterDialogContentWidget extends StatelessWidget {
       children: [
         TextButton(
           onPressed: () {
-            searchController.initializeDefaults();
-            Get.back();
+            searchController.resetFilters();
+            // Get.back();
+            WidgetsBinding.instance.addPostFrameCallback((_) => Get.back());
             FocusScope.of(context).unfocus();
           },
           child: Text(
@@ -85,26 +86,27 @@ class FilterDialogContentWidget extends StatelessWidget {
         ),
         Row(
           children: [
-            CustomRoundActionButtonWidget(
-              horizontal: 10.w,
-              title: AppString.close,
-              onTap: () {
-                Get.back();
-                FocusScope.of(context).unfocus();
-              },
-            ),
-            SizedBox(width: 10.w),
-            CustomRoundActionButtonWidget(
-              horizontal: 10.w,
-              title: AppString.save,
-              onTap: () {
-                searchController.applyFilters();
-                FocusScope.of(context).unfocus();
-              },
-            ),
+            _buildActionButton(AppString.close, () {
+              Get.back();
+              FocusScope.of(context).unfocus();
+            }),
+            AppsFunction.horizontalSpace(15),
+            _buildActionButton(AppString.save, () {
+              searchController.applyFilters();
+              FocusScope.of(context).unfocus();
+            }),
           ],
         ),
       ],
     );
   }
+
+  AppButton _buildActionButton(String title, VoidCallback onTap) {
+    return AppButton(width: 80, title: title, onPressed: onTap);
+  }
 }
+
+/*
+WidgetsBinding.instance.addPostFrameCallback((_) => Get.back()); why use this 
+why sometimes onTap() work and sometimes doesn't work 
+*/

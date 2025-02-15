@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-import '../../../controller/search_controller.dart';
+import '../../../controller/product_search_controller.dart';
 import '../../../model/product_model.dart';
 import '../../../res/app_asset/image_asset.dart';
 import '../../../res/app_function.dart';
@@ -10,6 +10,8 @@ import '../../../res/app_string.dart';
 import '../../../widget/empty_widget.dart';
 import '../../../widget/product_widget.dart';
 
+/// **SearchProductGridWidget**
+/// Displays a grid of products based on search and filter criteria.
 class SearchProductGridWidget extends StatelessWidget {
   const SearchProductGridWidget({
     super.key,
@@ -17,33 +19,32 @@ class SearchProductGridWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var searchController = Get.find<ProductSearchController>();
+    final controller = Get.find<ProductSearchController>();
     return Obx(() {
-      final productList = _getFilteredProducts(searchController);
+      final productList = _getFilteredProducts(
+          controller); // Encapsulated filtering logic in controller
 
-      if (productList.isEmpty) {
-        return EmptyWidget(
-          image: AppImage.error,
-          title: AppString.noDataAvaiable,
-        );
-      }
+      return productList.isEmpty
+          ? EmptyWidget(
+              image: AppImage.error,
+              title: AppString.noDataAvaiable,
+            )
 
-      /// Builds the product grid using the filtered product list.
-      return GridView.builder(
-        itemCount: productList.length,
-        gridDelegate: AppsFunction.buildGridDelegate(),
-        itemBuilder: (context, index) {
-          return ChangeNotifierProvider.value(
-            value: productList[index],
-            child: const ProductWidget(),
-          );
-        },
-      );
+          /// Builds the product grid using the filtered product list.
+          : GridView.builder(
+              itemCount: productList.length,
+              gridDelegate: AppsFunction.defaultProductGridDelegate(),
+              itemBuilder: (context, index) {
+                return ChangeNotifierProvider.value(
+                  value: productList[index],
+                  child: const ProductWidget(),
+                );
+              },
+            );
     });
   }
 
   /// Filters the product list based on the current state of the search and filter controllers.
-
   List<ProductModel> _getFilteredProducts(
       ProductSearchController searchController) {
     if (searchController.isFilterActive.value &&
@@ -57,3 +58,7 @@ class SearchProductGridWidget extends StatelessWidget {
     return searchController.allProducts;
   }
 }
+
+/*
+#:Use final to prevent reassignment and improve clarity.
+*/

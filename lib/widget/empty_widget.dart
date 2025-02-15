@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:seller_apps/res/apps_text_style.dart';
 
+import '../res/apps_text_style.dart';
+
+/// A reusable widget that displays an image and a message when no data is available.
 class EmptyWidget extends StatelessWidget {
   const EmptyWidget({
     super.key,
@@ -17,11 +19,16 @@ class EmptyWidget extends StatelessWidget {
     return Center(
       child: Stack(
         children: [
+          /// Background image for empty state
+
           Image.asset(
             image,
             height: 550.h,
             width: 320.w,
           ),
+
+          /// Title positioned on the image
+
           Positioned(
             top: 120.h,
             left: 130.w,
@@ -40,3 +47,6 @@ class EmptyWidget extends StatelessWidget {
     );
   }
 }
+/*
+Used const where applicable	Optimizes widget rebuilds.
+*/

@@ -22,7 +22,7 @@ class AppButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 50.h,
+      height: 48.h,
       width: width?.w ?? double.infinity,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
@@ -31,7 +31,7 @@ class AppButton extends StatelessWidget {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15.r))),
         onPressed: () =>
-            NetworkUtils.executeWithInternetCheck(action: () => onPressed),
+            NetworkUtils.executeWithInternetCheck(action: () => onPressed()),
 
         /// Ensures button action is only performed if internet is available.
         child: Text(

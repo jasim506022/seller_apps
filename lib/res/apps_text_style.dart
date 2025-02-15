@@ -38,17 +38,18 @@ class AppsTextStyle {
         fontWeight: FontWeight.w700,
       );
 
-  // Large Normal Text
+  // Large Normal Text (modify)
   static TextStyle get largeCustomBoldText => GoogleFonts.poppins(
-        fontSize: 18.sp,
+        fontSize: 16.sp,
         color: theme.primaryColor,
         fontWeight: FontWeight.w800,
       );
 
+// (modify)
   static TextStyle mediumTextCustom400lineThrough = GoogleFonts.roboto(
       decoration: TextDecoration.lineThrough,
       color: const Color(0xffcecfd2),
-      fontSize: 16.sp,
+      fontSize: 15.sp,
       fontWeight: FontWeight.w700);
 
 // dialog title
@@ -83,7 +84,7 @@ class AppsTextStyle {
       );
   // Large Normal Text (Modify) (Heading Title)
   static TextStyle get largeBoldText => GoogleFonts.poppins(
-        fontSize: 16.sp,
+        fontSize: 15.sp,
         color: theme.primaryColor,
         fontWeight: FontWeight.w800,
       );
@@ -143,7 +144,7 @@ class AppsTextStyle {
         fontSize: 13.sp,
       );
 
-//
+// Modify
   static TextStyle emptyTestStyle = GoogleFonts.roboto(
-      color: AppColors.red, fontSize: 25.sp, fontWeight: FontWeight.bold);
+      color: AppColors.red, fontSize: 22.sp, fontWeight: FontWeight.bold);
 }

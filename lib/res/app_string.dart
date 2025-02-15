@@ -40,6 +40,8 @@ Auth String
   static String phone = "Phone";
   static String name = "Name";
   static String orderDate = "or.Date";
+  static String minium = "Minimum";
+  static String maximum = "Maximum";
 
   // Textfleid String
   static String emailAddress = "Email Address";
@@ -128,13 +130,9 @@ Auth String
   static String orderComplete = "Order Complete";
 
   static String order = "Order";
-  static String searchProducts = "Search Products";
+
   static String searchProductHere = "Search Product Here";
-  static String filterSearch = "Filter Search";
-  static String productCategory = 'Product Category';
-  static String reset = "Reset";
-  static String close = "Close";
-  static String save = 'Save';
+
   static String myOrder = 'My Orders';
   static String off = "Off";
 
@@ -165,9 +163,13 @@ Auth String
   static String completeOrder = "Complete Order";
   static String deliveryPartner = "Delivery Partner";
   static String trackingNumber = "Tracking Number";
+  static String searchProducts = "Search Products";
+  static String productPrice = 'Product Price';
+  static String productCategory = 'Product Category';
 
   // Heading
   static String userDetails = "User Details";
+  static String filterSearch = "Filter Search";
 
   // argument;
   static const isUpdate = "isUpdate";
@@ -212,8 +214,6 @@ Auth String
   //
   static const currencyIcon = "৳.";
   static const similarProducts = "Similar Products";
-  static const update = "Update";
-  static const delete = "Delete";
 
   // static const signOut = "Sign Out";
 
@@ -231,6 +231,13 @@ Auth String
   static String light = "Light";
   static const String pleaseEnterPrefix = "Please enter";
   static const homePage = "Home Page";
+  static const update = "Update";
+  static const delete = "Delete";
+  static String reset = "Reset";
+  static String close = "Close";
+  static String save = 'Save';
+
+  static String minumeAndMaximum = 'Minimum price cannot exceed maximum price.';
 
   static String pleaseEnterField(String fieldName) {
     return "$pleaseEnterPrefix $fieldName.";

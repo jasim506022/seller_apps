@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import '../model/product_model.dart';
@@ -8,9 +9,12 @@ import '../res/app_string.dart';
 import '../res/apps_color.dart';
 import '../res/apps_text_style.dart';
 
+import '../res/routes/routes_name.dart';
 import 'app_button.dart';
 import 'product_image_widget.dart';
 
+/// **ProductWidget**
+/// Displays a product card with image, price, and navigation options.
 class ProductWidget extends StatelessWidget {
   const ProductWidget({
     super.key,
@@ -18,25 +22,24 @@ class ProductWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final productModel = Provider.of<ProductModel>(context);
+    final product = Provider.of<ProductModel>(context);
     return InkWell(
-      onTap: () {
-        _navigateToPage(productModel);
-      },
+      onTap: () => _navigateToPage(product),
       child: Card(
         elevation: 4,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            /// Product Image Section
             ProductImageWidget(
               imageHeight: 90,
-              productModel: productModel,
+              productModel: product,
               height: 100,
             ),
             Expanded(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 12.w),
-                child: _buildProductDetails(productModel),
+                child: _buildProductInfoSection(product),
               ),
             )
           ],
@@ -45,7 +48,11 @@ class ProductWidget extends StatelessWidget {
     );
   }
 
-  Column _buildProductDetails(ProductModel productModel) {
+  /// Builds the product's information section with name, price, and action button.
+  Column _buildProductInfoSection(ProductModel productModel) {
+    var productPrice = AppsFunction.getDiscountedPrice(
+            productModel.productprice!, productModel.discount!.toDouble())
+        .toStringAsFixed(2);
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,7 +60,7 @@ class ProductWidget extends StatelessWidget {
         Row(
           children: [
             Text(
-              "${AppString.currencyIcon} ${AppsFunction.getDiscountedPrice(productModel.productprice!, productModel.discount!.toDouble()).toStringAsFixed(2)}",
+              "${AppString.currencyIcon} $productPrice",
               style: AppsTextStyle.largeCustomBoldText
                   .copyWith(color: AppColors.red),
             ),
@@ -65,6 +72,8 @@ class ProductWidget extends StatelessWidget {
           ],
         ),
         AppsFunction.verticalSpace(2),
+
+        /// Product Name
         Text(
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
@@ -73,9 +82,7 @@ class ProductWidget extends StatelessWidget {
         ),
         AppsFunction.verticalSpace(5),
         AppButton(
-          onPressed: () {
-            _navigateToPage(productModel, true);
-          },
+          onPressed: () => _navigateToPage(productModel, true),
           title: AppString.update,
         ),
         AppsFunction.verticalSpace(5)
@@ -83,20 +90,20 @@ class ProductWidget extends StatelessWidget {
     );
   }
 
-  /// Handles navigation based on the action (product details or update).
+  /// Handles navigation based on the action (view details or update).
   Future<void> _navigateToPage(ProductModel productModel,
       [bool isUpdate = false]) async {
-/*
-    if (!(await NetworkUtili.verifyInternetStatus())) {
-      final routeName = isUpdate
-          ? RoutesName.uploadAndUpdateProduct
-          : RoutesName.productDetails;
-      Get.toNamed(routeName, arguments: {
-        AppString.productModel: productModel,
-        if (isUpdate) AppString.isUpdate: true,
-      });
-
-    }
-    */
+    final routeName = isUpdate
+        ? RoutesName.uploadAndUpdateProduct
+        : RoutesName.productDetails;
+    Get.toNamed(routeName, arguments: {
+      AppString.productModel: productModel,
+      if (isUpdate) AppString.isUpdate: true,
+    });
   }
 }
+
+/*
+#: Parameter 
+#: 
+*/

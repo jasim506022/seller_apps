@@ -200,7 +200,10 @@ class AppsFunction {
         statusBarIconBrightness: Theme.of(context).brightness));
   }
 
-  static SliverGridDelegateWithFixedCrossAxisCount buildGridDelegate() {
+  /// Returns a standard grid delegate for displaying products in a 2-column layout.
+  /// This maintains consistent spacing and aspect ratio across product grids.
+  static SliverGridDelegateWithFixedCrossAxisCount
+      defaultProductGridDelegate() {
     return const SliverGridDelegateWithFixedCrossAxisCount(
       crossAxisCount: 2,
       childAspectRatio: .76,

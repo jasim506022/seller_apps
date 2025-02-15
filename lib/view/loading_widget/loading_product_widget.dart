@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../res/app_function.dart';
 import '../../widget/defaul_shimmer_widget.dart';
 
+/// A shimmer effect widget that represents the loading state of a product.
 class LoadingProductWidget extends StatelessWidget {
   const LoadingProductWidget({
     super.key,
@@ -26,9 +27,9 @@ class LoadingProductWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: List.generate(
                     3,
-                    (index) => Column(
+                    (_) => Column(
                           children: [
-                            AppsFunction.shimmerPlaceholder(height:15),
+                            AppsFunction.shimmerPlaceholder(height: 15),
                             AppsFunction.verticalSpace(8),
                           ],
                         ))),

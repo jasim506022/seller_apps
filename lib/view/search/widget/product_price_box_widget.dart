@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:seller_apps/res/app_function.dart';
 
-import '../../../controller/search_controller.dart';
+import '../../../controller/product_search_controller.dart';
+import '../../../res/app_string.dart';
 import '../../../res/apps_text_style.dart';
 import '../../../widget/text_field_form_widget.dart';
 
@@ -17,20 +18,18 @@ class ProductPriceBoxWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Product Price', style: AppsTextStyle.mediumBoldText),
+        Text(AppString.productPrice, style: AppsTextStyle.mediumBoldText),
         Row(
           children: [
             Expanded(
                 child: TextFormFieldWidget(
-                    hintText: "Minium",
+                    hintText: AppString.minium,
                     controller: searchController.minPriceTEC)),
-            SizedBox(
-              width: 15.w,
-            ),
+            AppsFunction.horizontalSpace(15),
             Expanded(
               child: TextFormFieldWidget(
                   controller: searchController.maxPriceTEC,
-                  hintText: "Maximum"),
+                  hintText: AppString.maximum),
             ),
           ],
         ),

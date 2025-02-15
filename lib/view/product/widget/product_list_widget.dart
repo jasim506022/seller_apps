@@ -51,7 +51,7 @@ class ProductListWidget extends StatelessWidget {
       shrinkWrap: true,
       physics: const AlwaysScrollableScrollPhysics(),
       itemCount: snapshot.data!.docs.length,
-      gridDelegate: AppsFunction.buildGridDelegate(),
+      gridDelegate: AppsFunction.defaultProductGridDelegate(),
       itemBuilder: (context, index) {
         ProductModel productModel =
             ProductModel.fromMap(snapshot.data!.docs[index].data());

@@ -6,28 +6,29 @@ import '../model/app_exception.dart';
 import '../model/order_model.dart';
 import '../repository/order_repository.dart';
 import '../res/app_asset/icon_asset.dart';
+import '../res/app_asset/image_asset.dart';
 import '../res/app_string.dart';
 import '../widget/error_dialog_widget.dart';
 
+/// Controller responsible for managing order-related operations.
 class OrderController extends GetxController {
   OrderRepository orderRepository;
 
+  /// Constructor for initializing the `OrderRepository`.
   OrderController(this.orderRepository);
 
-  /// Returns a stream of orders based on the provided status.
-  Stream<QuerySnapshot<Map<String, dynamic>>> fatchOrders(
+  /// Fetches orders based on the provided order status.
+  Stream<QuerySnapshot<Map<String, dynamic>>> fetchOrders(
       {required String orderStatus}) {
     try {
       return orderRepository.orderSnapshots(orderStatus: orderStatus);
     } catch (e) {
       _handleException(e);
       rethrow;
-      //      return const Stream.empty();
-
     }
   }
 
-  /// Fetches order products based on the provided [orderModel].
+  /// Fetches products related to a specific order.
   Future<QuerySnapshot<Map<String, dynamic>>> fatchOrderProduct(
       {required OrderModel orderModel}) async {
     try {
@@ -38,27 +39,15 @@ class OrderController extends GetxController {
     } catch (e) {
       _handleException(e);
       rethrow;
-      // return Future.error(e);
     }
   }
 
-  /// Fetches seller's products based on provided [productList] and [sellerId].
+  /// Fetches seller's products based on product list and seller ID.
   Future<QuerySnapshot<Map<String, dynamic>>> fatchSellerProduct(
       {required List<String> productList, required String sellerId}) async {
     try {
       return await orderRepository.sellerProductSnapshot(
           productList: productList, sellerId: sellerId);
-    } catch (e) {
-      _handleException(e);
-      rethrow;
-    }
-  }
-
-  /// Returns a stream of order address based on [addressId].
-  Stream<DocumentSnapshot<Map<String, dynamic>>> fatchOrderAddress(
-      {required String addressId}) {
-    try {
-      return orderRepository.orderAddressSnapsot(addressId: addressId);
     } catch (e) {
       _handleException(e);
       rethrow;
@@ -73,6 +62,53 @@ class OrderController extends GetxController {
     } catch (e) {
       _handleException(e);
       rethrow;
+    }
+  }
+
+  /// Stores order status details including images and titles.
+  Map<String, Map<String, String>> orderStatusData = {
+    "normal": {
+      "imageAsset": AppImage.sendProductImage,
+      "title": AppString.sendProductAdmin,
+    },
+    "handover": {
+      "imageAsset": AppImage.handOverImage,
+      "title": AppString.handoverProduct,
+    },
+    "delivery": {
+      "imageAsset": AppImage.deliveryProductImage,
+      "title": AppString.deliveryProduct,
+    },
+    "complete": {
+      "imageAsset": AppString.completeOrder,
+      "title": AppString.orderSuccesfullyCompleted,
+    },
+  };
+
+  /// Fetches user details snapshot.
+  Stream<DocumentSnapshot<Map<String, dynamic>>> fetchUserDetails(
+      {required String userId}) {
+    try {
+      return orderRepository.delivaryUserDetailsSnaphots(userId: userId);
+    } catch (e) {
+      {
+        _handleException(e);
+        rethrow;
+      }
+    }
+  }
+
+  /// Fetches the delivery address snapshot based on the order.
+  Stream<DocumentSnapshot<Map<String, dynamic>>> fetchUserDeliveryAddress(
+      {required OrderModel orderModel}) {
+    try {
+      return orderRepository.userDeliveryAddressSnapshot(
+          userId: orderModel.orderBy, addressId: orderModel.addressId);
+    } catch (e) {
+      {
+        _handleException(e);
+        rethrow;
+      }
     }
   }
 

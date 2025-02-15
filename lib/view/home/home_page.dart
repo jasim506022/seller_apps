@@ -81,7 +81,7 @@ class HomePage extends StatelessWidget {
       height: 153.h,
       width: 1.sw,
       child: GridViewItem(
-        image: ImagesAsset.uploadProductImage,
+        image: AppImage.uploadProductImage,
         label: AppString.uploadYourProduct,
         onTap: () async {
           Get.toNamed(RoutesName.uploadAndUpdateProduct);

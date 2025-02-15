@@ -8,8 +8,8 @@ import '../../../model/order_model.dart';
 import '../../loading_widget/loading_single_product_widget.dart';
 import 'seller_product_widget.dart';
 
-class OrderSellerProductListWidget extends StatelessWidget {
-  const OrderSellerProductListWidget({
+class SellerOrderProductStream extends StatelessWidget {
+  const SellerOrderProductStream({
     super.key,
     required this.orderModel,
   });
@@ -45,7 +45,6 @@ class OrderSellerProductListWidget extends StatelessWidget {
           physics: const NeverScrollableScrollPhysics(),
           itemCount: snapshot.data!.docs.length,
           itemBuilder: (context, index) {
-            
             var sellerName = snapshot.data!.docs[index]["name"];
             var sellerId = snapshot.data!.docs[index]["uid"];
             return SellerOrderProductWidget(

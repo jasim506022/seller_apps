@@ -57,4 +57,25 @@ class OrderRepository {
       rethrow;
     }
   }
+
+  Stream<DocumentSnapshot<Map<String, dynamic>>> delivaryUserDetailsSnaphots(
+      {required String userId}) {
+    try {
+      return _dataFirebaseService.delivaryUserDetailsSnaphots(userId: userId);
+    } catch (e) {
+      AppsFunction.handleException(e);
+      rethrow;
+    }
+  }
+
+  Stream<DocumentSnapshot<Map<String, dynamic>>> userDeliveryAddressSnapshot(
+      {required String userId, required String addressId}) {
+    try {
+      return _dataFirebaseService.userDeliveryAddressSnapshot(
+          userId: userId, addressId: addressId);
+    } catch (e) {
+      AppsFunction.handleException(e);
+      rethrow;
+    }
+  }
 }

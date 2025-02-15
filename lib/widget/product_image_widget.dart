@@ -4,8 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../model/product_model.dart';
 import '../res/apps_color.dart';
-import 'product_discount_widget.dart';
+import 'discount_badge.dart';
 
+/// A reusable widget for displaying a product image with shimmer effect and discount tag.
 class ProductImageWidget extends StatelessWidget {
   const ProductImageWidget({
     super.key,
@@ -41,7 +42,7 @@ class ProductImageWidget extends StatelessWidget {
             ),
           ),
         ),
-        ProductDiscountWidget(discount: productModel.discount!),
+        DiscountBadge(discount: productModel.discount!),
       ],
     );
   }

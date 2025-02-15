@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../res/app_function.dart';
 import '../../../res/apps_text_style.dart';
 
+/// A widget displaying key delivery details using styled rich text.
 class DeliveryRichTextWidget extends StatelessWidget {
   const DeliveryRichTextWidget({
     super.key,
@@ -24,10 +25,7 @@ class DeliveryRichTextWidget extends StatelessWidget {
             text: title,
             style: AppsTextStyle.mediumBoldText,
           ),
-          WidgetSpan(
-              child: SizedBox(
-            width: 10.w,
-          )),
+          WidgetSpan(child: AppsFunction.horizontalSpace(10)),
           TextSpan(
               text: description,
               style: AppsTextStyle.mediumBoldText

@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import 'package:intl_phone_field/intl_phone_field.dart';
 
 import '../../controller/auth_controller.dart';
 import '../../res/app_function.dart';
 
 import '../../res/app_string.dart';
-import '../../res/apps_text_style.dart';
 import '../../res/network_utilis.dart';
 import '../../res/validator.dart';
 import '../../widget/custom_auth_button_widget.dart';

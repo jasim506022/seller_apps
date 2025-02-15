@@ -30,7 +30,7 @@ class ProductListWidget extends StatelessWidget {
                 snapshot.data!.docs.isEmpty ||
                 snapshot.hasError) {
               return EmptyWidget(
-                image: ImagesAsset.error,
+                image: AppImage.error,
                 title: snapshot.hasError
                     ? '${AppString.errorOccure}: ${snapshot.error}'
                     : AppString.noDataAvaiable,

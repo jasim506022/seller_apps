@@ -9,6 +9,7 @@ import '../../../res/apps_color.dart';
 import '../../../res/apps_text_style.dart';
 import '../../../widget/product_image_widget.dart';
 
+/// Displays a single ordered product with its quantity, unit, and pricing details.
 class OrderProductWidget extends StatelessWidget {
   const OrderProductWidget({super.key, required this.quantity});
 
@@ -30,14 +31,14 @@ class OrderProductWidget extends StatelessWidget {
             imageHeight: 110,
             productModel: productModel,
           ),
-          Expanded(child: _buildProductDetails(context, productModel)),
+          Expanded(child: _buildProductInfo(context, productModel)),
         ],
       ),
     );
   }
 
-  Padding _buildProductDetails(
-      BuildContext context, ProductModel productModel) {
+  /// Builds the product details including name, unit, and total price.
+  Padding _buildProductInfo(BuildContext context, ProductModel productModel) {
     final discountedPrice = AppsFunction.getDiscountedPrice(
       productModel.productprice!,
       productModel.discount!.toDouble(),
@@ -58,6 +59,7 @@ class OrderProductWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Product Name
           FittedBox(
             child: Text(
               productModel.productname!,
@@ -66,6 +68,7 @@ class OrderProductWidget extends StatelessWidget {
           ),
           Row(
             children: [
+              // Product Unit (e.g., "1kg", "500g")
               Text(productModel.productunit!,
                   style: AppsTextStyle.mediumBoldText.copyWith(
                     color: Theme.of(context).hintColor,

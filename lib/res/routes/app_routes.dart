@@ -3,8 +3,8 @@ import 'package:seller_apps/view/completeorder/totalsellerpage.dart';
 import 'package:seller_apps/view/add_product/manage_product_page.dart';
 import 'package:seller_apps/view/main/main_page.dart';
 import 'package:seller_apps/view/order/history_page.dart';
-import 'package:seller_apps/view/delivery/delivery_page.dart';
-import 'package:seller_apps/view/order/order_details_page.dart';
+import 'package:seller_apps/view/order/order_overview_page.dart';
+import 'package:seller_apps/view/order/seller_order_breakdown_page.dart';
 import 'package:seller_apps/view/order/order_page.dart';
 import 'package:seller_apps/view/product/product_details_page.dart';
 import 'package:seller_apps/view/product/product_page.dart';
@@ -69,7 +69,7 @@ class AppRoutes {
         ),
         GetPage(
           name: RoutesName.delivaryPage,
-          page: () => const OrderDeliveryPage(),
+          page: () => const OrderOverviewPage(),
         ),
         GetPage(
           name: RoutesName.editProfilePage,
@@ -77,7 +77,7 @@ class AppRoutes {
         ),
         GetPage(
           name: RoutesName.orderDetailsPage,
-          page: () => const OrderDetailsPage(),
+          page: () => const SllerOrderBreakdownPage(),
         ),
       ];
 }

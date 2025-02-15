@@ -5,6 +5,7 @@ import '../../res/app_function.dart';
 
 import '../../widget/defaul_shimmer_widget.dart';
 
+/// A shimmer loading effect for a single product placeholder.
 class LoadingSingleProductWidget extends StatelessWidget {
   const LoadingSingleProductWidget({
     super.key,
@@ -19,16 +20,16 @@ class LoadingSingleProductWidget extends StatelessWidget {
         padding: EdgeInsets.all(8.r),
         child: Row(
           children: [
-            AppsFunction.lineShimmer(130.h, 130.h),
+            AppsFunction.shimmerPlaceholder(height: 130, width: 130),
             Expanded(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: List.generate(3, (index) {
-                    return AppsFunction.lineShimmer(
-                        15.h); // Shimmer for text lines
+                  children: List.generate(3, (_) {
+                    return AppsFunction.shimmerPlaceholder(
+                        height: 15); // Shimmer for text lines
                   }),
                 ),
               ),
@@ -37,49 +38,5 @@ class LoadingSingleProductWidget extends StatelessWidget {
         ),
       ),
     );
-
-/*
-    Padding(
-      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
-      child: Container(
-        height: 160.h, //160
-        width: .9.sw,
-        decoration: BoxDecoration(
-            boxShadow: const [
-              BoxShadow(
-                color: AppColors.black,
-                spreadRadius: .05,
-              )
-            ],
-            color: Theme.of(context).cardColor,
-            borderRadius: BorderRadius.circular(20.r)),
-        child: Shimmer.fromColors(
-          baseColor: ThemeUtils.shimmerBaseColor,
-          highlightColor: ThemeUtils.shimmerHighlightColor,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              AppsFunction.lineShimmer(130.h, 130.h),
-              Expanded(
-                child: Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: List.generate(3, (index) {
-                      return AppsFunction.lineShimmer(
-                          20.h); // Shimmer for text lines
-                    }),
-                  ),
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
- 
- */
   }
 }

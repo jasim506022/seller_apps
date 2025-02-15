@@ -39,6 +39,7 @@ Auth String
   static String address = "Address";
   static String phone = "Phone";
   static String name = "Name";
+  static String orderDate = "or.Date";
 
   // Textfleid String
   static String emailAddress = "Email Address";
@@ -93,7 +94,6 @@ Auth String
   static String allProduct = "All Products";
   static String totalSales = "Total Sales";
   static String runningOrder = "Running Order";
-  static String completeOrder = "Complete Order";
   static String searchHint = "Search...........";
 
   // sharepare
@@ -120,20 +120,14 @@ Auth String
   static String permissionDenied = "Permission denied for notifications.";
   static String fcmTokenError = "Error retrieving FCM token:";
 
-  static String errorOccurred = "Error Occurred:";
   static String historyPage = "History Page";
-  static String orderDelivery = "Order Delivery";
-  static String userDetails = "User Details";
-  static String orderDate = "or.Date";
-  static String deliveryAddress = "Delivery Address";
+
   static String addresNoteFound = "Address Not Found";
-  static String estimatedDelivery = "Estimated Delivery Date is";
+
   static String complete = "complete";
   static String orderComplete = "Order Complete";
-  static String deliveryPartner = "Delivery Partner";
-  static String trackingNumber = "Tracking Number";
+
   static String order = "Order";
-  static String orderDetails = "Order Details";
   static String searchProducts = "Search Products";
   static String searchProductHere = "Search Product Here";
   static String filterSearch = "Filter Search";
@@ -148,6 +142,9 @@ Auth String
   static const sellersCollection = "seller";
   static const productsCollection = "products";
 
+  //Error
+  static String errorOccurred = "Error Occurred:";
+
   // Main Page
   static const home = "Home";
   static const products = "Products";
@@ -161,6 +158,16 @@ Auth String
   static const addNewProduct = "Add New Product";
   static const productTitle = "Products";
   static const String orderPage = "Order Page";
+  static String orderOverview = "Order Overview";
+  static String estimatedDelivery = "Estimated Delivery Date is";
+  static String orderBreakdown = "Order Breakdown";
+  static String deliveryAddress = "Delivery Address";
+  static String completeOrder = "Complete Order";
+  static String deliveryPartner = "Delivery Partner";
+  static String trackingNumber = "Tracking Number";
+
+  // Heading
+  static String userDetails = "User Details";
 
   // argument;
   static const isUpdate = "isUpdate";
@@ -199,7 +206,6 @@ Auth String
   //
   static const available = "available";
   // Firebase Message
-
   static const errorOccure = 'Error Occure';
   static String noDataAvaiable = "No Data Available";
 
@@ -208,8 +214,15 @@ Auth String
   static const similarProducts = "Similar Products";
   static const update = "Update";
   static const delete = "Delete";
-  static const homePage = "Home Page";
+
   // static const signOut = "Sign Out";
+
+  // Order Status
+  static const sendProductAdmin = "Please send your products to the admin";
+  static const handoverProduct = "Handover the product to the admin";
+  static const deliveryProduct = "Product ready for delivery";
+  static const orderSuccesfullyCompleted =
+      "The order has been successfully completed";
 
   //botton
   static const next = "Next";
@@ -217,6 +230,7 @@ Auth String
   static String dark = "Dark";
   static String light = "Light";
   static const String pleaseEnterPrefix = "Please enter";
+  static const homePage = "Home Page";
 
   static String pleaseEnterField(String fieldName) {
     return "$pleaseEnterPrefix $fieldName.";

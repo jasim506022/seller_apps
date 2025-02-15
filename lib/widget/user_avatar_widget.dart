@@ -4,7 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../res/apps_color.dart';
 
-// Modify
+/// A circular profile avatar widget with shimmer effect and error handling.
+
 class UserAvatarWidget extends StatelessWidget {
   const UserAvatarWidget({
     super.key,
@@ -32,3 +33,7 @@ class UserAvatarWidget extends StatelessWidget {
     );
   }
 }
+
+/*
+#: Also Add No Image
+*/

@@ -1,4 +1,4 @@
-class ImagesAsset {
+class AppImage {
   // App Logo
   static String appLogoImage = "asset/image/logo.png";
 
@@ -16,4 +16,10 @@ class ImagesAsset {
   static const String groceryImage = "asset/onboard/grocery.png";
   static const String allGroceryImage = "asset/onboard/all_grocery.png";
   static const String deliveryImage = "asset/onboard/delivery.png";
+
+  // Order Status Image
+  static const String sendProductImage = "asset/order/readyfordeliver.png";
+  static const String handOverImage = "asset/order/readyfordeliver.png";
+  static const String deliveryProductImage = "asset/order/readyfordeliver.png";
+  static const String orderComplete = "asset/order/order complete.jpg";
 }

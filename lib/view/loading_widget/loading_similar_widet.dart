@@ -21,11 +21,11 @@ class LoadingSimilierWidget extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                AppsFunction.lineShimmer(90),
+                AppsFunction.shimmerPlaceholder(height: 90),
                 AppsFunction.verticalSpace(10),
-                AppsFunction.lineShimmer(10),
+                AppsFunction.shimmerPlaceholder(height: 10),
                 AppsFunction.verticalSpace(10),
-                AppsFunction.lineShimmer(10)
+                AppsFunction.shimmerPlaceholder(height: 10)
               ],
             ),
           ),

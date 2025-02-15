@@ -15,6 +15,7 @@ import '../../../widget/empty_widget.dart';
 import '../../loading_widget/loading_list_single_product_widget.dart';
 import 'order_item_widget.dart';
 
+/// Displays a list of orders filtered by status.
 class OrderStatusListWidget extends StatelessWidget {
   const OrderStatusListWidget({
     super.key,
@@ -67,7 +68,7 @@ class OrderStatusListWidget extends StatelessWidget {
     // Get the OrderController for fetching order data
     final orderController = Get.find<OrderController>();
     return StreamBuilder(
-      stream: orderController.fatchOrders(orderStatus: orderStatus),
+      stream: orderController.fetchOrders(orderStatus: orderStatus),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const LoadingListSingleProductWidget();
@@ -76,7 +77,7 @@ class OrderStatusListWidget extends StatelessWidget {
             snapshot.data!.docs.isEmpty ||
             snapshot.hasError) {
           return EmptyWidget(
-            image: ImagesAsset.error,
+            image: AppImage.error,
             title: snapshot.hasError
                 ? '${AppString.errorOccurred} ${snapshot.error}'
                 : AppString.noDataAvaiable,

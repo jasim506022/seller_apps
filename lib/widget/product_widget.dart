@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import '../model/product_model.dart';
@@ -8,9 +7,8 @@ import '../res/app_function.dart';
 import '../res/app_string.dart';
 import '../res/apps_color.dart';
 import '../res/apps_text_style.dart';
-import '../res/network_utilis.dart';
-import '../res/routes/routes_name.dart';
-import 'app_button..dart';
+
+import 'app_button.dart';
 import 'product_image_widget.dart';
 
 class ProductWidget extends StatelessWidget {

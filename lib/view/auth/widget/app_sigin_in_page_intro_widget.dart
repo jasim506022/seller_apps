@@ -21,7 +21,7 @@ class AppSignInPageIntroWidget extends StatelessWidget {
         AppsFunction.verticalSpace(50),
         widget ??
             Image.asset(
-              ImagesAsset.appLogoImage,
+              AppImage.appLogoImage,
               height: 140.h,
               width: 140.h,
             ),

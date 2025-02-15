@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:seller_apps/controller/add_product_controller.dart';
 import 'package:seller_apps/controller/auth_controller.dart';
 import 'package:seller_apps/controller/category_manager_controller.dart';
-import 'package:seller_apps/controller/delivary_controller.dart';
 import 'package:seller_apps/repository/add_product_repository.dart';
 import 'package:seller_apps/repository/auth_reposity.dart';
 
@@ -15,7 +14,6 @@ import '../controller/search_controller.dart';
 import '../controller/select_image_controller.dart';
 
 import '../controller/splash_controller.dart';
-import '../repository/delivary_repository.dart';
 import '../repository/order_repository.dart';
 import '../repository/product_repository.dart';
 import '../repository/profile_repository.dart';
@@ -89,9 +87,6 @@ class InitialBinding extends Bindings {
         () => OrderController(Get.find<OrderRepository>()),
         fenix: true);
 
-    Get.lazyPut<DelivaryRepository>(() => DelivaryRepository(), fenix: true);
-    Get.lazyPut<DeliveryController>(
-        () => DeliveryController(Get.find<DelivaryRepository>()),
-        fenix: true);
+    
   }
 }

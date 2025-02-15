@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
@@ -20,14 +19,15 @@ class LoadingProfileHeaderWidget extends StatelessWidget {
         highlightColor: ThemeUtils.shimmerHighlightColor,
         child: Row(
           children: [
-            AppsFunction.circleShimmer(60),
+            AppsFunction.shimmerPlaceholder(height: 60, isCircle: true),
             AppsFunction.horizontalSpace(15),
             Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: List.generate(
                   2,
-                  (index) => AppsFunction.lineShimmer(15, 280),
+                  (index) =>
+                      AppsFunction.shimmerPlaceholder(height: 15, width: 280),
                 ))
           ],
         ),
@@ -35,4 +35,3 @@ class LoadingProfileHeaderWidget extends StatelessWidget {
     );
   }
 }
-

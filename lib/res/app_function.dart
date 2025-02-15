@@ -158,34 +158,40 @@ class AppsFunction {
     return calculateDiscountedPrice(productPrice, discount) * quantity;
   }
 
-  static Container lineShimmer(double height, [double? width]) {
+  /// Formats a Unix timestamp (milliseconds since epoch) into a human-readable date string.
+  /// - `timestamp`: Accepts an `int` or `String` (milliseconds since epoch).
+  /// - `includeTime`: If `true`, returns the date with time (e.g., `10:30 AM, Jan 1, 2024`).
+  /// Returns `"N/A"` if the input is invalid.
+
+  static String formatDate(
+      {required String timestamp, bool includeTime = true}) {
+    final date = DateTime.fromMillisecondsSinceEpoch(int.parse(timestamp));
+    return includeTime
+        ? DateFormat('hh:mm a, MMM d, yyyy').format(date)
+        : DateFormat("MMM d, yyyy").format(date);
+  }
+
+  /// Creates a shimmer effect placeholder for loading states.
+  ///
+  /// - [height] (required): Height of the shimmer placeholder.
+  /// - [width]: Optional width; defaults to full screen width.
+  /// - [isCircular]: If `true`, creates a circular shimmer effect.
+  static Container shimmerPlaceholder(
+      {required double height, double? width, bool isCircle = false}) {
     return Container(
       height: height.h,
-      width: width?.w ?? 1.sw,
+      width: isCircle ? height.h : width?.w ?? double.infinity,
       decoration: BoxDecoration(
           color: ThemeUtils.shimmerWidgetColor,
-          borderRadius: BorderRadius.circular(15.r)),
+          shape: isCircle ? BoxShape.circle : BoxShape.rectangle,
+          borderRadius: isCircle ? null : BorderRadius.circular(15.r)),
     );
   }
 
-  static String formatDate(String orderTime) {
-    return DateFormat('hh:mm a, MMM d, yyyy')
-        .format(DateTime.fromMillisecondsSinceEpoch(int.parse(orderTime)));
-  }
-
-  static Container circleShimmer(double height) {
-    return Container(
-      height: height.h,
-      width: height.h,
-      decoration: BoxDecoration(
-          color: ThemeUtils.shimmerWidgetColor, shape: BoxShape.circle),
-    );
-  }
-
-  static String getFormateDate({required String datetime}) {
-    final date = DateTime.fromMillisecondsSinceEpoch(int.parse(datetime));
-    return DateFormat("MMM d, yyyy").format(date);
-  }
+  // static String getFormateDate({required String datetime}) {
+  //   final date = DateTime.fromMillisecondsSinceEpoch(int.parse(datetime));
+  //   return DateFormat("MMM d, yyyy").format(date);
+  // }
 
   static void setSystemUIOverlayStyle(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(

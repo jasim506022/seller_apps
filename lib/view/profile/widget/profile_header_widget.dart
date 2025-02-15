@@ -8,7 +8,7 @@ import '../../../res/app_string.dart';
 import '../../../res/apps_text_style.dart';
 
 import '../../../res/routes/routes_name.dart';
-import '../../../widget/app_button..dart';
+import '../../../widget/app_button.dart';
 import '../../../widget/user_avatar_widget.dart';
 
 /// A widget that displays the user's profile information in the header.

@@ -18,23 +18,23 @@ class DashboardGridModel {
 
 final List<DashboardGridModel> dashboardGridList = [
   DashboardGridModel(
-    image: ImagesAsset.allProductImage,
+    image: AppImage.allProductImage,
     text: AppString.allProduct,
     route: RoutesName.mainPage,
     arguments: 1,
   ),
   DashboardGridModel(
-    image: ImagesAsset.totalsalesImages,
+    image: AppImage.totalsalesImages,
     text: AppString.totalSales,
     route: RoutesName.totalSales,
   ),
   DashboardGridModel(
-    image: ImagesAsset.runningOrderImages,
+    image: AppImage.runningOrderImages,
     text: AppString.runningOrder,
     route: RoutesName.orderPage,
   ),
   DashboardGridModel(
-    image: ImagesAsset.completeOrderImages,
+    image: AppImage.completeOrderImages,
     text: AppString.completeOrder,
     route: RoutesName.completeOrderPage,
   ),

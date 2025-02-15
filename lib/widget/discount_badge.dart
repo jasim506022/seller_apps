@@ -5,8 +5,9 @@ import 'package:seller_apps/res/app_string.dart';
 import '../res/apps_color.dart';
 import '../res/apps_text_style.dart';
 
-class ProductDiscountWidget extends StatelessWidget {
-  const ProductDiscountWidget({
+/// A badge that displays the product discount percentage.
+class DiscountBadge extends StatelessWidget {
+  const DiscountBadge({
     super.key,
     required this.discount,
   });
@@ -15,6 +16,9 @@ class ProductDiscountWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (discount <= 0) {
+      return const SizedBox.shrink(); // Avoids rendering if there's no discount
+    }
     return Positioned(
       left: 10.w,
       top: 10.h,

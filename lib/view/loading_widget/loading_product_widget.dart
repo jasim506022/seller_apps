@@ -17,7 +17,7 @@ class LoadingProductWidget extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: AppsFunction.lineShimmer(135),
+            child: AppsFunction.shimmerPlaceholder(height: 135),
           ),
           Padding(
             padding: EdgeInsets.all(10.0.r),
@@ -28,7 +28,7 @@ class LoadingProductWidget extends StatelessWidget {
                     3,
                     (index) => Column(
                           children: [
-                            AppsFunction.lineShimmer(15),
+                            AppsFunction.shimmerPlaceholder(height:15),
                             AppsFunction.verticalSpace(8),
                           ],
                         ))),

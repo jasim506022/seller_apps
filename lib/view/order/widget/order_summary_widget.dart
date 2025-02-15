@@ -1,39 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:seller_apps/res/app_string.dart';
-import 'package:seller_apps/res/routes/routes_name.dart';
 
 import '../../../model/order_model.dart';
 import '../../../res/app_function.dart';
+import '../../../res/app_string.dart';
 import '../../../res/apps_color.dart';
 import '../../../res/apps_text_style.dart';
-import '../../order/widget/order_item_widget.dart';
+import '../../../res/routes/routes_name.dart';
+import 'order_item_widget.dart';
 
-class OrderProductDetails extends StatelessWidget {
-  const OrderProductDetails({
+/// A widget that displays a summary of an order, including the order ID and a breakdown link.
+class OrderSummaryWidget extends StatelessWidget {
+  const OrderSummaryWidget({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    final orderModel = Provider.of<OrderModel>(context, listen: false);
+    final order = Provider.of<OrderModel>(context, listen: false);
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            // Order ID
             Text(
-              "${AppString.order} ${orderModel.orderId}",
+              "${AppString.order} ${order.orderId}",
               style: AppsTextStyle.largeBoldText,
             ),
+            // Order breakdown link
             InkWell(
-              onTap: () {
-                Get.toNamed(RoutesName.orderDetailsPage, arguments: orderModel);
-              },
+              onTap: () =>
+                  Get.toNamed(RoutesName.orderDetailsPage, arguments: order),
               child: Text(
-                "${AppString.orderDetails} >",
+                "${AppString.orderBreakdown} >",
                 style:
                     AppsTextStyle.mediumBoldText.copyWith(color: AppColors.red),
               ),
@@ -41,9 +44,10 @@ class OrderProductDetails extends StatelessWidget {
           ],
         ),
         AppsFunction.verticalSpace(15),
+        // Product list inside the order
         Flexible(
           child: ChangeNotifierProvider.value(
-            value: orderModel,
+            value: order,
             child: const OrderItemWidget(),
           ),
         ),
@@ -51,3 +55,9 @@ class OrderProductDetails extends StatelessWidget {
     );
   }
 }
+
+
+/*
+final orderModel = Provider.of<OrderModel>(context, listen: false);
+#: Prevents UI Overflows (TextOverflow.ellipsis, Expanded in Row)
+*/

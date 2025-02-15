@@ -23,7 +23,7 @@ class SearchProductGridWidget extends StatelessWidget {
 
       if (productList.isEmpty) {
         return EmptyWidget(
-          image: ImagesAsset.error,
+          image: AppImage.error,
           title: AppString.noDataAvaiable,
         );
       }

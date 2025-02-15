@@ -81,16 +81,16 @@ class AppsTextStyle {
         color: theme.primaryColor,
         fontWeight: FontWeight.w400,
       );
-  // Large Normal Text (Modify)
+  // Large Normal Text (Modify) (Heading Title)
   static TextStyle get largeBoldText => GoogleFonts.poppins(
         fontSize: 16.sp,
         color: theme.primaryColor,
         fontWeight: FontWeight.w800,
       );
 
-  // Large body Normal Text
+  // Large body Normal Text (Modify)
   static TextStyle get mediumNormalText => GoogleFonts.poppins(
-        fontSize: 14.sp,
+        fontSize: 15.sp,
         color: theme.primaryColor,
         fontWeight: FontWeight.w400,
       );
@@ -132,9 +132,9 @@ class AppsTextStyle {
       fontSize: 14.sp,
       fontWeight: FontWeight.w700);
 
-  // Small Bold Text
+  // Small Bold Text (Modify)
   static TextStyle get smallBoldText => GoogleFonts.poppins(
-      color: theme.primaryColor, fontSize: 12.sp, fontWeight: FontWeight.w700);
+      color: theme.primaryColor, fontSize: 11.sp, fontWeight: FontWeight.w700);
 
 //
   static TextStyle get rattingText => GoogleFonts.poppins(

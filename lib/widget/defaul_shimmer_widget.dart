@@ -21,7 +21,7 @@ class DefaultShimmerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget content = SizedBox(
+    Widget shimmerContent = SizedBox(
       height: height.h,
       width: width?.w ?? 1.sw,
       child: Shimmer.fromColors(
@@ -34,7 +34,7 @@ class DefaultShimmerWidget extends StatelessWidget {
       padding: EdgeInsets.symmetric(
         horizontal: padding?.w ?? 0,
       ),
-      child: useCard ? Card(child: content) : content,
+      child: useCard ? Card(child: shimmerContent) : shimmerContent,
     );
   }
 }

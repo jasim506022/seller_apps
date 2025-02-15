@@ -9,7 +9,6 @@ import '../../../res/app_constants.dart';
 import '../../../res/app_function.dart';
 import '../../../res/app_string.dart';
 import '../../../res/apps_color.dart';
-import '../../../res/network_utilis.dart';
 import '../../../res/validator.dart';
 import '../../../widget/custom_elevated_widget.dart';
 import '../../../widget/custom_drop_down_widget.dart';

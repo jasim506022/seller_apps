@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+/// A customizable rounded container with an optional background color.
+/// It provides a standard padding and rounded corners.
 class BackgroundShapeWidget extends StatelessWidget {
   const BackgroundShapeWidget(
       {super.key, required this.child, this.backgroundColor});
 
+  /// The widget displayed inside the container.
   final Widget child;
   final Color? backgroundColor;
 
@@ -20,3 +23,9 @@ class BackgroundShapeWidget extends StatelessWidget {
     );
   }
 }
+
+
+/*
+#: What is different Between 1.sw and double.infinity
+
+*/

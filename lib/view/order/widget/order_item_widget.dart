@@ -45,7 +45,7 @@ class OrderItemWidget extends StatelessWidget {
             snapshot.data!.docs.isEmpty ||
             snapshot.hasError) {
           return EmptyWidget(
-            image: ImagesAsset.error,
+            image: AppImage.error,
             title: snapshot.hasError
                 ? '${AppString.errorOccurred} ${snapshot.error}'
                 : AppString.noDataAvaiable,

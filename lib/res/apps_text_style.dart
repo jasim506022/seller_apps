@@ -62,8 +62,9 @@ class AppsTextStyle {
   //     fontSize: 16.sp,
   //     fontWeight: FontWeight.normal);
 
+// (Modify)
   static TextStyle get titleHomeProfileheader => GoogleFonts.poppins(
-      color: theme.primaryColor, fontSize: 22.sp, fontWeight: FontWeight.w800);
+      color: theme.primaryColor, fontSize: 20.sp, fontWeight: FontWeight.w800);
 
   static TextStyle get gridViewTextStyle => GoogleFonts.poppins(
       color: theme.primaryColor, fontSize: 18.sp, fontWeight: FontWeight.w800);

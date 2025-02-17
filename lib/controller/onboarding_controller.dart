@@ -14,7 +14,7 @@ class OnboardingController extends GetxController {
   void markOnboardingAsViewedAndNavigate() {
     AppConstants.isViewed = 0;
     AppConstants.sharedPreference!
-        .setInt(AppString.onBoardingShareKey, AppConstants.isViewed!);
+        .setInt(AppStrings.onBoardingShareKey, AppConstants.isViewed!);
     Get.offNamed(RoutesName.signPage);
   }
 

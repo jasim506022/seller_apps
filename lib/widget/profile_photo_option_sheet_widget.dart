@@ -35,7 +35,7 @@ class ProfilePhotoOptionSheetWidget extends StatelessWidget {
           AppsFunction.verticalSpace(10),
           Align(
               alignment: Alignment.center,
-              child: Text(AppString.selectPhoto,
+              child: Text(AppStrings.selectPhoto,
                   style: AppsTextStyle.titleTextStyle)),
           AppsFunction.verticalSpace(10),
           _buildPhotoOptions()
@@ -48,12 +48,12 @@ class ProfilePhotoOptionSheetWidget extends StatelessWidget {
     var selectImageController = Get.find<SelectImageController>();
     return Row(
       children: [
-        _buildPhotoOptionButton(AppString.camera, Icons.camera_alt, () {
+        _buildPhotoOptionButton(AppStrings.camera, Icons.camera_alt, () {
           Get.back();
           selectImageController.selectImage(imageSource: ImageSource.camera);
         }),
         AppsFunction.horizontalSpace(30),
-        _buildPhotoOptionButton(AppString.gallery, Icons.photo_album, () {
+        _buildPhotoOptionButton(AppStrings.gallery, Icons.photo_album, () {
           Get.back();
           selectImageController.selectImage(imageSource: ImageSource.gallery);
         }),

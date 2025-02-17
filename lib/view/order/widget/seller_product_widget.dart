@@ -37,7 +37,7 @@ class SellerOrderProductWidget extends StatelessWidget {
                 const TextSpan(text: "Seller Name:\t"),
                 TextSpan(
                   text: AppConstants.sharedPreference!
-                              .getString(AppString.uidSharedPreference) ==
+                              .getString(AppStrings.uidSharedPreference) ==
                           sellerId
                       ? "My Product"
                       : sellerName,

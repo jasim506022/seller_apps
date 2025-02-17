@@ -1,20 +1,100 @@
-class AppString {
+class AppStrings {
 /*
-Auth String
-*/
-  // Dialog String
-  static const String exit = "Exit";
-  static const String exitApps = 'Are you sure you want to Exit this Apps?';
-  static const String yes = "Yes";
-  static const String no = "No";
+   🏠 General App Strings
+  */
+  static const String appsName = "Grocery Apps";
+  static const String welcome = "Welcome";
+  static const String okay = "Okay";
+  static const String about = "About";
+  static const String permissionDenied = "Permission denied for notifications.";
+  static const String fcmTokenError = "Error retrieving FCM token:";
+
+// 📌 App Titles And Bottom Bar
+  static const String homeTitle = "Home";
+  static const String productsTitle = "Products";
+  static const String searchTitle = "Search";
+  static const String profileTitle = "Profile";
+
+  static const String defaultName = "Name Not Found";
+  static const String defaultEmail = "email@example.com";
+  static const String defaultImage =
+      "https://www.example.com/default-profile.png";
+
+/*
+  * 🔐 Authentication & User Account
+  */
+  static const String sellerLogIn = "Welcome, Admin!";
+  static const String signIn = "Sign In";
+  static const String signUp = "Sign Up";
+  static const String createAccount = "Create Account";
+  static const String alreadyHaveAccount = "Already have an account?";
+  static const String dontHaveAccount = "Don't have an account?";
+  static const String forgetPassword = "Forgot Password?";
+  static const String enterEmailAddress = 'Please enter your email address';
+  static const String validEmailAddress = 'Please enter a valid email address';
+  static const String enterPassword = 'Please enter your password';
+  static const String validPassword =
+      'Password must be at least 6 characters long';
+  static const String enterConfirmPassword =
+      'Please enter your confirm password';
+  static const String passwordMatch = "Passwords do not match.";
+  static const String successfullySignedOut = "Successfully signed out.";
+
+  /*
+  * 📸 Image Selection
+  */
+  static const String selectedImage = "Selected Image";
+  static const String noImageSelected = "No Image Selected";
+  static const String captureWithCamera = "Capture image with Camera";
+  static const String captureWithGallery = "Capture image with Gallery";
+  static const String pleaseSelectPhoto = "Please Select a Photo";
+
+/*
+  * 📞 Contact Information
+  */
+
+  static const String phone = "Phone";
+  static const String enterPhone = 'Please enter your phone number';
+  static const String validPhoneNumber = 'Please enter a valid phone number';
+  static const String address = "Address";
+  static const String pleaseEnterAddress = "Please enter your Address";
+
+/*
+  * 🛒 Product Management
+  */
+  static const String uploadProduct = "Upload Your Product";
+  static const String allProducts = "All Products";
+  static const String totalSales = "Total Sales";
+  static const String runningOrders = "Running Orders";
+  static const String searchPlaceholder = "Search...........";
+  static const productName = 'Product Name';
+  static const pleaseEnterProductName = "Please enter Product Name";
+  static const String productNameMustBe3Characters =
+      "Product name must be at least 3 characters long.";
+  static const String price = 'Price';
+  static const String discount = 'Discount';
+  static const String rating = 'Rating';
+  static const String description = 'Description';
+  static const String pickImage = "Pick Image";
+
+  /*
+  * 📦 Orders & Delivery
+  */
+
+  // 📌 Dialog title & Messages
+  static const String exitDialogTitle = "Exit Application";
+  static const String confirmExitMessage = "Are you sure you want to exit?";
+
+  // 📌 Button Labels
+  static const String btnYes = "Yes";
+  static const String btnNo = "No";
+
   static const saveChanges = "Save Changes?";
   static String doYouwantSignout = "Do you want to sign out?";
-  static const selectedImage = "Selected Image";
-  static const cancel = "Cancel";
-  static const captureImageWithCamera = "Capture image with Camera";
-  static const captureImageWithGallery = "Capture image with Gallery";
 
-  static const saveMessage = 'Do you want to save your changes?';
+  static const cancel = "Cancel";
+
+  static const saveMessage = "Do you want to save your changes?";
   static const areYouWantDelete = "Are You want to Delete";
   static const deleteMessage =
       "Do you Want to Delete The Product Produc. If you delete the Product it can not be undo";
@@ -23,21 +103,17 @@ Auth String
   static String gallery = "Gallery";
 
   // Auth Page
-  static String adminLogin = "Welcome Admin Login";
   static String logInPageSubjectTitle =
       'Check our fresh viggies from Jasim Grocery';
-  static String forgetPassword = "Forget Password";
+
   static String withOr = "with Or";
   static String facebook = "Facebook";
   static String gmail = "Gmail";
-  static String createAccount = "Create Account";
-  static String dontHaveAccount = "Don't Have An Account? ";
 
 // TextField Label Text
   static String email = "Email";
   static String password = "Password";
-  static String address = "Address";
-  static String phone = "Phone";
+
   static String name = "Name";
   static String orderDate = "or.Date";
   static String minium = "Minimum";
@@ -45,35 +121,25 @@ Auth String
 
   // Textfleid String
   static String emailAddress = "Email Address";
-  static String enterEmailAddress = 'Please enter your Email Address';
-  static String validEmailAddress = 'Please Enter a Valid Email Address';
+
   static String yourName = 'Your Name';
   static String enterName = 'Please enter your name';
   static String nameValid = 'Name must be longer than 2 characters';
-  static String enterPassword = 'Please enter your Password';
-  static String validPassword = 'Password Must be geather then 6 Characteris';
-  static String enterConfirmPassword = 'Please enter your Confirm Password';
+
   static String validConfirmPassword =
       'Confirm Password Must be geather then 6 Characteris';
   static String passwordConfirm = "Confirm Password";
 
   static String phoneNumber = "Phone Number";
-  static String enterPhone = 'Please enter your phone number';
-  static String validPhoneNumber = 'Please Give Valid Phone number';
+
   static String sendingMail = "Sending a mail. Please Check ur Email";
-  static String pleaseEnterAddress = "Please enter your Address";
 
   //
   static String signInSuccessfully = "Sign in Successfully";
-  static String okay = "Okay";
 
   static String adminRegistration = "Admin Registration";
-  static String signup = 'Sign Up';
-  static String alreadyCreateAccount = "Already Create An Account? ";
 
   static String signupSuccessfull = "Sign up Successfully";
-  static String pleaseSelectPhoto = "Please Select a Photo";
-  static String passwordMatch = "Password and Confirm Password do not match.";
 
   static String entreEmailAddressForResetPassword =
       "Please Enter your mail address to reset you password";
@@ -92,17 +158,12 @@ Auth String
   static String earningSharedPreference = "earning";
 
   //
-  static String uploadYourProduct = "Upload Your Product";
-  static String allProduct = "All Products";
-  static String totalSales = "Total Sales";
-  static String runningOrder = "Running Order";
-  static String searchHint = "Search...........";
 
   // sharepare
   static String onBoardingShareKey = 'onBoarding';
-  static String appsName = "Grocery Apps";
+
   static String skip = "Skip";
-  static String welcome = "Welcome";
+
   static String fresshFruis = "Fresh Fruits & Vegetables";
   static String quickDelivery = "Quick & Fast Delivery";
   static String firstOnboardingDescription =
@@ -112,15 +173,10 @@ Auth String
   static String thirdOnboardingDescription =
       "We offers speedy delivery of your groceries, bathroom supplies, baby care products, pet care items, stationary, etc within 30minutes at your doorstep.";
 
-  static String about = "About";
-
   static String givemPhoneNumbeer = "Please Give your Phone Numer";
   static String pleaseWait = "Pleasing Waiting........";
   static String profileUpdate = "Profile Update";
   static String successfullyUpdate = "Profile updated successfully";
-
-  static String permissionDenied = "Permission denied for notifications.";
-  static String fcmTokenError = "Error retrieving FCM token:";
 
   static String historyPage = "History Page";
 
@@ -144,10 +200,6 @@ Auth String
   static String errorOccurred = "Error Occurred:";
 
   // Main Page
-  static const home = "Home";
-  static const products = "Products";
-  static const search = "Search";
-  static const profile = "Profile";
 
   // App Bar and Title
   static const String editProfile = "Edit Profile";
@@ -166,6 +218,7 @@ Auth String
   static String searchProducts = "Search Products";
   static String productPrice = 'Product Price';
   static String productCategory = 'Product Category';
+  static const similarProducts = "Similar Products";
 
   // Heading
   static String userDetails = "User Details";
@@ -178,16 +231,6 @@ Auth String
   // Title
 
   //add Product
-  static const productName = 'Product Name';
-  static const pleaseEnterProduct = 'Please Enter Product';
-  static const discount = 'Discount';
-  static const ratting = 'Rating';
-  static const description = 'Description';
-  static const price = 'Price';
-  static const pickImage = "Pick Image";
-  static const pleaseEnterProductName = "Please enter Product Name";
-  static const productNameMustbe2Charactoer =
-      "Product Name must be longer than 2 characters";
 
   // dialog
 
@@ -199,11 +242,10 @@ Auth String
   static const waitUntilUpload = "Please Wait Until Upload";
   static const deleteSuccessFully = "Delete Succesffully";
   static const userDoesntExit = "User Doesn't Exit";
-  static const noImageSelect = "No Image Selected";
+
   static const noInternet = 'No Internet';
   static const noInternetMessage =
       'Please check your internet settings and try again.';
-  static String successfullySignout = "Successfully Signed Out";
 
   //
   static const available = "available";
@@ -213,7 +255,6 @@ Auth String
 
   //
   static const currencyIcon = "৳.";
-  static const similarProducts = "Similar Products";
 
   // static const signOut = "Sign Out";
 
@@ -226,7 +267,7 @@ Auth String
 
   //botton
   static const next = "Next";
-  static String signIn = 'Sign In';
+
   static String dark = "Dark";
   static String light = "Light";
   static const String pleaseEnterPrefix = "Please enter";
@@ -236,6 +277,7 @@ Auth String
   static String reset = "Reset";
   static String close = "Close";
   static String save = 'Save';
+  static const pleaseEnterProduct = 'Please Enter Product';
 
   static String minumeAndMaximum = 'Minimum price cannot exceed maximum price.';
 

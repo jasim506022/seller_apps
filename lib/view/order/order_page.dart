@@ -9,7 +9,7 @@ class OrderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const OrderStatusListWidget(
-      appBarTitle: AppString.orderPage,
+      appBarTitle: AppStrings.orderPage,
     );
   }
 }

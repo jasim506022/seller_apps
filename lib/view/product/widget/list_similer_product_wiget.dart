@@ -11,6 +11,8 @@ import '../../../widget/single_empty_widget.dart.dart';
 import '../../loading_widget/loading_similar_widet.dart';
 import 'similar_product_widget.dart';
 
+/// **SimilarProductsHorizontalList**
+/// Displays a horizontally scrollable list of similar products based on the provided product.
 class SimilarProductList extends StatelessWidget {
   const SimilarProductList({
     super.key,
@@ -21,12 +23,13 @@ class SimilarProductList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Get the ProductController instance
     var productController = Get.find<ProductController>();
     return SizedBox(
       height: 160.h,
       width: 1.sw,
       child: StreamBuilder(
-        stream: productController.similarProductSnapshot(
+        stream: productController.getSimilarProductsStream(
             productModel: productModel),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -35,10 +38,10 @@ class SimilarProductList extends StatelessWidget {
               snapshot.data!.docs.isEmpty ||
               snapshot.hasError) {
             return SingleEmptyWidget(
-                image: AppImage.appLogoImage, //ImagesAsset.errorSingle,
+                image: AppImage.singleError, //ImagesAsset.errorSingle,
                 title: snapshot.hasError
-                    ? '${AppString.errorOccure} ${snapshot.error}'
-                    : AppString.noDataAvaiable);
+                    ? '${AppStrings.errorOccure} ${snapshot.error}'
+                    : AppStrings.noDataAvaiable);
           }
           if (snapshot.hasData) {
             return ListView.builder(
@@ -51,7 +54,7 @@ class SimilarProductList extends StatelessWidget {
                       ProductModel.fromMap(snapshot.data!.docs[index].data());
                   return ChangeNotifierProvider.value(
                     value: productModel,
-                    child: const SimilarProductWidget(),
+                    child: const SimilarProductCard(),
                   );
                 });
           }
@@ -61,3 +64,7 @@ class SimilarProductList extends StatelessWidget {
     );
   }
 }
+
+/*
+#: min(5, snapshot.data!.docs.length)
+*/

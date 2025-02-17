@@ -38,7 +38,7 @@ class NetworkUtils {
   /// Displays a snackbar to notify the user about no internet connection.
 
   static void _showNoInternetSnackbar() {
-    Get.snackbar(AppString.noInternet, AppString.noInternetMessage,
+    Get.snackbar(AppStrings.noInternet, AppStrings.noInternetMessage,
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: AppColors.black.withOpacity(.7),
         colorText: AppColors.white,

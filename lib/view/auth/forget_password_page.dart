@@ -40,8 +40,8 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 AppSignInPageIntroWidget(
-                  title: AppString.forgetPassword,
-                  description: AppString.entreEmailAddressForResetPassword,
+                  title: AppStrings.forgetPassword,
+                  description: AppStrings.entreEmailAddressForResetPassword,
                 ),
                 _buildForgetPasswordForm(),
                 AppsFunction.verticalSpace(10),
@@ -53,18 +53,18 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                         action: () async =>
                             await authController.resetPassword());
                   },
-                  title: AppString.resetPassword,
+                  title: AppStrings.resetPassword,
                 ),
                 AppsFunction.verticalSpace(20),
                 RichTextWidget(
-                  colorText: AppString.signIn,
+                  colorText: AppStrings.signIn,
                   tap: () async {
                     if (!authController.loadingController.loading.value) {
                       Get.back();
                       authController.clearInputFields();
                     }
                   },
-                  simpleText: AppString.youdontWantToReset,
+                  simpleText: AppStrings.youdontWantToReset,
                 ),
               ],
             ),
@@ -80,8 +80,8 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
       child: Column(
         children: [
           TextFormFieldWidget(
-            label: AppString.forgetPassword,
-            hintText: AppString.emailAddress,
+            label: AppStrings.forgetPassword,
+            hintText: AppStrings.emailAddress,
             controller: authController.emailController,
             validator: Validators.validateEmail,
             textInputType: TextInputType.emailAddress,

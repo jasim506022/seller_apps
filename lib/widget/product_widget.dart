@@ -60,7 +60,7 @@ class ProductWidget extends StatelessWidget {
         Row(
           children: [
             Text(
-              "${AppString.currencyIcon} $productPrice",
+              "${AppStrings.currencyIcon} $productPrice",
               style: AppsTextStyle.largeCustomBoldText
                   .copyWith(color: AppColors.red),
             ),
@@ -83,7 +83,7 @@ class ProductWidget extends StatelessWidget {
         AppsFunction.verticalSpace(5),
         AppButton(
           onPressed: () => _navigateToPage(productModel, true),
-          title: AppString.update,
+          title: AppStrings.update,
         ),
         AppsFunction.verticalSpace(5)
       ],
@@ -97,8 +97,8 @@ class ProductWidget extends StatelessWidget {
         ? RoutesName.uploadAndUpdateProduct
         : RoutesName.productDetails;
     Get.toNamed(routeName, arguments: {
-      AppString.productModel: productModel,
-      if (isUpdate) AppString.isUpdate: true,
+      AppStrings.productModel: productModel,
+      if (isUpdate) AppStrings.isUpdate: true,
     });
   }
 }

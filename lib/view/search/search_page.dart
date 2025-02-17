@@ -22,7 +22,7 @@ class SearchPage extends StatelessWidget {
       onTap: () => FocusScope.of(context)
           .unfocus(), // Hide keyboard when tapping outside
       child: Scaffold(
-        appBar: AppBar(title: Text(AppString.searchProducts)),
+        appBar: AppBar(title: Text(AppStrings.searchProducts)),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 10.w),
           child: Column(

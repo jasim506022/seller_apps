@@ -26,7 +26,7 @@ class ThemeSwitchWidget extends StatelessWidget {
             size: 25.h,
           ),
           title: Text(
-            isDarkMode ? AppString.dark : AppString.light,
+            isDarkMode ? AppStrings.dark : AppStrings.light,
             style: AppsTextStyle.mediumBoldText,
           ),
           activeColor: AppColors.white,

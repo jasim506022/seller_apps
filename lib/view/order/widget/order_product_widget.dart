@@ -81,7 +81,7 @@ class OrderProductWidget extends StatelessWidget {
                   style: AppsTextStyle.mediumNormalText
                       .copyWith(color: AppColors.green)),
               const Spacer(),
-              Text("= ${AppString.currencyIcon} $totalPrice",
+              Text("= ${AppStrings.currencyIcon} $totalPrice",
                   style: AppsTextStyle.largeBoldText
                       .copyWith(color: AppColors.green)),
             ],

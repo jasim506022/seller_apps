@@ -20,7 +20,7 @@ class SllerOrderBreakdownPage extends StatelessWidget {
     // Retrieve the OrderModel from the GetX arguments
     final OrderModel orderModel = Get.arguments;
     return Scaffold(
-      appBar: AppBar(title: Text(AppString.orderBreakdown)),
+      appBar: AppBar(title: Text(AppStrings.orderBreakdown)),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10).r,
         child: SingleChildScrollView(
@@ -44,7 +44,7 @@ class SllerOrderBreakdownPage extends StatelessWidget {
                   onPressed: () {
                     Get.offAndToNamed(RoutesName.mainPage, arguments: 0);
                   },
-                  title: AppString.homePage,
+                  title: AppStrings.homePage,
                 ),
               ),
               AppsFunction.verticalSpace(100),

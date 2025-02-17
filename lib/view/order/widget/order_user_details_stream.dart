@@ -23,8 +23,7 @@ class OrderUserDetailsStream extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final OrderController orderController =
-        Get.find<OrderController>();
+    final OrderController orderController = Get.find<OrderController>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -32,7 +31,7 @@ class OrderUserDetailsStream extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5).r,
           child: Text(
-            AppString.userDetails,
+            AppStrings.userDetails,
             style: AppsTextStyle.largeBoldText.copyWith(color: AppColors.red),
           ),
         ),
@@ -47,14 +46,14 @@ class OrderUserDetailsStream extends StatelessWidget {
               if (snapshots.hasError) {
                 return SingleEmptyWidget(
                   image: AppImage.singleError,
-                  title: '${AppString.errorOccurred} ${snapshots.error}',
+                  title: '${AppStrings.errorOccurred} ${snapshots.error}',
                 );
               }
 
               if (!snapshots.hasData || snapshots.data?.data() == null) {
                 return SingleEmptyWidget(
                   image: AppImage.singleError,
-                  title: AppString.noDataAvaiable,
+                  title: AppStrings.noDataAvaiable,
                 );
               }
 

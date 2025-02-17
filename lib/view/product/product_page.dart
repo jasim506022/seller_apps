@@ -9,30 +9,36 @@ import '../../res/app_string.dart';
 import '../../widget/custom_drop_down_widget.dart';
 import 'widget/product_list_widget.dart';
 
+/// Represents the product listing screen where users can filter products by category.
+
 class ProductPage extends StatelessWidget {
   const ProductPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final categoryManagerController = Get.find<CategoryManagerController>();
+    // Find the CategoryManagerController using GetX
+    final controller = Get.find<CategoryManagerController>();
     return Scaffold(
       appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: const Text(AppString.productTitle)),
+          title: const Text(AppStrings.productTitle)),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 4.h),
+        padding: EdgeInsets.symmetric(horizontal: 8.w),
         child: Column(
           children: [
+            /// Dropdown to filter products by category
             CustomDropdownWidget(
               items: AppConstants.allCategories,
-              value: categoryManagerController.selectedAllCategory.value,
+              value: controller.selectedAllCategory.value,
               onChanged: (value) {
                 if (value != null) {
-                  categoryManagerController.updateAllCategory(value.toString());
+                  controller.updateAllCategory(value.toString());
                 }
               },
             ),
             AppsFunction.verticalSpace(10),
+
+            /// Displays the product list
             const Expanded(child: ProductListWidget())
           ],
         ),
@@ -40,3 +46,7 @@ class ProductPage extends StatelessWidget {
     );
   }
 }
+
+/*
+#: ProductPage	ProductScreen	"Screen" is more standard for pages in Flutter.
+*/

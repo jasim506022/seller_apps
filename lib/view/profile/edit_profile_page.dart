@@ -51,7 +51,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
         child: Scaffold(
             appBar: AppBar(
               title: Text(
-                isEditMode ? AppString.editProfile : AppString.about,
+                isEditMode ? AppStrings.editProfile : AppStrings.about,
               ),
               actions: [
                 if (isEditMode)
@@ -83,7 +83,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       return const Center(child: CircularProgressIndicator());
                     }
                     if (!snapshot.hasData || snapshot.data == null) {
-                      return Center(child: Text(AppString.noDataAvaiable));
+                      return Center(child: Text(AppStrings.noDataAvaiable));
                     }
                     if (snapshot.hasData) {
                       var profileModel =
@@ -121,12 +121,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextFormFieldWidget(
-              label: AppString.name,
+              label: AppStrings.name,
               onChanged: (value) =>
                   profileController.addChangeListener(profileModel),
               validator: Validators.validateNameEmpty,
               controller: profileController.nameTEC,
-              hintText: AppString.yourName,
+              hintText: AppStrings.yourName,
               enabled: isEditMode,
             ),
             PhoneNumberWidget(
@@ -134,18 +134,18 @@ class _EditProfilePageState extends State<EditProfilePage> {
               controller: profileController.phoneTEC,
             ),
             TextFormFieldWidget(
-              label: AppString.email,
+              label: AppStrings.email,
               controller: profileController.emailTEC,
               enabled: false,
-              hintText: AppString.enterEmailAddress,
+              hintText: AppStrings.enterEmailAddress,
             ),
             TextFormFieldWidget(
-              label: AppString.address,
+              label: AppStrings.address,
               validator: (value) =>
-                  Validators.validateNotEmpty(value, AppString.address),
+                  Validators.validateNotEmpty(value, AppStrings.address),
               onChanged: (p0) =>
                   profileController.addChangeListener(profileModel),
-              hintText: AppString.pleaseEnterAddress,
+              hintText: AppStrings.pleaseEnterAddress,
               controller: profileController.addressTEC,
               enabled: isEditMode,
             ),

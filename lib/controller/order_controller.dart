@@ -69,19 +69,19 @@ class OrderController extends GetxController {
   Map<String, Map<String, String>> orderStatusData = {
     "normal": {
       "imageAsset": AppImage.sendProductImage,
-      "title": AppString.sendProductAdmin,
+      "title": AppStrings.sendProductAdmin,
     },
     "handover": {
       "imageAsset": AppImage.handOverImage,
-      "title": AppString.handoverProduct,
+      "title": AppStrings.handoverProduct,
     },
     "delivery": {
       "imageAsset": AppImage.deliveryProductImage,
-      "title": AppString.deliveryProduct,
+      "title": AppStrings.deliveryProduct,
     },
     "complete": {
-      "imageAsset": AppString.completeOrder,
-      "title": AppString.orderSuccesfullyCompleted,
+      "imageAsset": AppStrings.completeOrder,
+      "title": AppStrings.orderSuccesfullyCompleted,
     },
   };
 
@@ -120,7 +120,7 @@ class OrderController extends GetxController {
           icon: IconAsset.warningIcon,
           title: e.title!,
           content: e.message,
-          buttonText: AppString.okay,
+          buttonText: AppStrings.okay,
         ),
       );
     }

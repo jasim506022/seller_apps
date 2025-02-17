@@ -47,7 +47,7 @@ class AddProductController extends GetxController {
       selectedProductImagesList.addAll(images);
       isProductUpdated(true);
     } catch (e) {
-      AppsFunction.flutterToast(msg: AppString.imageUploadFail);
+      AppsFunction.flutterToast(msg: AppStrings.imageUploadFail);
       isProductUpdated(false);
     }
   }
@@ -60,7 +60,7 @@ class AddProductController extends GetxController {
   /// Upload or update product
   Future<void> uploadOrUpdateProduct({required bool isUpdate}) async {
     if (selectedProductImagesList.isEmpty) {
-      AppsFunction.flutterToast(msg: AppString.selectOneImage);
+      AppsFunction.flutterToast(msg: AppStrings.selectOneImage);
       return;
     }
     loadingController.setLoading(true);
@@ -95,8 +95,8 @@ class AddProductController extends GetxController {
       Get.toNamed(RoutesName.mainPage, arguments: 0);
       AppsFunction.flutterToast(
           msg: isUpdate
-              ? AppString.updateProductToastMessage
-              : AppString.uploadProductToastMessage);
+              ? AppStrings.updateProductToastMessage
+              : AppStrings.uploadProductToastMessage);
     } catch (e) {
       if (kDebugMode) {
         print(e);
@@ -128,9 +128,9 @@ class AddProductController extends GetxController {
     return ProductModel(
       productId: productId,
       sellerId: AppConstants.sharedPreference!
-          .getString(AppString.uidSharedPreference),
+          .getString(AppStrings.uidSharedPreference),
       sellerName: AppConstants.sharedPreference!
-          .getString(AppString.nameSharedPreference),
+          .getString(AppStrings.nameSharedPreference),
       productname: nameTEC.text.trim(),
       productcategory: categoryController.selectedCategory.value,
       productprice: double.tryParse(priceTEC.text.trim()),
@@ -140,7 +140,7 @@ class AddProductController extends GetxController {
       publishDate: isUpdate ? publishDate : Timestamp.fromDate(DateTime.now()),
       discount: double.tryParse(discountTEC.text.trim()),
       productimage: imageUrls,
-      stutus: AppString.available,
+      stutus: AppStrings.available,
     );
   }
 
@@ -174,10 +174,10 @@ class AddProductController extends GetxController {
     } else {
       Get.dialog(ShowAlertDialogWidget(
         icon: Icons.question_mark_rounded,
-        title: AppString.saveChanges,
-        content: AppString.saveMessage,
-        onYesPressed: () => Get.back(),
-        onNoPressed: () {
+        title: AppStrings.saveChanges,
+        content: AppStrings.saveMessage,
+        onConfirmPressed: () => Get.back(),
+        onCancelPressed: () {
           resetInputs();
           isProductUpdated(false);
           Get.close(2);

@@ -28,7 +28,7 @@ void main() async {
 
 // Check onboarding status
   AppConstants.isViewed =
-      AppConstants.sharedPreference!.getInt(AppString.onBoardingShareKey);
+      AppConstants.sharedPreference!.getInt(AppStrings.onBoardingShareKey);
   // Configure background message handling for Firebase
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
@@ -93,19 +93,19 @@ class MyApp extends StatelessWidget {
     var isDarkTheme = themeProvider.getDarkTheme;
 
     return ThemeData(
+      // (Modify and Add comments)
       dialogTheme: DialogTheme(
           backgroundColor: isDarkTheme ? AppColors.cardDark : AppColors.white,
           titleTextStyle: GoogleFonts.poppins(
               color: isDarkTheme ? AppColors.white : AppColors.black,
-              fontSize: 20.sp,
+              fontSize: 18.sp,
               fontWeight: FontWeight.bold),
           contentTextStyle: GoogleFonts.poppins(
-              color: AppColors.black.withOpacity(.7),
-              fontSize: 16.sp,
+              color: isDarkTheme
+                  ? AppColors.white.withOpacity(.7)
+                  : AppColors.black.withOpacity(.7),
+              fontSize: 15.sp,
               fontWeight: FontWeight.normal)),
-      // dialogTheme: DialogTheme(
-      //   backgroundColor: Colors.blue
-      // ),
 
       cardTheme: CardTheme(
         elevation: 2,

@@ -40,7 +40,7 @@ class FilterDialogContentWidget extends StatelessWidget {
   Widget _buildTitle() {
     return Center(
       child: Text(
-        AppString.filterSearch,
+        AppStrings.filterSearch,
         style: AppsTextStyle.titleTextStyle.copyWith(color: AppColors.green),
       ),
     );
@@ -51,7 +51,7 @@ class FilterDialogContentWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(AppString.productCategory, style: AppsTextStyle.mediumBoldText),
+        Text(AppStrings.productCategory, style: AppsTextStyle.mediumBoldText),
         AppsFunction.verticalSpace(10),
         CustomDropdownWidget(
           value: searchController.selectedCategory.value,
@@ -80,18 +80,18 @@ class FilterDialogContentWidget extends StatelessWidget {
             FocusScope.of(context).unfocus();
           },
           child: Text(
-            AppString.reset,
+            AppStrings.reset,
             style: AppsTextStyle.largeBoldText.copyWith(color: AppColors.red),
           ),
         ),
         Row(
           children: [
-            _buildActionButton(AppString.close, () {
+            _buildActionButton(AppStrings.close, () {
               Get.back();
               FocusScope.of(context).unfocus();
             }),
             AppsFunction.horizontalSpace(15),
-            _buildActionButton(AppString.save, () {
+            _buildActionButton(AppStrings.save, () {
               searchController.applyFilters();
               FocusScope.of(context).unfocus();
             }),

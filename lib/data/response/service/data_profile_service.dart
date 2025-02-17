@@ -11,7 +11,7 @@ class DataProfileService extends BaseProfileService {
   @override
   Future<DocumentSnapshot<Map<String, dynamic>>> fetchUserProfile() {
     return _firebaseFirestore
-        .collection(AppString.sellersCollection)
+        .collection(AppStrings.sellersCollection)
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get();
   }
@@ -19,9 +19,9 @@ class DataProfileService extends BaseProfileService {
   @override
   Future<void> updateUserProfile({required Map<String, dynamic> map}) async {
     _firebaseFirestore
-        .collection(AppString.sellersCollection)
+        .collection(AppStrings.sellersCollection)
         .doc(AppConstants.sharedPreference
-            ?.getString(AppString.uidSharedPreference))
+            ?.getString(AppStrings.uidSharedPreference))
         .update(map);
   }
 }

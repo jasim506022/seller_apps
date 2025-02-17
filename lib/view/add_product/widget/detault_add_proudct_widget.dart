@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:seller_apps/res/app_string.dart';
+import 'package:seller_apps/res/app_function.dart';
+import 'package:seller_apps/widget/app_button.dart';
 
+import '../../../res/app_string.dart';
 import 'image_selecting_dialog.dart';
-import '../../../widget/custom_elevated_widget.dart';
 
+/// **Placeholder UI when no product images are selected**
+/// - Displays an icon and a button to prompt the user to add images.
+/// - Clicking the button opens an `ImageSelectionDialog`.
 class DefaultAddProductView extends StatelessWidget {
   const DefaultAddProductView({
     super.key,
@@ -14,22 +18,21 @@ class DefaultAddProductView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text(AppString.addNewProduct)),
+      appBar: AppBar(title: const Text(AppStrings.addNewProduct)),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
               Icons.add_photo_alternate_outlined,
-              size: 0.23.sh,
+              size: 200.h,
             ),
-            CustomElevatedButton(
-              title: AppString.addNewProduct,
-              onPressed: () {
-                Get.dialog(
-                  const ImageSelectionDialog(),
-                );
-              },
+            AppsFunction.verticalSpace(20),
+            AppButton(
+              title: AppStrings.addNewProduct,
+              onPressed: () => Get.dialog(
+                const ImageSelectionDialog(),
+              ),
             )
           ],
         ),

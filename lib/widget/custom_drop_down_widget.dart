@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../res/apps_text_style.dart';
 
+/// A reusable dropdown widget with a customizable list of items.
 class CustomDropdownWidget extends StatelessWidget {
   const CustomDropdownWidget({
     super.key,
@@ -11,9 +12,15 @@ class CustomDropdownWidget extends StatelessWidget {
     required this.items,
   });
 
-  final String value; // The selected value in the dropdown
+  /// The currently selected value in the dropdown.
+
+  final String value;
+
+  /// Callback function triggered when an item is selected.
 
   final void Function(String?)? onChanged;
+
+  /// List of items displayed in the dropdown.
 
   final List<String> items;
 
@@ -23,8 +30,8 @@ class CustomDropdownWidget extends StatelessWidget {
       decoration: InputDecoration(
         fillColor: Theme.of(context).cardColor,
         filled: true,
-        enabledBorder: _buildBorder(context),
-        focusedBorder: _buildBorder(context),
+        enabledBorder: _createBorderStyle(),
+        focusedBorder: _createBorderStyle(),
         contentPadding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 15.h),
       ),
       value: value,
@@ -38,7 +45,7 @@ class CustomDropdownWidget extends StatelessWidget {
   }
 
   /// Builds a rounded border for the input field.
-  OutlineInputBorder _buildBorder(BuildContext context) {
+  OutlineInputBorder _createBorderStyle() {
     return OutlineInputBorder(
       borderSide: const BorderSide(
         width: 1,

@@ -29,12 +29,12 @@ class AppsFunction {
   static Future<bool?> showBackDialog() {
     return Get.dialog(ShowAlertDialogWidget(
       icon: Icons.question_mark_rounded,
-      title: AppString.exit,
-      content: AppString.exitApps,
-      onYesPressed: () {
+      title: AppStrings.exitDialogTitle,
+      content: AppStrings.confirmExitMessage,
+      onConfirmPressed: () {
         Get.back(result: true);
       },
-      onNoPressed: () {
+      onCancelPressed: () {
         Get.back(result: false);
       },
     ));

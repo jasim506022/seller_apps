@@ -24,7 +24,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppString.profile),
+        title: const Text(AppStrings.profileTitle),
         actions: [
           IconButton(
               onPressed: () {},
@@ -46,7 +46,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ProfileOptionTileWidget(
                   hasTrailingIcon: false,
                   icon: Icons.exit_to_app,
-                  title: AppString.signOut,
+                  title: AppStrings.signOut,
                   iconColor: AppColors.red,
                   onTap: () async {
                     NetworkUtils.executeWithInternetCheck(action: () {
@@ -68,28 +68,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final List<Map<String, dynamic>> menuItems = [
       {
         "icon": Icons.person,
-        "title": AppString.about,
+        "title": AppStrings.about,
         "route": RoutesName.editProfilePage
       },
       {
         "icon": Icons.home_outlined,
-        "title": AppString.home,
+        "title": AppStrings.homeTitle,
         "route": RoutesName.mainPage,
         "argument": 0
       },
       {
         "icon": Icons.reorder,
-        "title": AppString.myOrder,
+        "title": AppStrings.myOrder,
         "route": RoutesName.orderPage
       },
       {
         "icon": Icons.access_time,
-        "title": AppString.historyPage,
+        "title": AppStrings.historyPage,
         "route": RoutesName.completeOrderPage
       },
       {
         "icon": Icons.search,
-        "title": AppString.search,
+        "title": AppStrings.searchTitle,
         "route": RoutesName.mainPage,
         "argument": 2
       },

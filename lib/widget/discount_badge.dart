@@ -30,7 +30,7 @@ class DiscountBadge extends StatelessWidget {
           color: AppColors.lightRed.withOpacity(.2),
         ),
         child: Text(
-          "$discount% ${AppString.off}",
+          "$discount% ${AppStrings.off}",
           style: AppsTextStyle.smallBoldText.copyWith(
             color: AppColors.red,
           ),

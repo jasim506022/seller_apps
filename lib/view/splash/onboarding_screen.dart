@@ -27,7 +27,7 @@ class OnboardingScreen extends StatelessWidget {
           TextButton(
               onPressed: () => controller.markOnboardingAsViewedAndNavigate(),
               child: Text(
-                AppString.skip,
+                AppStrings.skip,
                 style: AppsTextStyle.largeBoldText
                     .copyWith(color: AppColors.black),
               )),
@@ -53,7 +53,3 @@ class OnboardingScreen extends StatelessWidget {
         statusBarColor: AppColors.white, statusBarBrightness: Brightness.dark));
   }
 }
-
-
-
-

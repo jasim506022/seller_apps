@@ -41,7 +41,7 @@ class ProductSearchBar extends StatelessWidget {
           .copyWith(color: ThemeUtils.baseTextColor),
       isUdateDecoration: true,
       decoration: AppsFunction.inputDecoration(
-        hint: AppString.searchProductHere,
+        hint: AppStrings.searchProductHere,
       ),
       controller: searchController.searchTextTEC,
       onChanged: (text) {

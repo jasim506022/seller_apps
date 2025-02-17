@@ -16,17 +16,17 @@ class OnboardModel {
 List<OnboardModel> onboardingData = [
   OnboardModel(
     img: AppImage.groceryImage,
-    text: AppString.welcome,
-    desc: AppString.firstOnboardingDescription,
+    text: AppStrings.welcome,
+    desc: AppStrings.firstOnboardingDescription,
   ),
   OnboardModel(
     img: AppImage.allGroceryImage,
-    text: AppString.fresshFruis,
-    desc: AppString.secondOnboardingDescription,
+    text: AppStrings.fresshFruis,
+    desc: AppStrings.secondOnboardingDescription,
   ),
   OnboardModel(
     img: AppImage.deliveryImage,
-    text: AppString.quickDelivery,
-    desc: AppString.thirdOnboardingDescription,
+    text: AppStrings.quickDelivery,
+    desc: AppStrings.thirdOnboardingDescription,
   )
 ];

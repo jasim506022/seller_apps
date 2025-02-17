@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:seller_apps/widget/app_button.dart';
 
 import '../../../controller/add_product_controller.dart';
 
@@ -10,7 +11,6 @@ import '../../../res/app_function.dart';
 import '../../../res/app_string.dart';
 import '../../../res/apps_color.dart';
 import '../../../res/validator.dart';
-import '../../../widget/custom_elevated_widget.dart';
 import '../../../widget/custom_drop_down_widget.dart';
 import '../../../widget/text_field_form_widget.dart';
 import 'grid_image_list_widget.dart';
@@ -37,7 +37,7 @@ class _AddEditProductFormState extends State<AddEditProductForm> {
         canPop: false,
         onPopInvoked: (didPop) {
           if (addProductController.loadingController.loading.value) {
-            AppsFunction.flutterToast(msg: AppString.waitUntilUpload);
+            AppsFunction.flutterToast(msg: AppStrings.waitUntilUpload);
           } else {
             addProductController.confirmUnsavedChangesOnBack(didPop);
           }
@@ -87,13 +87,13 @@ class _AddEditProductFormState extends State<AddEditProductForm> {
 
   AppBar _buildAppBar() {
     return AppBar(
-      title: Text(
-          widget.isUpdate ? AppString.updateProduct : AppString.addNewProduct),
+      title: Text(widget.isUpdate
+          ? AppStrings.updateProduct
+          : AppStrings.addNewProduct),
       actions: [
         IconButton(
           onPressed: () async {
             if (_formKey.currentState!.validate()) {
-              
               /*
               if (!(await NetworkUtili.verifyInternetStatus())) {
                 addProductController.uploadOrUpdateProduct(
@@ -117,14 +117,21 @@ class _AddEditProductFormState extends State<AddEditProductForm> {
   }
 
   Widget _buildImagePickerButton() {
-    return CustomElevatedButton(
-      onPressed: () {
-        addProductController.uploadProductImage(ImageSource.gallery);
+    return AppButton(
+        title: AppStrings.pickImage,
+        onPressed: () {
+          addProductController.uploadProductImage(ImageSource.gallery);
+          addProductController.isProductUpdated(true);
+        });
 
-        addProductController.isProductUpdated(true);
-      },
-      title: AppString.pickImage,
-    );
+    // CustomElevatedButton(
+    //   onPressed: () {
+    //     addProductController.uploadProductImage(ImageSource.gallery);
+
+    //     addProductController.isProductUpdated(true);
+    //   },
+    //   title: AppString.pickImage,
+    // );
   }
 
   Form _buildProductForm() {
@@ -144,16 +151,16 @@ class _AddEditProductFormState extends State<AddEditProductForm> {
               },
             ),
           ),
-          _buildTextField(addProductController.nameTEC, AppString.productName,
+          _buildTextField(addProductController.nameTEC, AppStrings.productName,
               Validators.validateProductName),
           Row(
             children: [
               Expanded(
                 child: _buildTextField(
                     addProductController.priceTEC,
-                    AppString.price,
+                    AppStrings.price,
                     (value) => Validators.validateProductNotEmpty(
-                        value, AppString.price),
+                        value, AppStrings.price),
                     TextInputType.number),
               ),
               AppsFunction.horizontalSpace(20),
@@ -174,21 +181,21 @@ class _AddEditProductFormState extends State<AddEditProductForm> {
           ),
           _buildTextField(
               addProductController.discountTEC,
-              AppString.discount,
-              (value) =>
-                  Validators.validateProductNotEmpty(value, AppString.discount),
+              AppStrings.discount,
+              (value) => Validators.validateProductNotEmpty(
+                  value, AppStrings.discount),
               TextInputType.number),
           _buildTextField(
               addProductController.ratingTEC,
-              AppString.ratting,
+              AppStrings.rating,
               (value) =>
-                  Validators.validateProductNotEmpty(value, AppString.ratting),
+                  Validators.validateProductNotEmpty(value, AppStrings.rating),
               TextInputType.number),
           _buildTextField(
               addProductController.descriptionTEC,
-              AppString.description,
+              AppStrings.description,
               (value) => Validators.validateProductNotEmpty(
-                  value, AppString.description),
+                  value, AppStrings.description),
               TextInputType.text,
               null),
         ],

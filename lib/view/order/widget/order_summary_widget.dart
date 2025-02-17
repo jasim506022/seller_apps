@@ -28,7 +28,7 @@ class OrderSummaryWidget extends StatelessWidget {
           children: [
             // Order ID
             Text(
-              "${AppString.order} ${order.orderId}",
+              "${AppStrings.order} ${order.orderId}",
               style: AppsTextStyle.largeBoldText,
             ),
             // Order breakdown link
@@ -36,7 +36,7 @@ class OrderSummaryWidget extends StatelessWidget {
               onTap: () =>
                   Get.toNamed(RoutesName.orderDetailsPage, arguments: order),
               child: Text(
-                "${AppString.orderBreakdown} >",
+                "${AppStrings.orderBreakdown} >",
                 style:
                     AppsTextStyle.mediumBoldText.copyWith(color: AppColors.red),
               ),

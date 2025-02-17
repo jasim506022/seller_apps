@@ -64,10 +64,10 @@ class AuthController extends GetxController {
       );
 
       if (await repository.isUserProfileExists()) {
-        _navigateToMainPage(AppString.signInSuccessfully);
+        _navigateToMainPage(AppStrings.signInSuccessfully);
         clearInputFields();
       } else {
-        AppsFunction.flutterToast(msg: AppString.userDoesntExit);
+        AppsFunction.flutterToast(msg: AppStrings.userDoesntExit);
       }
     } catch (e) {
       _handleError(e);
@@ -87,7 +87,7 @@ class AuthController extends GetxController {
 
       if (userCredentialGmail != null) {
         if (await repository.isUserProfileExists()) {
-          _navigateToMainPage(AppString.signInSuccessfully);
+          _navigateToMainPage(AppStrings.signInSuccessfully);
         } else {
           var user = userCredentialGmail.user!;
           ProfileModel profileModel = buildUserProfile(user: user);
@@ -95,7 +95,7 @@ class AuthController extends GetxController {
           await repository.createNewUserWithGoogle(
               user: user, profileModel: profileModel);
 
-          _navigateToMainPage(AppString.signInSuccessfully);
+          _navigateToMainPage(AppStrings.signInSuccessfully);
         }
       }
     } catch (e) {
@@ -130,7 +130,7 @@ class AuthController extends GetxController {
 
       clearInputFields();
 
-      _navigateToMainPage(AppString.signupSuccessfull);
+      _navigateToMainPage(AppStrings.signupSuccessfull);
     } catch (e) {
       _handleError(e);
     } finally {
@@ -149,10 +149,10 @@ class AuthController extends GetxController {
       final bool shouldPop = await Get.dialog<bool>(
             ShowAlertDialogWidget(
               icon: Icons.question_mark_rounded,
-              title: AppString.exit,
-              content: AppString.exitApps,
-              onYesPressed: () => Get.back(result: true),
-              onNoPressed: () => Get.back(result: false),
+              title: AppStrings.exitDialogTitle,
+              content: AppStrings.confirmExitMessage,
+              onConfirmPressed: () => Get.back(result: true),
+              onCancelPressed: () => Get.back(result: false),
             ),
           ) ??
           false;
@@ -169,7 +169,7 @@ class AuthController extends GetxController {
     return ProfileModel(
         name: userName ?? user.displayName ?? "",
         earnings: 0.0,
-        status: AppString.approved,
+        status: AppStrings.approved,
         email: user.email,
         phone: phoneNumber ?? user.phoneNumber ?? "",
         uid: user.uid,
@@ -182,7 +182,7 @@ class AuthController extends GetxController {
     try {
       loadingController.setLoading(true);
       repository.sendPasswordResetEmail(email: emailController.text.trim());
-      AppsFunction.flutterToast(msg: AppString.sendingMail);
+      AppsFunction.flutterToast(msg: AppStrings.sendingMail);
       Get.toNamed(RoutesName.signPage);
     } catch (e) {
       _handleError(e);
@@ -194,15 +194,15 @@ class AuthController extends GetxController {
   /// Validates user input and shows appropriate error messages
   bool _validateInput() {
     if (selectImageController.selectPhoto.value == null) {
-      AppsFunction.flutterToast(msg: AppString.pleaseSelectPhoto);
+      AppsFunction.flutterToast(msg: AppStrings.pleaseSelectPhoto);
       return false;
     }
     if (phoneController.text.trim().isEmpty) {
-      AppsFunction.flutterToast(msg: AppString.validPhoneNumber);
+      AppsFunction.flutterToast(msg: AppStrings.validPhoneNumber);
       return false;
     }
     if (passwordController.text != confirmPasswordController.text) {
-      AppsFunction.flutterToast(msg: AppString.passwordMatch);
+      AppsFunction.flutterToast(msg: AppStrings.passwordMatch);
       return false;
     }
     return true;
@@ -219,8 +219,8 @@ class AuthController extends GetxController {
     Get.dialog(
       ErrorDialogWidget(
         icon: IconAsset.warningIcon,
-        title: AppString.logInPageSubjectTitle,
-        buttonText: AppString.okay,
+        title: AppStrings.logInPageSubjectTitle,
+        buttonText: AppStrings.okay,
       ),
       barrierDismissible: false,
     );
@@ -234,7 +234,7 @@ class AuthController extends GetxController {
           icon: IconAsset.warningIcon,
           title: error.title!,
           content: error.message,
-          buttonText: AppString.okay,
+          buttonText: AppStrings.okay,
         ),
       );
     }

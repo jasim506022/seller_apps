@@ -12,6 +12,7 @@ import '../../../widget/empty_widget.dart';
 import '../../../widget/product_widget.dart';
 import '../../loading_widget/loading_list_product_widget.dart';
 
+/// Displays a list of products using Firestore stream.
 class ProductListWidget extends StatelessWidget {
   const ProductListWidget({
     super.key,
@@ -21,7 +22,7 @@ class ProductListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var productController = Get.find<ProductController>();
     return Obx(() => StreamBuilder(
-          stream: productController.productSnapshots(),
+          stream: productController.fetchProductSnapshots(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const LoadingListProductWidget();
@@ -32,8 +33,8 @@ class ProductListWidget extends StatelessWidget {
               return EmptyWidget(
                 image: AppImage.error,
                 title: snapshot.hasError
-                    ? '${AppString.errorOccure}: ${snapshot.error}'
-                    : AppString.noDataAvaiable,
+                    ? '${AppStrings.errorOccure}: ${snapshot.error}'
+                    : AppStrings.noDataAvaiable,
               );
             }
             if (snapshot.hasData) {

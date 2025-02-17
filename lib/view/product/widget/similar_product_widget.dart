@@ -11,8 +11,11 @@ import '../../../res/apps_text_style.dart';
 import '../../../res/network_utilis.dart';
 import '../../../res/routes/routes_name.dart';
 
-class SimilarProductWidget extends StatelessWidget {
-  const SimilarProductWidget({
+/// **SimilarProductCard**
+/// Displays a single product in the "Similar Products" list.
+/// Tapping it navigates to the Product Details page.
+class SimilarProductCard extends StatelessWidget {
+  const SimilarProductCard({
     super.key,
   });
 
@@ -22,10 +25,12 @@ class SimilarProductWidget extends StatelessWidget {
 
     return InkWell(
       onTap: () async {
+        // Check Internet before navigating
+
         NetworkUtils.executeWithInternetCheck(action: () {
           Get.offAndToNamed(
             RoutesName.productDetails,
-            arguments: {AppString.productModel: productModel},
+            arguments: {AppStrings.productModel: productModel},
           );
         });
       },

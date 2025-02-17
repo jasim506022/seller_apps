@@ -46,8 +46,8 @@ class ProductActionPopupMenu extends StatelessWidget {
           Get.toNamed(
             RoutesName.uploadAndUpdateProduct,
             arguments: {
-              AppString.isUpdate: true,
-              AppString.productModel: productModel,
+              AppStrings.isUpdate: true,
+              AppStrings.productModel: productModel,
             },
           );
           break;
@@ -61,14 +61,14 @@ class ProductActionPopupMenu extends StatelessWidget {
       PopupMenuItem(
         value: ProductAction.delete,
         child: Text(
-          AppString.delete,
+          AppStrings.delete,
           style: AppsTextStyle.mediumBoldText,
         ),
       ),
       PopupMenuItem(
         value: ProductAction.update,
         child: Text(
-          AppString.update,
+          AppStrings.update,
           style: AppsTextStyle.mediumBoldText,
         ),
       ),

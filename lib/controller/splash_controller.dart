@@ -46,7 +46,7 @@ class SplashController extends GetxController {
             icon: IconAsset.warningIcon,
             title: e.title!,
             content: e.message,
-            buttonText: AppString.okay,
+            buttonText: AppStrings.okay,
           ),
         );
       }

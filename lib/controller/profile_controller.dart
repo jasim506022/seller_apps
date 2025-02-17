@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../model/app_exception.dart';
@@ -52,7 +53,7 @@ class ProfileController extends GetxController {
   /// Updates user profile information in the database.
   Future<void> updateProfile() async {
     if (phoneTEC.text.trim().isEmpty) {
-      AppsFunction.flutterToast(msg: AppString.givemPhoneNumbeer);
+      AppsFunction.flutterToast(msg: AppStrings.givemPhoneNumbeer);
       return;
     }
 
@@ -70,7 +71,7 @@ class ProfileController extends GetxController {
           map: _buildProfileModel().toMapProfileEdit());
       // Navigate to main page and show success message
       Get.offAllNamed(RoutesName.mainPage, arguments: 3);
-      AppsFunction.flutterToast(msg: AppString.successfullyUpdate);
+      AppsFunction.flutterToast(msg: AppStrings.successfullyUpdate);
     } catch (e) {
       _handleError(e);
     } finally {
@@ -115,20 +116,17 @@ class ProfileController extends GetxController {
     try {
       var snapshot = await repository.fetchUserProfile();
 
-      
-
+      /// Ensure snapshot contains data before proceeding
       var profileModel = ProfileModel.fromMap(snapshot.data()!);
 
-      if (profileModel.status == AppString.approved) {
+      /// Only proceed if user status is "approved"
+      if (profileModel.status == AppStrings.approved) {
         await _saveProfileToSharedPreferences(profileModel);
-
         _updateTextControllers(profileModel);
         // Update Firebase Cloud Messaging (FCM) token
-
         var token = await getFCMToken();
         await repository.updateUserProfile(map: {"token": token});
       }
-
       return snapshot;
     } catch (e) {
       _handleError(e);
@@ -136,24 +134,24 @@ class ProfileController extends GetxController {
     }
   }
 
-  /// Saves the fetched profile data to SharedPreferences
+  /// Saves the user's profile data to shared preferences.
   Future<void> _saveProfileToSharedPreferences(
       ProfileModel profileModel) async {
     final prefs = AppConstants.sharedPreference!;
     final prefsTasks = [
-      prefs.setString(AppString.uidSharedPreference, profileModel.uid!),
-      prefs.setString(AppString.emailSharedPreference, profileModel.email!),
-      prefs.setString(AppString.nameSharedPreference, profileModel.name!),
+      prefs.setString(AppStrings.uidSharedPreference, profileModel.uid!),
+      prefs.setString(AppStrings.emailSharedPreference, profileModel.email!),
+      prefs.setString(AppStrings.nameSharedPreference, profileModel.name!),
       prefs.setString(
-          AppString.imageurlSharedPreference, profileModel.imageurl!),
-      prefs.setString(AppString.phoneSharedPreference, profileModel.phone!),
-      prefs.setDouble(
-          AppString.earningSharedPreference, profileModel.earnings!.toDouble()),
+          AppStrings.imageurlSharedPreference, profileModel.imageurl!),
+      prefs.setString(AppStrings.phoneSharedPreference, profileModel.phone!),
+      prefs.setDouble(AppStrings.earningSharedPreference,
+          profileModel.earnings!.toDouble()),
     ];
     await Future.wait(prefsTasks);
   }
 
-  /// Updates UI controllers with the new profile data
+  /// Updates the UI text controllers with the fetched user profile data.
   void _updateTextControllers(ProfileModel profileModel) {
     nameTEC.text = profileModel.name ?? '';
     addressTEC.text = profileModel.address ?? '';
@@ -171,13 +169,13 @@ class ProfileController extends GetxController {
     }
     Get.dialog(ShowAlertDialogWidget(
         icon: Icons.question_mark_rounded,
-        title: AppString.saveChanges,
-        content: AppString.saveMessage,
-        onNoPressed: () {
+        title: AppStrings.saveChanges,
+        content: AppStrings.saveMessage,
+        onCancelPressed: () {
           Get.close(2);
           resetInputs();
         },
-        onYesPressed: () => Get.back()));
+        onConfirmPressed: () => Get.back()));
   }
 
   void resetInputs() {
@@ -206,10 +204,10 @@ class ProfileController extends GetxController {
         String? token = await FirebaseMessaging.instance.getToken();
         return token;
       } else {
-        AppsFunction.flutterToast(msg: AppString.permissionDenied);
+        AppsFunction.flutterToast(msg: AppStrings.permissionDenied);
       }
     } catch (e) {
-      AppsFunction.flutterToast(msg: "${AppString.fcmTokenError} $e");
+      AppsFunction.flutterToast(msg: "${AppStrings.fcmTokenError} $e");
     }
     return null;
   }
@@ -222,27 +220,45 @@ class ProfileController extends GetxController {
           icon: IconAsset.warningIcon,
           title: error.title!,
           content: error.message,
-          buttonText: AppString.okay,
+          buttonText: AppStrings.okay,
         ),
       );
     }
+  }
+
+  /// Displays a confirmation dialog asking the user if they want to exit the app.
+  /// If the user confirms, the app will be closed.
+  Future<void> exitApps(bool didPop) async {
+    // If the app screen was already popped, do nothing.
+    if (didPop) return;
+
+    final bool shouldPop = await Get.dialog<bool>(ShowAlertDialogWidget(
+          icon: Icons.question_mark_rounded,
+          title: AppStrings.exitDialogTitle,
+          content: AppStrings.confirmExitMessage,
+          onConfirmPressed: () => Get.back(result: true),
+          onCancelPressed: () => Get.back(result: false),
+        )) ??
+        false;
+    // Exit the app if the user confirmed.
+    if (shouldPop) SystemNavigator.pop();
   }
 
   /// Handles user sign-out with a confirmation dialog.
   Future<void> signOut() async {
     await Get.dialog(ShowAlertDialogWidget(
         icon: Icons.delete,
-        title: AppString.signOut,
-        content: AppString.doYouwantSignout,
-        onYesPressed: () async {
+        title: AppStrings.signOut,
+        content: AppStrings.doYouwantSignout,
+        onConfirmPressed: () async {
           try {
             final prefs = AppConstants.sharedPreference!;
-            await prefs.setString(AppString.imageurlSharedPreference, "");
-            await prefs.setString(AppString.nameSharedPreference, "");
-            await prefs.setString(AppString.emailSharedPreference, "");
+            await prefs.setString(AppStrings.imageurlSharedPreference, "");
+            await prefs.setString(AppStrings.nameSharedPreference, "");
+            await prefs.setString(AppStrings.emailSharedPreference, "");
             await repository.updateUserProfile(map: {"token": ""});
             await authRepository.signOut();
-            AppsFunction.flutterToast(msg: AppString.successfullySignout);
+            AppsFunction.flutterToast(msg: AppStrings.successfullySignedOut);
 
             Get.offAllNamed(RoutesName.signPage);
           } catch (e) {
@@ -259,72 +275,8 @@ Why Use controller.text = '' Instead of .clear()?
 Better performance: .clear() internally calls notifyListeners(), which can cause unnecessary UI rebuilds.
 More predictable: Directly setting .text = '' ensures that changes happen without side effects.
 
-#: Why use Final
+#: ()
+
+#: Why use Final (already)
 */
 
-
-/*
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:seller_apps/controller/profile_controller.dart';
-
-import '../../../model/profile_model.dart';
-import '../../../res/app_constants.dart';
-import '../../../res/app_string.dart';
-import '../../loading_widget/loading_profile_header_widget.dart';
-import 'user_profile_content.dart';
-
-class HomeProfileHeaderWidget extends StatelessWidget {
-  const HomeProfileHeaderWidget({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    var profileController = Get.find<ProfileController>();
-    final image = AppConstants.sharedPreference
-        ?.getString(AppString.imageurlSharedPreference);
-    var name = AppConstants.sharedPreference
-        ?.getString(AppString.nameSharedPreference);
-    var email = AppConstants.sharedPreference
-        ?.getString(AppString.emailSharedPreference);
-
-    print(image == null && name == null && email == null);
-
-    print(image);
-    print(name);
-    print(email);
-
-    if ((image == null || image.isEmpty) &&
-        (name == null || name.isEmpty) &&
-        (email == null || email.isEmpty)) {
-      print("Bangladesh");
-      return FutureBuilder(
-        future: profileController.getUserProfileData(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const LoadingProfileHeaderWidget();
-          } else if (snapshot.hasError) {
-            return Text(snapshot.error.toString());
-          } else if (snapshot.hasData) {
-            var data = snapshot.data!.data();
-            if (data != null) {
-              var profileModel = ProfileModel.fromMap(data);
-              return UserProfileContent(
-                  imageUrl: profileModel.imageurl ?? "",
-                  name: profileModel.name ?? "Unknows User",
-                  email: profileModel.email ?? "No Email");
-            }
-          }
-          return const LoadingProfileHeaderWidget();
-        },
-      );
-    } else {
-      print("Bangladesh1");
-      print(image!);
-      return UserProfileContent(imageUrl: image!, name: name!, email: email!);
-    }
-  }
-}
-
-*/

@@ -37,7 +37,7 @@ class DeliveryInfoCard extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Text("${AppString.deliveryAddress}: ",
+          Text("${AppStrings.deliveryAddress}: ",
               style: AppsTextStyle.mediumBoldText),
           AppsFunction.horizontalSpace(15),
           Expanded(
@@ -53,7 +53,7 @@ class DeliveryInfoCard extends StatelessWidget {
                       !snapshots.hasData ||
                       snapshots.data?.data() == null) {
                     return Text(
-                      AppString.noDataAvaiable,
+                      AppStrings.noDataAvaiable,
                       style: AppsTextStyle.mediumBoldText,
                     );
                   }
@@ -78,14 +78,14 @@ class DeliveryInfoCard extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("${AppString.estimatedDelivery}: ",
+            Text("${AppStrings.estimatedDelivery}: ",
                 style: AppsTextStyle.mediumBoldText
                     .copyWith(color: AppColors.white)),
             AppsFunction.horizontalSpace(10),
             Expanded(
               child: Text(
-                orderModel.status == AppString.complete
-                    ? AppString.completeOrder
+                orderModel.status == AppStrings.complete
+                    ? AppStrings.completeOrder
                     : AppsFunction.formatDate(
                         timestamp: orderModel.deliveryDate, includeTime: false),
                 style: AppsTextStyle.mediumBoldText
@@ -103,13 +103,13 @@ class DeliveryInfoCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           DeliveryRichTextWidget(
-            title: "${AppString.deliveryPartner}: ",
+            title: "${AppStrings.deliveryPartner}: ",
             description: orderModel.deliveryPartner,
             color: AppColors.green,
           ),
           AppsFunction.verticalSpace(15),
           DeliveryRichTextWidget(
-              title: "${AppString.trackingNumber} :",
+              title: "${AppStrings.trackingNumber} :",
               color: AppColors.red,
               description: orderModel.trackingNumber)
         ],

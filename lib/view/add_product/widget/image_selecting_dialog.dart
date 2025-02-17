@@ -17,17 +17,17 @@ class ImageSelectionDialog extends StatelessWidget {
     var addProductController = Get.find<AddProductController>();
     return SimpleDialog(
       title: Text(
-        AppString.selectedImage,
+        AppStrings.selectedImage,
         style: AppsTextStyle.titleTextStyle.copyWith(color: AppColors.green),
       ),
       children: [
         _buildDialogOption(() {
           addProductController.uploadProductImage(ImageSource.camera);
-        }, AppString.captureImageWithCamera),
+        }, AppStrings.captureWithCamera),
         _buildDialogOption(() {
           addProductController.uploadProductImage(ImageSource.gallery);
-        }, AppString.captureImageWithGallery),
-        _buildDialogOption(() {}, AppString.cancel,
+        }, AppStrings.captureWithGallery),
+        _buildDialogOption(() {}, AppStrings.cancel,
             AppsTextStyle.titleTextStyle.copyWith(color: AppColors.red)),
       ],
     );

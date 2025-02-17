@@ -25,7 +25,7 @@ class OrderOverviewPage extends StatelessWidget {
     // Ensure Get.arguments is of type OrderModel to prevent runtime errors
     OrderModel order = Get.arguments;
     return Scaffold(
-      appBar: AppBar(title: Text(AppString.orderOverview)),
+      appBar: AppBar(title: Text(AppStrings.orderOverview)),
       body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 10.h),
           child: SingleChildScrollView(

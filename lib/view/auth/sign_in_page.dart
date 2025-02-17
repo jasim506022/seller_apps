@@ -69,8 +69,8 @@ class _SignInPageState extends State<SignInPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   AppSignInPageIntroWidget(
-                    title: AppString.adminLogin,
-                    description: AppString.logInPageSubjectTitle,
+                    title: AppStrings.sellerLogIn,
+                    description: AppStrings.logInPageSubjectTitle,
                   ),
                   _buildLoginForm(),
                   AppsFunction.verticalSpace(5),
@@ -83,7 +83,7 @@ class _SignInPageState extends State<SignInPage> {
                       // await NetworkUtili.internetCheckingWFunction(
                       //     function: () async => await authController.signIn());
                     },
-                    title: AppString.signIn,
+                    title: AppStrings.signIn,
                   ),
                   AppsFunction.verticalSpace(25),
                   _buildOrDividerText(),
@@ -91,9 +91,9 @@ class _SignInPageState extends State<SignInPage> {
                   _buildSocialLoginOptions(),
                   AppsFunction.verticalSpace(25),
                   RichTextWidget(
-                    colorText: AppString.createAccount,
+                    colorText: AppStrings.createAccount,
                     tap: () async => Get.toNamed(RoutesName.signupPage),
-                    simpleText: AppString.dontHaveAccount,
+                    simpleText: AppStrings.dontHaveAccount,
                   ),
                   AppsFunction.verticalSpace(100)
                 ],
@@ -115,7 +115,7 @@ class _SignInPageState extends State<SignInPage> {
                 NetworkUtils.executeWithInternetCheck(action: () {}),
             color: AppColors.blue,
             image: IconAsset.facebookIcon,
-            title: AppString.facebook,
+            title: AppStrings.facebook,
           ),
         ),
         AppsFunction.horizontalSpace(10),
@@ -125,7 +125,7 @@ class _SignInPageState extends State<SignInPage> {
                 action: () async => await authController.signInWithGoogle()),
             color: AppColors.red,
             image: IconAsset.gmailIcon,
-            title: AppString.gmail,
+            title: AppStrings.gmail,
           ),
         ),
       ],
@@ -142,7 +142,7 @@ class _SignInPageState extends State<SignInPage> {
               action: () => Get.toNamed(RoutesName.forgetPassword));
         },
         child: Text(
-          AppString.forgetPassword,
+          AppStrings.forgetPassword,
           style: AppsTextStyle.mediumBoldText.copyWith(
             color: AppColors.hintLight,
           ),
@@ -158,18 +158,18 @@ class _SignInPageState extends State<SignInPage> {
       child: Column(
         children: [
           TextFormFieldWidget(
-            label: AppString.email,
-            hintText: AppString.emailAddress,
+            label: AppStrings.email,
+            hintText: AppStrings.emailAddress,
             controller: authController.emailController,
             validator: Validators.validateEmail,
             textInputType: TextInputType.emailAddress,
           ),
           TextFormFieldWidget(
-            label: AppString.password,
+            label: AppStrings.password,
             isShowPassword: true,
             obscureText: true,
             validator: Validators.validatePassword,
-            hintText: AppString.password,
+            hintText: AppStrings.password,
             controller: authController.passwordController,
             textInputAction: TextInputAction.done,
           ),
@@ -187,7 +187,7 @@ class _SignInPageState extends State<SignInPage> {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 15.w),
           child: Text(
-            AppString.withOr,
+            AppStrings.withOr,
             style:
                 AppsTextStyle.largeNormalText.copyWith(color: AppColors.grey),
           ),

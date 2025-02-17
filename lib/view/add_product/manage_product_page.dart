@@ -9,6 +9,9 @@ import '../../res/app_string.dart';
 import 'widget/add_product_widget.dart';
 import 'widget/detault_add_proudct_widget.dart';
 
+/// **Page for Adding or Editing a Product**
+/// - Displays a form to add a new product or edit an existing one.
+/// - Uses `AddProductController` for state management with GetX
 class ManageProductPage extends StatefulWidget {
   const ManageProductPage({
     super.key,
@@ -19,17 +22,21 @@ class ManageProductPage extends StatefulWidget {
 }
 
 class _ManageProductPageState extends State<ManageProductPage> {
+  /// Whether the page is in edit mode (true) or add mode (false)
   late bool isUpdate;
   final addProductController = Get.find<AddProductController>();
+
+  /// Stores the product being edited (only if in edit mode)
   late ProductModel productModel;
   @override
   void initState() {
-    var data = Get.arguments;
+    // Retrieve arguments passed to the page
+    final arguments = Get.arguments;
 
-    isUpdate = data?[AppString.isUpdate] ?? false;
+    isUpdate = arguments?[AppStrings.isUpdate] ?? false;
 
     if (isUpdate) {
-      productModel = data![AppString.productModel];
+      productModel = arguments![AppStrings.productModel];
       WidgetsBinding.instance.addPostFrameCallback(
         (_) => addProductController.updateProductsField(productModel),
       );
@@ -56,3 +63,9 @@ class _ManageProductPageState extends State<ManageProductPage> {
     });
   }
 }
+
+/*
+#: Why use final in argument
+#: WidgetsBinding.instance.addPostFrameCallback
+
+*/

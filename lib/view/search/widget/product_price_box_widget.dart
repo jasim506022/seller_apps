@@ -18,18 +18,18 @@ class ProductPriceBoxWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(AppString.productPrice, style: AppsTextStyle.mediumBoldText),
+        Text(AppStrings.productPrice, style: AppsTextStyle.mediumBoldText),
         Row(
           children: [
             Expanded(
                 child: TextFormFieldWidget(
-                    hintText: AppString.minium,
+                    hintText: AppStrings.minium,
                     controller: searchController.minPriceTEC)),
             AppsFunction.horizontalSpace(15),
             Expanded(
               child: TextFormFieldWidget(
                   controller: searchController.maxPriceTEC,
-                  hintText: AppString.maximum),
+                  hintText: AppStrings.maximum),
             ),
           ],
         ),

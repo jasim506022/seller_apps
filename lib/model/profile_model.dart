@@ -32,9 +32,9 @@ class ProfileModel {
       'name': name,
       'phone': phone,
       'token': token,
-      'status': AppString.approved,
+      'status': AppStrings.approved,
       'uid': AppConstants.sharedPreference!
-          .getString(AppString.uidSharedPreference),
+          .getString(AppStrings.uidSharedPreference),
     };
   }
 
@@ -42,16 +42,16 @@ class ProfileModel {
     return <String, dynamic>{
       'address': address,
       'earnings': AppConstants.sharedPreference!
-          .getDouble(AppString.earningSharedPreference),
+          .getDouble(AppStrings.earningSharedPreference),
       'email': AppConstants.sharedPreference!
-          .getString(AppString.emailSharedPreference),
+          .getString(AppStrings.emailSharedPreference),
       'imageurl': imageurl,
       'name': name,
       'phone': phone,
       'token': token,
-      'status': AppString.approved,
+      'status': AppStrings.approved,
       'uid': AppConstants.sharedPreference!
-          .getString(AppString.uidSharedPreference),
+          .getString(AppStrings.uidSharedPreference),
     };
   }
 

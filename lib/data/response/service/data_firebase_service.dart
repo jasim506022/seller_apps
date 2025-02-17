@@ -40,14 +40,14 @@ class DataFirebaseService implements BaseFirebaseService {
   Future<String> uploadImage(XFile imageFile, String productId) async {
     final uniqueImageName =
         "${imageFile.name}_${DateTime.now().millisecondsSinceEpoch}";
-    var sellerId =
-        AppConstants.sharedPreference?.getString(AppString.uidSharedPreference);
+    var sellerId = AppConstants.sharedPreference
+        ?.getString(AppStrings.uidSharedPreference);
     var sellerName = AppConstants.sharedPreference
-        ?.getString(AppString.nameSharedPreference);
+        ?.getString(AppStrings.nameSharedPreference);
 
     // Define the storage path
     final storagePath =
-        "${AppString.sellersCollection}/$sellerId/$sellerName/$productId/images/$uniqueImageName";
+        "${AppStrings.sellersCollection}/$sellerId/$sellerName/$productId/images/$uniqueImageName";
 
     // Upload image to Firebase Storage
     final ref = firebaseStorage.ref().child(storagePath);
@@ -61,17 +61,17 @@ class DataFirebaseService implements BaseFirebaseService {
   Future<void> saveProductToDatabase(
       {required ProductModel productModel, required bool isUpdate}) async {
     final sellerDoc = firebaseFirestore
-        .collection(AppString.sellersCollection)
+        .collection(AppStrings.sellersCollection)
         .doc(AppConstants.sharedPreference!
-            .getString(AppString.uidSharedPreference));
+            .getString(AppStrings.uidSharedPreference));
 
     // References to the product documents in seller and global collections
 
     var sellerProductDoc = sellerDoc
-        .collection(AppString.productsCollection)
+        .collection(AppStrings.productsCollection)
         .doc(productModel.productId);
     var globalProductDoc = firebaseFirestore
-        .collection(AppString.productsCollection)
+        .collection(AppStrings.productsCollection)
         .doc(productModel.productId);
     final productData = productModel.toMap();
     if (isUpdate) {
@@ -88,10 +88,10 @@ class DataFirebaseService implements BaseFirebaseService {
   Stream<QuerySnapshot<Map<String, dynamic>>> fetchCategoryProducts(
       {required String category}) {
     var collectionRef = firebaseFirestore
-        .collection(AppString.sellersCollection)
+        .collection(AppStrings.sellersCollection)
         .doc(AppConstants.sharedPreference!
-            .getString(AppString.uidSharedPreference))
-        .collection(AppString.productsCollection);
+            .getString(AppStrings.uidSharedPreference))
+        .collection(AppStrings.productsCollection);
     var query = collectionRef.orderBy("publishDate", descending: true);
 
     if (category != "All") {
@@ -103,16 +103,17 @@ class DataFirebaseService implements BaseFirebaseService {
 
   @override
   Future<void> deleteProductByIdSnapshot({required String productId}) async {
-    final sellerId =
-        AppConstants.sharedPreference?.getString(AppString.uidSharedPreference);
+    final sellerId = AppConstants.sharedPreference
+        ?.getString(AppStrings.uidSharedPreference);
 
-    final sellerRef =
-        firebaseFirestore.collection(AppString.sellersCollection).doc(sellerId);
+    final sellerRef = firebaseFirestore
+        .collection(AppStrings.sellersCollection)
+        .doc(sellerId);
 
-    sellerRef.collection(AppString.productsCollection).doc(productId).delete();
+    sellerRef.collection(AppStrings.productsCollection).doc(productId).delete();
 
     firebaseFirestore
-        .collection(AppString.productsCollection)
+        .collection(AppStrings.productsCollection)
         .doc(productId)
         .delete();
   }
@@ -122,12 +123,12 @@ class DataFirebaseService implements BaseFirebaseService {
   @override
   Stream<QuerySnapshot<Map<String, dynamic>>> fetchSimilarProducts(
       {required ProductModel productModel}) {
-    final sellerId =
-        AppConstants.sharedPreference?.getString(AppString.uidSharedPreference);
+    final sellerId = AppConstants.sharedPreference
+        ?.getString(AppStrings.uidSharedPreference);
     return firebaseFirestore
-        .collection(AppString.sellersCollection)
+        .collection(AppStrings.sellersCollection)
         .doc(sellerId)
-        .collection(AppString.productsCollection)
+        .collection(AppStrings.productsCollection)
         .where("productId", isNotEqualTo: productModel.productId)
         .where("productcategory", isEqualTo: productModel.productcategory)
         .snapshots();

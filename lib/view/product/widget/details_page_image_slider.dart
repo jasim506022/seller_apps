@@ -9,6 +9,7 @@ import '../../../res/apps_color.dart';
 import 'image_swiper_widget.dart';
 import 'popup_button_widget.dart';
 
+/// Displays the product image slider with a decorative background and action buttons.
 class DetailsPageImageSlideWithCartBridgeWidget extends StatelessWidget {
   const DetailsPageImageSlideWithCartBridgeWidget({
     super.key,

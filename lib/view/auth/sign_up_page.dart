@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-
 import '../../controller/auth_controller.dart';
 import '../../res/app_function.dart';
 
@@ -48,8 +47,8 @@ class _SignUpPageState extends State<SignUpPage> {
                 children: [
                   AppSignInPageIntroWidget(
                     widget: const ProfileImagePickerWidget(),
-                    title: AppString.adminRegistration,
-                    description: AppString.logInPageSubjectTitle,
+                    title: AppStrings.adminRegistration,
+                    description: AppStrings.logInPageSubjectTitle,
                   ),
                   _buildSignUpForm(),
                   AppsFunction.verticalSpace(15),
@@ -60,12 +59,12 @@ class _SignUpPageState extends State<SignUpPage> {
                           action: () async =>
                               await authController.registerUser());
                     },
-                    title: AppString.signup,
+                    title: AppStrings.signUp,
                   ),
                   AppsFunction.verticalSpace(25),
                   RichTextWidget(
-                    simpleText: AppString.alreadyCreateAccount,
-                    colorText: AppString.signIn,
+                    simpleText: AppStrings.alreadyHaveAccount,
+                    colorText: AppStrings.signIn,
                     tap: () async {
                       if (!authController.loadingController.loading.value) {
                         Get.back();
@@ -91,8 +90,8 @@ class _SignUpPageState extends State<SignUpPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TextFormFieldWidget(
-            label: AppString.name,
-            hintText: AppString.yourName,
+            label: AppStrings.name,
+            hintText: AppStrings.yourName,
             controller: authController.nameController,
             validator: Validators.validateNameEmpty, // Validation method.
             textInputType: TextInputType.name, // Keyboard type.
@@ -100,8 +99,8 @@ class _SignUpPageState extends State<SignUpPage> {
 
           // Email
           TextFormFieldWidget(
-            label: AppString.email,
-            hintText: AppString.emailAddress,
+            label: AppStrings.email,
+            hintText: AppStrings.emailAddress,
             controller: authController.emailController,
             validator: Validators.validateEmail,
             textInputType: TextInputType.emailAddress,
@@ -109,21 +108,21 @@ class _SignUpPageState extends State<SignUpPage> {
 
           // Password
           TextFormFieldWidget(
-            label: AppString.password,
+            label: AppStrings.password,
             obscureText: true,
             isShowPassword: true,
             validator: Validators.validatePassword,
-            hintText: AppString.password,
+            hintText: AppStrings.password,
             textInputAction: TextInputAction.next,
             controller: authController.passwordController,
           ),
 
           TextFormFieldWidget(
-            label: AppString.passwordConfirm,
+            label: AppStrings.passwordConfirm,
             obscureText: true,
             isShowPassword: true,
             validator: Validators.validateConfirmPassword,
-            hintText: AppString.passwordConfirm,
+            hintText: AppStrings.passwordConfirm,
             controller: authController.confirmPasswordController,
           ),
           AppsFunction.verticalSpace(10),

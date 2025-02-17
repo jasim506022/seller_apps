@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 
@@ -23,16 +22,15 @@ class PhoneNumberWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(AppString.phone, style: AppsTextStyle.labelTextStyle),
+        Text(AppStrings.phone, style: AppsTextStyle.labelTextStyle),
         AppsFunction.verticalSpace(8),
         IntlPhoneField(
-          
           enabled: enabled,
           textInputAction: textInputAction,
           controller: controller,
           style: style ?? AppsTextStyle.textFieldInputTextStyle(enabled),
           decoration: AppsFunction.textFormFielddecoration(
-            hintText: AppString.phoneNumber,
+            hintText: AppStrings.phoneNumber,
             function: () {},
           ),
           languageCode: "en",

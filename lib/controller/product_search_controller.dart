@@ -83,7 +83,7 @@ class ProductSearchController extends GetxController {
     final double maxPrice = double.tryParse(maxPriceTEC.text) ?? 10000.00;
 
     if (minPrice > maxPrice) {
-      AppsFunction.flutterToast(msg: AppString.minumeAndMaximum);
+      AppsFunction.flutterToast(msg: AppStrings.minumeAndMaximum);
       return;
     }
 
@@ -125,7 +125,7 @@ class ProductSearchController extends GetxController {
           icon: IconAsset.warningIcon,
           title: e.title!,
           content: e.message,
-          buttonText: AppString.okay,
+          buttonText: AppStrings.okay,
         ),
       );
     }

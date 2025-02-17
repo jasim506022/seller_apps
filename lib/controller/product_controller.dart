@@ -13,6 +13,8 @@ import '../widget/error_dialog_widget.dart';
 import '../widget/show_alert_dialog_widget.dart';
 import 'category_manager_controller.dart';
 
+/// **ProductController**
+/// Handles fetching, deleting, and managing products in Firestore.
 class ProductController extends GetxController {
   final ProductRepository repository;
 
@@ -20,8 +22,10 @@ class ProductController extends GetxController {
 
   final categoryManagerController = Get.find<CategoryManagerController>();
 
-// Okay
-  Stream<QuerySnapshot<Map<String, dynamic>>> productSnapshots() {
+  /// **Fetch Product Snapshots**
+  /// Retrieves product data from Firestore based on the selected category.
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> fetchProductSnapshots() {
     try {
       return repository.productSnapshots(
           category: categoryManagerController.selectedAllCategory.value);
@@ -31,17 +35,20 @@ class ProductController extends GetxController {
     }
   }
 
+  /// **Show Delete Confirmation Dialog**
+  /// Displays a confirmation dialog before deleting a product.
+  ///
+  /// ✅ **Enhancement**: Allows an **optional callback** after deletion instead of **hardcoding navigation**.
   Future<void> showDeleteProductDialog({required String productId}) async {
     Get.dialog(
       ShowAlertDialogWidget(
-        title: AppString.areYouWantDelete,
-        content: AppString.deleteMessage,
-        onYesPressed: () async {
+        title: AppStrings.areYouWantDelete,
+        content: AppStrings.deleteMessage,
+        onConfirmPressed: () async {
           try {
             await repository.deleteProductSnapshot(productId: productId);
-
             Get.toNamed(RoutesName.mainPage, arguments: 0);
-            AppsFunction.flutterToast(msg: AppString.deleteSuccessFully);
+            AppsFunction.flutterToast(msg: AppStrings.deleteSuccessFully);
           } catch (e) {
             Get.back();
             _handleException(e);
@@ -52,7 +59,7 @@ class ProductController extends GetxController {
     );
   }
 
-  Stream<QuerySnapshot<Map<String, dynamic>>> similarProductSnapshot(
+  Stream<QuerySnapshot<Map<String, dynamic>>> getSimilarProductsStream(
       {required ProductModel productModel}) {
     try {
       return repository.similarProductSnapshot(productModel: productModel);
@@ -73,7 +80,7 @@ class ProductController extends GetxController {
           icon: IconAsset.warningIcon,
           title: e.title!,
           content: e.message,
-          buttonText: AppString.okay,
+          buttonText: AppStrings.okay,
         ),
       );
     }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:seller_apps/res/app_string.dart';
+import '../../res/app_string.dart';
 import '../../res/utils.dart';
 import '../../res/routes/routes_name.dart';
 
@@ -14,6 +14,7 @@ import 'widget/details_page_image_slider.dart';
 import 'widget/list_similer_product_wiget.dart';
 import 'widget/product_details_widget.dart';
 
+/// Displays product details along with similar products.
 class ProductDetailsPage extends StatefulWidget {
   const ProductDetailsPage({
     super.key,
@@ -29,8 +30,6 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
 
   @override
   void initState() {
-    // var arguments = Get.arguments;
-    // productModel = arguments[AppString.productModel];
     _initializeProductModel();
     super.initState();
   }
@@ -38,7 +37,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
   /// Initializes the product model from arguments
   void _initializeProductModel() {
     final arguments = Get.arguments;
-    productModel = arguments[AppString.productModel];
+    productModel = arguments[AppStrings.productModel];
   }
 
   @override
@@ -48,7 +47,6 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
   }
 
   /// Configures the status bar style
-
   void _statusBar() {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);
@@ -82,10 +80,10 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ProductDetailsWidget(
-                      productModel: productModel,
+                      product: productModel,
                     ),
                     Text(
-                      AppString.similarProducts,
+                      AppStrings.similarProducts,
                       style: AppsTextStyle.titleTextStyle,
                     ),
                     AppsFunction.verticalSpace(10),

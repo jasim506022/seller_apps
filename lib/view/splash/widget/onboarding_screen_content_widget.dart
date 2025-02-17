@@ -36,7 +36,7 @@ class OnboardingPageContentWidget extends StatelessWidget {
             textAlign: TextAlign.center,
             style: AppsTextStyle.mediumBoldText.copyWith(height: 2)),
         NextActionButtonWidget(
-          title: AppString.next,
+          title: AppStrings.next,
           onTap: () {
             controller.navigateToNextPageOrSkip();
           },

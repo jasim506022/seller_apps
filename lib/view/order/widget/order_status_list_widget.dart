@@ -79,8 +79,8 @@ class OrderStatusListWidget extends StatelessWidget {
           return EmptyWidget(
             image: AppImage.error,
             title: snapshot.hasError
-                ? '${AppString.errorOccurred} ${snapshot.error}'
-                : AppString.noDataAvaiable,
+                ? '${AppStrings.errorOccurred} ${snapshot.error}'
+                : AppStrings.noDataAvaiable,
           );
         }
         if (snapshot.hasData) {

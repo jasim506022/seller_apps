@@ -6,8 +6,11 @@ import '../../../res/app_function.dart';
 import '../../../res/apps_color.dart';
 import '../../../res/apps_text_style.dart';
 
-class GridViewItem extends StatelessWidget {
-  const GridViewItem({
+/// **GridView Item**
+/// A reusable widget that displays an item in a grid with an image, label, and a tap action.
+/// The tap action is wrapped with a network check to ensure the device has internet connectivity.
+class GridItemWidet extends StatelessWidget {
+  const GridItemWidet({
     super.key,
     required this.image,
     required this.label,
@@ -20,9 +23,8 @@ class GridViewItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () async {
-        NetworkUtils.executeWithInternetCheck(action: onTap());
-      },
+      // Execute the provided function only if there's internet connectivity
+      onTap: () async => NetworkUtils.executeWithInternetCheck(action: onTap()),
       child: Container(
           padding: EdgeInsets.all(8.r),
           decoration: BoxDecoration(
@@ -32,6 +34,7 @@ class GridViewItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              // Display the image with specified dimensions and color tint
               Image.asset(
                 image,
                 height: 70.h,

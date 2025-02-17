@@ -31,7 +31,7 @@ class ProfileHeaderWidget extends StatelessWidget {
           children: [
             /// User Profile Avatar
             UserAvatarWidget(
-              size: 125,
+              diameter: 125,
               imageUrl: userData['profileImageUrl']!,
             ),
             AppsFunction.horizontalSpace(30),

@@ -28,7 +28,7 @@ class OrderUserDetailsWidget extends StatelessWidget {
         children: [
           /// Profile picture of the User Profile
           UserAvatarWidget(
-            size: 90,
+            diameter: 90,
             imageUrl: userProfileModel.imageurl!,
           ),
           AppsFunction.horizontalSpace(15),

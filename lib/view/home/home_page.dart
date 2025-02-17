@@ -13,8 +13,8 @@ import '../../res/apps_text_style.dart';
 import '../../res/routes/routes_name.dart';
 
 import '../../res/utils.dart';
-import 'widget/grid_view_item.dart';
-import 'widget/dashboard_grid_view.dart';
+import 'widget/grid_item_widget.dart';
+import 'widget/dashboard_grid_widget.dart';
 import 'widget/home_profile_header_stream.dart';
 
 /// HomePage - Displays the main dashboard with profile, search, and product management options.
@@ -60,9 +60,7 @@ class HomePage extends StatelessWidget {
                       AppsFunction.verticalSpace(10),
 
                       /// Search Bar for product search functionality
-
                       _buildSearchBar(context),
-
                       AppsFunction.verticalSpace(20),
 
                       /// Upload Product Section as a Grid Item
@@ -72,7 +70,7 @@ class HomePage extends StatelessWidget {
                       AppsFunction.verticalSpace(15),
 
                       /// Dashboard Grid View - Displays main dashboard options
-                      const Expanded(child: DashboardGridView()),
+                      const Expanded(child: DashboardGridWidget()),
                     ],
                   ),
                 ),
@@ -97,7 +95,7 @@ class HomePage extends StatelessWidget {
     return SizedBox(
       height: 153.h,
       width: 1.sw,
-      child: GridViewItem(
+      child: GridItemWidet(
         image: AppImage.uploadProductImage,
         label: AppStrings.uploadProduct,
         onTap: () async {

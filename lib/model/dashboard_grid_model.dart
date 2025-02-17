@@ -2,40 +2,44 @@ import '../res/app_asset/image_asset.dart';
 import '../res/app_string.dart';
 import '../res/routes/routes_name.dart';
 
+/// **DashboardGridModel**
+/// Represents a grid item in the dashboard with an image, label text, route for navigation, and optional arguments.
 class DashboardGridModel {
   final String image;
-  final String text;
-  final String route;
+  final String label;
+  final String destinationRoute;
   final int? arguments;
 
+  // Constructor for initializing the grid item properties
   DashboardGridModel({
     required this.image,
-    required this.text,
-    required this.route,
+    required this.label,
+    required this.destinationRoute,
     this.arguments,
   });
 }
 
+// List of all the grid items to be displayed on the dashboard
 final List<DashboardGridModel> dashboardGridList = [
   DashboardGridModel(
     image: AppImage.allProductImage,
-    text: AppStrings.allProducts,
-    route: RoutesName.mainPage,
+    label: AppStrings.allProducts,
+    destinationRoute: RoutesName.mainPage,
     arguments: 1,
   ),
   DashboardGridModel(
     image: AppImage.totalsalesImages,
-    text: AppStrings.totalSales,
-    route: RoutesName.totalSales,
+    label: AppStrings.totalSales,
+    destinationRoute: RoutesName.totalSales,
   ),
   DashboardGridModel(
     image: AppImage.runningOrderImages,
-    text: AppStrings.runningOrders,
-    route: RoutesName.orderPage,
+    label: AppStrings.runningOrders,
+    destinationRoute: RoutesName.orderPage,
   ),
   DashboardGridModel(
     image: AppImage.completeOrderImages,
-    text: AppStrings.completeOrder,
-    route: RoutesName.completeOrderPage,
+    label: AppStrings.completeOrder,
+    destinationRoute: RoutesName.completeOrderPage,
   ),
 ];

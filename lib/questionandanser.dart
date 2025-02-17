@@ -91,6 +91,10 @@ Don't use Inside ListView or SingleChildScrollView (use shrinkWrap instead)
 ✔ Use Expanded when you want a widget to fill the space completely.
 ✔ Use Flexible if you want the widget to resize but not forcefully occupy all space
 
+#: Difference Between FutureBuilder and StreamBuilder
+Answer :  FutureBuilder: Fetches data once when the widget is built or when setState() is called. It’s used for single asynchronous calls.
+StreamBuilder: Listens to a continuous stream of data updates and rebuilds the UI whenever new data is received
+
 
 */
 

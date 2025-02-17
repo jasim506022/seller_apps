@@ -67,7 +67,7 @@ class AppsTextStyle {
       color: theme.primaryColor, fontSize: 20.sp, fontWeight: FontWeight.w800);
 
   static TextStyle get gridViewTextStyle => GoogleFonts.poppins(
-      color: theme.primaryColor, fontSize: 18.sp, fontWeight: FontWeight.w800);
+      color: theme.primaryColor, fontSize: 17.sp, fontWeight: FontWeight.w800);
 
 // Description
   static TextStyle get descrptionTextStyle => GoogleFonts.roboto(
@@ -116,9 +116,9 @@ class AppsTextStyle {
   static TextStyle get buttonTextStyle => GoogleFonts.poppins(
       color: AppColors.white, fontWeight: FontWeight.bold, fontSize: 16.sp);
 
-// Hint Normal Text
+// Hint Normal Text (modify)
   static TextStyle get hintTextStyle => GoogleFonts.poppins(
-        fontSize: 14.sp,
+        fontSize: 15.sp,
         color: AppColors.grey,
         fontWeight: FontWeight.normal,
       );

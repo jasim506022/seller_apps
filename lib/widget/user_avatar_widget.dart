@@ -4,17 +4,20 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../res/apps_color.dart';
 
-/// A circular profile avatar widget with shimmer effect and error handling.
-
+/// A customizable circular avatar widget with a shimmer effect and error handling.
 class UserAvatarWidget extends StatelessWidget {
   const UserAvatarWidget({
     super.key,
     required this.imageUrl,
-    required this.size,
+    required this.diameter,
   });
 
+  /// Creates a circular profile avatar with a shimmer effect.
+  ///
+  /// [imageUrl] - The image URL of the user.
+  /// [diameter] - The size of the avatar in logical pixels
   final String imageUrl;
-  final double size;
+  final double diameter;
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +25,8 @@ class UserAvatarWidget extends StatelessWidget {
       decoration: BoxDecoration(
           border: Border.all(color: AppColors.red, width: 2),
           shape: BoxShape.circle),
-      height: size.h,
-      width: size.h,
+      height: diameter.h,
+      width: diameter.h,
       child: ClipOval(
         child: FancyShimmerImage(
           imageUrl: imageUrl,

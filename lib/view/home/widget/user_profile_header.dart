@@ -6,7 +6,8 @@ import '../../../res/apps_color.dart';
 import '../../../res/apps_text_style.dart';
 import '../../../widget/user_avatar_widget.dart';
 
-/// Displays user profile information in the home header.
+/// **User Profile Section**
+/// - Displays the user's profile picture, name, email, and quick action icons (notifications and profile).
 class UserProfileHeader extends StatelessWidget {
   final String imageUrl;
   final String name;
@@ -24,20 +25,20 @@ class UserProfileHeader extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
+        // Profile details like name, email, and avatar
         _buildUserInfo(),
+        // Icons for notifications and profile access
         _buildIconsRow(),
       ],
     );
   }
 
-  /// Builds the user avatar and profile details.
+  /// **Builds the Profile Details Section**
+  /// - Includes the user's avatar, name, and email.
   Row _buildUserInfo() {
     return Row(
       children: [
-        UserAvatarWidget(
-          imageUrl: imageUrl,
-          size: 70
-        ),
+        UserAvatarWidget(imageUrl: imageUrl, diameter: 70),
         AppsFunction.horizontalSpace(15),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,7 +57,8 @@ class UserProfileHeader extends StatelessWidget {
     );
   }
 
-  /// Builds the notification and profile icons.
+  /// **Builds Action Icons for Notifications and Profile**
+  /// - Includes icons for notifications and the profile page.
   Row _buildIconsRow() {
     return Row(
       children: [

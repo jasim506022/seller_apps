@@ -52,8 +52,9 @@ class Validators {
   }
 
   static String? validateProductName(String? value) {
-    if (value == null || value.isEmpty)
+    if (value == null || value.isEmpty) {
       return AppStrings.pleaseEnterProductName;
+    }
     if (value.length <= 2) {
       return AppStrings.productNameMustBe3Characters;
     }

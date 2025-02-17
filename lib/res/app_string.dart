@@ -62,11 +62,11 @@ class AppStrings {
 /*
   * 🛒 Product Management
   */
-  static const String uploadProduct = "Upload Your Product";
+
   static const String allProducts = "All Products";
   static const String totalSales = "Total Sales";
   static const String runningOrders = "Running Orders";
-  static const String searchPlaceholder = "Search...........";
+
   static const productName = 'Product Name';
   static const pleaseEnterProductName = "Please enter Product Name";
   static const String productNameMustBe3Characters =
@@ -284,4 +284,9 @@ class AppStrings {
   static String pleaseEnterField(String fieldName) {
     return "$pleaseEnterPrefix $fieldName.";
   }
+
+  // Hint
+  static const String searchPlaceholder = "Search...........";
+  // Product
+  static const String uploadProduct = "Upload Your Product";
 }

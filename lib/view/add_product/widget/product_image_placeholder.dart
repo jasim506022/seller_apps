@@ -10,8 +10,8 @@ import 'image_selecting_dialog.dart';
 /// **Placeholder UI when no product images are selected**
 /// - Displays an icon and a button to prompt the user to add images.
 /// - Clicking the button opens an `ImageSelectionDialog`.
-class DefaultAddProductView extends StatelessWidget {
-  const DefaultAddProductView({
+class ProductImagePlaceholder extends StatelessWidget {
+  const ProductImagePlaceholder({
     super.key,
   });
 
@@ -29,9 +29,12 @@ class DefaultAddProductView extends StatelessWidget {
             ),
             AppsFunction.verticalSpace(20),
             AppButton(
+              width: .7.sw,
               title: AppStrings.addNewProduct,
+
+              /// **Opens the Image Selection Dialog**
               onPressed: () => Get.dialog(
-                const ImageSelectionDialog(),
+                const ImageSelectionDialog()
               ),
             )
           ],
@@ -40,3 +43,8 @@ class DefaultAddProductView extends StatelessWidget {
     );
   }
 }
+
+
+/*
+#: ProductImagePlaceholder  Place HOlder Means
+*/

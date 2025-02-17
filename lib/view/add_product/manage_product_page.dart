@@ -7,7 +7,7 @@ import '../../model/product_model.dart';
 import '../../res/app_function.dart';
 import '../../res/app_string.dart';
 import 'widget/add_product_widget.dart';
-import 'widget/detault_add_proudct_widget.dart';
+import 'widget/product_image_placeholder.dart';
 
 /// **Page for Adding or Editing a Product**
 /// - Displays a form to add a new product or edit an existing one.
@@ -22,9 +22,10 @@ class ManageProductPage extends StatefulWidget {
 }
 
 class _ManageProductPageState extends State<ManageProductPage> {
-  /// Whether the page is in edit mode (true) or add mode (false)
-  late bool isUpdate;
-  final addProductController = Get.find<AddProductController>();
+  /// Indicates whether the page is in 'edit mode' or 'add mode'.
+  /// `true` for edit mode, `false` for add mode.
+  late bool isEditMode;
+  late final AddProductController addProductController;
 
   /// Stores the product being edited (only if in edit mode)
   late ProductModel productModel;
@@ -33,10 +34,13 @@ class _ManageProductPageState extends State<ManageProductPage> {
     // Retrieve arguments passed to the page
     final arguments = Get.arguments;
 
-    isUpdate = arguments?[AppStrings.isUpdate] ?? false;
+    isEditMode = arguments?[AppStrings.isUpdate] ?? false;
+    addProductController = Get.find<AddProductController>();
 
-    if (isUpdate) {
+    // If in edit mode, initialize productModel with passed product details
+    if (isEditMode) {
       productModel = arguments![AppStrings.productModel];
+      // Update the fields of the form with existing product data
       WidgetsBinding.instance.addPostFrameCallback(
         (_) => addProductController.updateProductsField(productModel),
       );
@@ -47,18 +51,21 @@ class _ManageProductPageState extends State<ManageProductPage> {
 
   @override
   Widget build(BuildContext context) {
+    // Set system UI styles (e.g., status bar and navigation bar appearance)
     AppsFunction.setSystemUIOverlayStyle(context);
 
+// Return a widget based on whether a product has been selected or not
     return Obx(() {
       final isPlaceholderVisible =
           addProductController.selectedProductImagesList.isEmpty &&
-              !isUpdate &&
+              !isEditMode &&
               !addProductController.isProductUpdated.value;
 
+      // Show placeholder if no product images are selected and the page is in 'add' mode.
       return isPlaceholderVisible
-          ? const DefaultAddProductView()
+          ? const ProductImagePlaceholder()
           : AddEditProductForm(
-              isUpdate: isUpdate,
+              isUpdate: isEditMode,
             );
     });
   }

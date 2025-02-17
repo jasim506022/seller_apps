@@ -7,14 +7,16 @@ import '../../../controller/add_product_controller.dart';
 import '../../../res/apps_color.dart';
 import '../../../res/apps_text_style.dart';
 
+/// **ImageSelectionDialog**
+/// - Displays a dialog for selecting an image source (Camera or Gallery).
+/// - Calls `uploadProductImage()` from `AddProductController` based on user selection.
 class ImageSelectionDialog extends StatelessWidget {
-  const ImageSelectionDialog({
-    super.key,
-  });
+  const ImageSelectionDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var addProductController = Get.find<AddProductController>();
+    final AddProductController addProductController =
+        Get.find<AddProductController>();
     return SimpleDialog(
       title: Text(
         AppStrings.selectedImage,
@@ -28,11 +30,12 @@ class ImageSelectionDialog extends StatelessWidget {
           addProductController.uploadProductImage(ImageSource.gallery);
         }, AppStrings.captureWithGallery),
         _buildDialogOption(() {}, AppStrings.cancel,
-            AppsTextStyle.titleTextStyle.copyWith(color: AppColors.red)),
+            AppsTextStyle.mediumBoldText.copyWith(color: AppColors.red)),
       ],
     );
   }
 
+  /// **Builds a Single Dialog Option**
   SimpleDialogOption _buildDialogOption(VoidCallback onPressed, String title,
       [TextStyle? textSyle]) {
     return SimpleDialogOption(
@@ -44,3 +47,9 @@ class ImageSelectionDialog extends StatelessWidget {
     );
   }
 }
+
+/*
+#: What is simple Dialog
+#: Understand Upload Image 
+#: 
+*/

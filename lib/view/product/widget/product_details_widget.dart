@@ -65,7 +65,7 @@ class ProductDetailsWidget extends StatelessWidget {
           text: TextSpan(
             children: [
               TextSpan(
-                text: "${AppStrings.discount}: ${product.discount!}% ",
+                text: "${AppStrings.discountLabel}: ${product.discount!}% ",
                 style:
                     AppsTextStyle.mediumBoldText.copyWith(color: AppColors.red),
               ),
@@ -98,7 +98,7 @@ class ProductDetailsWidget extends StatelessWidget {
                 const TextSpan(text: "( "),
                 TextSpan(text: product.productrating!.toString()),
                 TextSpan(
-                    text: " ${AppStrings.rating} ",
+                    text: " ${AppStrings.ratingLabel} ",
                     style: AppsTextStyle.rattingText),
                 TextSpan(
                     text: ")",

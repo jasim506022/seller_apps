@@ -101,10 +101,10 @@ class AppsTextStyle {
         fontWeight: FontWeight.w400,
       );
 
-  // Search text Field Input Text
+  // Search text Field Input Text (modify)
   static TextStyle textFieldInputTextStyle([bool isEnable = false]) =>
       GoogleFonts.poppins(
-        fontSize: 14.sp,
+        fontSize: 15.sp,
         color: isEnable ? AppColors.black : AppColors.black.withOpacity(.8),
         fontWeight: isEnable ? FontWeight.w600 : FontWeight.w800,
       );

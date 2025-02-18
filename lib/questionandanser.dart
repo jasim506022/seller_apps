@@ -97,6 +97,42 @@ Answer :  FutureBuilder: Fetches data once when the widget is built or when setS
 StreamBuilder: Listens to a continuous stream of data updates and rebuilds the UI whenever new data is received
 
 
+@@ Manage Product
+
+#: Understand Clearly Final:
+Answer: Final variable can't ressaing but can modify
+
+#: What is Necessary to Use WidgetsBinding.instance.addPostFrameCallback?
+Answer: To use WidgetsBinding.instance.addPostFrameCallback, you must ensure:
+Flutter framework is initialized (it should be used within a widget lifecycle, not before runApp).
+WidgetsBinding.instance.addPostFrameCallback allows executing code after the first frame is rendered but before the next frame begins.
+এটি শুধুমাত্র তখন ব্যবহার করতে হবে যখন আপনি প্রথম ফ্রেম রেন্ডার হওয়ার পর কোনো অ্যাকশন চালাতে চান, যেমনঃ উইজেটের সাইজ বের করা, অ্যানিমেশন ট্রিগার করা, অথবা BuildContext নির্ভর কোনো কাজ করা।
+
+
+#: Why is the class named ProductImagePlaceholder;
+Answer: The class named  ProductImagePlaceholder because it represent a placeholder  Ui for 
+a product Image . It is likely used when a product doesn't have an image yet, promiting the user to add one. 
+
+#: What is SimpleDialog, and when and why is it use?
+Answer: A SimpleDialog is a type of modal Dialog in flutter that present a list of option
+to user . it is typically used when you need to select option or confirm 
+❌ When you need more buttons (e.g., OK/Cancel) → Use AlertDialog instead.
+❌ When complex widgets are needed inside the dialog → Use a showModalBottomSheet or Dialog.
+
+#: When do we use onPressed(), and when it used OnPressed; 
+Answer: 
+Onpress: When you pass a function reference (without parentheses), it means the function will be executed later when the button or option is tapped.
+❌ Incorrect when used directly in a widget’s property because it executes the function immediately, instead of waiting for user interaction.// Calling the passed function
+
+#: Why Use formKey in Flutter?
+formKey is used with the Form widget to manage form state and validate input fields. It allows you to:
+
+#: Why Use const SizedBox.shrink(); in Flutter?
+Answer: SizedBox.shrink() is a special SizedBox that has zero width and zero height. It is used to create an empty, invisible widget that does not take up any space in the UI.
+
+
+
+
 */
 
 

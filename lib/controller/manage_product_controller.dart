@@ -53,7 +53,6 @@ class ManageProductController extends GetxController {
       hasProductsChanged(true);
     } catch (e) {
       AppsFunction.flutterToast(msg: AppStrings.imageUploadFail);
-      hasProductsChanged(false);
     }
   }
 
@@ -99,6 +98,7 @@ class ManageProductController extends GetxController {
 
       // Clear loading state and navigate back
       resetProductInputs();
+
       Get.toNamed(RoutesName.mainPage, arguments: 0);
       AppsFunction.flutterToast(
           msg: isUpdate
@@ -215,6 +215,7 @@ class ManageProductController extends GetxController {
 
 // Resets product-related input fields and selections
   void resetProductInputs() {
+    print("Bangladesh");
     for (var element in [
       nameController,
       priceController,

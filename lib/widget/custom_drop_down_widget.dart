@@ -54,10 +54,3 @@ class CustomDropdownWidget extends StatelessWidget {
     );
   }
 }
-
-/*
-#: Understand This Funtion: final void Function(String?)? onChanged;
-#: try to set one OutlineBorder in Main
-#: Why sometime OnChanged work why Something Need onChaned()
-
-*/

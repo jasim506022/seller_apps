@@ -15,19 +15,17 @@ class ImagePickerDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ManageProductController addProductController =
+    final ManageProductController manageProductController =
         Get.find<ManageProductController>();
     return SimpleDialog(
-      title: Text(
-        AppStrings.selectPhotoTitle,
-        style: AppsTextStyle.dialogTitleText,
-      ),
+      title: Text(AppStrings.selectPhotoTitle,
+          style: AppsTextStyle.dialogTitleText),
       children: [
         _buildDialogOption(() {
-          addProductController.pickProductImage(ImageSource.camera);
+          manageProductController.pickProductImage(ImageSource.camera);
         }, AppStrings.takePhotoCameraTitle),
         _buildDialogOption(() {
-          addProductController.pickProductImage(ImageSource.gallery);
+          manageProductController.pickProductImage(ImageSource.gallery);
         }, AppStrings.chooseFromGalleryTitle),
         _buildDialogOption(() {}, AppStrings.btnCancel, true),
       ],
@@ -49,9 +47,3 @@ class ImagePickerDialog extends StatelessWidget {
     );
   }
 }
-
-/*
-#: What is simple Dialog
-#: Understand Upload Image 
-#: Is use to OnPressed() or Just OnPressed
-*/

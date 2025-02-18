@@ -18,7 +18,7 @@ class ProductPriceBoxWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(AppStrings.productPrice, style: AppsTextStyle.mediumBoldText),
+        Text(AppStrings.productPriceHint, style: AppsTextStyle.mediumBoldText),
         Row(
           children: [
             Expanded(

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:seller_apps/res/apps_text_style.dart';
 
 import '../../../controller/manage_product_controller.dart';
+import '../../../res/app_string.dart';
 import '../../../res/apps_color.dart';
+import '../../../res/apps_text_style.dart';
 import 'single_image_remove_widget.dart';
 
 /// A widget that displays a grid of selected product images with the ability to remove them.
@@ -36,7 +37,7 @@ class GridImageListWidget extends StatelessWidget {
   Widget _buildEmptyState() {
     return Center(
       child: Text(
-        "No images selected",
+        AppStrings.noImageSelect,
         style: AppsTextStyle.mediumBoldText.copyWith(color: AppColors.red),
       ),
     );

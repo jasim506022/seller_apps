@@ -24,7 +24,8 @@ class GridItemWidet extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       // Execute the provided function only if there's internet connectivity
-      onTap: () async => NetworkUtils.executeWithInternetCheck(action: onTap()),
+      onTap: () async =>
+          await NetworkUtils.executeWithInternetCheck(action: onTap),
       child: Container(
           padding: EdgeInsets.all(8.r),
           decoration: BoxDecoration(

@@ -98,7 +98,7 @@ class HomePage extends StatelessWidget {
       child: GridItemWidet(
         image: AppImage.uploadProductImage,
         label: AppStrings.uploadProduct,
-        onTap: () async {
+        onTap: () {
           Get.toNamed(RoutesName.uploadAndUpdateProduct);
         },
       ),

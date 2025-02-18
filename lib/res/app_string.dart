@@ -68,15 +68,6 @@ class AppStrings {
   static const String totalSales = "Total Sales";
   static const String runningOrders = "Running Orders";
 
-  static const productName = 'Product Name';
-  static const pleaseEnterProductName = "Please enter Product Name";
-  static const String productNameMustBe3Characters =
-      "Product name must be at least 3 characters long.";
-  static const String price = 'Price';
-  static const String discount = 'Discount';
-  static const String rating = 'Rating';
-  static const String description = 'Description';
-
   /*
   * 📦 Orders & Delivery
   */
@@ -101,6 +92,55 @@ class AppStrings {
   // 📌 Success & Toast Messages
   static const String toastWaitForUploadMessage =
       "Please wait until upload completes.";
+
+  // 📌 Form Field Labels
+  static const productNameLabel = 'Product Name';
+  static const String priceLabel = 'Price';
+  static const String discountLabel = 'Discount';
+  static const String ratingLabel = 'Rating';
+  static const String descriptionLabel = 'Description';
+
+  // 📌 Hint Texts (For Input Fields)
+  static const String productNameHint = "Enter product name (e.g., Nike Shoes)";
+  static const String productPriceHint = "Enter price (e.g., 99.99)";
+  static const String productDiscountHint = "Enter discount (e.g., 10 for 10%)";
+  static const String productRatingHint = "Enter rating (1 to 5)";
+  static const String productDescriptionHint =
+      "Write a short product description...";
+
+  // 📌 Validation Messages
+  static const String emptyProductName = "Please enter a product name.";
+  static const String productNameTooShort =
+      "Product name must be at least 3 characters long.";
+  static const String productNameTooLong =
+      "Product name cannot exceed 100 characters.";
+  static const String productNameInvalid =
+      "Product name can only contain letters, numbers, and spaces.";
+  static const String emptyPrice = "Please enter a product price.";
+  static const String invalidPrice =
+      "Invalid price! Please enter a valid numeric value.";
+  static const String priceOutOfRange =
+      "Price must be between 0.01 and 1,000,000.";
+  static const String invalidPriceFormat =
+      "Please enter a valid price with up to two decimal places.";
+  static const String emptyRating = "Please enter a rating before submitting.";
+  static const String invalidRating =
+      "Invalid rating! Please enter a numeric value between 1 and 5.";
+  static const String ratingOutOfRange = "Rating must be between 1 and 5.";
+  static const String emptyDiscount = "Please enter a discount value.";
+  static const String invalidDiscount =
+      "Invalid discount! Please enter a valid numeric value.";
+  static const String discountNegative = "Discount cannot be negative.";
+  static const String discountTooHigh =
+      "Discount cannot be greater than the product price.";
+  static const String discountOverLimit = "Discount cannot exceed 100%.";
+  static const String invalidDiscountFormat =
+      "Please enter a valid discount with up to two decimal places.";
+  static const String emptyDescription = "Please enter a product description.";
+  static const String descriptionTooShort =
+      "Product description must be at least 10 characters long.";
+  static const String descriptionTooLong =
+      "Product description cannot exceed 1000 characters.";
 
   static String doYouwantSignout = "Do you want to sign out?";
 
@@ -289,9 +329,13 @@ class AppStrings {
 
   static String minumeAndMaximum = 'Minimum price cannot exceed maximum price.';
 
+  // 📌 Helper Functions for Dynamic Messages
   static String pleaseEnterField(String fieldName) {
-    return "$pleaseEnterPrefix $fieldName.";
+    return "Please enter $fieldName.";
   }
+
+  //
+  static const String noImageSelect = "No images selected";
 
   // Hint
   static const String searchPlaceholder = "Search...........";

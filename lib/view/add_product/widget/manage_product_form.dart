@@ -111,7 +111,6 @@ class _ManageProductFormState extends State<ManageProductForm> {
         title: AppStrings.btnPickImage,
         onPressed: () {
           manageProductController.pickProductImage(ImageSource.gallery);
-          manageProductController.hasProductsChanged(true);
         });
   }
 
@@ -120,78 +119,71 @@ class _ManageProductFormState extends State<ManageProductForm> {
       key: _formKey,
       child: Column(
         children: [
-          Obx(
-            () => CustomDropdownWidget(
-              items: AppConstants.categories,
-              value: manageProductController
-                  .categoryController.selectedCategory.value,
-              onChanged: (value) {
-                manageProductController.categoryController
-                    .updateCategory(value!.toString());
-                manageProductController.hasProductsChanged(true);
-              },
-            ),
+          CustomDropdownWidget(
+            items: AppConstants.categories,
+            value: manageProductController
+                .categoryController.selectedCategory.value,
+            onChanged: (value) {
+              manageProductController.categoryController
+                  .updateCategory(value!.toString());
+              manageProductController.hasProductsChanged(true);
+            },
           ),
           AppsFunction.verticalSpacing(10),
           TextFormFieldWidget(
-            onChanged: (value) => manageProductController.trackInputChanges(),
-            controller: manageProductController.nameController,
-            label: AppStrings.productName,
-            hintText: AppStrings.productName,
-            validator: Validators.validateProductName,
-          ),
+              onChanged: (value) => manageProductController.trackInputChanges(),
+              controller: manageProductController.nameController,
+              label: AppStrings.productNameLabel,
+              hintText: AppStrings.productNameHint,
+              validator: Validators.validateProductName),
           Row(
             children: [
               Expanded(
+                flex: 6,
                 child: TextFormFieldWidget(
                     onChanged: (value) =>
                         manageProductController.trackInputChanges(),
                     controller: manageProductController.priceController,
-                    label: AppStrings.price,
-                    hintText: AppStrings.price,
-                    validator: (value) => Validators.validateProductNotEmpty(
-                        value, AppStrings.price),
+                    label: AppStrings.priceLabel,
+                    hintText: AppStrings.productPriceHint,
+                    validator: Validators.validatePrice,
                     textInputType: TextInputType.number),
               ),
               AppsFunction.horizontalSpacing(20),
               Expanded(
-                  child: Obx(
-                () => CustomDropdownWidget(
-                  onChanged: (value) {
-                    manageProductController.categoryController
-                        .updateUnit(value!.toString());
-                    manageProductController.hasProductsChanged(true);
-                  },
-                  items: AppConstants.units,
-                  value: manageProductController
-                      .categoryController.selectedUnit.value,
-                ),
-              )),
+                  flex: 5,
+                  child: CustomDropdownWidget(
+                    onChanged: (value) {
+                      manageProductController.categoryController
+                          .updateUnit(value!.toString());
+                      manageProductController.hasProductsChanged(true);
+                    },
+                    items: AppConstants.units,
+                    value: manageProductController
+                        .categoryController.selectedUnit.value,
+                  )),
             ],
           ),
           TextFormFieldWidget(
               onChanged: (value) => manageProductController.trackInputChanges(),
               controller: manageProductController.discountController,
-              label: AppStrings.discount,
-              hintText: AppStrings.discount,
-              validator: (value) => Validators.validateProductNotEmpty(
-                  value, AppStrings.discount),
+              label: AppStrings.discountLabel,
+              hintText: AppStrings.productDiscountHint,
+              validator: Validators.validateRating,
               textInputType: TextInputType.number),
           TextFormFieldWidget(
               onChanged: (value) => manageProductController.trackInputChanges(),
               controller: manageProductController.ratingController,
-              hintText: AppStrings.rating,
-              label: AppStrings.rating,
-              validator: (value) =>
-                  Validators.validateProductNotEmpty(value, AppStrings.rating),
+              hintText: AppStrings.ratingLabel,
+              label: AppStrings.productRatingHint,
+              validator: Validators.validateDiscount,
               textInputType: TextInputType.number),
           TextFormFieldWidget(
               onChanged: (value) => manageProductController.trackInputChanges(),
               controller: manageProductController.descriptionController,
-              label: AppStrings.description,
-              hintText: AppStrings.description,
-              validator: (value) => Validators.validateProductNotEmpty(
-                  value, AppStrings.description),
+              label: AppStrings.descriptionLabel,
+              hintText: AppStrings.productDescriptionHint,
+              validator: Validators.validateProductDescription,
               textInputType: TextInputType.text,
               maxLines: 7),
         ],
@@ -199,11 +191,3 @@ class _ManageProductFormState extends State<ManageProductForm> {
     );
   }
 }
-
-/*
-#: Why use FormKey
-#: Why use : const SizedBox.shrink();
-#: Change name to uploadProductImage	pickProductImage
-#: Which we use Screen or Page
-#: CustomDropdownWidget and TextField Deson't Check
-*/

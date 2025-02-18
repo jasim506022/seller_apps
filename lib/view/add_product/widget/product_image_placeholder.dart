@@ -18,9 +18,9 @@ class ProductImagePlaceholder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text(AppStrings.addNewProductTitle)),
-      body: Center(
-        child: Column(
+        appBar: AppBar(title: const Text(AppStrings.addNewProductTitle)),
+        body: Center(
+            child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
@@ -33,16 +33,11 @@ class ProductImagePlaceholder extends StatelessWidget {
               title: AppStrings.btnaddProductImage,
 
               /// **Opens the Image Selection Dialog**
-              onPressed: () => Get.dialog(const ImagePickerDialog()),
+              onPressed: () async {
+                await Get.dialog(const ImagePickerDialog());
+              },
             )
           ],
-        ),
-      ),
-    );
+        )));
   }
 }
-
-
-/*
-#: ProductImagePlaceholder  Place HOlder Means (Why use PlaceHolder)
-*/

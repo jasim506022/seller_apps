@@ -13,9 +13,7 @@ import 'widget/product_image_placeholder.dart';
 /// - Displays a form to add a new product or edit an existing one.
 /// - Uses `AddProductController` for state management with GetX
 class ManageProductPage extends StatefulWidget {
-  const ManageProductPage({
-    super.key,
-  });
+  const ManageProductPage({super.key});
 
   @override
   State<ManageProductPage> createState() => _ManageProductPageState();
@@ -40,9 +38,7 @@ class _ManageProductPageState extends State<ManageProductPage> {
     if (isEditMode) {
       productModel = arguments![AppStrings.productModel];
       // Update the fields of the form with existing product data
-      WidgetsBinding.instance.addPostFrameCallback(
-        (_) => manageProductController.updateProductsFields(productModel),
-      );
+      manageProductController.updateProductsFields(productModel);
     }
     super.initState();
   }
@@ -68,9 +64,3 @@ class _ManageProductPageState extends State<ManageProductPage> {
     });
   }
 }
-
-/*
-#: Why use final in argument
-#: WidgetsBinding.instance.addPostFrameCallback
-
-*/

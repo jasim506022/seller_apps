@@ -45,7 +45,7 @@ class ShowAlertDialogWidget extends StatelessWidget {
     return Row(
       children: [
         Text(title),
-        AppsFunction.horizontalSpace(10),
+        AppsFunction.horizontalSpacing(10),
         Container(
           padding: EdgeInsets.all(5.r),
           decoration: BoxDecoration(color: iconColor, shape: BoxShape.circle),

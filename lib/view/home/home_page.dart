@@ -53,21 +53,21 @@ class HomePage extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 30.w),
                   child: Column(
                     children: [
-                      AppsFunction.verticalSpace(10),
+                      AppsFunction.verticalSpacing(10),
 
                       /// Profile Header displaying user info
                       const HomeProfileHeaderStream(),
-                      AppsFunction.verticalSpace(10),
+                      AppsFunction.verticalSpacing(10),
 
                       /// Search Bar for product search functionality
                       _buildSearchBar(context),
-                      AppsFunction.verticalSpace(20),
+                      AppsFunction.verticalSpacing(20),
 
                       /// Upload Product Section as a Grid Item
 
                       _buildUploadProductTile(),
 
-                      AppsFunction.verticalSpace(15),
+                      AppsFunction.verticalSpacing(15),
 
                       /// Dashboard Grid View - Displays main dashboard options
                       const Expanded(child: DashboardGridWidget()),
@@ -124,7 +124,7 @@ class HomePage extends StatelessWidget {
                   style: AppsTextStyle.hintTextStyle),
               const Spacer(),
               const Icon(IconlyLight.search),
-              AppsFunction.horizontalSpace(20)
+              AppsFunction.horizontalSpacing(20)
             ],
           ),
         ),

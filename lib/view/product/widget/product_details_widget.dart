@@ -23,15 +23,15 @@ class ProductDetailsWidget extends StatelessWidget {
       children: [
         Text(product.productname!,
             style: AppsTextStyle.largeBoldText.copyWith(fontSize: 20.sp)),
-        AppsFunction.verticalSpace(15),
+        AppsFunction.verticalSpacing(15),
         _buildPriceDetailsRow(),
-        AppsFunction.verticalSpace(15),
+        AppsFunction.verticalSpacing(15),
         Text(product.productdescription!,
             textAlign: TextAlign.justify,
             style: AppsTextStyle.mediumNormalText),
-        AppsFunction.verticalSpace(20),
+        AppsFunction.verticalSpacing(20),
         _buildRatingBar(context),
-        AppsFunction.verticalSpace(20),
+        AppsFunction.verticalSpacing(20),
       ],
     );
   }
@@ -95,7 +95,7 @@ class ProductDetailsWidget extends StatelessWidget {
                 style:
                     AppsTextStyle.mediumBoldText.copyWith(color: AppColors.red),
               ),
-              WidgetSpan(child: AppsFunction.horizontalSpace(10)),
+              WidgetSpan(child: AppsFunction.horizontalSpacing(10)),
               TextSpan(
                 text: product.productprice!.toString(),
                 style: AppsTextStyle.mediumBoldText.copyWith(

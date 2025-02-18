@@ -98,9 +98,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                   isEditMode: isEditMode,
                                   imageUrl: profileModel.imageurl!,
                                 ),
-                                AppsFunction.verticalSpace(50),
+                                AppsFunction.verticalSpacing(50),
                                 _buildFormField(profileModel),
-                                AppsFunction.verticalSpace(100),
+                                AppsFunction.verticalSpacing(100),
                               ],
                             ),
                           ));

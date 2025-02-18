@@ -47,7 +47,7 @@ class OrderStatusCard extends StatelessWidget {
             width: 1.sw,
             fit: BoxFit.contain,
           ),
-          AppsFunction.verticalSpace(15),
+          AppsFunction.verticalSpacing(15),
           BackgroundShapeWidget(
             backgroundColor: AppColors.deepGreen,
             child: Text(

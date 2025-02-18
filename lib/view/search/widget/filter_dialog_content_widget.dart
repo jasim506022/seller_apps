@@ -25,11 +25,11 @@ class FilterDialogContentWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           _buildTitle(),
-          AppsFunction.verticalSpace(10),
+          AppsFunction.verticalSpacing(10),
           const ProductPriceBoxWidget(),
-          AppsFunction.verticalSpace(10),
+          AppsFunction.verticalSpacing(10),
           _buildCategoryDropdown(searchController),
-          AppsFunction.verticalSpace(10),
+          AppsFunction.verticalSpacing(10),
           _buildActionButtons(context, searchController),
         ],
       ),
@@ -52,7 +52,7 @@ class FilterDialogContentWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(AppStrings.productCategory, style: AppsTextStyle.mediumBoldText),
-        AppsFunction.verticalSpace(10),
+        AppsFunction.verticalSpacing(10),
         CustomDropdownWidget(
           value: searchController.selectedCategory.value,
           items: AppConstants.allCategories,
@@ -90,7 +90,7 @@ class FilterDialogContentWidget extends StatelessWidget {
               Get.back();
               FocusScope.of(context).unfocus();
             }),
-            AppsFunction.horizontalSpace(15),
+            AppsFunction.horizontalSpacing(15),
             _buildActionButton(AppStrings.save, () {
               searchController.applyFilters();
               FocusScope.of(context).unfocus();

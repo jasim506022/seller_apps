@@ -169,7 +169,7 @@ class ProfileController extends GetxController {
     }
     Get.dialog(ShowAlertDialogWidget(
         icon: Icons.question_mark_rounded,
-        title: AppStrings.saveChanges,
+        title: AppStrings.saveChangesTitle,
         content: AppStrings.saveMessage,
         onCancelPressed: () {
           Get.close(2);

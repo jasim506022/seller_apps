@@ -32,12 +32,12 @@ class ProfilePhotoOptionSheetWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(2.r)),
             ),
           ),
-          AppsFunction.verticalSpace(10),
+          AppsFunction.verticalSpacing(10),
           Align(
               alignment: Alignment.center,
               child: Text(AppStrings.selectPhoto,
                   style: AppsTextStyle.titleTextStyle)),
-          AppsFunction.verticalSpace(10),
+          AppsFunction.verticalSpacing(10),
           _buildPhotoOptions()
         ],
       ),
@@ -52,7 +52,7 @@ class ProfilePhotoOptionSheetWidget extends StatelessWidget {
           Get.back();
           selectImageController.selectImage(imageSource: ImageSource.camera);
         }),
-        AppsFunction.horizontalSpace(30),
+        AppsFunction.horizontalSpacing(30),
         _buildPhotoOptionButton(AppStrings.gallery, Icons.photo_album, () {
           Get.back();
           selectImageController.selectImage(imageSource: ImageSource.gallery);
@@ -80,7 +80,7 @@ class ProfilePhotoOptionSheetWidget extends StatelessWidget {
                 color: AppColors.green,
               ),
             ),
-            AppsFunction.horizontalSpace(30),
+            AppsFunction.horizontalSpacing(30),
             Text(
               title,
               style: AppsTextStyle.buttonTextStyle

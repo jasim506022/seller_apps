@@ -69,7 +69,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              AppsFunction.verticalSpace(20),
+              AppsFunction.verticalSpacing(20),
               DetailsPageImageSlideWithCartBridgeWidget(
                 productModel: productModel,
               ),
@@ -86,11 +86,11 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                       AppStrings.similarProducts,
                       style: AppsTextStyle.titleTextStyle,
                     ),
-                    AppsFunction.verticalSpace(10),
+                    AppsFunction.verticalSpacing(10),
                     SimilarProductList(
                       productModel: productModel,
                     ),
-                    AppsFunction.verticalSpace(20),
+                    AppsFunction.verticalSpacing(20),
                   ],
                 ),
               )

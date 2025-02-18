@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:seller_apps/controller/add_product_controller.dart';
+import 'package:seller_apps/controller/manage_product_controller.dart';
 import 'package:seller_apps/controller/auth_controller.dart';
 import 'package:seller_apps/controller/category_manager_controller.dart';
 import 'package:seller_apps/repository/add_product_repository.dart';
@@ -45,9 +45,9 @@ class InitialBinding extends Bindings {
     Get.lazyPut<AddProductRepository>(() => AddProductRepository(),
         fenix: true);
 
-    Get.lazyPut<AddProductController>(
-        () =>
-            AddProductController(repository: Get.find<AddProductRepository>()),
+    Get.lazyPut<ManageProductController>(
+        () => ManageProductController(
+            repository: Get.find<AddProductRepository>()),
         fenix: true);
 
     Get.put<LoadingController>(LoadingController(), permanent: true);
@@ -86,7 +86,5 @@ class InitialBinding extends Bindings {
     Get.lazyPut<OrderController>(
         () => OrderController(Get.find<OrderRepository>()),
         fenix: true);
-
-    
   }
 }

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../controller/add_product_controller.dart';
+import '../../../controller/manage_product_controller.dart';
 import '../../../res/apps_color.dart';
 
 class SingleImageRemove extends StatelessWidget {
@@ -13,8 +13,8 @@ class SingleImageRemove extends StatelessWidget {
   final int index;
   @override
   Widget build(BuildContext context) {
-    var addProductController = Get.find<AddProductController>();
-    var image = addProductController.selectedProductImagesList[index];
+    var addProductController = Get.find<ManageProductController>();
+    var image = addProductController.selectedImagesList[index];
     return Stack(
       children: [
         ClipRRect(

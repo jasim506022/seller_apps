@@ -14,6 +14,8 @@ class AppStrings {
   static const String productsTitle = "Products";
   static const String searchTitle = "Search";
   static const String profileTitle = "Profile";
+  static const addNewProductTitle = "Add New Product";
+  static const updateProductTitle = "Update Product";
 
   static const String defaultName = "Name Not Found";
   static const String defaultEmail = "email@example.com";
@@ -43,10 +45,9 @@ class AppStrings {
   /*
   * 📸 Image Selection
   */
-  static const String selectedImage = "Selected Image";
+
   static const String noImageSelected = "No Image Selected";
-  static const String captureWithCamera = "Capture image with Camera";
-  static const String captureWithGallery = "Capture image with Gallery";
+
   static const String pleaseSelectPhoto = "Please Select a Photo";
 
 /*
@@ -75,7 +76,6 @@ class AppStrings {
   static const String discount = 'Discount';
   static const String rating = 'Rating';
   static const String description = 'Description';
-  static const String pickImage = "Pick Image";
 
   /*
   * 📦 Orders & Delivery
@@ -83,18 +83,27 @@ class AppStrings {
 
   // 📌 Dialog title & Messages
   static const String exitDialogTitle = "Exit Application";
-  static const String confirmExitMessage = "Are you sure you want to exit?";
+  static const String selectPhotoTitle = "Select Photo";
+  static const String takePhotoCameraTitle = "Take a Photo";
+  static const String chooseFromGalleryTitle = "Choose from Gallery";
+  static const String saveChangesTitle = "Save Changes?";
+
+  static const String confirmExitMessage = "Are you sure  want to exit?";
+  static const String saveMessage = "Do you want to save your changes?";
 
   // 📌 Button Labels
   static const String btnYes = "Yes";
   static const String btnNo = "No";
+  static const String btnaddProductImage = "Add Product Image";
+  static const String btnCancel = "Cancel";
+  static const String btnPickImage = "Pick Image";
 
-  static const saveChanges = "Save Changes?";
+  // 📌 Success & Toast Messages
+  static const String toastWaitForUploadMessage =
+      "Please wait until upload completes.";
+
   static String doYouwantSignout = "Do you want to sign out?";
 
-  static const cancel = "Cancel";
-
-  static const saveMessage = "Do you want to save your changes?";
   static const areYouWantDelete = "Are You want to Delete";
   static const deleteMessage =
       "Do you Want to Delete The Product Produc. If you delete the Product it can not be undo";
@@ -204,8 +213,7 @@ class AppStrings {
   // App Bar and Title
   static const String editProfile = "Edit Profile";
   static const String signOut = "Sign Out";
-  static const updateProduct = "Update Product";
-  static const addNewProduct = "Add New Product";
+
   static const productTitle = "Products";
   static const String orderPage = "Order Page";
   static String orderOverview = "Order Overview";
@@ -239,7 +247,7 @@ class AppStrings {
   static const selectOneImage = "Please Select at least One Image";
   static const updateProductToastMessage = "Succesfully update a New Product";
   static const uploadProductToastMessage = "Succesfully Upload a New Product";
-  static const waitUntilUpload = "Please Wait Until Upload";
+
   static const deleteSuccessFully = "Delete Succesffully";
   static const userDoesntExit = "User Doesn't Exit";
 

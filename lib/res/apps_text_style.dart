@@ -14,6 +14,10 @@ class AppsTextStyle {
   static TextStyle get titleTextStyle => GoogleFonts.poppins(
       color: theme.primaryColor, fontSize: 20.sp, fontWeight: FontWeight.w800);
 
+  // Title Text Style (Modify)
+  static TextStyle get dialogTitleText => GoogleFonts.poppins(
+      color: AppColors.green, fontSize: 18.sp, fontWeight: FontWeight.w800);
+
 // Apps Logo
   static TextStyle get appsLogoTextStyole => GoogleFonts.roboto(
         color: AppColors.green,
@@ -34,7 +38,7 @@ class AppsTextStyle {
 // Modify Text
   static TextStyle get labelTextStyle => GoogleFonts.poppins(
         color: theme.primaryColor,
-        fontSize: 16.sp,
+        fontSize: 15.sp,
         fontWeight: FontWeight.w700,
       );
 

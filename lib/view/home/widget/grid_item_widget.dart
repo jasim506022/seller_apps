@@ -41,7 +41,7 @@ class GridItemWidet extends StatelessWidget {
                 width: 70.h,
                 color: AppColors.green,
               ),
-              AppsFunction.verticalSpace(10),
+              AppsFunction.verticalSpacing(10),
               Text(
                 label,
                 style: AppsTextStyle.gridViewTextStyle,

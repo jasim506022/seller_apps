@@ -30,8 +30,8 @@ class CustomDropdownWidget extends StatelessWidget {
       decoration: InputDecoration(
         fillColor: Theme.of(context).cardColor,
         filled: true,
-        enabledBorder: _createBorderStyle(),
-        focusedBorder: _createBorderStyle(),
+        enabledBorder: _buildDropdownItems(),
+        focusedBorder: _buildDropdownItems(),
         contentPadding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 15.h),
       ),
       value: value,
@@ -45,7 +45,7 @@ class CustomDropdownWidget extends StatelessWidget {
   }
 
   /// Builds a rounded border for the input field.
-  OutlineInputBorder _createBorderStyle() {
+  OutlineInputBorder _buildDropdownItems() {
     return OutlineInputBorder(
       borderSide: const BorderSide(
         width: 1,
@@ -54,3 +54,10 @@ class CustomDropdownWidget extends StatelessWidget {
     );
   }
 }
+
+/*
+#: Understand This Funtion: final void Function(String?)? onChanged;
+#: try to set one OutlineBorder in Main
+#: Why sometime OnChanged work why Something Need onChaned()
+
+*/

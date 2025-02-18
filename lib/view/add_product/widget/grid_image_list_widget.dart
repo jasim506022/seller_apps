@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../controller/add_product_controller.dart';
+import '../../../controller/manage_product_controller.dart';
 import '../../../res/apps_color.dart';
 import 'single_image_remove_widget.dart';
 
+/// A widget that displays a grid of selected product images with the ability to remove them.
 class GridImageListWidget extends StatelessWidget {
   const GridImageListWidget({
     super.key,
@@ -13,9 +14,11 @@ class GridImageListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var addProductController = Get.find<AddProductController>();
-    return Obx(
-      () => Container(
+    final ManageProductController manageProductController =
+        Get.find<ManageProductController>();
+    return Obx(() {
+       List<dynamic> images = manageProductController.selectedImagesList.value;
+      return Container(
         height: 0.25.sh,
         width: 1.sw,
         padding: EdgeInsets.all(3.r),
@@ -24,21 +27,34 @@ class GridImageListWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(15.r),
           border: Border.all(color: AppColors.green, width: 3.h),
         ),
-        child: GridView.builder(
-          itemCount: addProductController.selectedProductImagesList.length,
-          itemBuilder: (context, index) {
-            return SingleImageRemove(
-              index: index,
-            );
-          },
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            childAspectRatio: 1.5,
-            crossAxisSpacing: 15.w,
-            mainAxisSpacing: 15.h,
-            crossAxisCount: 2,
-          ),
-        ),
+        child: images.isEmpty
+            ? _buildEmptyState()
+            : _buildImageGrid(images.value)
+      );
+    });
+  }
+
+  /// **Displays an empty state when no images are selected.**
+  Widget _buildEmptyState() {
+    return Center(
+      child: Text(
+        "No images selected",
+        style: TextStyle(fontSize: 14.sp, color: AppColors.green),
       ),
+    );
+  }
+
+  /// **Builds the grid of selected images.**
+  Widget _buildImageGrid(List<String> images) {
+    return GridView.builder(
+      itemCount: images.length,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: 1.5,
+        crossAxisSpacing: 15.w,
+        mainAxisSpacing: 15.h,
+      ),
+      itemBuilder: (context, index) => SingleImageRemove(index: index),
     );
   }
 }

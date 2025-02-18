@@ -51,7 +51,7 @@ class SimilarProductCard extends StatelessWidget {
                   imageUrl: productModel.productimage![0],
                 ),
               ),
-              AppsFunction.verticalSpace(10),
+              AppsFunction.verticalSpacing(10),
               Text(productModel.productname!,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,

@@ -40,7 +40,7 @@ class SocialButtonWidget extends StatelessWidget {
               width: 34.h,
               color: AppColors.white,
             ),
-            AppsFunction.horizontalSpace(10),
+            AppsFunction.horizontalSpacing(10),
             Text(
               title,
               style: AppsTextStyle.buttonTextStyle,

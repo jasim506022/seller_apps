@@ -20,7 +20,7 @@ class LoadingProfileHeaderWidget extends StatelessWidget {
         child: Row(
           children: [
             AppsFunction.shimmerPlaceholder(height: 60, isCircle: true),
-            AppsFunction.horizontalSpace(15),
+            AppsFunction.horizontalSpacing(15),
             Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,

@@ -22,9 +22,9 @@ class LoadingSimilierWidget extends StatelessWidget {
             child: Column(
               children: [
                 AppsFunction.shimmerPlaceholder(height: 90),
-                AppsFunction.verticalSpace(10),
+                AppsFunction.verticalSpacing(10),
                 AppsFunction.shimmerPlaceholder(height: 10),
-                AppsFunction.verticalSpace(10),
+                AppsFunction.verticalSpacing(10),
                 AppsFunction.shimmerPlaceholder(height: 10)
               ],
             ),

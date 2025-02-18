@@ -23,7 +23,7 @@ class DeliveryInfoCard extends StatelessWidget {
     return Column(
       children: [
         _buildDeliveryAddressSection(),
-        AppsFunction.verticalSpace(10),
+        AppsFunction.verticalSpacing(10),
         _buildEstimatedDeliverySection(),
         _buildDeliveryPartnerDetails(),
       ],
@@ -39,7 +39,7 @@ class DeliveryInfoCard extends StatelessWidget {
         children: [
           Text("${AppStrings.deliveryAddress}: ",
               style: AppsTextStyle.mediumBoldText),
-          AppsFunction.horizontalSpace(15),
+          AppsFunction.horizontalSpacing(15),
           Expanded(
             child: StreamBuilder(
                 stream: orderController.fetchUserDeliveryAddress(
@@ -81,7 +81,7 @@ class DeliveryInfoCard extends StatelessWidget {
             Text("${AppStrings.estimatedDelivery}: ",
                 style: AppsTextStyle.mediumBoldText
                     .copyWith(color: AppColors.white)),
-            AppsFunction.horizontalSpace(10),
+            AppsFunction.horizontalSpacing(10),
             Expanded(
               child: Text(
                 orderModel.status == AppStrings.complete
@@ -107,7 +107,7 @@ class DeliveryInfoCard extends StatelessWidget {
             description: orderModel.deliveryPartner,
             color: AppColors.green,
           ),
-          AppsFunction.verticalSpace(15),
+          AppsFunction.verticalSpacing(15),
           DeliveryRichTextWidget(
               title: "${AppStrings.trackingNumber} :",
               color: AppColors.red,

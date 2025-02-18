@@ -39,7 +39,7 @@ class UserProfileHeader extends StatelessWidget {
     return Row(
       children: [
         UserAvatarWidget(imageUrl: imageUrl, diameter: 70),
-        AppsFunction.horizontalSpace(15),
+        AppsFunction.horizontalSpacing(15),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -63,7 +63,7 @@ class UserProfileHeader extends StatelessWidget {
     return Row(
       children: [
         Icon(Icons.notifications, color: AppColors.white, size: 25.h),
-        AppsFunction.horizontalSpace(10),
+        AppsFunction.horizontalSpacing(10),
         Icon(Icons.person, color: AppColors.white, size: 25.h),
       ],
     );

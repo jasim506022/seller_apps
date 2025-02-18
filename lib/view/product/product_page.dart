@@ -36,7 +36,7 @@ class ProductPage extends StatelessWidget {
                 }
               },
             ),
-            AppsFunction.verticalSpace(10),
+            AppsFunction.verticalSpacing(10),
 
             /// Displays the product list
             const Expanded(child: ProductListWidget())

@@ -30,7 +30,7 @@ class LoadingProductWidget extends StatelessWidget {
                     (_) => Column(
                           children: [
                             AppsFunction.shimmerPlaceholder(height: 15),
-                            AppsFunction.verticalSpace(8),
+                            AppsFunction.verticalSpacing(8),
                           ],
                         ))),
           )

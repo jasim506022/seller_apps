@@ -20,7 +20,7 @@ class UserDetailsLoadingWidget extends StatelessWidget {
         children: [
           /// Circular shimmer placeholder for profile image
           AppsFunction.shimmerPlaceholder(height: 90, isCircle: true),
-          AppsFunction.horizontalSpace(10),
+          AppsFunction.horizontalSpacing(10),
           Expanded(
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 10.h),

@@ -64,14 +64,14 @@ class ProductWidget extends StatelessWidget {
               style: AppsTextStyle.largeCustomBoldText
                   .copyWith(color: AppColors.red),
             ),
-            AppsFunction.horizontalSpace(15),
+            AppsFunction.horizontalSpacing(15),
             Text(
               productModel.productprice!.toString(),
               style: AppsTextStyle.mediumTextCustom400lineThrough,
             ),
           ],
         ),
-        AppsFunction.verticalSpace(2),
+        AppsFunction.verticalSpacing(2),
 
         /// Product Name
         Text(
@@ -80,12 +80,12 @@ class ProductWidget extends StatelessWidget {
           productModel.productname!,
           style: AppsTextStyle.largeBoldText,
         ),
-        AppsFunction.verticalSpace(5),
+        AppsFunction.verticalSpacing(5),
         AppButton(
           onPressed: () => _navigateToPage(productModel, true),
           title: AppStrings.update,
         ),
-        AppsFunction.verticalSpace(5)
+        AppsFunction.verticalSpacing(5)
       ],
     );
   }

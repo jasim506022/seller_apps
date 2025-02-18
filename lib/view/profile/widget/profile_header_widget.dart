@@ -34,7 +34,7 @@ class ProfileHeaderWidget extends StatelessWidget {
               diameter: 125,
               imageUrl: userData['profileImageUrl']!,
             ),
-            AppsFunction.horizontalSpace(30),
+            AppsFunction.horizontalSpacing(30),
 
             /// Profile Details Section
             Expanded(

@@ -41,6 +41,7 @@ late ProfileController profileController;
     profileController = Get.find<ProfileController>(); // ✅ Best practice
   }
   Using late ensures that profileController is initialized only after the widget is created.
+
 When Using Get.put() Instead of Get.find()
 If you are initializing the controller inside the widget, use Get.put() inside initState() instead of Get.find():
 

@@ -42,7 +42,7 @@ class ErrorDialogWidget extends StatelessWidget {
                 height: 100.h,
                 width: 100.h,
               ),
-              AppsFunction.verticalSpace(20),
+              AppsFunction.verticalSpacing(20),
               Text(
                 title,
                 style: AppsTextStyle.titleTextStyle
@@ -50,7 +50,7 @@ class ErrorDialogWidget extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               if (content != null) ...[
-                AppsFunction.verticalSpace(15),
+                AppsFunction.verticalSpacing(15),
                 Text(
                   content!,
                   textAlign: TextAlign.center,
@@ -58,7 +58,7 @@ class ErrorDialogWidget extends StatelessWidget {
                 ),
               ],
               if (buttonText != null) ...[
-                AppsFunction.verticalSpace(20),
+                AppsFunction.verticalSpacing(20),
                 RoundButtonWidget(
                   buttonColors: AppColors.red,
                   width: Get.width,

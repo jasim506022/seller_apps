@@ -25,7 +25,7 @@ class ProductPriceBoxWidget extends StatelessWidget {
                 child: TextFormFieldWidget(
                     hintText: AppStrings.minium,
                     controller: searchController.minPriceTEC)),
-            AppsFunction.horizontalSpace(15),
+            AppsFunction.horizontalSpacing(15),
             Expanded(
               child: TextFormFieldWidget(
                   controller: searchController.maxPriceTEC,

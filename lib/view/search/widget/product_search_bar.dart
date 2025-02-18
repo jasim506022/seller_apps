@@ -27,7 +27,7 @@ class ProductSearchBar extends StatelessWidget {
       child: Row(
         children: [
           Expanded(flex: 4, child: _buildSearchField(searchController)),
-          AppsFunction.horizontalSpace(8),
+          AppsFunction.horizontalSpacing(8),
           _buildFilterButton(context)
         ],
       ),

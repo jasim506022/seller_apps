@@ -32,10 +32,10 @@ class DetailsPageImageSlideWithCartBridgeWidget extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  AppsFunction.verticalSpace(10),
+                  AppsFunction.verticalSpacing(10),
                   _buildTopBar(),
                   DetailsImageSwiperWidget(images: productModel.productimage!),
-                  AppsFunction.verticalSpace(10),
+                  AppsFunction.verticalSpacing(10),
                 ],
               ),
             ),

@@ -43,7 +43,7 @@ class OrderSummaryWidget extends StatelessWidget {
             ),
           ],
         ),
-        AppsFunction.verticalSpace(15),
+        AppsFunction.verticalSpacing(15),
         // Product list inside the order
         Flexible(
           child: ChangeNotifierProvider.value(

@@ -31,7 +31,7 @@ class OrderUserDetailsWidget extends StatelessWidget {
             diameter: 90,
             imageUrl: userProfileModel.imageurl!,
           ),
-          AppsFunction.horizontalSpace(15),
+          AppsFunction.horizontalSpacing(15),
 
           /// Expanded to ensure proper layout alignment
           Expanded(

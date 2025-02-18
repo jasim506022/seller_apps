@@ -143,11 +143,15 @@ class MyApp extends StatelessWidget {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15.r))),
       ),
+
+      // Modify
       progressIndicatorTheme: const ProgressIndicatorThemeData(
         color: AppColors.white,
+        linearTrackColor: AppColors.red,
         circularTrackColor: AppColors.red,
         refreshBackgroundColor: AppColors.red,
       ),
+
       scaffoldBackgroundColor:
           isDarkTheme ? AppColors.backgroundDark : AppColors.backgroundLight,
       indicatorColor: Colors.red,

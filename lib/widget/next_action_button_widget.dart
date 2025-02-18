@@ -30,7 +30,7 @@ class NextActionButtonWidget extends StatelessWidget {
               title,
               style: AppsTextStyle.buttonTextStyle,
             ),
-            AppsFunction.horizontalSpace(10),
+            AppsFunction.horizontalSpacing(10),
             const Icon(
               Icons.arrow_forward_sharp,
               color: AppColors.white,

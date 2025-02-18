@@ -73,9 +73,9 @@ class _SignInPageState extends State<SignInPage> {
                     description: AppStrings.logInPageSubjectTitle,
                   ),
                   _buildLoginForm(),
-                  AppsFunction.verticalSpace(5),
+                  AppsFunction.verticalSpacing(5),
                   _buildForgetPasswordButton(),
-                  AppsFunction.verticalSpace(15),
+                  AppsFunction.verticalSpacing(15),
                   CustomAuthButtonWidget(
                     onPressed: () async {
                       if (!_formKey.currentState!.validate()) return;
@@ -85,17 +85,17 @@ class _SignInPageState extends State<SignInPage> {
                     },
                     title: AppStrings.signIn,
                   ),
-                  AppsFunction.verticalSpace(25),
+                  AppsFunction.verticalSpacing(25),
                   _buildOrDividerText(),
-                  AppsFunction.verticalSpace(20),
+                  AppsFunction.verticalSpacing(20),
                   _buildSocialLoginOptions(),
-                  AppsFunction.verticalSpace(25),
+                  AppsFunction.verticalSpacing(25),
                   RichTextWidget(
                     colorText: AppStrings.createAccount,
                     tap: () async => Get.toNamed(RoutesName.signupPage),
                     simpleText: AppStrings.dontHaveAccount,
                   ),
-                  AppsFunction.verticalSpace(100)
+                  AppsFunction.verticalSpacing(100)
                 ],
               ),
             ),
@@ -118,7 +118,7 @@ class _SignInPageState extends State<SignInPage> {
             title: AppStrings.facebook,
           ),
         ),
-        AppsFunction.horizontalSpace(10),
+        AppsFunction.horizontalSpacing(10),
         Expanded(
           child: SocialButtonWidget(
             tap: () async => await NetworkUtils.executeWithInternetCheck(

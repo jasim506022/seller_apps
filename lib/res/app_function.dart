@@ -40,11 +40,11 @@ class AppsFunction {
     ));
   }
 
-  // VerticalSpace
-  static SizedBox verticalSpace(double height) => SizedBox(height: height.h);
+  /// Provides vertical spacing with adaptive height scaling.
+  static SizedBox verticalSpacing(double height) => SizedBox(height: height.h);
 
-  // VerticalSpace
-  static SizedBox horizontalSpace(double width) => SizedBox(width: width.w);
+  /// Provides horizontal spacing with adaptive width scaling.
+  static SizedBox horizontalSpacing(double width) => SizedBox(width: width.w);
 
   static flutterToast({required String msg}) {
     Fluttertoast.showToast(
@@ -193,6 +193,8 @@ class AppsFunction {
   //   return DateFormat("MMM d, yyyy").format(date);
   // }
 
+  /// Sets the system UI overlay style to match the Screen.
+  /// Ensures status bar adapts to the current theme dynamically
   static void setSystemUIOverlayStyle(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
         statusBarColor: Theme.of(context).scaffoldBackgroundColor,

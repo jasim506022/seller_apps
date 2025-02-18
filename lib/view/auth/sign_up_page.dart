@@ -51,7 +51,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     description: AppStrings.logInPageSubjectTitle,
                   ),
                   _buildSignUpForm(),
-                  AppsFunction.verticalSpace(15),
+                  AppsFunction.verticalSpacing(15),
                   CustomAuthButtonWidget(
                     onPressed: () async {
                       if (!formKey.currentState!.validate()) return;
@@ -61,7 +61,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     },
                     title: AppStrings.signUp,
                   ),
-                  AppsFunction.verticalSpace(25),
+                  AppsFunction.verticalSpacing(25),
                   RichTextWidget(
                     simpleText: AppStrings.alreadyHaveAccount,
                     colorText: AppStrings.signIn,
@@ -72,7 +72,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       }
                     },
                   ),
-                  AppsFunction.verticalSpace(150)
+                  AppsFunction.verticalSpacing(150)
                 ],
               ),
             ),
@@ -125,13 +125,13 @@ class _SignUpPageState extends State<SignUpPage> {
             hintText: AppStrings.passwordConfirm,
             controller: authController.confirmPasswordController,
           ),
-          AppsFunction.verticalSpace(10),
+          AppsFunction.verticalSpacing(10),
           PhoneNumberWidget(
             controller: authController.phoneController,
             textInputAction: TextInputAction.done,
           ),
 
-          AppsFunction.verticalSpace(20),
+          AppsFunction.verticalSpacing(20),
         ],
       ),
     );

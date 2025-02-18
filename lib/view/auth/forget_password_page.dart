@@ -44,7 +44,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                   description: AppStrings.entreEmailAddressForResetPassword,
                 ),
                 _buildForgetPasswordForm(),
-                AppsFunction.verticalSpace(10),
+                AppsFunction.verticalSpacing(10),
                 CustomAuthButtonWidget(
                   onPressed: () async {
                     if (!_formKey.currentState!.validate()) return;
@@ -55,7 +55,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                   },
                   title: AppStrings.resetPassword,
                 ),
-                AppsFunction.verticalSpace(20),
+                AppsFunction.verticalSpacing(20),
                 RichTextWidget(
                   colorText: AppStrings.signIn,
                   tap: () async {

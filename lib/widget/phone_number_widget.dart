@@ -23,7 +23,7 @@ class PhoneNumberWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(AppStrings.phone, style: AppsTextStyle.labelTextStyle),
-        AppsFunction.verticalSpace(8),
+        AppsFunction.verticalSpacing(8),
         IntlPhoneField(
           enabled: enabled,
           textInputAction: textInputAction,

@@ -18,22 +18,22 @@ class AppSignInPageIntroWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        AppsFunction.verticalSpace(50),
+        AppsFunction.verticalSpacing(50),
         widget ??
             Image.asset(
               AppImage.appLogoImage,
               height: 140.h,
               width: 140.h,
             ),
-        AppsFunction.verticalSpace(10),
+        AppsFunction.verticalSpacing(10),
         Text(title, style: AppsTextStyle.titleSignPageTextStyle),
-        AppsFunction.verticalSpace(10),
+        AppsFunction.verticalSpacing(10),
         Text(
           description,
           textAlign: TextAlign.center,
           style: AppsTextStyle.descrptionTextStyle,
         ),
-        AppsFunction.verticalSpace(40),
+        AppsFunction.verticalSpacing(40),
       ],
     );
   }

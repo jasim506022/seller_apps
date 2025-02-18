@@ -54,7 +54,7 @@ class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
         children: [
           if (widget.label != null)
             Text(widget.label!, style: AppsTextStyle.labelTextStyle),
-          AppsFunction.verticalSpace(8),
+          AppsFunction.verticalSpacing(8),
           TextFormField(
               onChanged: widget.onChanged,
               enabled: widget.enabled,

@@ -34,15 +34,15 @@ class OrderOverviewPage extends StatelessWidget {
               children: [
                 OrderUserDetailsStream(
                     userId: order.orderBy, orderId: order.orderId),
-                AppsFunction.verticalSpace(10),
+                AppsFunction.verticalSpacing(10),
                 DeliveryInfoCard(
                   orderModel: order,
                 ),
-                AppsFunction.verticalSpace(10),
+                AppsFunction.verticalSpacing(10),
                 OrderStatusCard(
                   orderModel: order,
                 ),
-                AppsFunction.verticalSpace(15),
+                AppsFunction.verticalSpacing(15),
                 ChangeNotifierProvider.value(
                   value: order,
                   child: const OrderSummaryWidget(),

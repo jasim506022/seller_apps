@@ -31,13 +31,13 @@ class SllerOrderBreakdownPage extends StatelessWidget {
               OrderUserDetailsStream(
                   userId: orderModel.orderBy, orderId: orderModel.orderId),
 
-              AppsFunction.verticalSpace(10),
+              AppsFunction.verticalSpacing(10),
 
               /// Product details section // Uupdate This Position
               SellerOrderProductStream(
                 orderModel: orderModel,
               ),
-              AppsFunction.verticalSpace(20),
+              AppsFunction.verticalSpacing(20),
               Center(
                 child: AppButton(
                   width: 250,
@@ -47,7 +47,7 @@ class SllerOrderBreakdownPage extends StatelessWidget {
                   title: AppStrings.homePage,
                 ),
               ),
-              AppsFunction.verticalSpace(100),
+              AppsFunction.verticalSpacing(100),
             ],
           ),
         ),

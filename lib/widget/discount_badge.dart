@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:seller_apps/res/app_string.dart';
 
+import '../res/app_string.dart';
 import '../res/apps_color.dart';
 import '../res/apps_text_style.dart';
 
-/// A badge that displays the product discount percentage.
+/// A badge widget that displays the product's discount percentage on the UI.
+/// This widget will only be visible if the product has a discount greater than 0.
 class DiscountBadge extends StatelessWidget {
   const DiscountBadge({
     super.key,
@@ -16,6 +17,7 @@ class DiscountBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // If the discount is 0 or less, don't render the badge.
     if (discount <= 0) {
       return const SizedBox.shrink(); // Avoids rendering if there's no discount
     }

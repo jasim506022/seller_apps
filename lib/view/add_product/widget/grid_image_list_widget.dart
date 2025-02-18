@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:seller_apps/res/apps_text_style.dart';
 
 import '../../../controller/manage_product_controller.dart';
 import '../../../res/apps_color.dart';
@@ -36,7 +37,7 @@ class GridImageListWidget extends StatelessWidget {
     return Center(
       child: Text(
         "No images selected",
-        style: TextStyle(fontSize: 14.sp, color: AppColors.green),
+        style: AppsTextStyle.mediumBoldText.copyWith(color: AppColors.red),
       ),
     );
   }

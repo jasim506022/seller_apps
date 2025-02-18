@@ -18,13 +18,17 @@ import 'category_manager_controller.dart';
 class ProductController extends GetxController {
   final ProductRepository repository;
 
+// Get the instance of CategoryManagerController
+  final CategoryManagerController categoryManagerController =
+      Get.find<CategoryManagerController>();
+
+// Injecting the ProductRepository via the constructor
   ProductController({required this.repository});
 
-  final categoryManagerController = Get.find<CategoryManagerController>();
-
   /// **Fetch Product Snapshots**
-  /// Retrieves product data from Firestore based on the selected category.
-
+  /// Retrieves a stream of product data from Firestore for the selected category.
+  ///
+  /// Returns a [Stream] of product data snapshots.
   Stream<QuerySnapshot<Map<String, dynamic>>> fetchProductSnapshots() {
     try {
       return repository.productSnapshots(
@@ -35,10 +39,12 @@ class ProductController extends GetxController {
     }
   }
 
-  /// **Show Delete Confirmation Dialog**
-  /// Displays a confirmation dialog before deleting a product.
+  /// **Show Delete Product Dialog**
+  /// Displays a confirmation dialog before deleting a product from Firestore.
+  /// Allows for an optional callback after the deletion to perform additional actions.
   ///
-  /// ✅ **Enhancement**: Allows an **optional callback** after deletion instead of **hardcoding navigation**.
+  /// - [productId] : The ID of the product to be deleted.
+  /// - [onDeleted] : Optional callback executed after successful deletio
   Future<void> showDeleteProductDialog({required String productId}) async {
     Get.dialog(
       ShowAlertDialogWidget(
@@ -59,7 +65,11 @@ class ProductController extends GetxController {
     );
   }
 
-  Stream<QuerySnapshot<Map<String, dynamic>>> getSimilarProductsStream(
+  /// **Fetch Similar Products**
+  /// Retrieves a stream of similar products based on the provided product model.
+  ///
+  /// Returns a [Stream] of similar product data snapshots.
+  Stream<QuerySnapshot<Map<String, dynamic>>> fetchSimilarProductsStream(
       {required ProductModel productModel}) {
     try {
       return repository.similarProductSnapshot(productModel: productModel);
@@ -72,7 +82,10 @@ class ProductController extends GetxController {
     }
   }
 
-  /// Handles exceptions by showing a dialog with error details
+  /// **Handle Exception**
+  /// Displays an error dialog with details about the exception.
+  ///
+  /// - [e] : The exception that occurred.
   void _handleException(dynamic e) {
     if (e is AppException) {
       Get.dialog(
@@ -86,3 +99,8 @@ class ProductController extends GetxController {
     }
   }
 }
+
+/*
+#: Injecting the ProductRepository via the constructor
+
+*/

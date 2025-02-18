@@ -19,7 +19,7 @@ class TextFormFieldWidget extends StatefulWidget {
       this.textInputType = TextInputType.text,
       this.onChanged,
       this.validator,
-      this.isUdateDecoration = false,
+      this.isUpdateDecoration = false,
       this.decoration,
       this.label,
       this.style});
@@ -34,7 +34,7 @@ class TextFormFieldWidget extends StatefulWidget {
   final bool enabled;
   final String? Function(String?)? validator;
   final Function(String)? onChanged;
-  final bool isUdateDecoration;
+  final bool isUpdateDecoration;
   final InputDecoration? decoration;
   final TextStyle? style;
 
@@ -67,7 +67,7 @@ class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
               keyboardType: widget.textInputType,
               style: widget.style ??
                   AppsTextStyle.textFieldInputTextStyle(widget.enabled),
-              decoration: widget.isUdateDecoration
+              decoration: widget.isUpdateDecoration
                   ? widget.decoration
                   : AppsFunction.textFormFielddecoration(
                       isEnable: widget.enabled,

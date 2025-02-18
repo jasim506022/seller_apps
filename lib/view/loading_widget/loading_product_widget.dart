@@ -13,7 +13,6 @@ class LoadingProductWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultShimmerWidget(
-      height: 1.sh,
       widget: Column(
         children: [
           Padding(
@@ -27,11 +26,9 @@ class LoadingProductWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: List.generate(
                     3,
-                    (_) => Column(
-                          children: [
-                            AppsFunction.shimmerPlaceholder(height: 15),
-                            AppsFunction.verticalSpacing(8),
-                          ],
+                    (_) => Padding(
+                          padding: EdgeInsets.only(bottom: 8.h),
+                          child: AppsFunction.shimmerPlaceholder(height: 15),
                         ))),
           )
         ],
@@ -39,3 +36,8 @@ class LoadingProductWidget extends StatelessWidget {
     );
   }
 }
+
+/*
+#:  List.generate(3),
+*/
+

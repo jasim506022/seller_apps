@@ -13,16 +13,15 @@ import '../../../widget/product_widget.dart';
 /// **SearchProductGridWidget**
 /// Displays a grid of products based on search and filter criteria.
 class SearchProductGridWidget extends StatelessWidget {
-  const SearchProductGridWidget({
-    super.key,
-  });
+  const SearchProductGridWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<ProductSearchController>();
+    final ProductSearchController searchController =
+        Get.find<ProductSearchController>();
     return Obx(() {
-      final productList = _getFilteredProducts(
-          controller); // Encapsulated filtering logic in controller
+      // Encapsulated filtering logic in controller
+      final productList = _getFilteredProducts(searchController);
 
       return productList.isEmpty
           ? EmptyWidget(
@@ -36,11 +35,8 @@ class SearchProductGridWidget extends StatelessWidget {
               gridDelegate: AppsFunction.defaultProductGridDelegate(),
               itemBuilder: (context, index) {
                 return ChangeNotifierProvider.value(
-                  value: productList[index],
-                  child: const ProductWidget(),
-                );
-              },
-            );
+                    value: productList[index], child: const ProductWidget());
+              });
     });
   }
 
@@ -61,4 +57,5 @@ class SearchProductGridWidget extends StatelessWidget {
 
 /*
 #:Use final to prevent reassignment and improve clarity.
+#: _getFilteredProducts()
 */

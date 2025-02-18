@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../controller/product_controller.dart';
 import '../../../model/product_model.dart';
+import '../../../res/app_constants.dart';
 import '../../../res/app_string.dart';
 import '../../../res/apps_text_style.dart';
 import '../../../res/network_utilis.dart';
@@ -19,43 +20,36 @@ class ProductActionPopupMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton<ProductAction>(
-      color: Theme.of(context).cardColor,
-      iconColor: Colors.white,
-      onSelected: (ProductAction action) => _handleAction(
-        action,
-      ),
-      itemBuilder: (BuildContext context) => _buildMenuItems(),
-    );
+        color: Theme.of(context).cardColor,
+        iconColor: Colors.white,
+        onSelected: (ProductAction productAction) =>
+            _handleAction(productAction),
+        itemBuilder: (BuildContext context) => _buildMenuItems());
   }
 
   /// Handles the selected action from the popup menu
-  Future<void> _handleAction(
-    ProductAction action,
-  ) async {
+  /// Performs either delete or update based on the selected action.
+  Future<void> _handleAction(ProductAction productAction) async {
     NetworkUtils.executeWithInternetCheck(action: () async {
       final ProductController productController = Get.find<ProductController>();
-      switch (action) {
+      switch (productAction) {
         case ProductAction.delete:
           await productController.showDeleteProductDialog(
-            productId: productModel.productId!,
-          );
+              productId: productModel.productId!);
 
           break;
 
         case ProductAction.update:
-          Get.toNamed(
-            RoutesName.uploadAndUpdateProduct,
-            arguments: {
-              AppStrings.isUpdate: true,
-              AppStrings.productModel: productModel,
-            },
-          );
+          Get.toNamed(RoutesName.uploadAndUpdateProduct, arguments: {
+            AppStrings.isUpdate: true,
+            AppStrings.productModel: productModel
+          });
           break;
       }
     });
   }
 
-  /// Builds the menu items for the popup button
+  /// Builds the menu items (Delete, Update) for the product action menu.
   List<PopupMenuItem<ProductAction>> _buildMenuItems() {
     return [
       PopupMenuItem(
@@ -76,5 +70,7 @@ class ProductActionPopupMenu extends StatelessWidget {
   }
 }
 
-/// Enum for product actions
-enum ProductAction { delete, update }
+/*
+#: PopupMenuItem 
+#: 
+*/

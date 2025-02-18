@@ -12,15 +12,19 @@ import 'widget/product_search_bar.dart';
 import 'widget/search_product_grid_widget.dart';
 
 /// **SearchPage**: Displays a search bar and dynamically updates product results.
+///
+/// This page allows users to search for products in real time using a search bar.
+/// It listens to the search query and updates the product results accordingly.
 class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final searchController = Get.find<ProductSearchController>();
+    final ProductSearchController searchController =
+        Get.find<ProductSearchController>();
     return GestureDetector(
-      onTap: () => FocusScope.of(context)
-          .unfocus(), // Hide keyboard when tapping outside
+      // Hide keyboard when tapping outside
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: AppBar(title: Text(AppStrings.searchProducts)),
         body: Padding(
@@ -28,7 +32,7 @@ class SearchPage extends StatelessWidget {
           child: Column(
             children: [
               const ProductSearchBar(),
-              _buildProductGrid(searchController),
+              _buildSearchResults(searchController),
             ],
           ),
         ),
@@ -36,9 +40,13 @@ class SearchPage extends StatelessWidget {
     );
   }
 
-  /// **_buildProductGrid**: Displays search results or a loading indicator.
-  Expanded _buildProductGrid(ProductSearchController controller) {
-    var searchController = Get.find<ProductSearchController>();
+  /// **buildSearchResults**
+  /// Displays search results or a loading indicator.
+  ///
+  /// - Uses `StreamBuilder` to listen to product updates.
+  /// - Updates the product list when new data arrives.
+  /// - Displays a loading indicator while fetching data
+  Expanded _buildSearchResults(ProductSearchController searchController) {
     return Expanded(
         child: Obx(
       () => StreamBuilder(
@@ -62,4 +70,9 @@ class SearchPage extends StatelessWidget {
 
 /*
 why use final
+#: Why here use Obx
+#: Understand this code
+searchController.updateProductList(snapshot.data!.docs
+                .map((e) => ProductModel.fromMap(e.data()))
+                .toList());
 */

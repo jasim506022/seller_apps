@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../model/product_model.dart';
 import '../../../res/app_function.dart';
@@ -21,10 +20,11 @@ class ProductDetailsWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(product.productname!,
-            style: AppsTextStyle.largeBoldText.copyWith(fontSize: 20.sp)),
+        // Product name displayed with the title text style
+        Text(product.productname!, style: AppsTextStyle.titleTextStyle),
         AppsFunction.verticalSpacing(15),
-        _buildPriceDetailsRow(),
+        // Price section: displays the discounted price and the original price with discount percentage
+        _buildPriceRow(),
         AppsFunction.verticalSpacing(15),
         Text(product.productdescription!,
             textAlign: TextAlign.justify,
@@ -36,57 +36,31 @@ class ProductDetailsWidget extends StatelessWidget {
     );
   }
 
-  /// Builds the rating bar
-  Row _buildRatingBar(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        const Icon(Icons.star, color: AppColors.yellow),
-        RichText(
-          text: TextSpan(
-              style: AppsTextStyle.rattingText.copyWith(
-                color: Theme.of(context).primaryColor,
-              ),
-              children: [
-                const TextSpan(text: "( "),
-                TextSpan(text: product.productrating!.toString()),
-                TextSpan(
-                    text: " ${AppStrings.rating} ",
-                    style: AppsTextStyle.rattingText),
-                TextSpan(
-                    text: ")",
-                    style: AppsTextStyle.rattingText.copyWith(
-                      color: Theme.of(context).primaryColor,
-                    )),
-              ]),
-        ),
-      ],
-    );
-  }
-
-  /// Builds the price and discount details
-  Row _buildPriceDetailsRow() {
-    var productPrice = AppsFunction.getDiscountedPrice(
+  /// Builds a row displaying the product price, discounted price, and discount percentage
+  Row _buildPriceRow() {
+    String discountedPrice = AppsFunction.getDiscountedPrice(
             product.productprice!, product.discount!.toDouble())
         .toStringAsFixed(2);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
+        // Display the discounted price with currency symbol and unit
         RichText(
-          text: TextSpan(
-            children: [
-              TextSpan(
-                text: "${AppStrings.currencyIcon} $productPrice ",
-                style:
-                    AppsTextStyle.titleTextStyle.copyWith(color: AppColors.red),
-              ),
-              TextSpan(
-                text: product.productunit,
-                style: AppsTextStyle.smallBoldText,
-              ),
-            ],
-          ),
-        ),
+            text: TextSpan(
+          children: [
+            TextSpan(
+              text: "${AppStrings.currencyIcon} $discountedPrice ",
+              style:
+                  AppsTextStyle.titleTextStyle.copyWith(color: AppColors.red),
+            ),
+            TextSpan(
+              text: product.productunit,
+              style: AppsTextStyle.mediumBoldText,
+            ),
+          ],
+        )),
+
+        // Display the original price and discount percentage
         RichText(
           text: TextSpan(
             children: [
@@ -109,4 +83,35 @@ class ProductDetailsWidget extends StatelessWidget {
       ],
     );
   }
+
+  /// Builds the rating bar
+  Row _buildRatingBar(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        const Icon(Icons.star, color: AppColors.yellow),
+        RichText(
+          text: TextSpan(
+              style: AppsTextStyle.rattingText
+                  .copyWith(color: Theme.of(context).primaryColor),
+              children: [
+                const TextSpan(text: "( "),
+                TextSpan(text: product.productrating!.toString()),
+                TextSpan(
+                    text: " ${AppStrings.rating} ",
+                    style: AppsTextStyle.rattingText),
+                TextSpan(
+                    text: ")",
+                    style: AppsTextStyle.rattingText
+                        .copyWith(color: Theme.of(context).primaryColor)),
+              ]),
+        ),
+      ],
+    );
+  }
 }
+
+/*
+#: TextSpan & WidgetSpan
+
+*/

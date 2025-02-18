@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 
 import '../../../controller/onboarding_controller.dart';
 import '../../../model/onboard_model.dart';
-import '../../../res/app_constants.dart';
 import '../../../res/apps_color.dart';
 
 class OnboardingProgressDotsWidget extends StatelessWidget {
@@ -16,7 +15,7 @@ class OnboardingProgressDotsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.find<OnboardingController>();
     return SizedBox(
-      height: AppConstants.defaultHeightSpace,
+      height: 10.h,
       child: ListView.builder(
         itemCount: onboardingData.length,
         shrinkWrap: true,

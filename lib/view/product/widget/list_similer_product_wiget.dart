@@ -24,17 +24,18 @@ class SimilarProductList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Get the ProductController instance
-    var productController = Get.find<ProductController>();
+    final ProductController productController = Get.find<ProductController>();
     return SizedBox(
       height: 160.h,
       width: 1.sw,
       child: StreamBuilder(
-        stream: productController.getSimilarProductsStream(
+        stream: productController.fetchSimilarProductsStream(
             productModel: productModel),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const LoadingSimilierWidget();
-          } else if (!snapshot.hasData ||
+          }
+          if (!snapshot.hasData ||
               snapshot.data!.docs.isEmpty ||
               snapshot.hasError) {
             return SingleEmptyWidget(
@@ -44,14 +45,13 @@ class SimilarProductList extends StatelessWidget {
                     : AppStrings.noDataAvaiable);
           }
           if (snapshot.hasData) {
+            final products = snapshot.data!.docs;
             return ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: snapshot.data!.docs.length > 5
-                    ? 5
-                    : snapshot.data!.docs.length,
+                itemCount: products.length > 5 ? 5 : products.length,
                 itemBuilder: (context, index) {
                   ProductModel productModel =
-                      ProductModel.fromMap(snapshot.data!.docs[index].data());
+                      ProductModel.fromMap(products[index].data());
                   return ChangeNotifierProvider.value(
                     value: productModel,
                     child: const SimilarProductCard(),

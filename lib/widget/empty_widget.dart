@@ -19,7 +19,7 @@ class EmptyWidget extends StatelessWidget {
     return Center(
       child: Stack(
         children: [
-          /// Background image for empty state
+          /// Background image for empty state.
 
           Image.asset(
             image,
@@ -34,11 +34,11 @@ class EmptyWidget extends StatelessWidget {
             left: 130.w,
             right: 40.w,
             child: Center(
-              child: Container(
+              child: SizedBox(
                 height: 300.h,
                 width: 130.w,
-                alignment: Alignment.center,
-                child: Text(title, style: AppsTextStyle.emptyTestStyle),
+                child: Center(
+                    child: Text(title, style: AppsTextStyle.emptyTestStyle)),
               ),
             ),
           )

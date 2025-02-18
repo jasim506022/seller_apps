@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:seller_apps/res/app_function.dart';
 
 import '../../../model/product_model.dart';
+import '../../../res/app_function.dart';
 import '../../../res/app_string.dart';
 import '../../../res/apps_text_style.dart';
 import '../../../res/network_utilis.dart';
@@ -26,7 +26,6 @@ class SimilarProductCard extends StatelessWidget {
     return InkWell(
       onTap: () async {
         // Check Internet before navigating
-
         NetworkUtils.executeWithInternetCheck(action: () {
           Get.offAndToNamed(
             RoutesName.productDetails,
@@ -46,12 +45,14 @@ class SimilarProductCard extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(10.r),
                 child: FancyShimmerImage(
+                  
                   height: 80.h,
                   boxFit: BoxFit.fill,
                   imageUrl: productModel.productimage![0],
                 ),
               ),
               AppsFunction.verticalSpacing(10),
+              // Display the product name, truncating if it's too long
               Text(productModel.productname!,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,

@@ -25,7 +25,7 @@ class DetailsPageImageSlideWithCartBridgeWidget extends StatelessWidget {
       width: 1.sw,
       child: Stack(
         children: [
-          ..._buildBackgroundCircles(),
+          ..._buildBackgroundCircles(), // Background Circles
           Positioned(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
@@ -46,6 +46,7 @@ class DetailsPageImageSlideWithCartBridgeWidget extends StatelessWidget {
   }
 
   // This method builds the background circles
+  // Consolidating circle configuration into a list of maps for better readability and maintainability.
   List<Widget> _buildBackgroundCircles() {
     List<Map<String, dynamic>> circleConfig = [
       {
@@ -104,22 +105,30 @@ class DetailsPageImageSlideWithCartBridgeWidget extends StatelessWidget {
           ),
         ),
         InkWell(
-            onTap: () async {},
+            onTap: () {},
             child: _buildCircularButton(
                 ProductActionPopupMenu(productModel: productModel)))
       ],
     );
   }
 
+// Creates a circular button with the given widget inside it
   Container _buildCircularButton(Widget widget) {
     return Container(
-      height: 50.h,
-      width: 50.h,
-      decoration: const BoxDecoration(
-        color: AppColors.green,
-        shape: BoxShape.circle,
-      ),
-      child: widget,
-    );
+        height: 50.h,
+        width: 50.h,
+        decoration: const BoxDecoration(
+          color: AppColors.green,
+          shape: BoxShape.circle,
+        ),
+        child: widget);
   }
 }
+
+/*
+// Background Circles 
+
+#: Understand ... and .. difference 
+
+#:  To List
+*/

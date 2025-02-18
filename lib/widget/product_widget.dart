@@ -23,6 +23,7 @@ class ProductWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final product = Provider.of<ProductModel>(context);
+    // Main structure of the product widget with tap handling
     return InkWell(
       onTap: () => _navigateToPage(product),
       child: Card(
@@ -36,6 +37,7 @@ class ProductWidget extends StatelessWidget {
               productModel: product,
               height: 100,
             ),
+            // Expanded section to fit product info
             Expanded(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 12.w),
@@ -50,7 +52,8 @@ class ProductWidget extends StatelessWidget {
 
   /// Builds the product's information section with name, price, and action button.
   Column _buildProductInfoSection(ProductModel productModel) {
-    var productPrice = AppsFunction.getDiscountedPrice(
+    // Calculate the discounted price of the product
+    String productPrice = AppsFunction.getDiscountedPrice(
             productModel.productprice!, productModel.discount!.toDouble())
         .toStringAsFixed(2);
     return Column(
@@ -59,12 +62,14 @@ class ProductWidget extends StatelessWidget {
       children: [
         Row(
           children: [
+            // Display discounted price with red color
             Text(
               "${AppStrings.currencyIcon} $productPrice",
               style: AppsTextStyle.largeCustomBoldText
                   .copyWith(color: AppColors.red),
             ),
             AppsFunction.horizontalSpacing(15),
+            // Display the original price with a line-through style
             Text(
               productModel.productprice!.toString(),
               style: AppsTextStyle.mediumTextCustom400lineThrough,
@@ -91,8 +96,7 @@ class ProductWidget extends StatelessWidget {
   }
 
   /// Handles navigation based on the action (view details or update).
-  Future<void> _navigateToPage(ProductModel productModel,
-      [bool isUpdate = false]) async {
+  void _navigateToPage(ProductModel productModel, [bool isUpdate = false]) {
     final routeName = isUpdate
         ? RoutesName.uploadAndUpdateProduct
         : RoutesName.productDetails;
@@ -105,5 +109,6 @@ class ProductWidget extends StatelessWidget {
 
 /*
 #: Parameter 
-#: 
+#: Why use false in provider
+#: Understand 
 */

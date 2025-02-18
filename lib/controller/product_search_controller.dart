@@ -10,13 +10,21 @@ import '../res/app_string.dart';
 import '../widget/error_dialog_widget.dart';
 import 'product_controller.dart';
 
+/// **ProductSearchController**
+/// This controller is responsible for managing the search and filtering operations
+/// for products. It provides methods for applying price range filters, searching
+/// products based on user input, and fetching product data from Firestore.
+///
+/// It also manages the state of the search and filter UI, including the selected category,
+/// price range, and search text.
 class ProductSearchController extends GetxController {
   // Dependencies
   final productController = Get.find<ProductController>();
 
 // Text editing controllers for price range and search input
-  final TextEditingController minPriceTEC = TextEditingController(text: "0.00");
-  final TextEditingController maxPriceTEC =
+  final TextEditingController minPriceController =
+      TextEditingController(text: "0.00");
+  final TextEditingController maxPriceController =
       TextEditingController(text: "10000.00");
   final TextEditingController searchTextTEC = TextEditingController(text: "");
 
@@ -37,28 +45,30 @@ class ProductSearchController extends GetxController {
   @override
   void onClose() {
     // Dispose controllers to prevent memory leaks
-    minPriceTEC.dispose();
-    maxPriceTEC.dispose();
+    minPriceController.dispose();
+    maxPriceController.dispose();
     searchTextTEC.dispose();
     super.onClose();
   }
 
-  /// Updates the product list.
-  void updateProductList(List<ProductModel> products) {
-    allProducts.assignAll(products); // Clean way to update the list
-  }
+  /// **updateProductList**: Updates the list of all products with the provided list of products.
+  /// This is used when fetching products from the server or Firestore.
+  void updateProductList(List<ProductModel> products) =>
+      allProducts.assignAll(products); // Clean way to update the list
 
-  // reset to Defaults default values for controllers and observables
+  /// **resetFilters**: Resets the filters to their default state, clearing the search text and resetting the price range and category.
   void resetFilters() {
-    minPriceTEC.text = "0.00";
-    maxPriceTEC.text = "10000.00";
+    minPriceController.text = "0.00";
+    maxPriceController.text = "10000.00";
     selectedCategory.value = "All";
     searchTextTEC.clear();
-    isSearchActive.value = false;
-    isFilterActive.value = false;
+    isSearchActive(false);
+    isFilterActive(false);
   }
 
-  // Set selected category
+  /// **searchProducts**: Searches for products that match the provided text.
+  /// It compares the search text (case-insensitive) with the product name.
+  /// It searches from either the filtered products (if filters are active) or all products.
   void updateSelectedCategory(String category) =>
       selectedCategory.value = category;
 
@@ -77,10 +87,13 @@ class ProductSearchController extends GetxController {
     isSearchActive.value = true;
   }
 
-// Apply price filter to products
+  /// **applyPriceRangeFilter**: Applies the price range filter based on the values
+  /// entered in the min and max price text controllers. It filters products to show
+  /// those within the specified price range, including any applicable discounts.
   void applyPriceRangeFilter() {
-    final double minPrice = double.tryParse(minPriceTEC.text) ?? 0.00;
-    final double maxPrice = double.tryParse(maxPriceTEC.text) ?? 10000.00;
+    final double minPrice = double.tryParse(minPriceController.text) ?? 0.00;
+    final double maxPrice =
+        double.tryParse(maxPriceController.text) ?? 10000.00;
 
     if (minPrice > maxPrice) {
       AppsFunction.flutterToast(msg: AppStrings.minumeAndMaximum);
@@ -98,14 +111,14 @@ class ProductSearchController extends GetxController {
     isFilterActive.value = true;
   }
 
-  // Apply filters and close the filter dialog
+  /// **applyFilters**: Applies all active filters, including clearing the search text and applying the price range filter.
   void applyFilters() {
     searchTextTEC.clear();
     applyPriceRangeFilter();
-    Get.back();
   }
 
-// Retrieve product snapshots from Firestore
+  /// **fetchProductStream**: Retrieves the product data stream from Firestore for the selected category.
+  /// This method uses the ProductController to fetch product data from the repository.
   Stream<QuerySnapshot<Map<String, dynamic>>> fetchProductStream() {
     try {
       return productController.repository
@@ -117,7 +130,8 @@ class ProductSearchController extends GetxController {
     }
   }
 
-  /// Handles exceptions by showing a dialog with error details
+  /// **_handleException**: Handles exceptions that occur during the product fetching process.
+  /// It displays an error dialog with the exception details.
   void _handleException(dynamic e) {
     if (e is AppException) {
       Get.dialog(
@@ -131,3 +145,10 @@ class ProductSearchController extends GetxController {
     }
   }
 }
+
+/*
+  What is Memory: Dispose controllers to prevent memory leaks
+  #: allProducts.assignAll
+  #:   isFilterActive.value = false and   isFilterActive(false)
+ #: where
+*/

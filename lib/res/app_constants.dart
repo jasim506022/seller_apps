@@ -1,21 +1,21 @@
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-// Enum declared at the top level
-enum ProductAction { delete, edit }
+/// Enum representing product actions (delete, edit).
+enum ProductAction { delete, update }
 
+/// A class that holds globally used constants throughout the app.
 class AppConstants {
-  // Global Variables
+  /// Previous earning amount (default: 0.0).
   static double previousEarning = 0.0;
+
+  /// A flag to track if a specific action/view has been completed.
   static int? isViewed;
 
-  // Shared Preferences
+  /// SharedPreferences instance (  initialized in main)
   static SharedPreferences? sharedPreference;
 
-  // Default Height Space
-  static final double defaultHeightSpace = 10.h;
-
-  // Categories
+// ─────────────────────────────────────────────────────────────
+  /// Predefined product categories.
   static const categories = [
     "Fruits",
     "Vegetables",
@@ -26,13 +26,15 @@ class AppConstants {
     "Candy & Chocolate"
   ];
 
-// If "All" is needed:
+  /// List of all categories, including an "All" option.
   static const allCategories = ["All", ...categories];
 
-// Order Status
+// ─────────────────────────────────────────────────────────────
+
+  /// Order status types.
   static const List<String> orderStatuses = ["normal", "handover"];
 
-  // Units
+  /// Measurement units for products.
   static const units = ["Per Kg", "Per Dozen", "Litter", "Pc", "Pcs"];
 }
 
@@ -47,5 +49,6 @@ Modularized constants make the codebase more navigable and reusable.
 Use Static Members for Shared Access
 To prevent unnecessary instantiations, make constants and variables static. This ensures that you can access 
 them directly via the class name without creating an instance.
+4. Understand  static const allCategories = ["All", ...categories];
 
 */

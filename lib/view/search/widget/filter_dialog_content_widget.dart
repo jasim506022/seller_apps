@@ -12,13 +12,20 @@ import '../../../widget/app_button.dart';
 import '../../../widget/custom_drop_down_widget.dart';
 import 'product_price_box_widget.dart';
 
+/// **FilterDialogContentWidget**
+/// This widget is responsible for rendering the content of the filter dialog.
+/// It allows users to filter products by price range, category, and provides options to reset, save, or close the dialog.
+
 class FilterDialogContentWidget extends StatelessWidget {
   const FilterDialogContentWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final searchController = Get.find<ProductSearchController>();
+    // Obtain the instance of ProductSearchController using GetX for state management
+    final ProductSearchController searchController =
+        Get.find<ProductSearchController>();
     return Padding(
+      // Add padding around the content of the filter dialog
       padding: EdgeInsets.all(20.r),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,7 +53,9 @@ class FilterDialogContentWidget extends StatelessWidget {
     );
   }
 
-  /// Builds the category dropdown section.
+  /// **_buildCategoryDropdown**: Builds the dropdown for selecting product categories.
+  /// This section allows the user to choose from a list of categories.
+  /// The selected category is stored in the `ProductSearchController`.
   Widget _buildCategoryDropdown(ProductSearchController searchController) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,46 +63,43 @@ class FilterDialogContentWidget extends StatelessWidget {
         Text(AppStrings.productCategory, style: AppsTextStyle.mediumBoldText),
         AppsFunction.verticalSpacing(10),
         CustomDropdownWidget(
-          value: searchController.selectedCategory.value,
-          items: AppConstants.allCategories,
-          onChanged: (category) {
-            if (category != null) {
-              searchController.updateSelectedCategory(category);
-            }
-          },
-        ),
+            value: searchController.selectedCategory.value,
+            items: AppConstants.allCategories,
+            onChanged: (category) {
+              if (category != null) {
+                searchController.updateSelectedCategory(category);
+              }
+            })
       ],
     );
   }
 
-  /// Builds the action buttons section.
+  /// **_buildActionButtons**: Builds the action buttons (Reset, Close, Save).
+  /// The reset button will reset the filters, the close button will close the dialog,
+  /// and the save button will apply the selected filters.
   Widget _buildActionButtons(
       BuildContext context, ProductSearchController searchController) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         TextButton(
-          onPressed: () {
-            searchController.resetFilters();
-            // Get.back();
-            WidgetsBinding.instance.addPostFrameCallback((_) => Get.back());
-            FocusScope.of(context).unfocus();
-          },
-          child: Text(
-            AppStrings.reset,
-            style: AppsTextStyle.largeBoldText.copyWith(color: AppColors.red),
-          ),
-        ),
+            onPressed: () {
+              searchController.resetFilters();
+              _dismissDialogAndUnfocus(context);
+              // WidgetsBinding.instance.addPostFrameCallback((_) => Get.back());
+            },
+            child: Text(
+              AppStrings.reset,
+              style: AppsTextStyle.largeBoldText.copyWith(color: AppColors.red),
+            )),
         Row(
           children: [
-            _buildActionButton(AppStrings.close, () {
-              Get.back();
-              FocusScope.of(context).unfocus();
-            }),
+            _buildActionButton(
+                AppStrings.close, () => _dismissDialogAndUnfocus(context)),
             AppsFunction.horizontalSpacing(15),
             _buildActionButton(AppStrings.save, () {
               searchController.applyFilters();
-              FocusScope.of(context).unfocus();
+              _dismissDialogAndUnfocus(context);
             }),
           ],
         ),
@@ -101,12 +107,21 @@ class FilterDialogContentWidget extends StatelessWidget {
     );
   }
 
+  /// **_buildActionButton**: Creates a custom action button with a specific title and onTap behavior.
   AppButton _buildActionButton(String title, VoidCallback onTap) {
     return AppButton(width: 80, title: title, onPressed: onTap);
+  }
+
+  /// **_dismissDialogAndUnfocus**: Utility function to close the filter dialog and unfocus the keyboard.
+  /// This is called when either the Close or Reset button is pressed.
+  void _dismissDialogAndUnfocus(BuildContext context) {
+    Get.back();
+    FocusScope.of(context).unfocus();
   }
 }
 
 /*
 WidgetsBinding.instance.addPostFrameCallback((_) => Get.back()); why use this 
 why sometimes onTap() work and sometimes doesn't work 
+Why Don't use Ontap() and why use Ontap
 */

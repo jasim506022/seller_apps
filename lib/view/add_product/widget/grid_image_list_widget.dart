@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:seller_apps/res/apps_text_style.dart';
 
 import '../../../controller/manage_product_controller.dart';
 import '../../../res/apps_color.dart';
@@ -17,20 +18,17 @@ class GridImageListWidget extends StatelessWidget {
     final ManageProductController manageProductController =
         Get.find<ManageProductController>();
     return Obx(() {
-       List<dynamic> images = manageProductController.selectedImagesList.value;
+      List<dynamic> images = manageProductController.selectedImagesList;
       return Container(
-        height: 0.25.sh,
-        width: 1.sw,
-        padding: EdgeInsets.all(3.r),
-        margin: EdgeInsets.all(5.r),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15.r),
-          border: Border.all(color: AppColors.green, width: 3.h),
-        ),
-        child: images.isEmpty
-            ? _buildEmptyState()
-            : _buildImageGrid(images.value)
-      );
+          height: 0.25.sh,
+          width: 1.sw,
+          padding: EdgeInsets.all(3.r),
+          margin: EdgeInsets.all(5.r),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15.r),
+            border: Border.all(color: AppColors.green, width: 3.h),
+          ),
+          child: images.isEmpty ? _buildEmptyState() : _buildImageGrid(images));
     });
   }
 
@@ -39,13 +37,13 @@ class GridImageListWidget extends StatelessWidget {
     return Center(
       child: Text(
         "No images selected",
-        style: TextStyle(fontSize: 14.sp, color: AppColors.green),
+        style: AppsTextStyle.mediumBoldText.copyWith(color: AppColors.red),
       ),
     );
   }
 
   /// **Builds the grid of selected images.**
-  Widget _buildImageGrid(List<String> images) {
+  Widget _buildImageGrid(List<dynamic> images) {
     return GridView.builder(
       itemCount: images.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

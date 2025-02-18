@@ -10,14 +10,16 @@ import '../../widget/custom_drop_down_widget.dart';
 import 'widget/product_list_widget.dart';
 
 /// Represents the product listing screen where users can filter products by category.
-
+/// This screen allows users to view and filter a list of products based on their selected category.
 class ProductPage extends StatelessWidget {
+  /// Constructor for ProductPage.
   const ProductPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     // Find the CategoryManagerController using GetX
-    final controller = Get.find<CategoryManagerController>();
+    final CategoryManagerController categoryController =
+        Get.find<CategoryManagerController>();
     return Scaffold(
       appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -26,20 +28,23 @@ class ProductPage extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 8.w),
         child: Column(
           children: [
-            /// Dropdown to filter products by category
+            /// Dropdown to filter products by category.
+            /// The dropdown allows users to select a category from a predefined list.
             CustomDropdownWidget(
               items: AppConstants.allCategories,
-              value: controller.selectedAllCategory.value,
+              value: categoryController.selectedAllCategory.value,
               onChanged: (value) {
                 if (value != null) {
-                  controller.updateAllCategory(value.toString());
+                  categoryController.updateAllCategory(value.toString());
+                  // Updates the selected category in the controller.
                 }
               },
             ),
             AppsFunction.verticalSpacing(10),
 
-            /// Displays the product list
-            const Expanded(child: ProductListWidget())
+            /// Displays the product list.
+            /// The product list is dynamically updated based on the selected category.
+            const Expanded(child: ProductGridViewStream())
           ],
         ),
       ),
@@ -49,4 +54,6 @@ class ProductPage extends StatelessWidget {
 
 /*
 #: ProductPage	ProductScreen	"Screen" is more standard for pages in Flutter.
+#: why here no need use Obx on CutomDropDownWidget
+#: 
 */

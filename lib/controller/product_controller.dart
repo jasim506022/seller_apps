@@ -31,7 +31,7 @@ class ProductController extends GetxController {
   /// Returns a [Stream] of product data snapshots.
   Stream<QuerySnapshot<Map<String, dynamic>>> fetchProductSnapshots() {
     try {
-      return repository.productSnapshots(
+      return repository.fetchProductSnapshots(
           category: categoryManagerController.selectedAllCategory.value);
     } catch (e) {
       _handleException(e);
@@ -48,12 +48,12 @@ class ProductController extends GetxController {
   Future<void> showDeleteProductDialog({required String productId}) async {
     Get.dialog(
       ShowAlertDialogWidget(
-        title: AppStrings.areYouWantDelete,
+        title: AppStrings.areYouWantDeleteTitle,
         content: AppStrings.deleteMessage,
         onConfirmPressed: () async {
           try {
             await repository.deleteProductSnapshot(productId: productId);
-            Get.toNamed(RoutesName.mainPage, arguments: 0);
+            Get.toNamed(RoutesName.mainPage, arguments: 1);
             AppsFunction.flutterToast(msg: AppStrings.deleteSuccessFully);
           } catch (e) {
             Get.back();
@@ -90,7 +90,7 @@ class ProductController extends GetxController {
     if (e is AppException) {
       Get.dialog(
         ErrorDialogWidget(
-          icon: IconAsset.warningIcon,
+          icon: AppIcons.warningIcon,
           title: e.title!,
           content: e.message,
           buttonText: AppStrings.okay,
@@ -99,8 +99,3 @@ class ProductController extends GetxController {
     }
   }
 }
-
-/*
-#: Injecting the ProductRepository via the constructor
-
-*/

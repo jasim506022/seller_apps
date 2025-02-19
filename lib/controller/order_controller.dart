@@ -117,7 +117,7 @@ class OrderController extends GetxController {
     if (e is AppException) {
       Get.dialog(
         ErrorDialogWidget(
-          icon: IconAsset.warningIcon,
+          icon: AppIcons.warningIcon,
           title: e.title!,
           content: e.message,
           buttonText: AppStrings.okay,

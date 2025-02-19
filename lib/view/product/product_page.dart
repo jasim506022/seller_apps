@@ -23,7 +23,7 @@ class ProductPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: const Text(AppStrings.productTitle)),
+          title: const Text(AppStrings.productsTitle)),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 8.w),
         child: Column(
@@ -33,9 +33,9 @@ class ProductPage extends StatelessWidget {
             CustomDropdownWidget(
               items: AppConstants.allCategories,
               value: categoryController.selectedAllCategory.value,
-              onChanged: (value) {
-                if (value != null) {
-                  categoryController.updateAllCategory(value.toString());
+              onChanged: (category) {
+                if (category != null) {
+                  categoryController.updateAllCategory(category.toString());
                   // Updates the selected category in the controller.
                 }
               },
@@ -51,9 +51,3 @@ class ProductPage extends StatelessWidget {
     );
   }
 }
-
-/*
-#: ProductPage	ProductScreen	"Screen" is more standard for pages in Flutter.
-#: why here no need use Obx on CutomDropDownWidget
-#: 
-*/

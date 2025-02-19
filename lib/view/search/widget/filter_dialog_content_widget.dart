@@ -86,18 +86,17 @@ class FilterDialogContentWidget extends StatelessWidget {
             onPressed: () {
               searchController.resetFilters();
               _dismissDialogAndUnfocus(context);
-              // WidgetsBinding.instance.addPostFrameCallback((_) => Get.back());
             },
             child: Text(
-              AppStrings.reset,
+              AppStrings.btnReset,
               style: AppsTextStyle.largeBoldText.copyWith(color: AppColors.red),
             )),
         Row(
           children: [
             _buildActionButton(
-                AppStrings.close, () => _dismissDialogAndUnfocus(context)),
+                AppStrings.btnClose, () => _dismissDialogAndUnfocus(context)),
             AppsFunction.horizontalSpacing(15),
-            _buildActionButton(AppStrings.save, () {
+            _buildActionButton(AppStrings.btnSave, () {
               searchController.applyFilters();
               _dismissDialogAndUnfocus(context);
             }),
@@ -119,9 +118,3 @@ class FilterDialogContentWidget extends StatelessWidget {
     FocusScope.of(context).unfocus();
   }
 }
-
-/*
-WidgetsBinding.instance.addPostFrameCallback((_) => Get.back()); why use this 
-why sometimes onTap() work and sometimes doesn't work 
-Why Don't use Ontap() and why use Ontap
-*/

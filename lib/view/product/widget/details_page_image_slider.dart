@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../res/app_function.dart';
+import '../../../res/app_string.dart';
 import '../../../res/utils.dart';
 import '../../../model/product_model.dart';
 import '../../../res/apps_color.dart';
@@ -95,7 +96,7 @@ class DetailsPageImageSlideWithCartBridgeWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Tooltip(
-          message: "Go Back",
+          message: AppStrings.goBack,
           child: InkWell(
             onTap: () => Get.back(),
             child: _buildCircularButton(
@@ -124,11 +125,3 @@ class DetailsPageImageSlideWithCartBridgeWidget extends StatelessWidget {
         child: widget);
   }
 }
-
-/*
-// Background Circles 
-
-#: Understand ... and .. difference 
-
-#:  To List
-*/

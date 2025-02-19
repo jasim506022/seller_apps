@@ -19,9 +19,11 @@ class AppsTextStyle {
       color: AppColors.green, fontSize: 18.sp, fontWeight: FontWeight.w800);
 
 // Apps Logo
-  static TextStyle get appsLogoTextStyole => GoogleFonts.roboto(
-        color: AppColors.green,
+// Apps Logo (Modify)
+  static TextStyle get appsLogoTextStyle => GoogleFonts.pacifico(
+        color: AppColors.deepGreen,
         fontSize: 24.sp,
+        letterSpacing: 1.2,
         fontWeight: FontWeight.w900,
       );
 
@@ -55,16 +57,6 @@ class AppsTextStyle {
       color: const Color(0xffcecfd2),
       fontSize: 15.sp,
       fontWeight: FontWeight.w700);
-
-// dialog title
-
-  // static TextStyle get titleDialogTextStyle => GoogleFonts.poppins(
-  //     color: theme.primaryColor, fontSize: 20.sp, fontWeight: FontWeight.bold);
-
-  // static TextStyle get contentDialogTextStyle => GoogleFonts.poppins(
-  //     color: AppColors.black.withOpacity(.7),
-  //     fontSize: 16.sp,
-  //     fontWeight: FontWeight.normal);
 
 // (Modify)
   static TextStyle get titleHomeProfileheader => GoogleFonts.poppins(

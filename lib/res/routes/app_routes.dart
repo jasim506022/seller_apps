@@ -14,14 +14,14 @@ import '../../view/auth/forget_password_page.dart';
 import '../../view/auth/sign_in_page.dart';
 import '../../view/auth/sign_up_page.dart';
 import '../../view/splash/onboarding_screen.dart';
-import '../../view/splash/splash_screen.dart';
+import '../../view/splash/splash_page.dart';
 import 'routes_name.dart';
 
 class AppRoutes {
   static appRoutes() => [
         GetPage(
           name: RoutesName.splashPage,
-          page: () => const SplashScreen(),
+          page: () => const SplashPage(),
         ),
         GetPage(
           name: RoutesName.onBardingPpage,

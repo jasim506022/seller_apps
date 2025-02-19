@@ -2,7 +2,7 @@ class AppStrings {
 /*
    🏠 General App Strings
   */
-  static const String appsName = "Grocery Apps";
+  static const String appName = "JasiVendor";
   static const String welcome = "Welcome";
   static const String okay = "Okay";
   static const String about = "About";
@@ -78,9 +78,12 @@ class AppStrings {
   static const String takePhotoCameraTitle = "Take a Photo";
   static const String chooseFromGalleryTitle = "Choose from Gallery";
   static const String saveChangesTitle = "Save Changes?";
+  static const String areYouWantDeleteTitle = "Do you want to delete?";
 
   static const String confirmExitMessage = "Are you sure  want to exit?";
   static const String saveMessage = "Do you want to save your changes?";
+  static const String deleteMessage =
+      "Do you want to delete the product? If you delete the product, it cannot be undone.";
 
   // 📌 Button Labels
   static const String btnYes = "Yes";
@@ -88,6 +91,11 @@ class AppStrings {
   static const String btnaddProductImage = "Add Product Image";
   static const String btnCancel = "Cancel";
   static const String btnPickImage = "Pick Image";
+  static const String btnUpdate = "Update";
+  static const String btnDelete = "Delete";
+  static const String btnReset = "Reset";
+  static const String btnClose = "Close";
+  static const String btnSave = 'Save';
 
   // 📌 Success & Toast Messages
   static const String toastWaitForUploadMessage =
@@ -144,9 +152,6 @@ class AppStrings {
 
   static String doYouwantSignout = "Do you want to sign out?";
 
-  static const areYouWantDelete = "Are You want to Delete";
-  static const deleteMessage =
-      "Do you Want to Delete The Product Produc. If you delete the Product it can not be undo";
   static String selectPhoto = "Select Photo";
   static String camera = "Camera";
   static String gallery = "Gallery";
@@ -254,7 +259,6 @@ class AppStrings {
   static const String editProfile = "Edit Profile";
   static const String signOut = "Sign Out";
 
-  static const productTitle = "Products";
   static const String orderPage = "Order Page";
   static String orderOverview = "Order Overview";
   static String estimatedDelivery = "Estimated Delivery Date is";
@@ -320,11 +324,7 @@ class AppStrings {
   static String light = "Light";
   static const String pleaseEnterPrefix = "Please enter";
   static const homePage = "Home Page";
-  static const update = "Update";
-  static const delete = "Delete";
-  static String reset = "Reset";
-  static String close = "Close";
-  static String save = 'Save';
+
   static const pleaseEnterProduct = 'Please Enter Product';
 
   static String minumeAndMaximum = 'Minimum price cannot exceed maximum price.';
@@ -334,6 +334,7 @@ class AppStrings {
     return "Please enter $fieldName.";
   }
 
+  static const String goBack = "Go Back";
   //
   static const String noImageSelect = "No images selected";
 

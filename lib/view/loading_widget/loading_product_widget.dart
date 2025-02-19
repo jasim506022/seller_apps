@@ -36,8 +36,3 @@ class LoadingProductWidget extends StatelessWidget {
     );
   }
 }
-
-/*
-#:  List.generate(3),
-*/
-

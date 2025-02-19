@@ -23,6 +23,7 @@ class _ManageProductPageState extends State<ManageProductPage> {
   /// Indicates whether the page is in 'edit mode' or 'add mode'.
   /// `true` for edit mode, `false` for add mode.
   late bool isEditMode;
+
   late final ManageProductController manageProductController;
 
   /// Stores the product being edited (only if in edit mode)
@@ -37,6 +38,7 @@ class _ManageProductPageState extends State<ManageProductPage> {
     // If in edit mode, initialize productModel with passed product details
     if (isEditMode) {
       productModel = arguments![AppStrings.productModel];
+
       // Update the fields of the form with existing product data
       manageProductController.updateProductsFields(productModel);
     }

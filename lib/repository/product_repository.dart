@@ -7,7 +7,7 @@ import '../res/app_function.dart';
 class ProductRepository {
   final _dataFirebaseService = DataFirebaseService();
 
-  Stream<QuerySnapshot<Map<String, dynamic>>> productSnapshots(
+  Stream<QuerySnapshot<Map<String, dynamic>>> fetchProductSnapshots(
       {required String category}) {
     try {
       return _dataFirebaseService.fetchCategoryProducts(category: category);

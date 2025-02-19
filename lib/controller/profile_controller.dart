@@ -217,7 +217,7 @@ class ProfileController extends GetxController {
     if (error is AppException) {
       Get.dialog(
         ErrorDialogWidget(
-          icon: IconAsset.warningIcon,
+          icon: AppIcons.warningIcon,
           title: error.title!,
           content: error.message,
           buttonText: AppStrings.okay,

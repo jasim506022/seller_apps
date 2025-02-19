@@ -48,31 +48,19 @@ class SearchPage extends StatelessWidget {
   /// - Displays a loading indicator while fetching data
   Expanded _buildSearchResults(ProductSearchController searchController) {
     return Expanded(
-        child: Obx(
-      () => StreamBuilder(
-        stream: searchController.fetchProductStream(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.active &&
-              snapshot.hasData) {
-            searchController.updateProductList(snapshot.data!.docs
-                .map((e) => ProductModel.fromMap(e.data()))
-                .toList());
+        child: Obx(() => StreamBuilder(
+              stream: searchController.fetchProductStream(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.active &&
+                    snapshot.hasData) {
+                  searchController.updateProductList(snapshot.data!.docs
+                      .map((e) => ProductModel.fromMap(e.data()))
+                      .toList());
 
-            return const SearchProductGridWidget();
-          }
-
-          return const LoadingListProductWidget();
-        },
-      ),
-    ));
+                  return const SearchProductGridWidget();
+                }
+                return const LoadingListProductWidget();
+              },
+            )));
   }
 }
-
-/*
-why use final
-#: Why here use Obx
-#: Understand this code
-searchController.updateProductList(snapshot.data!.docs
-                .map((e) => ProductModel.fromMap(e.data()))
-                .toList());
-*/

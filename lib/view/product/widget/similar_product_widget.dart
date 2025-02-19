@@ -45,7 +45,6 @@ class SimilarProductCard extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(10.r),
                 child: FancyShimmerImage(
-                  
                   height: 80.h,
                   boxFit: BoxFit.fill,
                   imageUrl: productModel.productimage![0],

@@ -19,10 +19,14 @@ import 'grid_image_list_widget.dart';
 /// Screen for adding or editing a product.
 /// Uses [GetX] for state management.
 class ManageProductForm extends StatefulWidget {
-  const ManageProductForm({super.key, required this.isEditMode});
+  const ManageProductForm({
+    super.key,
+    required this.isEditMode,
+  });
 
   /// Indicates whether the form is in edit mode.
   final bool isEditMode;
+
   @override
   State<ManageProductForm> createState() => _ManageProductFormState();
 }

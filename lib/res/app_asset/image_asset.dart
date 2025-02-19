@@ -10,7 +10,7 @@ class AppImage {
   static String error = "asset/empty/empty.png";
   static String singleError = "asset/empty/single.png";
   // Splash Page Bg
-  static String splashPageBg = "asset/image/splash.png";
+  static String splashScreenBackground = "asset/image/splash.png";
 
   // Onboarding Image
   static const String groceryImage = "asset/onboard/grocery.png";

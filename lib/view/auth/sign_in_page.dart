@@ -114,7 +114,7 @@ class _SignInPageState extends State<SignInPage> {
             tap: () async =>
                 NetworkUtils.executeWithInternetCheck(action: () {}),
             color: AppColors.blue,
-            image: IconAsset.facebookIcon,
+            image: AppIcons.facebookIcon,
             title: AppStrings.facebook,
           ),
         ),
@@ -124,7 +124,7 @@ class _SignInPageState extends State<SignInPage> {
             tap: () async => await NetworkUtils.executeWithInternetCheck(
                 action: () async => await authController.signInWithGoogle()),
             color: AppColors.red,
-            image: IconAsset.gmailIcon,
+            image: AppIcons.gmailIcon,
             title: AppStrings.gmail,
           ),
         ),

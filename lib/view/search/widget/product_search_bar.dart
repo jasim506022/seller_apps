@@ -44,7 +44,7 @@ class ProductSearchBar extends StatelessWidget {
         decoration:
             AppsFunction.inputDecoration(hint: AppStrings.searchProductHere),
         controller: searchController.searchTextTEC,
-        onChanged: (text) => searchController.searchProducts(text));
+        onChanged: searchController.searchProducts);
   }
 
   /// Builds the filter button, which opens the filter dialog.
@@ -59,7 +59,7 @@ class ProductSearchBar extends StatelessWidget {
 }
 
 /*
-When use Expendend and when use Flexable
+
 _buildSearchField → buildSearchField (Remove underscore since it's used within a stateless
 Why onChanged: searchController.searchProducts, // Directly passing function reference
 */

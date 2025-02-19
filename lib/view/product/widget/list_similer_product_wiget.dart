@@ -39,7 +39,7 @@ class SimilarProductList extends StatelessWidget {
               snapshot.data!.docs.isEmpty ||
               snapshot.hasError) {
             return SingleEmptyWidget(
-                image: AppImage.singleError, //ImagesAsset.errorSingle,
+                image: AppImage.singleError,
                 title: snapshot.hasError
                     ? '${AppStrings.errorOccure} ${snapshot.error}'
                     : AppStrings.noDataAvaiable);
@@ -64,7 +64,3 @@ class SimilarProductList extends StatelessWidget {
     );
   }
 }
-
-/*
-#: min(5, snapshot.data!.docs.length)
-*/

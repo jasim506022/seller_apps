@@ -122,7 +122,7 @@ class ProductSearchController extends GetxController {
   Stream<QuerySnapshot<Map<String, dynamic>>> fetchProductStream() {
     try {
       return productController.repository
-          .productSnapshots(category: selectedCategory.value);
+          .fetchProductSnapshots(category: selectedCategory.value);
     } catch (e) {
       _handleException(e);
 
@@ -136,7 +136,7 @@ class ProductSearchController extends GetxController {
     if (e is AppException) {
       Get.dialog(
         ErrorDialogWidget(
-          icon: IconAsset.warningIcon,
+          icon: AppIcons.warningIcon,
           title: e.title!,
           content: e.message,
           buttonText: AppStrings.okay,
@@ -145,10 +145,3 @@ class ProductSearchController extends GetxController {
     }
   }
 }
-
-/*
-  What is Memory: Dispose controllers to prevent memory leaks
-  #: allProducts.assignAll
-  #:   isFilterActive.value = false and   isFilterActive(false)
- #: where
-*/

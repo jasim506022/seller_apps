@@ -1,5 +1,13 @@
 
 /*
+
+##########################Splash Page###########################
+
+
+
+
+
+
 Question:1:- What is different between single qotation and double qutation
 Answer: 
 In Flutter (which uses Dart as its programming language), single quotes (' ') and double quotes (" ") are functionally the same when defining string literals.
@@ -132,6 +140,50 @@ Answer: SizedBox.shrink() is a special SizedBox that has zero width and zero hei
 
 
 
+###################Product:####################
+
+#:  automaticallyImplyLeading: false,
+Answer: Automatically use for hiding Leading AppBar
+
+#: Descripitve this code: ProductModel productModel = ProductModel.fromMap(productDocs[index].data());
+Answer: This code retrieves Firestore document data (as a map), converts it into a ProductModel instance, and stores it in the productModel variable.
+
+#: List<QueryDocumentSnapshot<Map<String, dynamic>>> productDocs understand this code
+Answer:  list of Firestore document snapshots, where each document contains structured data in the form of a Map<String, dynamic>
+
+#: Understanding fromMap Factory Constructor
+Answer: This is a factory constructor, meaning it does not create a new instance directly but instead returns an instance of ProductModel after processing map.
+
+#: productDocs[index].data() why use .data()
+Why Is .data() Needed?
+Firestore’s QueryDocumentSnapshot does not directly hold the field values; instead, it provides methods to access them.
+.data() extracts the fields as a Map<String, dynamic>, making it easier to use in models.
+
+#: Why do we use shrinkWrap.true
+Answer:
+When shrinkWrap: true is Used
+The GridView (or ListView) only takes up space required by its children instead of expanding indefinitely.
+This is useful inside a column, single-child scroll view, or nested scrollable widgets.
+
+#: Understanding List.generate(3, (index) => someValue) in Dart
+Answer: The List.generate() function in Dart is used to create a list with a 
+fixed number of elements and initialize each element using a function.
+
+#: why do we use false in provider  (Provider.of<ProductModel>(context, false);
+Answer:   Flutter's Provider package, the Provider.of<T>(context, listen: false) method is used to access an instance of T without listening for changes.
+listen: false → The widget does not rebuild when the provider’s data changes.
+
+#: What is difference between ... and .. in dart and flutter 
+Answer: .. (Cascade Operator)
+The cascade operator (..) is used to perform multiple operations on the same object without needing to reference the object multiple times.
+
+... (Spread Operator)
+The spread operator (...) is used to insert multiple elements from one collection (e.g., a list or set) into another collection. It’s primarily used with collections like lists and sets.
+
+#: What is Memory: Dispose controllers to prevent memory leaks
+Dispose controllers: Always call the dispose() method on controllers like TextEditingController, ScrollController, etc., in a StatefulWidget to prevent memory leaks.
+dispose() method: This is where you free up any resources the controller is using.
+Avoid memory leaks: Properly managing resources helps avoid memory leaks, improving the performance and stability of your app.
 
 */
 

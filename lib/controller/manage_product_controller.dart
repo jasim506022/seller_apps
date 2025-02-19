@@ -108,7 +108,7 @@ class ManageProductController extends GetxController {
       if (e is AppException) {
         Get.dialog(
           ErrorDialogWidget(
-            icon: IconAsset.warningIcon,
+            icon: AppIcons.warningIcon,
             title: e.title!,
             content: e.message,
             buttonText: AppStrings.okay,
@@ -209,13 +209,13 @@ class ManageProductController extends GetxController {
         onCancelPressed: () {
           resetProductInputs();
           hasProductsChanged(false);
-          Get.close(2);
+          Get.back();
+          Get.back();
         }));
   }
 
 // Resets product-related input fields and selections
   void resetProductInputs() {
-    print("Bangladesh");
     for (var element in [
       nameController,
       priceController,

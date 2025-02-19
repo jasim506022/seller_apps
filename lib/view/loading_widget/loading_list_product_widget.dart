@@ -14,7 +14,7 @@ class LoadingListProductWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      shrinkWrap: true,
+      // shrinkWrap: true,
       physics: const AlwaysScrollableScrollPhysics(),
       gridDelegate: AppsFunction.defaultProductGridDelegate(),
       itemCount: 20,
@@ -24,7 +24,3 @@ class LoadingListProductWidget extends StatelessWidget {
     );
   }
 }
-
-/*
-#: ShrinWrap: 
-*/

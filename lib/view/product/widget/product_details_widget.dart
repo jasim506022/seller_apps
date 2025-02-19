@@ -110,8 +110,3 @@ class ProductDetailsWidget extends StatelessWidget {
     );
   }
 }
-
-/*
-#: TextSpan & WidgetSpan
-
-*/

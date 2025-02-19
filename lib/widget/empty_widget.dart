@@ -47,6 +47,3 @@ class EmptyWidget extends StatelessWidget {
     );
   }
 }
-/*
-Used const where applicable	Optimizes widget rebuilds.
-*/

@@ -88,7 +88,7 @@ class ProductWidget extends StatelessWidget {
         AppsFunction.verticalSpacing(5),
         AppButton(
           onPressed: () => _navigateToPage(productModel, true),
-          title: AppStrings.update,
+          title: AppStrings.btnUpdate,
         ),
         AppsFunction.verticalSpacing(5)
       ],
@@ -106,9 +106,3 @@ class ProductWidget extends StatelessWidget {
     });
   }
 }
-
-/*
-#: Parameter 
-#: Why use false in provider
-#: Understand 
-*/

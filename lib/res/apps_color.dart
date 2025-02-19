@@ -40,10 +40,4 @@ class AppColors {
   }
 
   static Color searchLightColor = const Color(0xfff3f3f4);
-
-  // static Color indicatorColorDarkColor = Colors.white54;
-  // static Color indicatorColorightColor = Colors.black54;
-
-  // utilies Color
 }
-

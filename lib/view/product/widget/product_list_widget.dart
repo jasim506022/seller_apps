@@ -56,7 +56,6 @@ class ProductGridViewStream extends StatelessWidget {
   GridView _buildProductGrid(
       List<QueryDocumentSnapshot<Map<String, dynamic>>> productDocs) {
     return GridView.builder(
-      shrinkWrap: true,
       physics: const AlwaysScrollableScrollPhysics(),
       itemCount: productDocs.length,
       gridDelegate: AppsFunction.defaultProductGridDelegate(),
@@ -73,8 +72,3 @@ class ProductGridViewStream extends StatelessWidget {
     );
   }
 }
-
-/*
-#: ProductModel productModel = ProductModel.fromMap(productDocs[index].data());
-#: List<QueryDocumentSnapshot<Map<String, dynamic>>> productDocs
-*/

@@ -41,8 +41,7 @@ class ProductDetailsPage extends StatelessWidget {
             children: [
               AppsFunction.verticalSpacing(20),
               DetailsPageImageSlideWithCartBridgeWidget(
-                productModel: productModel,
-              ),
+                  productModel: productModel),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w),
                 child: Column(
@@ -50,17 +49,13 @@ class ProductDetailsPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Display product details such as title, description, etc.
-                    ProductDetailsWidget(
-                      product: productModel,
-                    ),
+                    ProductDetailsWidget(product: productModel),
                     Text(
                       AppStrings.similarProducts,
                       style: AppsTextStyle.titleTextStyle,
                     ),
                     AppsFunction.verticalSpacing(10),
-                    SimilarProductList(
-                      productModel: productModel,
-                    ),
+                    SimilarProductList(productModel: productModel),
                     AppsFunction.verticalSpacing(20),
                   ],
                 ),
@@ -87,8 +82,3 @@ class ProductDetailsPage extends StatelessWidget {
         statusBarIconBrightness: Theme.of(context).brightness));
   }
 }
-
-/*
-#: Understand Status Bar
-#: 
-*/

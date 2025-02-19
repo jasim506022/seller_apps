@@ -54,8 +54,3 @@ class SearchProductGridWidget extends StatelessWidget {
     return searchController.allProducts;
   }
 }
-
-/*
-#:Use final to prevent reassignment and improve clarity.
-#: _getFilteredProducts()
-*/

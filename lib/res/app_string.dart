@@ -96,6 +96,8 @@ class AppStrings {
   static const String btnReset = "Reset";
   static const String btnClose = "Close";
   static const String btnSave = 'Save';
+  static const String btnSkip = "Skip";
+  static const String btnNext = "Next";
 
   // 📌 Success & Toast Messages
   static const String toastWaitForUploadMessage =
@@ -216,8 +218,6 @@ class AppStrings {
   // sharepare
   static String onBoardingShareKey = 'onBoarding';
 
-  static String skip = "Skip";
-
   static String fresshFruis = "Fresh Fruits & Vegetables";
   static String quickDelivery = "Quick & Fast Delivery";
   static String firstOnboardingDescription =
@@ -318,7 +318,6 @@ class AppStrings {
       "The order has been successfully completed";
 
   //botton
-  static const next = "Next";
 
   static String dark = "Dark";
   static String light = "Light";
@@ -342,4 +341,5 @@ class AppStrings {
   static const String searchPlaceholder = "Search...........";
   // Product
   static const String uploadProduct = "Upload Your Product";
+  static const String fresshFruits = "Fresh Fruits & Vegetables";
 }

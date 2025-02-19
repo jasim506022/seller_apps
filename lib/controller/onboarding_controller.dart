@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../model/onboard_model.dart';
+import '../data/response/service/onboarding_list_data.dart';
 import '../res/app_constants.dart';
 import '../res/app_string.dart';
 import '../res/routes/routes_name.dart';
@@ -11,7 +11,7 @@ class OnboardingController extends GetxController {
   var currentIndex = 0.obs;
 
   /// Marks the onboarding as viewed in shared preferences and navigates to the sign-in page
-  void markOnboardingAsViewedAndNavigate() {
+  void skipOnboarding() {
     AppConstants.isViewed = 0;
     AppConstants.sharedPreference!
         .setInt(AppStrings.onBoardingShareKey, AppConstants.isViewed!);
@@ -19,9 +19,10 @@ class OnboardingController extends GetxController {
   }
 
   /// Navigates to the next page in the onboarding sequence
-  void navigateToNextPageOrSkip() {
-    if (currentIndex.value == onboardingData.length - 1) {
-      markOnboardingAsViewedAndNavigate();
+  void goToNextPageOrSkip() {
+    if (currentIndex.value ==
+        OnBoardingListData.getOnboardingData().length - 1) {
+      skipOnboarding();
     } else {
       pageController.nextPage(
         duration: const Duration(milliseconds: 250),

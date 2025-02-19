@@ -28,8 +28,8 @@ class AppsTextStyle {
       );
 
   // Large  Title Text Style
-  static TextStyle get largeTitleTextStyleForOnBoarding => GoogleFonts.roboto(
-      color: theme.primaryColor, fontSize: 30.sp, fontWeight: FontWeight.w900);
+  static TextStyle get largeTitle => GoogleFonts.roboto(
+      color: theme.primaryColor, fontSize: 28.sp, fontWeight: FontWeight.w900);
 
   static TextStyle get titleSignPageTextStyle => GoogleFonts.roboto(
       color: theme.primaryColor,

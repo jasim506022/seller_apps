@@ -3,9 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../controller/onboarding_controller.dart';
-import '../../../model/onboard_model.dart';
+import '../../../data/response/service/onboarding_list_data.dart';
 import '../../../res/apps_color.dart';
 
+/// A widget to display progress dots during the onboarding process.
+/// The active dot is highlighted based on the current page.
 class OnboardingProgressDotsWidget extends StatelessWidget {
   const OnboardingProgressDotsWidget({
     super.key,
@@ -13,30 +15,33 @@ class OnboardingProgressDotsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<OnboardingController>();
+    final OnboardingController onboardingController =
+        Get.find<OnboardingController>();
     return SizedBox(
-      height: 10.h,
+      height: 15.h,
       child: ListView.builder(
-        itemCount: onboardingData.length,
+        itemCount: OnBoardingListData.getOnboardingData().length,
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Obx(
-                () => AnimatedContainer(
-                  duration: const Duration(milliseconds: 300),
+              Obx(() {
+                // The current dot's active/inactive state
+                bool isActive =
+                    onboardingController.currentIndex.value == index;
+                return AnimatedContainer(
+                  duration:
+                      const Duration(milliseconds: 300), //Smooth transition
                   height: 10.h,
-                  width: controller.currentIndex.value == index ? 12.h : 10.h,
+                  width: isActive ? 12.h : 10.h,
                   margin: EdgeInsets.symmetric(horizontal: 4.w),
                   decoration: BoxDecoration(
-                      color: controller.currentIndex.value == index
-                          ? AppColors.red
-                          : AppColors.black,
+                      color: isActive ? AppColors.red : AppColors.black,
                       borderRadius: BorderRadius.circular(10.r)),
-                ),
-              ),
+                );
+              }),
             ],
           );
         },

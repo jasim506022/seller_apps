@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../res/app_function.dart';
-import '../res/apps_color.dart';
-import '../res/apps_text_style.dart';
+import '../../../res/app_function.dart';
+import '../../../res/apps_color.dart';
+import '../../../res/apps_text_style.dart';
 
+/// A reusable button widget with an action and an arrow icon.
 class NextActionButtonWidget extends StatelessWidget {
   const NextActionButtonWidget({
     super.key,

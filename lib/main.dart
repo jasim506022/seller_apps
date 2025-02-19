@@ -28,7 +28,7 @@ void main() async {
 
 // Check onboarding status
   AppConstants.isViewed =
-      AppConstants.sharedPreference!.getInt(AppStrings.onBoardingShareKey);
+      AppConstants.sharedPreference!.getInt(AppStrings.prefOnboarding);
   // Configure background message handling for Firebase
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
@@ -135,8 +135,6 @@ class MyApp extends StatelessWidget {
         color: isDarkTheme ? AppColors.hintDark : AppColors.hintLight,
         thickness: 2,
       ),
-
-      
 
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(

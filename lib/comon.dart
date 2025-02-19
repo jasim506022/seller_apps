@@ -7,6 +7,8 @@
 #: Understand AppException
 #: Understand Try-Catch and Rethorw
 #: Understand Null Clearly !, ?., ??, ??=
+#: OnBoarding Image Doesn't modify
+#: Validation Understand Clearly
 
 */ 
 

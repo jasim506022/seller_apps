@@ -13,14 +13,21 @@ import '../../res/apps_text_style.dart';
 import '../../res/network_utilis.dart';
 import '../../res/routes/routes_name.dart';
 import '../../res/validator.dart';
-import '../../widget/custom_auth_button_widget.dart';
 
 import '../../widget/rich_text_widget.dart';
 
 import '../../widget/text_field_form_widget.dart';
-import 'widget/app_sigin_in_page_intro_widget.dart';
-import 'widget/social_button_widget.dart';
+import 'widget/auth_intro_widget.dart';
+import 'widget/auth_button.dart';
+import 'widget/social_button.dart';
 
+/// A sign-in page where users can log in with email/password or social accounts.
+///
+/// This page includes:
+/// - A login form with validation.
+/// - Social login buttons (Google, Facebook).
+/// - A "Forget Password" option.
+/// - A sign-up redirection link.
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
 
@@ -29,16 +36,18 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
-  final authController = Get.find<AuthController>();
+  late final AuthController authController;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
-  void didChangeDependencies() {
-    _setupStatusBar();
-    super.didChangeDependencies();
+  void initState() {
+    authController = Get.find<AuthController>();
+    _configureStatusBar();
+    super.initState();
   }
 
-  void _setupStatusBar() {
+  /// Configures the system UI to set the status bar color and icon brightness.
+  void _configureStatusBar() {
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
         statusBarColor: AppColors.backgroundLight,
@@ -58,8 +67,11 @@ class _SignInPageState extends State<SignInPage> {
     return PopScope(
       canPop: false,
       // ignore: deprecated_member_use
-      onPopInvoked: (didPop) async => await authController.exitApps(didPop),
+      onPopInvoked:
+          (didPop) async => // Prevents accidental app exit without confirmation.
+              await authController.confirmExitApp(didPop),
       child: GestureDetector(
+        // Dismiss keyboard when tapping outside.
         onTap: () => FocusScope.of(context).unfocus(),
         child: Scaffold(
           body: SingleChildScrollView(
@@ -68,32 +80,39 @@ class _SignInPageState extends State<SignInPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  AppSignInPageIntroWidget(
-                    title: AppStrings.sellerLogIn,
-                    description: AppStrings.logInPageSubjectTitle,
+                  /// Displays an introduction (title & description).
+                  const AuthIntroWidget(
+                    title: AppStrings.sellerLogInTitle,
+                    description: AppStrings.loginPageDescription,
                   ),
                   _buildLoginForm(),
                   AppsFunction.verticalSpacing(5),
+
+                  /// "Forgot Password" button.
                   _buildForgetPasswordButton(),
                   AppsFunction.verticalSpacing(15),
-                  CustomAuthButtonWidget(
+                  AuthButton(
                     onPressed: () async {
                       if (!_formKey.currentState!.validate()) return;
                       await authController.signIn();
-                      // await NetworkUtili.internetCheckingWFunction(
-                      //     function: () async => await authController.signIn());
                     },
-                    title: AppStrings.signIn,
+                    label: AppStrings.signInTitle,
                   ),
                   AppsFunction.verticalSpacing(25),
-                  _buildOrDividerText(),
+
+                  /// OR divider section.
+                  _buildOrDivider(),
                   AppsFunction.verticalSpacing(20),
+
+                  /// Social login buttons (Google & Facebook)
                   _buildSocialLoginOptions(),
                   AppsFunction.verticalSpacing(25),
+
+                  /// Sign-up link with navigation to the registration page.
                   RichTextWidget(
-                    colorText: AppStrings.createAccount,
-                    tap: () async => Get.toNamed(RoutesName.signupPage),
-                    simpleText: AppStrings.dontHaveAccount,
+                    highlightedText: AppStrings.createAccount,
+                    onTap: () => Get.toNamed(RoutesName.signupPage),
+                    normalText: AppStrings.dontHaveAccount,
                   ),
                   AppsFunction.verticalSpacing(100)
                 ],
@@ -105,71 +124,28 @@ class _SignInPageState extends State<SignInPage> {
     );
   }
 
-  /// Builds the social login options row (e.g., Facebook and Gmail).
-  Row _buildSocialLoginOptions() {
-    return Row(
-      children: [
-        Expanded(
-          child: SocialButtonWidget(
-            tap: () async =>
-                NetworkUtils.executeWithInternetCheck(action: () {}),
-            color: AppColors.blue,
-            image: AppIcons.facebookIcon,
-            title: AppStrings.facebook,
-          ),
-        ),
-        AppsFunction.horizontalSpacing(10),
-        Expanded(
-          child: SocialButtonWidget(
-            tap: () async => await NetworkUtils.executeWithInternetCheck(
-                action: () async => await authController.signInWithGoogle()),
-            color: AppColors.red,
-            image: AppIcons.gmailIcon,
-            title: AppStrings.gmail,
-          ),
-        ),
-      ],
-    );
-  }
-
-  /// Builds the "Forget Password" button aligned to the right.
-  Align _buildForgetPasswordButton() {
-    return Align(
-      alignment: Alignment.topRight,
-      child: TextButton(
-        onPressed: () async {
-          NetworkUtils.executeWithInternetCheck(
-              action: () => Get.toNamed(RoutesName.forgetPassword));
-        },
-        child: Text(
-          AppStrings.forgetPassword,
-          style: AppsTextStyle.mediumBoldText.copyWith(
-            color: AppColors.hintLight,
-          ),
-        ),
-      ),
-    );
-  }
-
-  /// Builds the login form containing email and password input fields.
+  /// Builds the login form containing email and password input fields
   Form _buildLoginForm() {
     return Form(
       key: _formKey,
       child: Column(
         children: [
+          /// Email input field.
           TextFormFieldWidget(
             label: AppStrings.email,
-            hintText: AppStrings.emailAddress,
+            hintText: AppStrings.emailHint,
             controller: authController.emailController,
             validator: Validators.validateEmail,
             textInputType: TextInputType.emailAddress,
           ),
+
+          /// Password input field
           TextFormFieldWidget(
             label: AppStrings.password,
             isShowPassword: true,
             obscureText: true,
             validator: Validators.validatePassword,
-            hintText: AppStrings.password,
+            hintText: AppStrings.passwordHint,
             controller: authController.passwordController,
             textInputAction: TextInputAction.done,
           ),
@@ -178,8 +154,27 @@ class _SignInPageState extends State<SignInPage> {
     );
   }
 
-  /// Builds a divider with text in the center ("or").
-  Row _buildOrDividerText() {
+  /// Builds the "Forgot Password" button.
+  Widget _buildForgetPasswordButton() {
+    return Align(
+      alignment: Alignment.topRight,
+      child: TextButton(
+        onPressed: () async {
+          await NetworkUtils.executeWithInternetCheck(
+              action: () => Get.toNamed(RoutesName.forgetPassword));
+        },
+        child: Text(
+          AppStrings.forgetPasswordTitle,
+          style: AppsTextStyle.mediumBoldText.copyWith(
+            color: AppColors.hintLight,
+          ),
+        ),
+      ),
+    );
+  }
+
+  /// Builds a divider with "OR" text in the center.
+  Row _buildOrDivider() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -189,10 +184,39 @@ class _SignInPageState extends State<SignInPage> {
           child: Text(
             AppStrings.withOr,
             style:
-                AppsTextStyle.largeNormalText.copyWith(color: AppColors.grey),
+                AppsTextStyle.mediumNormalText.copyWith(color: AppColors.grey),
           ),
         ),
         _buildLine(),
+      ],
+    );
+  }
+
+  /// Builds the social login options row (e.g., Facebook and Gmail).
+  Row _buildSocialLoginOptions() {
+    return Row(
+      children: [
+        Expanded(
+          /// Facebook login button.
+          child: SocialButton(
+            onTap: () async =>
+                NetworkUtils.executeWithInternetCheck(action: () {}),
+            color: AppColors.blue,
+            iconPath: AppIcons.facebookIcon,
+            label: AppStrings.btnFacebook,
+          ),
+        ),
+        AppsFunction.horizontalSpacing(10),
+        Expanded(
+          /// Facebook login button.
+          child: SocialButton(
+            onTap: () async => await NetworkUtils.executeWithInternetCheck(
+                action: () async => await authController.signInWithGoogle()),
+            color: AppColors.red,
+            iconPath: AppIcons.gmailIcon,
+            label: AppStrings.btnGmail,
+          ),
+        ),
       ],
     );
   }
@@ -206,3 +230,21 @@ class _SignInPageState extends State<SignInPage> {
     );
   }
 }
+
+/*
+  @override
+  void dispose() {
+    authController.dispose();
+    super.dispose();
+  } Why use authController.dispose and What is meaning it good way to declare this
+#: Why use _configureStatusBar in didchagneDepence
+#: 
+4. Lifecycle Management Improvements
+✅ Remove authController.dispose(); from dispose()
+Reason:
+
+Get.find<AuthController>() is managed by GetX, and disposing it manually can cause unintended issues.
+Controllers registered with Get.put() or Get.lazyPut() are automatically managed
+
+Ensured _configureStatusBar() is called in initState() instead of didChangeDependencies() (better placement).
+*/

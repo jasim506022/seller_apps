@@ -6,18 +6,18 @@ class OnBoardingListData {
   static List<OnboardModel> getOnboardingData() => [
         OnboardModel(
           image: AppImage.onboardingFirstImage,
-          title: AppStrings.welcome,
-          description: AppStrings.firstOnboardingDescription,
+          title: AppStrings.onboardingTitle1,
+          description: AppStrings.onboardingDescription1,
         ),
         OnboardModel(
           image: AppImage.onboardingSecondImage,
-          title: AppStrings.fresshFruits,
-          description: AppStrings.secondOnboardingDescription,
+          title: AppStrings.onboardingTitle2,
+          description: AppStrings.onboardingDescription2,
         ),
         OnboardModel(
           image: AppImage.onboardingThirdImage,
-          title: AppStrings.quickDelivery,
-          description: AppStrings.thirdOnboardingDescription,
+          title: AppStrings.onboardingTitle3,
+          description: AppStrings.onboardingDescription3,
         )
       ];
 }

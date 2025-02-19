@@ -1,4 +1,3 @@
-import 'app_function.dart';
 import 'app_string.dart';
 
 /// **Validation Utility Class**
@@ -8,47 +7,52 @@ class Validators {
   /// **Validates an email address.**
   /// - Checks if the email is empty.
   /// - Ensures the email format is valid.
-  static String? validateEmail(String? email) {
-    if (email == null || email.isEmpty) {
-      return AppStrings.enterEmailAddress;
+
+  static String? validateEmail(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return AppStrings.emptyEmail;
     }
-    if (!AppsFunction.isValidEmail(email)) {
-      return AppStrings.validEmailAddress;
+    String emailPattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
+    if (!RegExp(emailPattern).hasMatch(value)) {
+      return AppStrings.invalidEmailFormat;
     }
-    return null;
+    if (value.length > 320) {
+      return AppStrings.emailTooLong;
+    }
+    return null; // ✅ Valid input
   }
 
-  static String? validatePassword(String? password) {
-    if (password == null || password.isEmpty) {
-      return AppStrings.enterPassword;
-    } else if (password.length < 6) {
-      return AppStrings.validPassword;
-    }
-    return null;
-  }
-
-  // Validation for non-empty fields.
-  static String? validateNameEmpty(String? value) {
-    if (value == null || value.isEmpty) return AppStrings.enterName;
-    if (value.length < 4) return AppStrings.nameValid;
-    return null;
-  }
-
-  // Validation for confirm password field.
-  static String? validateConfirmPassword(String? value) {
+  static String? validatePassword(String? value) {
     if (value == null || value.isEmpty) {
-      return AppStrings.enterConfirmPassword;
-    } else if (value.length < 6) {
-      return AppStrings.validConfirmPassword;
+      return AppStrings.emptyPassword;
     }
-    return null;
+    if (value.length < 6) {
+      return AppStrings.passwordTooShort;
+    }
+    if (!RegExp(r'[A-Z]').hasMatch(value)) {
+      return AppStrings.passwordUppercase;
+    }
+    if (!RegExp(r'[a-z]').hasMatch(value)) {
+      return AppStrings.passwordLowercase;
+    }
+    if (!RegExp(r'\d').hasMatch(value)) {
+      return AppStrings.passwordNumber;
+    }
+
+    if (value.length > 20) {
+      return AppStrings.passwordTooLong;
+    }
+    return null; // ✅ Valid input
   }
 
-  static String? validateNotEmpty(String? value, String fieldName) {
+  static String? validateConfirmPassword(String? value, String password) {
     if (value == null || value.isEmpty) {
-      return AppStrings.pleaseEnterField(fieldName);
+      return "Please confirm your password.";
     }
-    return null;
+    if (value != password) {
+      return "Passwords do not match. Please re-enter.";
+    }
+    return null; // ✅ Valid input
   }
 
   static String? validateProductName(String? value) {
@@ -75,7 +79,7 @@ class Validators {
     if (price == null) {
       return AppStrings.invalidPrice;
     }
-    if (price <= 0 && price > 1000000) {
+    if (price <= 0 || price > 1000000) {
       return AppStrings.priceOutOfRange;
     }
 
@@ -132,9 +136,40 @@ class Validators {
     }
     return null; // ✅ Valid input
   }
+
+  static String? validateName(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return "Please enter your name.";
+    }
+    if (value.trim().length < 2) {
+      return "Name must be at least 2 characters long.";
+    }
+    if (value.length > 50) {
+      return "Name cannot exceed 50 characters.";
+    }
+    if (!RegExp(r"^[a-zA-Z\s]+$").hasMatch(value)) {
+      return "Name can only contain letters and spaces.";
+    }
+    return null; // ✅ Valid input
+  }
+
+  String? validateAddress(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return "Please enter your address.";
+    }
+    if (value.trim().length < 5) {
+      return "Address must be at least 5 characters long.";
+    }
+    if (value.length > 200) {
+      return "Address cannot exceed 200 characters.";
+    }
+    return null; // ✅ Valid input
+  }
 }
 
 /*
+#: String emailPattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
+#: !RegExp(r'[A-Z]').hasMatch(value)
 !RegExp(r'^[a-zA-Z0-9 ]+$').hasMatch(value)
 #: RegExp(r'^\d+(\.\d{1,2})?$').hasMatch(value) == false
 #:  double? discount = double.tryParse(value);

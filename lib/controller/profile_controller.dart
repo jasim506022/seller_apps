@@ -220,7 +220,7 @@ class ProfileController extends GetxController {
           icon: AppIcons.warningIcon,
           title: error.title!,
           content: error.message,
-          buttonText: AppStrings.okay,
+          buttonText: AppStrings.btnOkay,
         ),
       );
     }

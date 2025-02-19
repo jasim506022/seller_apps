@@ -27,11 +27,12 @@ class AppsTextStyle {
         fontWeight: FontWeight.w900,
       );
 
-  // Large  Title Text Style
+  // Large  Title Text Style (modify)
   static TextStyle get largeTitle => GoogleFonts.roboto(
       color: theme.primaryColor, fontSize: 28.sp, fontWeight: FontWeight.w900);
 
-  static TextStyle get titleSignPageTextStyle => GoogleFonts.roboto(
+// MOdify
+  static TextStyle get authIntroTitleTextStyle => GoogleFonts.roboto(
       color: theme.primaryColor,
       fontSize: 28.sp,
       fontWeight: FontWeight.w900,
@@ -65,10 +66,10 @@ class AppsTextStyle {
   static TextStyle get gridViewTextStyle => GoogleFonts.poppins(
       color: theme.primaryColor, fontSize: 17.sp, fontWeight: FontWeight.w800);
 
-// Description
-  static TextStyle get descrptionTextStyle => GoogleFonts.roboto(
-      color: AppColors.black.withOpacity(.7),
-      fontSize: 16.sp,
+// Description (Modify)
+  static TextStyle get authIntroDescriptionTextStyle => GoogleFonts.roboto(
+      color: AppColors.black.withOpacity(.8),
+      fontSize: 17.sp,
       fontWeight: FontWeight.normal,
       height: 1.6,
       letterSpacing: 1.2);
@@ -110,7 +111,7 @@ class AppsTextStyle {
 
   // Button Text Style
   static TextStyle get buttonTextStyle => GoogleFonts.poppins(
-      color: AppColors.white, fontWeight: FontWeight.bold, fontSize: 16.sp);
+      color: AppColors.white, fontWeight: FontWeight.bold, fontSize: 15.sp);
 
 // Hint Normal Text (modify)
   static TextStyle get hintTextStyle => GoogleFonts.poppins(

@@ -8,11 +8,11 @@ import '../../res/app_function.dart';
 import '../../res/app_string.dart';
 import '../../res/network_utilis.dart';
 import '../../res/validator.dart';
-import '../../widget/custom_auth_button_widget.dart';
+import 'widget/auth_button.dart';
 import '../../widget/phone_number_widget.dart';
 import '../../widget/rich_text_widget.dart';
 import '../../widget/text_field_form_widget.dart';
-import 'widget/app_sigin_in_page_intro_widget.dart';
+import 'widget/auth_intro_widget.dart';
 import 'widget/profile_image_picker_widget.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -45,27 +45,27 @@ class _SignUpPageState extends State<SignUpPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  AppSignInPageIntroWidget(
-                    widget: const ProfileImagePickerWidget(),
+                  AuthIntroWidget(
+                    customWidget: const ProfileImagePickerWidget(),
                     title: AppStrings.adminRegistration,
-                    description: AppStrings.logInPageSubjectTitle,
+                    description: AppStrings.loginPageDescription,
                   ),
                   _buildSignUpForm(),
                   AppsFunction.verticalSpacing(15),
-                  CustomAuthButtonWidget(
+                  AuthButton(
                     onPressed: () async {
                       if (!formKey.currentState!.validate()) return;
                       await NetworkUtils.executeWithInternetCheck(
                           action: () async =>
                               await authController.registerUser());
                     },
-                    title: AppStrings.signUp,
+                    label: AppStrings.signUpTitle,
                   ),
                   AppsFunction.verticalSpacing(25),
                   RichTextWidget(
-                    simpleText: AppStrings.alreadyHaveAccount,
-                    colorText: AppStrings.signIn,
-                    tap: () async {
+                    normalText: AppStrings.alreadyHaveAccount,
+                    highlightedText: AppStrings.signInTitle,
+                    onTap: () async {
                       if (!authController.loadingController.loading.value) {
                         Get.back();
                         authController.clearInputFields();
@@ -93,14 +93,14 @@ class _SignUpPageState extends State<SignUpPage> {
             label: AppStrings.name,
             hintText: AppStrings.yourName,
             controller: authController.nameController,
-            validator: Validators.validateNameEmpty, // Validation method.
+            validator: Validators.validateName, // Validation method.
             textInputType: TextInputType.name, // Keyboard type.
           ),
 
           // Email
           TextFormFieldWidget(
             label: AppStrings.email,
-            hintText: AppStrings.emailAddress,
+            hintText: AppStrings.emailHint,
             controller: authController.emailController,
             validator: Validators.validateEmail,
             textInputType: TextInputType.emailAddress,
@@ -121,7 +121,8 @@ class _SignUpPageState extends State<SignUpPage> {
             label: AppStrings.passwordConfirm,
             obscureText: true,
             isShowPassword: true,
-            validator: Validators.validateConfirmPassword,
+            validator: (value) => Validators.validateConfirmPassword(
+                value, authController.passwordController.text),
             hintText: AppStrings.passwordConfirm,
             controller: authController.confirmPasswordController,
           ),

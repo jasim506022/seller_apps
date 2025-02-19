@@ -50,33 +50,67 @@ class AuthController extends GetxController {
     confirmPasswordController.clear();
     phoneController.clear();
     nameController.clear();
+    loadingController.setLoading(false);
     selectImageController.selectPhoto.value = null;
   }
 
-  /// Signs in the user using email and password.
+  /// Displays a confirmation dialog before exiting the app.
   ///
+  /// If a process (such as login) is ongoing, the user is notified via a toast message
+  /// instead of showing the dialog. Otherwise, it presents an alert dialog asking
+  /// the user to confirm exiting the app.
+  Future<void> confirmExitApp(bool didPop) async {
+    if (loadingController.loading.value) {
+      AppsFunction.flutterToast(msg: AppStrings.loginProcessOngoingToast);
+      return;
+    }
+
+    // Show a confirmation dialog and wait for the user's response.
+    final bool shouldPop = await Get.dialog<bool>(
+          ShowAlertDialogWidget(
+            icon: Icons.question_mark_rounded,
+            title: AppStrings.exitDialogTitle,
+            content: AppStrings.confirmExitMessage,
+            onConfirmPressed: () => Get.back(result: true),
+            onCancelPressed: () => Get.back(result: false),
+          ),
+        ) ??
+        false; // Default to `false` if the dialog is dismissed.
+    // Close the app if the user confirms.
+    if (shouldPop) SystemNavigator.pop();
+  }
+
+  /// Handles user sign-in using email and password.
   Future<void> signIn() async {
     try {
+// Show loading indicator
       loadingController.setLoading(true);
+      // Retrieve and clean up user input
+      final String email = emailController.text.trim();
+      final String password = passwordController.text.trim();
+      // Attempt login using repository
       await repository.loginWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim(),
+        email: email,
+        password: password,
       );
-
+// Check if the user's profile exists
       if (await repository.isUserProfileExists()) {
-        _navigateToMainPage(AppStrings.signInSuccessfully);
-        clearInputFields();
+        _navigateToMainPage(AppStrings.successSignInMessage);
+        clearInputFields(); // Clear input fields after successful login
       } else {
-        AppsFunction.flutterToast(msg: AppStrings.userDoesntExit);
+        // Show error toast if user profile does not exist
+        AppsFunction.flutterToast(msg: AppStrings.errorUserNotFound);
       }
     } catch (e) {
+      // Handle any errors that occur during sign-in
       _handleError(e);
     } finally {
+      // Hide loading indicator
       loadingController.setLoading(false);
     }
   }
 
-  /// Signs in a user using Google authentication.
+  /// (Please Check After) Signs in a user using Google authentication.
   Future<void> signInWithGoogle() async {
     try {
       _showLoadingDialog();
@@ -87,7 +121,7 @@ class AuthController extends GetxController {
 
       if (userCredentialGmail != null) {
         if (await repository.isUserProfileExists()) {
-          _navigateToMainPage(AppStrings.signInSuccessfully);
+          _navigateToMainPage(AppStrings.successSignInMessage);
         } else {
           var user = userCredentialGmail.user!;
           ProfileModel profileModel = buildUserProfile(user: user);
@@ -95,7 +129,7 @@ class AuthController extends GetxController {
           await repository.createNewUserWithGoogle(
               user: user, profileModel: profileModel);
 
-          _navigateToMainPage(AppStrings.signInSuccessfully);
+          _navigateToMainPage(AppStrings.successSignInMessage);
         }
       }
     } catch (e) {
@@ -136,28 +170,6 @@ class AuthController extends GetxController {
     } finally {
       loadingController.setLoading(false);
       selectImageController.selectPhoto.value = null;
-    }
-  }
-
-  /// Displays a dialog asking the user for confirmation to exit the app.
-  Future<void> exitApps(bool didPop) async {
-    if (!loadingController.loading.value) {
-      if (didPop) {
-        return;
-      }
-
-      final bool shouldPop = await Get.dialog<bool>(
-            ShowAlertDialogWidget(
-              icon: Icons.question_mark_rounded,
-              title: AppStrings.exitDialogTitle,
-              content: AppStrings.confirmExitMessage,
-              onConfirmPressed: () => Get.back(result: true),
-              onCancelPressed: () => Get.back(result: false),
-            ),
-          ) ??
-          false;
-
-      if (shouldPop) SystemNavigator.pop();
     }
   }
 
@@ -219,8 +231,8 @@ class AuthController extends GetxController {
     Get.dialog(
       ErrorDialogWidget(
         icon: AppIcons.warningIcon,
-        title: AppStrings.logInPageSubjectTitle,
-        buttonText: AppStrings.okay,
+        title: AppStrings.loginPageDescription,
+        buttonText: AppStrings.btnOkay,
       ),
       barrierDismissible: false,
     );
@@ -234,9 +246,15 @@ class AuthController extends GetxController {
           icon: AppIcons.warningIcon,
           title: error.title!,
           content: error.message,
-          buttonText: AppStrings.okay,
+          buttonText: AppStrings.btnOkay,
         ),
       );
     }
   }
 }
+
+/*
+#: Get.back(result: true)
+#: Loading.setLoding(true) : loadingController.setLoading(false);
+#: Gmail After
+*/

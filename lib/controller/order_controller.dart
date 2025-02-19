@@ -120,7 +120,7 @@ class OrderController extends GetxController {
           icon: AppIcons.warningIcon,
           title: e.title!,
           content: e.message,
-          buttonText: AppStrings.okay,
+          buttonText: AppStrings.btnOkay,
         ),
       );
     }

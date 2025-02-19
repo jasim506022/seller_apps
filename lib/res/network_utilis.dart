@@ -7,16 +7,6 @@ import 'apps_color.dart';
 
 /// A utility class for checking network connectivity and handling no-internet scenarios.
 class NetworkUtils {
-  /*
-  static Future<bool> verifyInternetStatus() async {
-    bool checkInternet = await _isOffline();
-    if (checkInternet) {
-      showNoInternetSnackbar();
-    }
-    return checkInternet;
-  }
-  */
-
   /// Executes a function only if internet is available, otherwise shows a snackbar.
   static Future<void> executeWithInternetCheck(
       {required VoidCallback action}) async {
@@ -35,8 +25,6 @@ class NetworkUtils {
     return connectivityResult.contains(ConnectivityResult.none);
   }
 
-  /// Displays a snackbar to notify the user about no internet connection.
-
   static void _showNoInternetSnackbar() {
     Get.snackbar(AppStrings.noInternet, AppStrings.noInternetMessage,
         snackPosition: SnackPosition.BOTTOM,
@@ -46,14 +34,4 @@ class NetworkUtils {
         margin: EdgeInsets.zero,
         borderRadius: 0);
   }
-/*
-  /// A utility function to verify internet status before executing an action
-  static Future<void> verifyInternetAndExecute(
-      Future<void> Function() action) async {
-    if (!await verifyInternetStatus()) {
-      await action();
-    }
-  }
-
-*/
 }

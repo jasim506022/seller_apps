@@ -8,10 +8,10 @@ import '../../res/app_string.dart';
 
 import '../../res/network_utilis.dart';
 import '../../res/validator.dart';
-import '../../widget/custom_auth_button_widget.dart';
+import 'widget/auth_button.dart';
 import '../../widget/rich_text_widget.dart';
 import '../../widget/text_field_form_widget.dart';
-import 'widget/app_sigin_in_page_intro_widget.dart';
+import 'widget/auth_intro_widget.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
   const ForgetPasswordScreen({super.key});
@@ -39,13 +39,13 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                AppSignInPageIntroWidget(
-                  title: AppStrings.forgetPassword,
+                AuthIntroWidget(
+                  title: AppStrings.forgetPasswordTitle,
                   description: AppStrings.entreEmailAddressForResetPassword,
                 ),
                 _buildForgetPasswordForm(),
                 AppsFunction.verticalSpacing(10),
-                CustomAuthButtonWidget(
+                AuthButton(
                   onPressed: () async {
                     if (!_formKey.currentState!.validate()) return;
 
@@ -53,18 +53,18 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                         action: () async =>
                             await authController.resetPassword());
                   },
-                  title: AppStrings.resetPassword,
+                  label: AppStrings.resetPassword,
                 ),
                 AppsFunction.verticalSpacing(20),
                 RichTextWidget(
-                  colorText: AppStrings.signIn,
-                  tap: () async {
+                  highlightedText: AppStrings.signInTitle,
+                  onTap: () async {
                     if (!authController.loadingController.loading.value) {
                       Get.back();
                       authController.clearInputFields();
                     }
                   },
-                  simpleText: AppStrings.youdontWantToReset,
+                  normalText: AppStrings.youdontWantToReset,
                 ),
               ],
             ),
@@ -80,8 +80,8 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
       child: Column(
         children: [
           TextFormFieldWidget(
-            label: AppStrings.forgetPassword,
-            hintText: AppStrings.emailAddress,
+            label: AppStrings.forgetPasswordTitle,
+            hintText: AppStrings.passwordHint,
             controller: authController.emailController,
             validator: Validators.validateEmail,
             textInputType: TextInputType.emailAddress,

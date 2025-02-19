@@ -7,6 +7,8 @@ import '../res/apps_color.dart';
 import '../res/apps_text_style.dart';
 import 'round_button_widget.dart';
 
+/// A customizable error dialog widget that displays an icon, title,
+/// optional content, and an optional button.
 class ErrorDialogWidget extends StatelessWidget {
   final String icon;
   final String title;
@@ -26,42 +28,52 @@ class ErrorDialogWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      /// Dismiss dialog if `barrierDismissible` is true.
       onTap: barrierDismissible ? () => Get.back() : null,
+      behavior: barrierDismissible
+          ? HitTestBehavior.opaque
+          : HitTestBehavior.translucent,
       child: Dialog(
-        backgroundColor: AppColors.white,
         insetPadding: EdgeInsets.symmetric(horizontal: 20.w),
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.r)),
         child: Padding(
-          padding: EdgeInsets.only(left: 20.w, right: 20.w, bottom: 20.h),
+          padding: EdgeInsets.all(20.r),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              /// Displays the error icon.
               Image.asset(
                 icon,
                 height: 100.h,
                 width: 100.h,
               ),
               AppsFunction.verticalSpacing(20),
+
+              /// Displays the title text.
+
               Text(
                 title,
                 style: AppsTextStyle.titleTextStyle
                     .copyWith(color: AppColors.deepGreen),
                 textAlign: TextAlign.center,
               ),
-              if (content != null) ...[
+
+              /// Displays the optional content message if available.
+
+              if (content?.isNotEmpty ?? false) ...[
                 AppsFunction.verticalSpacing(15),
                 Text(
                   content!,
                   textAlign: TextAlign.center,
-                  style: AppsTextStyle.subTitleTextStyle,
+                  style: AppsTextStyle.mediumNormalText,
                 ),
               ],
-              if (buttonText != null) ...[
+
+              /// Displays the optional button if `buttonText` is provided.
+              if (buttonText?.isNotEmpty ?? false) ...[
                 AppsFunction.verticalSpacing(20),
                 RoundButtonWidget(
                   buttonColors: AppColors.red,
-                  width: Get.width,
+                  width: double.infinity,
                   title: buttonText!,
                   onTap: () => Get.back(),
                 ),
@@ -73,3 +85,8 @@ class ErrorDialogWidget extends StatelessWidget {
     );
   }
 }
+/*
+Understand Null: ?.!. ??, ??=
+Also Underst ...
+content?.isNotEmpty ?? false) ...
+*/

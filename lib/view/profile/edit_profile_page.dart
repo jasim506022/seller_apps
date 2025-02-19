@@ -124,7 +124,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               label: AppStrings.name,
               onChanged: (value) =>
                   profileController.addChangeListener(profileModel),
-              validator: Validators.validateNameEmpty,
+              validator: Validators.validateName,
               controller: profileController.nameTEC,
               hintText: AppStrings.yourName,
               enabled: isEditMode,
@@ -141,8 +141,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
             ),
             TextFormFieldWidget(
               label: AppStrings.address,
-              validator: (value) =>
-                  Validators.validateNotEmpty(value, AppStrings.address),
+              validator: Validators.validatePassword,
               onChanged: (p0) =>
                   profileController.addChangeListener(profileModel),
               hintText: AppStrings.pleaseEnterAddress,

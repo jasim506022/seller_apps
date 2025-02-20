@@ -36,10 +36,12 @@ class AppStrings {
   static const String sellerLogInTitle = "JasiVendor Login";
   static const String signInTitle = "Sign In";
   static const String signUpTitle = "Sign Up";
-  static const String loginPageDescription =
+  static const String authPageDescription =
       "Check our fresh veggies from Jasim Grocery";
   static const String forgetPasswordTitle = "Forgot Password?";
   static String withOr = "with Or";
+
+  static String sellerRegistration = "JasiVender Registration";
 
   static const String createAccount = "Create Account";
   static const String alreadyHaveAccount = "Already have an account?";
@@ -122,6 +124,8 @@ class AppStrings {
       "Please wait until upload completes.";
   static const String loginProcessOngoingToast =
       "Login process is in progress. Please wait...";
+  static const String registrationProcessOngoingToast =
+      "Registration process is in progress. Please wait...";
 
   // 📌 Form Field Labels
   static const productNameLabel = 'Product Name';
@@ -241,8 +245,6 @@ class AppStrings {
   static String sendingMail = "Sending a mail. Please Check ur Email";
 
   //
-
-  static String adminRegistration = "Admin Registration";
 
   static String signupSuccessfull = "Sign up Successfully";
 

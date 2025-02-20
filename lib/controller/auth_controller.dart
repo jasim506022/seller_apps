@@ -44,13 +44,19 @@ class AuthController extends GetxController {
   }
 
   /// Resets all input fields to initial state.
-  void clearInputFields() {
-    emailController.clear();
-    passwordController.clear();
-    confirmPasswordController.clear();
-    phoneController.clear();
-    nameController.clear();
+  void resetFields() {
+    for (final controller in [
+      emailController,
+      passwordController,
+      confirmPasswordController,
+      phoneController,
+      nameController
+    ]) {
+      controller.clear();
+    }
+    // Reset loading state
     loadingController.setLoading(false);
+    // Reset selected image
     selectImageController.selectPhoto.value = null;
   }
 
@@ -96,7 +102,7 @@ class AuthController extends GetxController {
 // Check if the user's profile exists
       if (await repository.isUserProfileExists()) {
         _navigateToMainPage(AppStrings.successSignInMessage);
-        clearInputFields(); // Clear input fields after successful login
+        resetFields(); // Clear input fields after successful login
       } else {
         // Show error toast if user profile does not exist
         AppsFunction.flutterToast(msg: AppStrings.errorUserNotFound);
@@ -124,7 +130,7 @@ class AuthController extends GetxController {
           _navigateToMainPage(AppStrings.successSignInMessage);
         } else {
           var user = userCredentialGmail.user!;
-          ProfileModel profileModel = buildUserProfile(user: user);
+          ProfileModel profileModel = createUserProfile(user: user);
 
           await repository.createNewUserWithGoogle(
               user: user, profileModel: profileModel);
@@ -138,55 +144,94 @@ class AuthController extends GetxController {
     }
   }
 
+  void resetFormIfNotLoading() {
+    if (loadingController.loading.value) {
+      AppsFunction.flutterToast(
+          msg: AppStrings.registrationProcessOngoingToast);
+    } else {
+      resetFields();
+    }
+  }
+
   /// Registers a new user with email and password.
-  Future<void> registerUser() async {
-    if (!_validateInput()) return;
+  Future<void> registerNewUser() async {
+    // Check if the input data is valid before proceeding
+    if (!_isInputValid()) return;
 
     try {
+      // Set loading state to true to show a loading indicator
       loadingController.setLoading(true);
 
-      var imageUrl = await repository.uploadUserImage(
+      // Upload the user's profile image and get the image URL
+      String userProfileImageUrl = await repository.uploadUserImage(
           file: selectImageController.selectPhoto.value!);
 
-      var user = await repository.registerUserWithEmailAndPassword(
-          email: emailController.text.trim(),
-          password: passwordController.text.trim());
+      // Register the user with email and password
+      UserCredential userCredential =
+          await repository.registerUserWithEmailAndPassword(
+              email: emailController.text.trim(),
+              password: passwordController.text.trim());
 
-      ProfileModel profile = buildUserProfile(
-          user: user.user!,
-          userProfileImageUrl: imageUrl,
+      // Create user profile data
+      ProfileModel profile = createUserProfile(
+          user: userCredential.user!,
+          userProfileImageUrl: userProfileImageUrl,
           phoneNumber: phoneController.text.trim(),
           userName: nameController.text.trim());
 
       // Upload user profile data
       repository.saveUserProfile(
-          profileModel: profile, documentId: user.user!.uid);
+          profileModel: profile, documentId: userCredential.user!.uid);
 
-      clearInputFields();
+      // Reset the input fields after successful registration
+      resetFields();
 
       _navigateToMainPage(AppStrings.signupSuccessfull);
     } catch (e) {
+      // Handle any errors during registration
       _handleError(e);
     } finally {
       loadingController.setLoading(false);
-      selectImageController.selectPhoto.value = null;
     }
   }
 
-  ProfileModel buildUserProfile(
+  /// Creates a user profile using the provided user data or defaults.
+
+  ProfileModel createUserProfile(
       {required User user,
       String? userProfileImageUrl,
       String? userName,
       String? phoneNumber}) {
     return ProfileModel(
-        name: userName ?? user.displayName ?? "",
+        name: userName ?? user.displayName ?? "Unknown",
         earnings: 0.0,
         status: AppStrings.approved,
-        email: user.email,
-        phone: phoneNumber ?? user.phoneNumber ?? "",
+        email: user.email ?? "No email provided",
+        phone: phoneNumber ?? user.phoneNumber ?? "No phone number",
         uid: user.uid,
         address: "",
-        imageurl: userProfileImageUrl ?? user.photoURL ?? "");
+        imageurl: userProfileImageUrl ?? user.photoURL ?? "default_image_url");
+  }
+
+  /// Validates the user input fields and shows appropriate error messages if any field is invalid.
+
+  bool _isInputValid() {
+    // Check if a photo has been selected
+    if (selectImageController.selectPhoto.value == null) {
+      AppsFunction.flutterToast(msg: AppStrings.pleaseSelectPhoto);
+      return false;
+    }
+    // Check if phone number is empty
+    if (phoneController.text.trim().isEmpty) {
+      AppsFunction.flutterToast(msg: AppStrings.validPhoneNumber);
+      return false;
+    }
+    // Check if password and confirm password match
+    if (passwordController.text != confirmPasswordController.text) {
+      AppsFunction.flutterToast(msg: AppStrings.passwordMatch);
+      return false;
+    }
+    return true;
   }
 
   /// Sends a password reset email.
@@ -203,23 +248,6 @@ class AuthController extends GetxController {
     }
   }
 
-  /// Validates user input and shows appropriate error messages
-  bool _validateInput() {
-    if (selectImageController.selectPhoto.value == null) {
-      AppsFunction.flutterToast(msg: AppStrings.pleaseSelectPhoto);
-      return false;
-    }
-    if (phoneController.text.trim().isEmpty) {
-      AppsFunction.flutterToast(msg: AppStrings.validPhoneNumber);
-      return false;
-    }
-    if (passwordController.text != confirmPasswordController.text) {
-      AppsFunction.flutterToast(msg: AppStrings.passwordMatch);
-      return false;
-    }
-    return true;
-  }
-
   /// Navigates to the main page with a success message.
   void _navigateToMainPage(String message) {
     AppsFunction.flutterToast(msg: message);
@@ -231,7 +259,7 @@ class AuthController extends GetxController {
     Get.dialog(
       ErrorDialogWidget(
         icon: AppIcons.warningIcon,
-        title: AppStrings.loginPageDescription,
+        title: AppStrings.authPageDescription,
         buttonText: AppStrings.btnOkay,
       ),
       barrierDismissible: false,
@@ -257,4 +285,5 @@ class AuthController extends GetxController {
 #: Get.back(result: true)
 #: Loading.setLoding(true) : loadingController.setLoading(false);
 #: Gmail After
+#: Boolean methods should start with is or has to make it clear they return a true/false result.
 */

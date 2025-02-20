@@ -6,7 +6,6 @@ import '../../controller/auth_controller.dart';
 import '../../res/app_function.dart';
 import '../../res/app_string.dart';
 
-import '../../res/network_utilis.dart';
 import '../../res/validator.dart';
 import 'widget/auth_button.dart';
 import '../../widget/rich_text_widget.dart';
@@ -21,52 +20,57 @@ class ForgetPasswordScreen extends StatefulWidget {
 }
 
 class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
-  final authController = Get.find<AuthController>();
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  late final AuthController authController;
+  // Form key for validation
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    //Get AuthController instance
+    authController = Get.find<AuthController>();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        if (!authController.loadingController.loading.value) {
-          authController.clearInputFields();
-        }
-      },
-      child: Scaffold(
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 20.h),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                AuthIntroWidget(
-                  title: AppStrings.forgetPasswordTitle,
-                  description: AppStrings.entreEmailAddressForResetPassword,
-                ),
-                _buildForgetPasswordForm(),
-                AppsFunction.verticalSpacing(10),
-                AuthButton(
-                  onPressed: () async {
-                    if (!_formKey.currentState!.validate()) return;
-
-                    await NetworkUtils.executeWithInternetCheck(
-                        action: () async =>
-                            await authController.resetPassword());
-                  },
-                  label: AppStrings.resetPassword,
-                ),
-                AppsFunction.verticalSpacing(20),
-                RichTextWidget(
-                  highlightedText: AppStrings.signInTitle,
-                  onTap: () async {
-                    if (!authController.loadingController.loading.value) {
-                      Get.back();
-                      authController.clearInputFields();
-                    }
-                  },
-                  normalText: AppStrings.youdontWantToReset,
-                ),
-              ],
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) => authController.resetFormIfNotLoading(), //
+      child: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(), // Hide keyboard on tap,
+        child: Scaffold(
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 20.h),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  AuthIntroWidget(
+                    title: AppStrings.forgetPasswordTitle,
+                    description: AppStrings.entreEmailAddressForResetPassword,
+                  ),
+                  _buildForgetPasswordForm(),
+                  AppsFunction.verticalSpacing(10),
+                  AuthButton(
+                    onPressed: () async {
+                      if (!formKey.currentState!.validate()) return;
+                      await authController.resetPassword();
+                    },
+                    label: AppStrings.resetPassword,
+                  ),
+                  AppsFunction.verticalSpacing(20),
+                  RichTextWidget(
+                    highlightedText: AppStrings.signInTitle,
+                    onTap: () async {
+                      if (!authController.loadingController.loading.value) {
+                        Get.back();
+                        authController.resetFields();
+                      }
+                    },
+                    normalText: AppStrings.youdontWantToReset,
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -76,7 +80,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
 
   Form _buildForgetPasswordForm() {
     return Form(
-      key: _formKey,
+      key: formKey,
       child: Column(
         children: [
           TextFormFieldWidget(

@@ -2,20 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:seller_apps/res/app_function.dart';
 
 import '../controller/select_image_controller.dart';
+import '../res/app_function.dart';
 import '../res/app_string.dart';
 import '../res/apps_color.dart';
 import '../res/apps_text_style.dart';
 
-class ProfilePhotoOptionSheetWidget extends StatelessWidget {
-  const ProfilePhotoOptionSheetWidget({
+class PhotoOptionSheetWidget extends StatelessWidget {
+  const PhotoOptionSheetWidget({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
+    final SelectImageController selectImageController =
+        Get.find<SelectImageController>();
     return Padding(
       padding: EdgeInsets.all(20.0.r),
       child: Column(
@@ -38,21 +40,21 @@ class ProfilePhotoOptionSheetWidget extends StatelessWidget {
               child: Text(AppStrings.selectPhoto,
                   style: AppsTextStyle.titleTextStyle)),
           AppsFunction.verticalSpacing(10),
-          _buildPhotoOptions()
+          _buildPhotoOptions(selectImageController)
         ],
       ),
     );
   }
 
-  Row _buildPhotoOptions() {
-    var selectImageController = Get.find<SelectImageController>();
-    return Row(
+  Widget _buildPhotoOptions(SelectImageController selectImageController) {
+    return Wrap(
+      spacing: 30.w,
+      runSpacing: 10.h,
       children: [
         _buildPhotoOptionButton(AppStrings.camera, Icons.camera_alt, () {
           Get.back();
           selectImageController.selectImage(imageSource: ImageSource.camera);
         }),
-        AppsFunction.horizontalSpacing(30),
         _buildPhotoOptionButton(AppStrings.gallery, Icons.photo_album, () {
           Get.back();
           selectImageController.selectImage(imageSource: ImageSource.gallery);
@@ -61,6 +63,7 @@ class ProfilePhotoOptionSheetWidget extends StatelessWidget {
     );
   }
 
+  /// Builds a photo option button with icon and label.
   Padding _buildPhotoOptionButton(
       String title, IconData icon, VoidCallback onTap) {
     return Padding(

@@ -60,7 +60,7 @@ class ProfileImageSectionWidget extends StatelessWidget {
           profileController.isDataChanged(true);
           Get.bottomSheet(
               backgroundColor: Theme.of(context).cardColor,
-              const ProfilePhotoOptionSheetWidget());
+              const PhotoOptionSheetWidget());
         },
       ),
     );

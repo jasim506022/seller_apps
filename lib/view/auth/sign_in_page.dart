@@ -56,11 +56,11 @@ class _SignInPageState extends State<SignInPage> {
     );
   }
 
-  @override
-  void dispose() {
-    authController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   authController.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +83,7 @@ class _SignInPageState extends State<SignInPage> {
                   /// Displays an introduction (title & description).
                   const AuthIntroWidget(
                     title: AppStrings.sellerLogInTitle,
-                    description: AppStrings.loginPageDescription,
+                    description: AppStrings.authPageDescription,
                   ),
                   _buildLoginForm(),
                   AppsFunction.verticalSpacing(5),

@@ -6,19 +6,20 @@ import '../../../controller/auth_controller.dart';
 import '../../../res/apps_color.dart';
 import '../../../widget/profile_photo_option_sheet_widget.dart';
 
-class ProfileImagePickerWidget extends StatelessWidget {
-  const ProfileImagePickerWidget({
+class ProfileImagePicker extends StatelessWidget {
+  const ProfileImagePicker({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    final authController = Get.find<AuthController>();
+    final AuthController authController = Get.find<AuthController>();
 
     return InkWell(
+      // When the container is tapped, show the bottom sheet for photo options
       onTap: () => Get.bottomSheet(
-          backgroundColor: AppColors.white,
-          const ProfilePhotoOptionSheetWidget()),
+          backgroundColor: Theme.of(context).cardColor,
+          const PhotoOptionSheetWidget()),
       child: Container(
         decoration: BoxDecoration(
             shape: BoxShape.circle,
@@ -26,6 +27,7 @@ class ProfileImagePickerWidget extends StatelessWidget {
         child: Obx(() {
           var selectedPhoto =
               authController.selectImageController.selectPhoto.value;
+          // Display the CircleAvatar widget with selected image (if available)
           return CircleAvatar(
             radius: 0.2.sw,
             backgroundImage:
@@ -44,3 +46,7 @@ class ProfileImagePickerWidget extends StatelessWidget {
     );
   }
 }
+
+/*
+Naming classes with Widget at the end is a common convention for Flutter widgets, making it clearer that this is a UI element.
+*/

@@ -14,6 +14,8 @@ import '../../widget/text_field_form_widget.dart';
 import 'widget/auth_intro_widget.dart';
 import 'widget/profile_image_picker_widget.dart';
 
+/// `SignUpPage` is a user registration screen where users can enter their details
+/// to create a new account.
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
 
@@ -23,26 +25,23 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   late final AuthController authController;
+  // Form key for validation
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
+    //Get AuthController instance
     authController = Get.find<AuthController>();
-
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      // ignore: deprecated_member_use
-      onPopInvoked: (didPop) {
-        if (!authController.loadingController.loading.value) {
-          authController.clearInputFields();
-        }
-      },
+      canPop: false,
+      onPopInvoked: (didPop) => authController.resetFormIfNotLoading(), //
       child: GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(),
+        onTap: () => FocusScope.of(context).unfocus(), // Hide keyboard on tap
         child: Scaffold(
           body: SingleChildScrollView(
             child: Padding(
@@ -50,17 +49,19 @@ class _SignUpPageState extends State<SignUpPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  // Header with profile image picker and description
                   AuthIntroWidget(
-                    customWidget: const ProfileImagePickerWidget(),
-                    title: AppStrings.adminRegistration,
-                    description: AppStrings.loginPageDescription,
+                    customWidget: const ProfileImagePicker(),
+                    title: AppStrings.sellerRegistration,
+                    description: AppStrings.authPageDescription,
                   ),
-                  _buildSignUpForm(),
+                  // Sign-up form with input fields
+                  _buildForm(),
                   AppsFunction.verticalSpacing(15),
                   AuthButton(
                     onPressed: () async {
                       if (!formKey.currentState!.validate()) return;
-                      authController.registerUser();
+                      await authController.registerNewUser();
                     },
                     label: AppStrings.signUpTitle,
                   ),
@@ -71,7 +72,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     onTap: () async {
                       if (!authController.loadingController.loading.value) {
                         Get.back();
-                        authController.clearInputFields();
+                        authController.resetFields();
                       }
                     },
                   ),
@@ -86,21 +87,22 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   // Build the sign-up form with various input fields and validations.
-  Form _buildSignUpForm() {
+  Form _buildForm() {
     return Form(
       key: formKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Name input field
           TextFormFieldWidget(
             label: AppStrings.name,
-            hintText: AppStrings.yourName,
+            hintText: AppStrings.nameHint,
             controller: authController.nameController,
             validator: Validators.validateName, // Validation method.
             textInputType: TextInputType.name, // Keyboard type.
           ),
 
-          // Email
+          // Email input field
           TextFormFieldWidget(
             label: AppStrings.email,
             hintText: AppStrings.emailHint,
@@ -109,27 +111,29 @@ class _SignUpPageState extends State<SignUpPage> {
             textInputType: TextInputType.emailAddress,
           ),
 
-          // Password
+          // Password input field
           TextFormFieldWidget(
             label: AppStrings.password,
             obscureText: true,
             isShowPassword: true,
             validator: Validators.validatePassword,
-            hintText: AppStrings.password,
+            hintText: AppStrings.passwordHint,
             textInputAction: TextInputAction.next,
             controller: authController.passwordController,
           ),
 
+          // Confirm password input field
           TextFormFieldWidget(
             label: AppStrings.passwordConfirm,
             obscureText: true,
             isShowPassword: true,
             validator: (value) => Validators.validateConfirmPassword(
                 value, authController.passwordController.text),
-            hintText: AppStrings.passwordConfirm,
+            hintText: AppStrings.confirmPasswordHint,
             controller: authController.confirmPasswordController,
           ),
           AppsFunction.verticalSpacing(10),
+          // Phone number input field
           PhoneNumberWidget(
             controller: authController.phoneController,
             textInputAction: TextInputAction.done,

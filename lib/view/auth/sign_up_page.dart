@@ -6,7 +6,6 @@ import '../../controller/auth_controller.dart';
 import '../../res/app_function.dart';
 
 import '../../res/app_string.dart';
-import '../../res/network_utilis.dart';
 import '../../res/validator.dart';
 import 'widget/auth_button.dart';
 import '../../widget/phone_number_widget.dart';
@@ -23,9 +22,15 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  final authController = Get.find<AuthController>();
+  late final AuthController authController;
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  final formKey = GlobalKey<FormState>();
+  @override
+  void initState() {
+    authController = Get.find<AuthController>();
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,9 +60,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   AuthButton(
                     onPressed: () async {
                       if (!formKey.currentState!.validate()) return;
-                      await NetworkUtils.executeWithInternetCheck(
-                          action: () async =>
-                              await authController.registerUser());
+                      authController.registerUser();
                     },
                     label: AppStrings.signUpTitle,
                   ),

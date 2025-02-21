@@ -16,18 +16,12 @@ import '../../res/validator.dart';
 
 import '../../widget/rich_text_widget.dart';
 
-import '../../widget/text_field_form_widget.dart';
+import '../../widget/custom_text_form_field.dart';
 import 'widget/auth_intro_widget.dart';
 import 'widget/auth_button.dart';
 import 'widget/social_button.dart';
 
 /// A sign-in page where users can log in with email/password or social accounts.
-///
-/// This page includes:
-/// - A login form with validation.
-/// - Social login buttons (Google, Facebook).
-/// - A "Forget Password" option.
-/// - A sign-up redirection link.
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
 
@@ -36,11 +30,14 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
+  /// Controller for handling authentication-related logic
   late final AuthController authController;
+  // Form key for validation
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
+    /// Get the `AuthController` instance for managing authentication.
     authController = Get.find<AuthController>();
     _configureStatusBar();
     super.initState();
@@ -66,7 +63,6 @@ class _SignInPageState extends State<SignInPage> {
   Widget build(BuildContext context) {
     return PopScope(
       canPop: false,
-      // ignore: deprecated_member_use
       onPopInvoked:
           (didPop) async => // Prevents accidental app exit without confirmation.
               await authController.confirmExitApp(didPop),
@@ -85,12 +81,16 @@ class _SignInPageState extends State<SignInPage> {
                     title: AppStrings.sellerLogInTitle,
                     description: AppStrings.authPageDescription,
                   ),
-                  _buildLoginForm(),
+
+                  /// Displays the form.
+                  _buildForm(),
                   AppsFunction.verticalSpacing(5),
 
                   /// "Forgot Password" button.
                   _buildForgetPasswordButton(),
                   AppsFunction.verticalSpacing(15),
+
+                  /// Login Button  Button.
                   AuthButton(
                     onPressed: () async {
                       if (!_formKey.currentState!.validate()) return;
@@ -125,14 +125,14 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   /// Builds the login form containing email and password input fields
-  Form _buildLoginForm() {
+  Form _buildForm() {
     return Form(
       key: _formKey,
       child: Column(
         children: [
           /// Email input field.
-          TextFormFieldWidget(
-            label: AppStrings.email,
+          CustomTextFormField(
+            label: AppStrings.emailLabel,
             hintText: AppStrings.emailHint,
             controller: authController.emailController,
             validator: Validators.validateEmail,
@@ -140,9 +140,9 @@ class _SignInPageState extends State<SignInPage> {
           ),
 
           /// Password input field
-          TextFormFieldWidget(
-            label: AppStrings.password,
-            isShowPassword: true,
+          CustomTextFormField(
+            label: AppStrings.passwordLabel,
+            hasPasswordToggle: true,
             obscureText: true,
             validator: Validators.validatePassword,
             hintText: AppStrings.passwordHint,
@@ -199,8 +199,7 @@ class _SignInPageState extends State<SignInPage> {
         Expanded(
           /// Facebook login button.
           child: SocialButton(
-            onTap: () async =>
-                NetworkUtils.executeWithInternetCheck(action: () {}),
+            onTap: () {},
             color: AppColors.blue,
             iconPath: AppIcons.facebookIcon,
             label: AppStrings.btnFacebook,
@@ -210,8 +209,9 @@ class _SignInPageState extends State<SignInPage> {
         Expanded(
           /// Facebook login button.
           child: SocialButton(
-            onTap: () async => await NetworkUtils.executeWithInternetCheck(
-                action: () async => await authController.signInWithGoogle()),
+            onTap: () async {
+              await authController.signInWithGoogle();
+            },
             color: AppColors.red,
             iconPath: AppIcons.gmailIcon,
             label: AppStrings.btnGmail,

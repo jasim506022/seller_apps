@@ -15,6 +15,19 @@ import '../widget/show_alert_dialog_widget.dart';
 import 'loading_controller.dart';
 import 'select_image_controller.dart';
 
+/// **AuthController** handles user authentication with Firebase using GetX.
+///
+/// It provides methods for:
+/// - Email/Password login.
+/// - Google sign-in.
+/// - User registration.
+/// - Password reset.
+/// - Managing authentication state.
+///
+/// Uses:
+/// - `AuthRepository` for Firebase interactions.
+/// - `LoadingController` for loading state management.
+/// - `SelectImageController` for profile image handling.
 class AuthController extends GetxController {
   final AuthRepository repository;
   final LoadingController loadingController = Get.find();
@@ -105,7 +118,7 @@ class AuthController extends GetxController {
         resetFields(); // Clear input fields after successful login
       } else {
         // Show error toast if user profile does not exist
-        AppsFunction.flutterToast(msg: AppStrings.errorUserNotFound);
+        AppsFunction.flutterToast(msg: AppStrings.errorUserNotFoundToast);
       }
     } catch (e) {
       // Handle any errors that occur during sign-in
@@ -144,10 +157,11 @@ class AuthController extends GetxController {
     }
   }
 
+  /// **Resets form only if not loading.**
+
   void resetFormIfNotLoading() {
     if (loadingController.loading.value) {
-      AppsFunction.flutterToast(
-          msg: AppStrings.registrationProcessOngoingToast);
+      AppsFunction.flutterToast(msg: AppStrings.processOngoingToast);
     } else {
       resetFields();
     }
@@ -203,14 +217,16 @@ class AuthController extends GetxController {
       String? userName,
       String? phoneNumber}) {
     return ProfileModel(
-        name: userName ?? user.displayName ?? "Unknown",
+        name: userName ?? user.displayName ?? AppStrings.defaultName,
         earnings: 0.0,
         status: AppStrings.approved,
-        email: user.email ?? "No email provided",
-        phone: phoneNumber ?? user.phoneNumber ?? "No phone number",
+        email: user.email ?? AppStrings.defaultEmail,
+        phone: phoneNumber ?? user.phoneNumber ?? AppStrings.defaultPhone,
         uid: user.uid,
         address: "",
-        imageurl: userProfileImageUrl ?? user.photoURL ?? "default_image_url");
+        token: "",
+        imageurl:
+            userProfileImageUrl ?? user.photoURL ?? AppStrings.defaultImage);
   }
 
   /// Validates the user input fields and shows appropriate error messages if any field is invalid.
@@ -218,12 +234,12 @@ class AuthController extends GetxController {
   bool _isInputValid() {
     // Check if a photo has been selected
     if (selectImageController.selectPhoto.value == null) {
-      AppsFunction.flutterToast(msg: AppStrings.pleaseSelectPhoto);
+      AppsFunction.flutterToast(msg: AppStrings.pleaseSelectPhotoToast);
       return false;
     }
     // Check if phone number is empty
     if (phoneController.text.trim().isEmpty) {
-      AppsFunction.flutterToast(msg: AppStrings.validPhoneNumber);
+      AppsFunction.flutterToast(msg: AppStrings.validPhoneNumberToast);
       return false;
     }
     // Check if password and confirm password match
@@ -238,7 +254,8 @@ class AuthController extends GetxController {
   Future<void> resetPassword() async {
     try {
       loadingController.setLoading(true);
-      repository.sendPasswordResetEmail(email: emailController.text.trim());
+      await repository.sendPasswordResetEmail(
+          email: emailController.text.trim());
       AppsFunction.flutterToast(msg: AppStrings.sendingMail);
       Get.toNamed(RoutesName.signPage);
     } catch (e) {

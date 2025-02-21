@@ -10,7 +10,7 @@ import '../../res/validator.dart';
 import 'widget/auth_button.dart';
 import '../../widget/phone_number_widget.dart';
 import '../../widget/rich_text_widget.dart';
-import '../../widget/text_field_form_widget.dart';
+import '../../widget/custom_text_form_field.dart';
 import 'widget/auth_intro_widget.dart';
 import 'widget/profile_image_picker_widget.dart';
 
@@ -24,13 +24,14 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  /// Controller for handling authentication-related logic
   late final AuthController authController;
   // Form key for validation
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
-    //Get AuthController instance
+    /// Get the `AuthController` instance for managing authentication.
     authController = Get.find<AuthController>();
     super.initState();
   }
@@ -38,14 +39,15 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      canPop: false,
+      canPop: false, // Prevents Back when Loadng True
       onPopInvoked: (didPop) => authController.resetFormIfNotLoading(), //
       child: GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(), // Hide keyboard on tap
+        onTap: () => FocusScope.of(context)
+            .unfocus(), // Dismiss keyboard when tapping outside.
         child: Scaffold(
           body: SingleChildScrollView(
             child: Padding(
-              padding: EdgeInsets.all(20.r),
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -55,9 +57,13 @@ class _SignUpPageState extends State<SignUpPage> {
                     title: AppStrings.sellerRegistration,
                     description: AppStrings.authPageDescription,
                   ),
-                  // Sign-up form with input fields
+
+                  /// Displays the form.
                   _buildForm(),
+
                   AppsFunction.verticalSpacing(15),
+
+                  /// Registration Button.
                   AuthButton(
                     onPressed: () async {
                       if (!formKey.currentState!.validate()) return;
@@ -94,8 +100,8 @@ class _SignUpPageState extends State<SignUpPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Name input field
-          TextFormFieldWidget(
-            label: AppStrings.name,
+          CustomTextFormField(
+            label: AppStrings.nameLabel,
             hintText: AppStrings.nameHint,
             controller: authController.nameController,
             validator: Validators.validateName, // Validation method.
@@ -103,8 +109,8 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
 
           // Email input field
-          TextFormFieldWidget(
-            label: AppStrings.email,
+          CustomTextFormField(
+            label: AppStrings.emailLabel,
             hintText: AppStrings.emailHint,
             controller: authController.emailController,
             validator: Validators.validateEmail,
@@ -112,10 +118,10 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
 
           // Password input field
-          TextFormFieldWidget(
-            label: AppStrings.password,
+          CustomTextFormField(
+            label: AppStrings.passwordLabel,
             obscureText: true,
-            isShowPassword: true,
+            hasPasswordToggle: true,
             validator: Validators.validatePassword,
             hintText: AppStrings.passwordHint,
             textInputAction: TextInputAction.next,
@@ -123,10 +129,10 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
 
           // Confirm password input field
-          TextFormFieldWidget(
-            label: AppStrings.passwordConfirm,
+          CustomTextFormField(
+            label: AppStrings.passwordConfirmLabel,
             obscureText: true,
-            isShowPassword: true,
+            hasPasswordToggle: true,
             validator: (value) => Validators.validateConfirmPassword(
                 value, authController.passwordController.text),
             hintText: AppStrings.confirmPasswordHint,
@@ -138,8 +144,6 @@ class _SignUpPageState extends State<SignUpPage> {
             controller: authController.phoneController,
             textInputAction: TextInputAction.done,
           ),
-
-          AppsFunction.verticalSpacing(20),
         ],
       ),
     );

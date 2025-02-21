@@ -71,17 +71,22 @@ class AppsFunction {
     );
   }
 
-  static InputDecoration textFormFielddecoration(
+  /// This function provides a pre-defined text field decoration with options for:
+  static InputDecoration textFieldInputDecoration(
       {bool isShowPassword = false,
       required String hintText,
       bool obscureText = false,
       bool isEnable = true,
-      required Function function}) {
+      VoidCallback? onPasswordToggle}) {
+    // ✅ More specific type}
     return InputDecoration(
+        // Background color changes based on enabled state
+
         fillColor:
             isEnable ? AppColors.searchLightColor : ThemeUtils.textFieldColor,
         filled: true,
         hintText: hintText,
+        // Border styling: No border, rounded corners
         border: OutlineInputBorder(
             borderSide: BorderSide.none,
             borderRadius: BorderRadius.circular(15.r)),
@@ -91,13 +96,12 @@ class AppsFunction {
         focusedBorder: OutlineInputBorder(
             borderSide: BorderSide.none,
             borderRadius: BorderRadius.circular(15.r)),
+        // Adds password visibility toggle if needed
         suffixIcon: isShowPassword
             ? IconButton(
-                onPressed: () {
-                  function();
-                },
+                onPressed: onPasswordToggle ?? () {}, // ✅ Safe null handling,
                 icon: Icon(
-                  Icons.password,
+                  obscureText ? Icons.visibility_off : Icons.visibility,
                   color: obscureText ? AppColors.hintLight : AppColors.red,
                 ))
             : null,
@@ -197,3 +201,12 @@ class AppsFunction {
     );
   }
 }
+
+/*
+Function? function and  function!();
+Function? function and why use VoidCallback? onPasswordToggle
+onPressed: () {
+                  function!();
+                }, diffewrence 
+
+*/

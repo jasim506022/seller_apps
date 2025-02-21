@@ -27,34 +27,24 @@ class AppStrings {
   static const addNewProductTitle = "Add New Product";
   static const updateProductTitle = "Update Product";
 
-  static const String defaultName = "Name Not Found";
-  static const String defaultEmail = "email@example.com";
-  static const String defaultImage =
-      "https://www.example.com/default-profile.png";
-
   // 📌 Authentication Titles & Messages
   static const String sellerLogInTitle = "JasiVendor Login";
   static const String signInTitle = "Sign In";
   static const String signUpTitle = "Sign Up";
+  static String resetPasswordTitle = "Reset Password";
   static const String authPageDescription =
       "Check our fresh veggies from Jasim Grocery";
   static const String forgetPasswordTitle = "Forgot Password?";
   static String withOr = "with Or";
-
+  static String forgetPasswordDescription =
+      "Please Enter your mail address to reset you password";
   static String sellerRegistration = "JasiVender Registration";
-
   static const String createAccount = "Create Account";
   static const String alreadyHaveAccount = "Already have an account?";
   static const String dontHaveAccount = "Don't have an account?";
-
-  static const String enterEmailAddress = 'Please enter your email address';
-  static const String validEmailAddress = 'Please enter a valid email address';
-  static const String enterPassword = 'Please enter your password';
-  static const String validPassword =
-      'Password must be at least 6 characters long';
-  static const String enterConfirmPassword =
-      'Please enter your confirm password';
+  static String youdontWantToReset = "If you don't want to reset Password? ";
   static const String passwordMatch = "Passwords do not match.";
+
   static const String successfullySignedOut = "Successfully signed out.";
 
   /*
@@ -63,15 +53,12 @@ class AppStrings {
 
   static const String noImageSelected = "No Image Selected";
 
-  static const String pleaseSelectPhoto = "Please Select a Photo";
-
 /*
   * 📞 Contact Information
   */
 
-  static const String phone = "Phone";
   static const String enterPhone = 'Please enter your phone number';
-  static const String validPhoneNumber = 'Please enter a valid phone number';
+
   static const String address = "Address";
   static const String pleaseEnterAddress = "Please enter your Address";
 
@@ -120,12 +107,15 @@ class AppStrings {
   // 📌 Success & Toast Messages
   static const String successSignUpMessage = "Sign up successful!";
   static const String successSignInMessage = "Sign in successful!";
+  static const String errorUserNotFoundToast = "User not found.";
   static const String toastWaitForUploadMessage =
       "Please wait until upload completes.";
   static const String loginProcessOngoingToast =
       "Login process is in progress. Please wait...";
-  static const String registrationProcessOngoingToast =
-      "Registration process is in progress. Please wait...";
+  static const String processOngoingToast = "Please wait.   progressing.";
+  static const String pleaseSelectPhotoToast = "Please Select a Photo";
+  static const String validPhoneNumberToast =
+      'Please enter a valid phone number';
 
   // 📌 Form Field Labels
   static const productNameLabel = 'Product Name';
@@ -133,6 +123,11 @@ class AppStrings {
   static const String discountLabel = 'Discount';
   static const String ratingLabel = 'Rating';
   static const String descriptionLabel = 'Description';
+  static const String emailLabel = "Email";
+  static const String passwordLabel = "Password";
+  static const String nameLabel = "Name";
+  static const String passwordConfirmLabel = "Confirm Password";
+  static const String phoneLabel = "Phone";
 
   // 📌 Hint Texts (For Input Fields)
   static const String productNameHint = "Enter product name (e.g., Nike Shoes)";
@@ -146,6 +141,7 @@ class AppStrings {
   static const String confirmPasswordHint = "Re-enter your password";
   static const String nameHint = "Enter your full name";
   static const String addressHint = "Enter your address (Street, City, ZIP)";
+  static const String phoneHint = "Phone Number";
 
   // 📌 Validation Messages
   // Product
@@ -202,6 +198,20 @@ class AppStrings {
       "Password must contain at least one lowercase letter.";
   static const String passwordNumber =
       "Password must contain at least one number.";
+  // Confirm Password
+  static const String confirmPasswordRequired = "Please confirm your password.";
+  static const String passwordMismatch =
+      "Passwords do not match. Please re-enter.";
+  // Name
+  static const String emptyName = "Please enter your name.";
+  static const String nameTooShort = "Name must be at least 2 characters long.";
+  static const String nameTooLong = "Name cannot exceed 50 characters.";
+  static const String nameInvalid = "Name can only contain letters and spaces.";
+  // Address
+  static const String emptyAddress = "Please enter your address.";
+  static const String addressTooShort =
+      "Address must be at least 5 characters long.";
+  static const String addressTooLong = "Address cannot exceed 200 characters.";
 
   static String doYouwantSignout = "Do you want to sign out?";
 
@@ -221,11 +231,15 @@ class AppStrings {
   static const String prefUserEarnings = "userEarnings";
   static const String prefOnboarding = 'onBoarding';
 
-// TextField Label Text
-  static String email = "Email";
-  static String password = "Password";
+  // Defauld Value:
+  static const String defaultName = "Name Not Found";
+  static const String defaultEmail = "email@example.com";
+  static const String defaultPhone = "No phone number";
+  static const String defaultImage =
+      "https://www.example.com/default-profile.png";
 
-  static String name = "Name";
+// TextField Label Text
+
   static String orderDate = "or.Date";
   static String minium = "Minimum";
   static String maximum = "Maximum";
@@ -238,9 +252,6 @@ class AppStrings {
 
   static String validConfirmPassword =
       'Confirm Password Must be geather then 6 Characteris';
-  static String passwordConfirm = "Confirm Password";
-
-  static String phoneNumber = "Phone Number";
 
   static String sendingMail = "Sending a mail. Please Check ur Email";
 
@@ -248,10 +259,6 @@ class AppStrings {
 
   static String signupSuccessfull = "Sign up Successfully";
 
-  static String entreEmailAddressForResetPassword =
-      "Please Enter your mail address to reset you password";
-  static String resetPassword = "Reset Password";
-  static String youdontWantToReset = "If you don't want to reset Password? ";
   static String loginWithGmailTitle =
       "Loading for sign with Gmail \n Pleasing Waiting........";
 
@@ -387,7 +394,7 @@ class AppStrings {
   static const String errorGeneric = "Something went wrong. Please try again.";
   static const String errorNoInternet =
       "No internet connection. Please check your network.";
-  static const String errorUserNotFound = "User not found.";
+
   static const String errorUnauthorized =
       "Unauthorized access. Please sign in again.";
   static const String errorImageUpload =

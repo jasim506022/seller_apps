@@ -8,7 +8,7 @@ import '../../res/network_utilis.dart';
 
 import '../../res/validator.dart';
 import '../../widget/phone_number_widget.dart';
-import '../../widget/text_field_form_widget.dart';
+import '../../widget/custom_text_form_field.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -120,8 +120,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextFormFieldWidget(
-              label: AppStrings.name,
+            CustomTextFormField(
+              label: AppStrings.nameLabel,
               onChanged: (value) =>
                   profileController.addChangeListener(profileModel),
               validator: Validators.validateName,
@@ -133,13 +133,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
               enabled: isEditMode,
               controller: profileController.phoneTEC,
             ),
-            TextFormFieldWidget(
-              label: AppStrings.email,
+            CustomTextFormField(
+              label: AppStrings.emailLabel,
               controller: profileController.emailTEC,
               enabled: false,
-              hintText: AppStrings.enterEmailAddress,
+              hintText: AppStrings.emailHint,
             ),
-            TextFormFieldWidget(
+            CustomTextFormField(
               label: AppStrings.address,
               validator: Validators.validatePassword,
               onChanged: (p0) =>

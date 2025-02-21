@@ -53,9 +53,10 @@ class OrderUserDetailsWidget extends StatelessWidget {
             1: FlexColumnWidth(8),
           },
           children: [
-            _createTableRow(AppStrings.name, userProfileModel.name!),
-            _createTableRow(AppStrings.email, userProfileModel.email!),
-            _createTableRow(AppStrings.phone, "0${userProfileModel.phone!}"),
+            _createTableRow(AppStrings.nameLabel, userProfileModel.name!),
+            _createTableRow(AppStrings.emailLabel, userProfileModel.email!),
+            _createTableRow(
+                AppStrings.phoneLabel, "0${userProfileModel.phone!}"),
             _createTableRow(AppStrings.orderDate,
                 AppsFunction.formatDate(timestamp: orderId)),
           ],

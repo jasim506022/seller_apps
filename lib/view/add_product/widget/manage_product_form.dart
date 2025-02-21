@@ -13,7 +13,7 @@ import '../../../res/apps_color.dart';
 import '../../../res/validator.dart';
 import '../../../widget/app_button.dart';
 import '../../../widget/custom_drop_down_widget.dart';
-import '../../../widget/text_field_form_widget.dart';
+import '../../../widget/custom_text_form_field.dart';
 import 'grid_image_list_widget.dart';
 
 /// Screen for adding or editing a product.
@@ -134,7 +134,7 @@ class _ManageProductFormState extends State<ManageProductForm> {
             },
           ),
           AppsFunction.verticalSpacing(10),
-          TextFormFieldWidget(
+          CustomTextFormField(
               onChanged: (value) => manageProductController.trackInputChanges(),
               controller: manageProductController.nameController,
               label: AppStrings.productNameLabel,
@@ -144,7 +144,7 @@ class _ManageProductFormState extends State<ManageProductForm> {
             children: [
               Expanded(
                 flex: 6,
-                child: TextFormFieldWidget(
+                child: CustomTextFormField(
                     onChanged: (value) =>
                         manageProductController.trackInputChanges(),
                     controller: manageProductController.priceController,
@@ -168,21 +168,21 @@ class _ManageProductFormState extends State<ManageProductForm> {
                   )),
             ],
           ),
-          TextFormFieldWidget(
+          CustomTextFormField(
               onChanged: (value) => manageProductController.trackInputChanges(),
               controller: manageProductController.discountController,
               label: AppStrings.discountLabel,
               hintText: AppStrings.productDiscountHint,
               validator: Validators.validateRating,
               textInputType: TextInputType.number),
-          TextFormFieldWidget(
+          CustomTextFormField(
               onChanged: (value) => manageProductController.trackInputChanges(),
               controller: manageProductController.ratingController,
               hintText: AppStrings.ratingLabel,
               label: AppStrings.productRatingHint,
               validator: Validators.validateDiscount,
               textInputType: TextInputType.number),
-          TextFormFieldWidget(
+          CustomTextFormField(
               onChanged: (value) => manageProductController.trackInputChanges(),
               controller: manageProductController.descriptionController,
               label: AppStrings.descriptionLabel,

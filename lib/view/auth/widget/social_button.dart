@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../res/app_function.dart';
 import '../../../res/apps_color.dart';
 import '../../../res/apps_text_style.dart';
+import '../../../res/network_utilis.dart';
 
 /// A reusable social login button with an icon, label, and customizable background color.
 ///
@@ -26,7 +27,8 @@ class SocialButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap,
+      onTap: () async =>
+            await NetworkUtils.executeWithInternetCheck(action: onTap),
       child: Container(
         alignment: Alignment.center,
         height: 60.h,

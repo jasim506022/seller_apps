@@ -9,24 +9,26 @@ import '../../res/app_string.dart';
 import '../../res/validator.dart';
 import 'widget/auth_button.dart';
 import '../../widget/rich_text_widget.dart';
-import '../../widget/text_field_form_widget.dart';
+import '../../widget/custom_text_form_field.dart';
 import 'widget/auth_intro_widget.dart';
 
-class ForgetPasswordScreen extends StatefulWidget {
-  const ForgetPasswordScreen({super.key});
+/// This Page allows users to reset their password by entering their email.
+class ForgetPasswordPage extends StatefulWidget {
+  const ForgetPasswordPage({super.key});
 
   @override
-  State<ForgetPasswordScreen> createState() => _ForgetPasswordScreenState();
+  State<ForgetPasswordPage> createState() => _ForgetPasswordPageState();
 }
 
-class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
+class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
+  /// Controller for handling authentication-related logic
   late final AuthController authController;
   // Form key for validation
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
-    //Get AuthController instance
+    /// Get the `AuthController` instance for managing authentication.
     authController = Get.find<AuthController>();
     super.initState();
   }
@@ -35,28 +37,35 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   Widget build(BuildContext context) {
     return PopScope(
       canPop: false,
+      // Prevents Back when Loadng True
       onPopInvoked: (didPop) => authController.resetFormIfNotLoading(), //
       child: GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(), // Hide keyboard on tap,
+        onTap: () => FocusScope.of(context)
+            .unfocus(), // Dismiss keyboard when tapping outside.
         child: Scaffold(
           body: SingleChildScrollView(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 20.h),
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  /// Displays an introduction (title & description).
                   AuthIntroWidget(
                     title: AppStrings.forgetPasswordTitle,
-                    description: AppStrings.entreEmailAddressForResetPassword,
+                    description: AppStrings.forgetPasswordDescription,
                   ),
-                  _buildForgetPasswordForm(),
+
+                  /// Displays the form.
+                  _buildForm(),
                   AppsFunction.verticalSpacing(10),
+
+                  /// Reset Password Button.
                   AuthButton(
                     onPressed: () async {
                       if (!formKey.currentState!.validate()) return;
                       await authController.resetPassword();
                     },
-                    label: AppStrings.resetPassword,
+                    label: AppStrings.resetPasswordTitle,
                   ),
                   AppsFunction.verticalSpacing(20),
                   RichTextWidget(
@@ -78,19 +87,16 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
     );
   }
 
-  Form _buildForgetPasswordForm() {
+  /// **Builds the password reset form**
+  Form _buildForm() {
     return Form(
       key: formKey,
-      child: Column(
-        children: [
-          TextFormFieldWidget(
-            label: AppStrings.forgetPasswordTitle,
-            hintText: AppStrings.passwordHint,
-            controller: authController.emailController,
-            validator: Validators.validateEmail,
-            textInputType: TextInputType.emailAddress,
-          ),
-        ],
+      child: CustomTextFormField(
+        label: AppStrings.emailLabel,
+        hintText: AppStrings.emailHint,
+        controller: authController.emailController,
+        validator: Validators.validateEmail,
+        textInputType: TextInputType.emailAddress,
       ),
     );
   }

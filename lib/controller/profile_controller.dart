@@ -117,7 +117,13 @@ class ProfileController extends GetxController {
       var snapshot = await repository.fetchUserProfile();
 
       /// Ensure snapshot contains data before proceeding
-      var profileModel = ProfileModel.fromMap(snapshot.data()!);
+      var data = snapshot.data();
+      if (data == null) {
+        debugPrint("Error: User profile data is null");
+        throw Exception("User profile data is missing.");
+      }
+
+      var profileModel = ProfileModel.fromMap(data);
 
       /// Only proceed if user status is "approved"
       if (profileModel.status == AppStrings.approved) {
@@ -137,17 +143,30 @@ class ProfileController extends GetxController {
   /// Saves the user's profile data to shared preferences.
   Future<void> _saveProfileToSharedPreferences(
       ProfileModel profileModel) async {
-    final prefs = AppConstants.sharedPreference!;
+    final prefs = AppConstants.sharedPreference;
+
+    if (prefs == null) {
+      debugPrint("SharedPreferences instance is null!");
+      return;
+    }
+
+    // Safely handling potential null values from profileModel
+    final uid = profileModel.uid ?? "";
+    final email = profileModel.email ?? "";
+    final name = profileModel.name ?? "";
+    final imageUrl = profileModel.imageurl ?? "";
+    final phone = profileModel.phone ?? "";
+    final earnings = profileModel.earnings?.toDouble() ?? 0.0;
+
     final prefsTasks = [
-      prefs.setString(AppStrings.uidSharedPreference, profileModel.uid!),
-      prefs.setString(AppStrings.emailSharedPreference, profileModel.email!),
-      prefs.setString(AppStrings.nameSharedPreference, profileModel.name!),
-      prefs.setString(
-          AppStrings.imageurlSharedPreference, profileModel.imageurl!),
-      prefs.setString(AppStrings.phoneSharedPreference, profileModel.phone!),
-      prefs.setDouble(AppStrings.earningSharedPreference,
-          profileModel.earnings!.toDouble()),
+      prefs.setString(AppStrings.uidSharedPreference, uid),
+      prefs.setString(AppStrings.emailSharedPreference, email),
+      prefs.setString(AppStrings.nameSharedPreference, name),
+      prefs.setString(AppStrings.imageurlSharedPreference, imageUrl),
+      prefs.setString(AppStrings.phoneSharedPreference, phone),
+      prefs.setDouble(AppStrings.earningSharedPreference, earnings),
     ];
+
     await Future.wait(prefsTasks);
   }
 

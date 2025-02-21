@@ -9,7 +9,7 @@ import '../../../controller/product_search_controller.dart';
 import '../../../res/app_function.dart';
 import '../../../res/apps_color.dart';
 import '../../../res/apps_text_style.dart';
-import '../../../widget/text_field_form_widget.dart';
+import '../../../widget/custom_text_form_field.dart';
 import 'product_filter_dialog.dart';
 
 /// **ProductSearchBar**
@@ -37,10 +37,10 @@ class ProductSearchBar extends StatelessWidget {
   /// **buildSearchField**
   /// Creates the search input field.
   Widget _buildSearchField(ProductSearchController searchController) {
-    return TextFormFieldWidget(
+    return CustomTextFormField(
+        hintText: "Searching",
         style: AppsTextStyle.mediumNormalText
             .copyWith(color: ThemeUtils.baseTextColor),
-        isUpdateDecoration: true,
         decoration:
             AppsFunction.inputDecoration(hint: AppStrings.searchProductHere),
         controller: searchController.searchTextTEC,

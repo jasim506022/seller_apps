@@ -5,7 +5,7 @@ import 'package:seller_apps/res/app_function.dart';
 import '../../../controller/product_search_controller.dart';
 import '../../../res/app_string.dart';
 import '../../../res/apps_text_style.dart';
-import '../../../widget/text_field_form_widget.dart';
+import '../../../widget/custom_text_form_field.dart';
 
 class ProductPriceBoxWidget extends StatelessWidget {
   const ProductPriceBoxWidget({
@@ -22,12 +22,12 @@ class ProductPriceBoxWidget extends StatelessWidget {
         Row(
           children: [
             Expanded(
-                child: TextFormFieldWidget(
+                child: CustomTextFormField(
                     hintText: AppStrings.minium,
                     controller: searchController.minPriceController)),
             AppsFunction.horizontalSpacing(15),
             Expanded(
-              child: TextFormFieldWidget(
+              child: CustomTextFormField(
                   controller: searchController.maxPriceController,
                   hintText: AppStrings.maximum),
             ),

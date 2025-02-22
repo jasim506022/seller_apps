@@ -35,11 +35,12 @@ class _ManageProductFormState extends State<ManageProductForm> {
   /// Form key for validation.
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  /// Controller for managing product-related operations.
+  /// Controller for handling ManageProductController logic
   late final ManageProductController manageProductController;
 
   @override
   void initState() {
+    /// Get the `ManageProductController` instance for managing AddProduct.
     manageProductController = Get.find<ManageProductController>();
     super.initState();
   }
@@ -96,7 +97,7 @@ class _ManageProductFormState extends State<ManageProductForm> {
       actions: [
         IconButton(
             onPressed: () async {
-              if (_formKey.currentState!.validate()) return;
+              if (!_formKey.currentState!.validate()) return;
 
               NetworkUtils.executeWithInternetCheck(
                   action: () => manageProductController.saveProduct(
@@ -122,6 +123,7 @@ class _ManageProductFormState extends State<ManageProductForm> {
       key: _formKey,
       child: Column(
         children: [
+          /// Product Category Selection Dropdown
           CustomDropdownWidget(
             items: AppConstants.categories,
             value: manageProductController
@@ -133,16 +135,23 @@ class _ManageProductFormState extends State<ManageProductForm> {
             },
           ),
           AppsFunction.verticalSpacing(10),
+
+          /// Product Input Field
           CustomTextFormField(
               onChanged: (value) => manageProductController.trackInputChanges(),
               controller: manageProductController.nameController,
               label: AppStrings.productNameLabel,
               hintText: AppStrings.productNameHint,
               validator: Validators.validateProductName),
+
+          /// Price & Unit Selection Row
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Expanded(
                 flex: 6,
+                //  Product Price Input Field
                 child: CustomTextFormField(
                     onChanged: (value) =>
                         manageProductController.trackInputChanges(),
@@ -153,6 +162,7 @@ class _ManageProductFormState extends State<ManageProductForm> {
                     textInputType: TextInputType.number),
               ),
               AppsFunction.horizontalSpacing(20),
+              // Product Unit Selection
               Expanded(
                   flex: 5,
                   child: CustomDropdownWidget(
@@ -167,20 +177,23 @@ class _ManageProductFormState extends State<ManageProductForm> {
                   )),
             ],
           ),
+          // Product Discount Input Field
           CustomTextFormField(
               onChanged: (value) => manageProductController.trackInputChanges(),
               controller: manageProductController.discountController,
               label: AppStrings.discountLabel,
               hintText: AppStrings.productDiscountHint,
-              validator: Validators.validateRating,
+              validator: Validators.validateDiscount,
               textInputType: TextInputType.number),
+          // Product Ratting Input Field
           CustomTextFormField(
               onChanged: (value) => manageProductController.trackInputChanges(),
               controller: manageProductController.ratingController,
               hintText: AppStrings.ratingLabel,
               label: AppStrings.productRatingHint,
-              validator: Validators.validateDiscount,
+              validator: Validators.validateRating,
               textInputType: TextInputType.number),
+          // Product Discription Input Field
           CustomTextFormField(
               onChanged: (value) => manageProductController.trackInputChanges(),
               controller: manageProductController.descriptionController,
@@ -194,3 +207,11 @@ class _ManageProductFormState extends State<ManageProductForm> {
     );
   }
 }
+
+/*
+ Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center
+            Understand 
+            #: 
+*/

@@ -134,7 +134,7 @@ class Validators {
  if (value == null || value.trim().isEmpty) {
       return AppStrings.emptyEmail;
     } 
-
+#: final price = double.tryParse(trimmedValue!);
 
 
 

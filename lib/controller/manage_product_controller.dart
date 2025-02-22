@@ -52,7 +52,7 @@ class ManageProductController extends GetxController {
       // Indicate that product data has change
       hasProductsChanged(true);
     } catch (e) {
-      AppsFunction.flutterToast(msg: AppStrings.imageUploadFail);
+      AppsFunction.flutterToast(msg: AppStrings.imageUploadFailToast);
     }
   }
 
@@ -66,7 +66,7 @@ class ManageProductController extends GetxController {
   Future<void> saveProduct({required bool isUpdate}) async {
     // Ensure at least one image is selected before proceeding.
     if (selectedImagesList.isEmpty) {
-      AppsFunction.flutterToast(msg: AppStrings.selectOneImage);
+      AppsFunction.flutterToast(msg: AppStrings.selectOneImageToast);
       return;
     }
     loadingController.setLoading(true);
@@ -260,6 +260,7 @@ Flexibility: Use with both non-nullable (..) and nullable (?..) objects
 #:  List<XFile> newImages = selectedImagesList.whereType<XFile>().toList();
 #: ?. Understand Clear
 #: Different Between ?. !:
+#: double.tryParse
 #: 
 imageList.removeWhere((image) => image is XFile);
     return imageList.cast<String>().toList();

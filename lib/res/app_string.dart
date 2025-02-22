@@ -116,6 +116,11 @@ class AppStrings {
   static const String pleaseSelectPhotoToast = "Please Select a Photo";
   static const String validPhoneNumberToast =
       'Please enter a valid phone number';
+  static const String imageUploadFailToast =
+      "Image upload failed. Please try again.";
+  static const String selectOneImageToast = "Please Select at least One Image";
+  static const updateProductToastMessage = "Succesfully update a New Product";
+  static const uploadProductToastMessage = "Succesfully Upload a New Product";
 
   // 📌 Form Field Labels
   static const productNameLabel = 'Product Name';
@@ -331,10 +336,6 @@ class AppStrings {
   // dialog
 
   // Toast
-  static const imageUploadFail = "Image upload failed. Please try again.";
-  static const selectOneImage = "Please Select at least One Image";
-  static const updateProductToastMessage = "Succesfully update a New Product";
-  static const uploadProductToastMessage = "Succesfully Upload a New Product";
 
   static const deleteSuccessFully = "Delete Succesffully";
   static const userDoesntExit = "User Doesn't Exit";

@@ -117,11 +117,7 @@ class ProfileController extends GetxController {
       var snapshot = await repository.fetchUserProfile();
 
       /// Ensure snapshot contains data before proceeding
-      var data = snapshot.data();
-      if (data == null) {
-        debugPrint("Error: User profile data is null");
-        throw Exception("User profile data is missing.");
-      }
+      var data = snapshot.data()!;
 
       var profileModel = ProfileModel.fromMap(data);
 
@@ -143,28 +139,15 @@ class ProfileController extends GetxController {
   /// Saves the user's profile data to shared preferences.
   Future<void> _saveProfileToSharedPreferences(
       ProfileModel profileModel) async {
-    final prefs = AppConstants.sharedPreference;
-
-    if (prefs == null) {
-      debugPrint("SharedPreferences instance is null!");
-      return;
-    }
-
-    // Safely handling potential null values from profileModel
-    final uid = profileModel.uid ?? "";
-    final email = profileModel.email ?? "";
-    final name = profileModel.name ?? "";
-    final imageUrl = profileModel.imageurl ?? "";
-    final phone = profileModel.phone ?? "";
-    final earnings = profileModel.earnings?.toDouble() ?? 0.0;
-
+    var prefs = AppConstants.sharedPreference;
     final prefsTasks = [
-      prefs.setString(AppStrings.uidSharedPreference, uid),
-      prefs.setString(AppStrings.emailSharedPreference, email),
-      prefs.setString(AppStrings.nameSharedPreference, name),
-      prefs.setString(AppStrings.imageurlSharedPreference, imageUrl),
-      prefs.setString(AppStrings.phoneSharedPreference, phone),
-      prefs.setDouble(AppStrings.earningSharedPreference, earnings),
+      prefs!.setString(AppStrings.prefUserId, profileModel.uid!),
+      prefs.setString(AppStrings.prefUserEmail, profileModel.email!),
+      prefs.setString(AppStrings.prefUserName, profileModel.name!),
+      prefs.setString(AppStrings.prefUserProfilePic, profileModel.imageurl!),
+      prefs.setString(AppStrings.prefUserPhone, profileModel.phone!),
+      prefs.setDouble(
+          AppStrings.prefUserEarnings, profileModel.earnings!.toDouble()),
     ];
 
     await Future.wait(prefsTasks);
@@ -272,9 +255,9 @@ class ProfileController extends GetxController {
         onConfirmPressed: () async {
           try {
             final prefs = AppConstants.sharedPreference!;
-            await prefs.setString(AppStrings.imageurlSharedPreference, "");
-            await prefs.setString(AppStrings.nameSharedPreference, "");
-            await prefs.setString(AppStrings.emailSharedPreference, "");
+            await prefs.setString(AppStrings.prefUserProfilePic, "");
+            await prefs.setString(AppStrings.prefUserName, "");
+            await prefs.setString(AppStrings.prefUserEmail, "");
             await repository.updateUserProfile(map: {"token": ""});
             await authRepository.signOut();
             AppsFunction.flutterToast(msg: AppStrings.successfullySignedOut);
@@ -295,7 +278,7 @@ Better performance: .clear() internally calls notifyListeners(), which can cause
 More predictable: Directly setting .text = '' ensures that changes happen without side effects.
 
 #: ()
-
+how double to num
 #: Why use Final (already)
 */
 

@@ -51,14 +51,14 @@ class ProfileHeaderWidget extends StatelessWidget {
   /// Ensures that null values are safely handled with defaults.
   Map<String, String> _fetchUserProfile() {
     return {
-      'name': AppConstants.sharedPreference
-              ?.getString(AppStrings.nameSharedPreference) ??
-          'Unknown User',
-      'email': AppConstants.sharedPreference
-              ?.getString(AppStrings.emailSharedPreference) ??
-          'No Email Available',
+      'name':
+          AppConstants.sharedPreference?.getString(AppStrings.prefUserName) ??
+              'Unknown User',
+      'email':
+          AppConstants.sharedPreference?.getString(AppStrings.prefUserEmail) ??
+              'No Email Available',
       'profileImageUrl': AppConstants.sharedPreference
-              ?.getString(AppStrings.imageurlSharedPreference) ??
+              ?.getString(AppStrings.prefUserProfilePic) ??
           '',
     };
   }

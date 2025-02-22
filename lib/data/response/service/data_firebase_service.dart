@@ -40,10 +40,10 @@ class DataFirebaseService implements BaseFirebaseService {
   Future<String> uploadImage(XFile imageFile, String productId) async {
     final uniqueImageName =
         "${imageFile.name}_${DateTime.now().millisecondsSinceEpoch}";
-    var sellerId = AppConstants.sharedPreference
-        ?.getString(AppStrings.uidSharedPreference);
-    var sellerName = AppConstants.sharedPreference
-        ?.getString(AppStrings.nameSharedPreference);
+    var sellerId =
+        AppConstants.sharedPreference?.getString(AppStrings.prefUserId);
+    var sellerName =
+        AppConstants.sharedPreference?.getString(AppStrings.prefUserName);
 
     // Define the storage path
     final storagePath =
@@ -62,8 +62,7 @@ class DataFirebaseService implements BaseFirebaseService {
       {required ProductModel productModel, required bool isUpdate}) async {
     final sellerDoc = firebaseFirestore
         .collection(AppStrings.sellersCollection)
-        .doc(AppConstants.sharedPreference!
-            .getString(AppStrings.uidSharedPreference));
+        .doc(AppConstants.sharedPreference!.getString(AppStrings.prefUserId));
 
     // References to the product documents in seller and global collections
 
@@ -89,8 +88,7 @@ class DataFirebaseService implements BaseFirebaseService {
       {required String category}) {
     var collectionRef = firebaseFirestore
         .collection(AppStrings.sellersCollection)
-        .doc(AppConstants.sharedPreference!
-            .getString(AppStrings.uidSharedPreference))
+        .doc(AppConstants.sharedPreference!.getString(AppStrings.prefUserId))
         .collection(AppStrings.productsCollection);
     var query = collectionRef.orderBy("publishDate", descending: true);
 
@@ -103,8 +101,8 @@ class DataFirebaseService implements BaseFirebaseService {
 
   @override
   Future<void> deleteProductByIdSnapshot({required String productId}) async {
-    final sellerId = AppConstants.sharedPreference
-        ?.getString(AppStrings.uidSharedPreference);
+    final sellerId =
+        AppConstants.sharedPreference?.getString(AppStrings.prefUserId);
 
     final sellerRef = firebaseFirestore
         .collection(AppStrings.sellersCollection)
@@ -123,8 +121,8 @@ class DataFirebaseService implements BaseFirebaseService {
   @override
   Stream<QuerySnapshot<Map<String, dynamic>>> fetchSimilarProducts(
       {required ProductModel productModel}) {
-    final sellerId = AppConstants.sharedPreference
-        ?.getString(AppStrings.uidSharedPreference);
+    final sellerId =
+        AppConstants.sharedPreference?.getString(AppStrings.prefUserId);
     return firebaseFirestore
         .collection(AppStrings.sellersCollection)
         .doc(sellerId)

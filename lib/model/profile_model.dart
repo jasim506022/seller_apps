@@ -33,25 +33,23 @@ class ProfileModel {
       'phone': phone,
       'token': token,
       'status': AppStrings.approved,
-      'uid': AppConstants.sharedPreference!
-          .getString(AppStrings.uidSharedPreference),
+      'uid': AppConstants.sharedPreference!.getString(AppStrings.prefUserId),
     };
   }
 
   Map<String, dynamic> toMapProfileEdit() {
     return <String, dynamic>{
       'address': address,
-      'earnings': AppConstants.sharedPreference!
-          .getDouble(AppStrings.earningSharedPreference),
-      'email': AppConstants.sharedPreference!
-          .getString(AppStrings.emailSharedPreference),
+      'earnings':
+          AppConstants.sharedPreference!.getDouble(AppStrings.prefUserEarnings),
+      'email':
+          AppConstants.sharedPreference!.getString(AppStrings.prefUserEmail),
       'imageurl': imageurl,
       'name': name,
       'phone': phone,
       'token': token,
       'status': AppStrings.approved,
-      'uid': AppConstants.sharedPreference!
-          .getString(AppStrings.uidSharedPreference),
+      'uid': AppConstants.sharedPreference!.getString(AppStrings.prefUserId),
     };
   }
 

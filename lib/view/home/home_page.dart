@@ -96,12 +96,9 @@ class HomePage extends StatelessWidget {
       height: 153.h,
       width: 1.sw,
       child: GridItemWidet(
-        image: AppImage.uploadProductImage,
-        label: AppStrings.uploadProduct,
-        onTap: () {
-          Get.toNamed(RoutesName.uploadAndUpdateProduct);
-        },
-      ),
+          image: AppImage.uploadProductImage,
+          label: AppStrings.updateProductTitle,
+          onTap: () => Get.toNamed(RoutesName.uploadAndUpdateProduct)),
     );
   }
 
@@ -120,8 +117,7 @@ class HomePage extends StatelessWidget {
           padding: EdgeInsets.only(left: 25.w),
           child: Row(
             children: [
-              Text(AppStrings.searchPlaceholder,
-                  style: AppsTextStyle.hintTextStyle),
+              Text(AppStrings.searchHint, style: AppsTextStyle.hintTextStyle),
               const Spacer(),
               const Icon(IconlyLight.search),
               AppsFunction.horizontalSpacing(20)

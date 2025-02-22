@@ -17,8 +17,10 @@ class HomeProfileHeaderStream extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    /// Get the `ProfileController`.
     final ProfileController profileController = Get.find<ProfileController>();
 
+    // Attempt to fetch locally cached profile data from shared preferences
     final profileData = _fetchLocalProfileData();
 
     /// If local profile data is available, use it directly
@@ -30,24 +32,20 @@ class HomeProfileHeaderStream extends StatelessWidget {
       );
     }
 
-    /// Otherwise, fetch from the API
+    /// If no cached data is found, fetch profile from Database
     return _fetchAndBuildProfile(profileController);
   }
 
   /// Fetches the user profile data from shared preferences.
   /// Returns `null` if no valid data is found.
   Map<String, String>? _fetchLocalProfileData() {
-    final image = AppConstants.sharedPreference
-        ?.getString(AppStrings.imageurlSharedPreference);
-    final name = AppConstants.sharedPreference
-        ?.getString(AppStrings.nameSharedPreference);
-    final email = AppConstants.sharedPreference
-        ?.getString(AppStrings.emailSharedPreference);
+    var pref = AppConstants.sharedPreference;
+    final image = pref?.getString(AppStrings.prefUserProfilePic);
+    final name = pref?.getString(AppStrings.prefUserName);
+    final email = pref?.getString(AppStrings.prefUserEmail);
 
-    /// Ensure all values are valid before returning
-    if ((image?.isNotEmpty ?? false) &&
-        (name?.isNotEmpty ?? false) &&
-        (email?.isNotEmpty ?? false)) {
+    /// Ensure all values are valid before returning the cached data
+    if ([image, name, email].every((val) => val?.isNotEmpty ?? false)) {
       return {'imageUrl': image!, 'name': name!, 'email': email!};
     }
     return null; // No valid data found
@@ -60,18 +58,20 @@ class HomeProfileHeaderStream extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const LoadingProfileHeaderWidget();
-        } else if (snapshot.hasData) {
-          final data = snapshot.data!.data();
-          if (data != null) {
-            final profileModel = ProfileModel.fromMap(data);
-            return UserProfileHeader(
-              imageUrl: profileModel.imageurl ?? AppStrings.defaultImage,
-              name: profileModel.name ?? AppStrings.defaultName,
-              email: profileModel.email ?? AppStrings.defaultEmail,
-            );
-          }
         }
-        return const LoadingProfileHeaderWidget(); // Default fallback
+        if (snapshot.hasError || snapshot.data == null) {
+          return const LoadingProfileHeaderWidget(); // Error fallback
+        }
+
+        final data = snapshot.data!.data();
+
+        final profileModel = ProfileModel.fromMap(data!);
+        // Display the user's profile header with fallback values if any field is null
+        return UserProfileHeader(
+          imageUrl: profileModel.imageurl ?? AppStrings.defaultImage,
+          name: profileModel.name ?? AppStrings.defaultName,
+          email: profileModel.email ?? AppStrings.defaultEmail,
+        );
       },
     );
   }
@@ -82,4 +82,16 @@ class HomeProfileHeaderStream extends StatelessWidget {
 #: Understand Clear Null (?. and !)
 #: Understand Profile Controller  (FetchUserProfileStream)
 #: Why use Future Builder Why no StreamBuilder
+#: Separation of Concerns (SoC)
+#:
+why use it if ([image, name, email].every((val) => val?.isNotEmpty ?? false)) {
+      return {'imageUrl': image!, 'name': name!, 'email': email!};
+    }
+    instead of 
+if ((image?.isNotEmpty ?? false) &&
+        (name?.isNotEmpty ?? false) &&
+        (email?.isNotEmpty ?? false)) {
+      return {'imageUrl': image!, 'name': name!, 'email': email!};
+    }
+    why use
 */

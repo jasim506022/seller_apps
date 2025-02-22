@@ -144,10 +144,9 @@ class ManageProductController extends GetxController {
   ProductModel _buildProductModel(bool isUpdate, List<String> imageUrls) {
     return ProductModel(
       productId: productId,
-      sellerId: AppConstants.sharedPreference
-          ?.getString(AppStrings.uidSharedPreference),
-      sellerName: AppConstants.sharedPreference
-          ?.getString(AppStrings.nameSharedPreference),
+      sellerId: AppConstants.sharedPreference?.getString(AppStrings.prefUserId),
+      sellerName:
+          AppConstants.sharedPreference?.getString(AppStrings.prefUserName),
       productname: nameController.text.trim(),
       productcategory: categoryController.selectedCategory.value,
       productprice: double.tryParse(priceController.text.trim()),

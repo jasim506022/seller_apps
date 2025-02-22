@@ -18,7 +18,7 @@ class GridItemWidet extends StatelessWidget {
   });
   final String image;
   final String label;
-  final Function() onTap;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -36,12 +36,8 @@ class GridItemWidet extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               // Display the image with specified dimensions and color tint
-              Image.asset(
-                image,
-                height: 70.h,
-                width: 70.h,
-                color: AppColors.green,
-              ),
+              Image.asset(image,
+                  height: 70.h, width: 70.h, color: AppColors.green),
               AppsFunction.verticalSpacing(10),
               Text(
                 label,

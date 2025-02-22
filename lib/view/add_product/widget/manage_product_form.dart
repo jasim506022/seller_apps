@@ -96,11 +96,11 @@ class _ManageProductFormState extends State<ManageProductForm> {
       actions: [
         IconButton(
             onPressed: () async {
-              if (_formKey.currentState!.validate()) {
-                NetworkUtils.executeWithInternetCheck(
-                    action: () => manageProductController.saveProduct(
-                        isUpdate: widget.isEditMode));
-              }
+              if (_formKey.currentState!.validate()) return;
+
+              NetworkUtils.executeWithInternetCheck(
+                  action: () => manageProductController.saveProduct(
+                      isUpdate: widget.isEditMode));
             },
             icon: const Icon(
               Icons.cloud_upload,
@@ -113,9 +113,8 @@ class _ManageProductFormState extends State<ManageProductForm> {
   Widget _buildImagePickerButton() {
     return AppButton(
         title: AppStrings.btnPickImage,
-        onPressed: () {
-          manageProductController.pickProductImage(ImageSource.gallery);
-        });
+        onPressed: () =>
+            manageProductController.pickProductImage(ImageSource.gallery));
   }
 
   Form _buildProductForm() {

@@ -7,6 +7,7 @@ class AppStrings {
   static const String about = "About";
   static const String permissionDenied = "Permission denied for notifications.";
   static const String fcmTokenError = "Error retrieving FCM token:";
+  static const String noImageSelect = "No images selected";
 
   // 📌 Onboarding Titles & Descriptions
   static const String onboardingTitle1 = "Welcome to Grocery App";
@@ -26,6 +27,9 @@ class AppStrings {
   static const String profileTitle = "Profile";
   static const addNewProductTitle = "Add New Product";
   static const updateProductTitle = "Update Product";
+  static const String allProductsTitle = "All Products";
+  static const String totalSalesTitle = "Total Sales";
+  static const String runningOrdersTitle = "Running Orders";
 
   // 📌 Authentication Titles & Messages
   static const String sellerLogInTitle = "JasiVendor Login";
@@ -66,10 +70,6 @@ class AppStrings {
   * 🛒 Product Management
   */
 
-  static const String allProducts = "All Products";
-  static const String totalSales = "Total Sales";
-  static const String runningOrders = "Running Orders";
-
   /*
   * 📦 Orders & Delivery
   */
@@ -90,7 +90,7 @@ class AppStrings {
   // 📌 Button Labels
   static const String btnYes = "Yes";
   static const String btnNo = "No";
-  static const String btnaddProductImage = "Add Product Image";
+  static const String btnAddProductImage = "Add Product Image";
   static const String btnCancel = "Cancel";
   static const String btnPickImage = "Pick Image";
   static const String btnUpdate = "Update";
@@ -142,6 +142,7 @@ class AppStrings {
   static const String nameHint = "Enter your full name";
   static const String addressHint = "Enter your address (Street, City, ZIP)";
   static const String phoneHint = "Phone Number";
+  static const String searchHint = "Search...........";
 
   // 📌 Validation Messages
   // Product
@@ -223,13 +224,15 @@ class AppStrings {
   static const String collectionUsers = "users";
   static const String collectionProducts = "products";
   static const String collectionOrders = "orders";
-  static const String prefUserId = "userId";
-  static const String prefUserEmail = "userEmail";
-  static const String prefUserName = "userName";
-  static const String prefUserPhone = "userPhone";
-  static const String prefUserProfilePic = "userProfilePic";
-  static const String prefUserEarnings = "userEarnings";
+  static const String prefUserId = "uid";
+  static const String prefUserEmail = "email";
+  static const String prefUserName = "name";
+  static const String prefUserPhone = "phone";
+  static const String prefUserProfilePic = "imageurl";
+  static const String prefUserEarnings = "earning";
   static const String prefOnboarding = 'onBoarding';
+
+  static String approved = "approved";
 
   // Defauld Value:
   static const String defaultName = "Name Not Found";
@@ -263,13 +266,6 @@ class AppStrings {
       "Loading for sign with Gmail \n Pleasing Waiting........";
 
 //
-  static String approved = "approved";
-  static String uidSharedPreference = "uid";
-  static String emailSharedPreference = "email";
-  static String nameSharedPreference = "name";
-  static String imageurlSharedPreference = "imageurl";
-  static String phoneSharedPreference = "phone";
-  static String earningSharedPreference = "earning";
 
   //
 
@@ -382,13 +378,8 @@ class AppStrings {
   }
 
   static const String goBack = "Go Back";
-  //
-  static const String noImageSelect = "No images selected";
 
-  // Hint
-  static const String searchPlaceholder = "Search...........";
   // Product
-  static const String uploadProduct = "Upload Your Product";
 
   // 📌 Error Messages
   static const String errorGeneric = "Something went wrong. Please try again.";

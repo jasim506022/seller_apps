@@ -69,3 +69,7 @@ class UserProfileHeader extends StatelessWidget {
     );
   }
 }
+
+/*
+Why use it crossAxisAlignment: CrossAxisAlignment.start,
+*/

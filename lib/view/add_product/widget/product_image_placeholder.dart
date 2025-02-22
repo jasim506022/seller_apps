@@ -30,7 +30,7 @@ class ProductImagePlaceholder extends StatelessWidget {
             AppsFunction.verticalSpacing(20),
             AppButton(
               width: .7.sw,
-              title: AppStrings.btnaddProductImage,
+              title: AppStrings.btnAddProductImage,
 
               /// **Opens the Image Selection Dialog**
               onPressed: () async {

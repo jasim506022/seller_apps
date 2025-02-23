@@ -74,7 +74,7 @@ class ProfileHeaderWidget extends StatelessWidget {
           userData['name']!,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: AppsTextStyle.titleTextStyle,
+          style: AppsTextStyle.titleText,
         ),
         // Display user email
         Text(

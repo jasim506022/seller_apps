@@ -52,7 +52,7 @@ class ProductDetailsPage extends StatelessWidget {
                     ProductDetailsWidget(product: productModel),
                     Text(
                       AppStrings.similarProducts,
-                      style: AppsTextStyle.titleTextStyle,
+                      style: AppsTextStyle.titleText,
                     ),
                     AppsFunction.verticalSpacing(10),
                     SimilarProductList(productModel: productModel),

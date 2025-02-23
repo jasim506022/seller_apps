@@ -48,7 +48,7 @@ class FilterDialogContentWidget extends StatelessWidget {
     return Center(
       child: Text(
         AppStrings.filterSearch,
-        style: AppsTextStyle.titleTextStyle.copyWith(color: AppColors.green),
+        style: AppsTextStyle.titleText.copyWith(color: AppColors.green),
       ),
     );
   }
@@ -89,7 +89,7 @@ class FilterDialogContentWidget extends StatelessWidget {
             },
             child: Text(
               AppStrings.btnReset,
-              style: AppsTextStyle.largeBoldText.copyWith(color: AppColors.red),
+              style: AppsTextStyle.mediumBoldText.copyWith(color: AppColors.red),
             )),
         Row(
           children: [

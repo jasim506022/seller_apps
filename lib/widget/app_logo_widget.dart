@@ -27,7 +27,7 @@ class AppLogoWidget extends StatelessWidget {
 
         AppsFunction.verticalSpacing(10),
         // App name displayed as text with a predefined style
-        Text(AppStrings.appName, style: AppsTextStyle.appsLogoTextStyle),
+        Text(AppStrings.appName, style: AppsTextStyle.logoText),
       ],
     );
   }

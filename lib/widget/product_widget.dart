@@ -22,6 +22,7 @@ class ProductWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Get Product Model by Provider
     final product = Provider.of<ProductModel>(context);
     // Main structure of the product widget with tap handling
     return InkWell(
@@ -65,14 +66,13 @@ class ProductWidget extends StatelessWidget {
             // Display discounted price with red color
             Text(
               "${AppStrings.currencyIcon} $productPrice",
-              style: AppsTextStyle.largeCustomBoldText
-                  .copyWith(color: AppColors.red),
+              style: AppsTextStyle.largeBold.copyWith(color: AppColors.red),
             ),
             AppsFunction.horizontalSpacing(15),
             // Display the original price with a line-through style
             Text(
               productModel.productprice!.toString(),
-              style: AppsTextStyle.mediumTextCustom400lineThrough,
+              style: AppsTextStyle.lineThroughText,
             ),
           ],
         ),
@@ -83,7 +83,7 @@ class ProductWidget extends StatelessWidget {
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
           productModel.productname!,
-          style: AppsTextStyle.largeBoldText,
+          style: AppsTextStyle.mediumBoldText,
         ),
         AppsFunction.verticalSpacing(5),
         AppButton(
@@ -106,3 +106,17 @@ class ProductWidget extends StatelessWidget {
     });
   }
 }
+
+/*
+# Understand this
+void _navigateToPage(ProductModel productModel, [bool isUpdate = false]) {
+    final routeName = isUpdate
+        ? RoutesName.uploadAndUpdateProduct
+        : RoutesName.productDetails;
+    Get.toNamed(routeName, arguments: {
+      AppStrings.productModel: productModel,
+      if (isUpdate) AppStrings.isUpdate: true,
+    });
+
+    #: 
+*/

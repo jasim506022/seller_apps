@@ -21,6 +21,7 @@ class ProductGridViewStream extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Find the CategoryManagerController using GetX
     final ProductController productController = Get.find<ProductController>();
     return Obx(() => StreamBuilder(
           /// Fetches product snapshots from Firestore using the controller.

@@ -45,7 +45,7 @@ class UserProfileHeader extends StatelessWidget {
           children: [
             FittedBox(
                 child: Text(name,
-                    style: AppsTextStyle.titleHomeProfileheader
+                    style: AppsTextStyle.homeProfileTitle
                         .copyWith(color: AppColors.white))),
             FittedBox(
                 child: Text(email,

@@ -144,7 +144,7 @@ class _SignInPageState extends State<SignInPage> {
             label: AppStrings.passwordLabel,
             hasPasswordToggle: true,
             obscureText: true,
-            validator: Validators.validatePassword,
+            // validator: Validators.validatePassword,
             hintText: AppStrings.passwordHint,
             controller: authController.passwordController,
             textInputAction: TextInputAction.done,

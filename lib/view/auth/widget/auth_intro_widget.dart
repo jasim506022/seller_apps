@@ -28,12 +28,12 @@ class AuthIntroWidget extends StatelessWidget {
         /// Displays the custom widget if provided, otherwise shows the default app logo.
         customWidget ?? const AppLogoWidget(),
         AppsFunction.verticalSpacing(10),
-        Text(title, style: AppsTextStyle.authIntroTitleTextStyle),
+        Text(title, style: AppsTextStyle.authTitle),
         AppsFunction.verticalSpacing(10),
         Text(
           description,
           textAlign: TextAlign.center,
-          style: AppsTextStyle.authIntroDescriptionTextStyle,
+          style: AppsTextStyle.authDescription,
         ),
         AppsFunction.verticalSpacing(40),
       ],

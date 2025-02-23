@@ -31,7 +31,7 @@ class SellerOrderProductWidget extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
           child: RichText(
             text: TextSpan(
-              style: AppsTextStyle.largeBoldText
+              style: AppsTextStyle.mediumBoldText
                   .copyWith(color: Theme.of(context).primaryColor),
               children: [
                 const TextSpan(text: "Seller Name:\t"),
@@ -41,7 +41,7 @@ class SellerOrderProductWidget extends StatelessWidget {
                           sellerId
                       ? "My Product"
                       : sellerName,
-                  style: AppsTextStyle.largeBoldText
+                  style: AppsTextStyle.mediumBoldText
                       .copyWith(color: AppColors.red),
                 ),
               ],

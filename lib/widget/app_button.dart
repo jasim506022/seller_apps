@@ -36,7 +36,7 @@ class AppButton extends StatelessWidget {
         /// Ensures button action is only performed if internet is available.
         child: Text(
           title,
-          style: AppsTextStyle.buttonTextStyle,
+          style: AppsTextStyle.button,
         ),
       ),
     );

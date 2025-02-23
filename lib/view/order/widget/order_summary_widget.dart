@@ -29,7 +29,7 @@ class OrderSummaryWidget extends StatelessWidget {
             // Order ID
             Text(
               "${AppStrings.order} ${order.orderId}",
-              style: AppsTextStyle.largeBoldText,
+              style: AppsTextStyle.mediumBoldText,
             ),
             // Order breakdown link
             InkWell(

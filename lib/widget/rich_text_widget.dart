@@ -34,7 +34,7 @@ class RichTextWidget extends StatelessWidget {
       ),
       TextSpan(
         text: " $highlightedText",
-        style: AppsTextStyle.buttonTextStyle.copyWith(
+        style: AppsTextStyle.button.copyWith(
             decoration: TextDecoration.underline, color: AppColors.green),
         recognizer: TapGestureRecognizer()
           ..onTap = () async =>

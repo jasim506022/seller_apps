@@ -7,8 +7,8 @@ import '../../../res/app_string.dart';
 import '../../../res/utils.dart';
 import '../../../model/product_model.dart';
 import '../../../res/apps_color.dart';
-import 'image_swiper_widget.dart';
-import 'popup_button_widget.dart';
+import 'product_image_swiper_widget.dart';
+import 'product_option_menu.dart';
 
 /// Displays the product image slider with a decorative background and action buttons.
 class DetailsPageImageSlideWithCartBridgeWidget extends StatelessWidget {
@@ -35,7 +35,8 @@ class DetailsPageImageSlideWithCartBridgeWidget extends StatelessWidget {
                 children: [
                   AppsFunction.verticalSpacing(10),
                   _buildTopBar(),
-                  DetailsImageSwiperWidget(images: productModel.productimage!),
+                  ProductImageSwiperWidget(
+                      imageUrls: productModel.productimage!),
                   AppsFunction.verticalSpacing(10),
                 ],
               ),
@@ -108,7 +109,7 @@ class DetailsPageImageSlideWithCartBridgeWidget extends StatelessWidget {
         InkWell(
             onTap: () {},
             child: _buildCircularButton(
-                ProductActionPopupMenu(productModel: productModel)))
+                ProductOptionsMenu(productModel: productModel)))
       ],
     );
   }
@@ -125,3 +126,7 @@ class DetailsPageImageSlideWithCartBridgeWidget extends StatelessWidget {
         child: widget);
   }
 }
+
+/*
+Undersand Background
+*/

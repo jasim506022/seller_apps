@@ -26,7 +26,6 @@ class OutlinedTextButtonWidget extends StatelessWidget {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8.r))),
         onPressed: onPressed,
-        child: Text(title,
-            style: AppsTextStyle.buttonTextStyle.copyWith(color: color)));
+        child: Text(title, style: AppsTextStyle.button.copyWith(color: color)));
   }
 }

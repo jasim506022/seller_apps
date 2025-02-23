@@ -106,7 +106,7 @@ class AppsFunction {
                 ))
             : null,
         contentPadding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 20.h),
-        hintStyle: AppsTextStyle.hintTextStyle);
+        hintStyle: AppsTextStyle.hintText);
   }
 
   static void handleException(Object e) {

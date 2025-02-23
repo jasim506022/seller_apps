@@ -31,7 +31,7 @@ class CustomRoundActionButtonWidget extends StatelessWidget {
         onPressed: onTap,
         child: Text(
           title,
-          style: AppsTextStyle.buttonTextStyle,
+          style: AppsTextStyle.button,
         ));
   }
 }

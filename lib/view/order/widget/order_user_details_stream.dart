@@ -32,7 +32,7 @@ class OrderUserDetailsStream extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5).r,
           child: Text(
             AppStrings.userDetails,
-            style: AppsTextStyle.largeBoldText.copyWith(color: AppColors.red),
+            style: AppsTextStyle.mediumBoldText.copyWith(color: AppColors.red),
           ),
         ),
 

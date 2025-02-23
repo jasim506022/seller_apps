@@ -63,7 +63,7 @@ class OrderProductWidget extends StatelessWidget {
           FittedBox(
             child: Text(
               productModel.productname!,
-              style: AppsTextStyle.largeBoldText,
+              style: AppsTextStyle.mediumBoldText,
             ),
           ),
           Row(
@@ -82,7 +82,7 @@ class OrderProductWidget extends StatelessWidget {
                       .copyWith(color: AppColors.green)),
               const Spacer(),
               Text("= ${AppStrings.currencyIcon} $totalPrice",
-                  style: AppsTextStyle.largeBoldText
+                  style: AppsTextStyle.mediumBoldText
                       .copyWith(color: AppColors.green)),
             ],
           ),

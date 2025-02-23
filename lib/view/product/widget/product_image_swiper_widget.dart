@@ -3,20 +3,18 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
 import '../../../res/apps_color.dart';
 
-class DetailsImageSwiperWidget extends StatelessWidget {
-  const DetailsImageSwiperWidget({
+class ProductImageSwiperWidget extends StatelessWidget {
+  const ProductImageSwiperWidget({
     super.key,
-    required this.images,
+    required this.imageUrls,
   });
 
-  final List<dynamic> images;
+  final List<dynamic> imageUrls;
 
   @override
   Widget build(BuildContext context) {
-    
     return Align(
       alignment: Alignment.center,
       child: SizedBox(
@@ -25,7 +23,7 @@ class DetailsImageSwiperWidget extends StatelessWidget {
         child: Swiper(
           itemBuilder: (BuildContext context, int index) {
             return CachedNetworkImage(
-              imageUrl: images[index],
+              imageUrl: imageUrls[index],
               progressIndicatorBuilder: (context, url, downloadProgress) =>
                   Center(
                 child:
@@ -34,8 +32,8 @@ class DetailsImageSwiperWidget extends StatelessWidget {
               errorWidget: (context, url, error) => const Icon(Icons.error),
             );
           },
-          autoplay: images.length == 1 ? false : true,
-          itemCount: images.length,
+          autoplay: imageUrls.length > 1,// Enable autoplay only if multiple images exist
+          itemCount: imageUrls.length,
           pagination: const SwiperPagination(
               alignment: Alignment.bottomCenter,
               builder: DotSwiperPaginationBuilder(
@@ -46,3 +44,6 @@ class DetailsImageSwiperWidget extends StatelessWidget {
     );
   }
 }
+/*
+images.length == 1 ? false : true	images.length > 1	Simplifies logic for autoplay toggle
+*/

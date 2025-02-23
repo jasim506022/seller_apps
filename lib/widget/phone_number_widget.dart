@@ -23,7 +23,7 @@ class PhoneNumberWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(AppStrings.phoneLabel, style: AppsTextStyle.labelTextStyle),
+        Text(AppStrings.phoneLabel, style: AppsTextStyle.label),
         AppsFunction.verticalSpacing(8),
 
         /// International phone input field.
@@ -31,7 +31,7 @@ class PhoneNumberWidget extends StatelessWidget {
           enabled: enabled,
           textInputAction: textInputAction,
           controller: controller,
-          style: textStyle ?? AppsTextStyle.textFieldInputTextStyle(enabled),
+          style: textStyle ?? AppsTextStyle.inputText(enabled),
 
           /// Custom decoration with hint text.
           decoration: AppsFunction.textFieldInputDecoration(

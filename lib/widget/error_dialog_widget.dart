@@ -52,7 +52,7 @@ class ErrorDialogWidget extends StatelessWidget {
 
               Text(
                 title,
-                style: AppsTextStyle.titleTextStyle
+                style: AppsTextStyle.titleText
                     .copyWith(color: AppColors.deepGreen),
                 textAlign: TextAlign.center,
               ),

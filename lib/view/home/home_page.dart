@@ -117,7 +117,7 @@ class HomePage extends StatelessWidget {
           padding: EdgeInsets.only(left: 25.w),
           child: Row(
             children: [
-              Text(AppStrings.searchHint, style: AppsTextStyle.hintTextStyle),
+              Text(AppStrings.searchHint, style: AppsTextStyle.hintText),
               const Spacer(),
               const Icon(IconlyLight.search),
               AppsFunction.horizontalSpacing(20)

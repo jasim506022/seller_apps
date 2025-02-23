@@ -21,7 +21,7 @@ class ProductDetailsWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Product name displayed with the title text style
-        Text(product.productname!, style: AppsTextStyle.titleTextStyle),
+        Text(product.productname!, style: AppsTextStyle.titleText),
         AppsFunction.verticalSpacing(15),
         // Price section: displays the discounted price and the original price with discount percentage
         _buildPriceRow(),
@@ -50,8 +50,7 @@ class ProductDetailsWidget extends StatelessWidget {
           children: [
             TextSpan(
               text: "${AppStrings.currencyIcon} $discountedPrice ",
-              style:
-                  AppsTextStyle.titleTextStyle.copyWith(color: AppColors.red),
+              style: AppsTextStyle.titleText.copyWith(color: AppColors.red),
             ),
             TextSpan(
               text: product.productunit,
@@ -92,17 +91,17 @@ class ProductDetailsWidget extends StatelessWidget {
         const Icon(Icons.star, color: AppColors.yellow),
         RichText(
           text: TextSpan(
-              style: AppsTextStyle.rattingText
+              style: AppsTextStyle.ratingText
                   .copyWith(color: Theme.of(context).primaryColor),
               children: [
                 const TextSpan(text: "( "),
                 TextSpan(text: product.productrating!.toString()),
                 TextSpan(
                     text: " ${AppStrings.ratingLabel} ",
-                    style: AppsTextStyle.rattingText),
+                    style: AppsTextStyle.ratingText),
                 TextSpan(
                     text: ")",
-                    style: AppsTextStyle.rattingText
+                    style: AppsTextStyle.ratingText
                         .copyWith(color: Theme.of(context).primaryColor)),
               ]),
         ),

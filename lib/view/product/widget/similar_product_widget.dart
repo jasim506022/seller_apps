@@ -55,7 +55,7 @@ class SimilarProductCard extends StatelessWidget {
               Text(productModel.productname!,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
-                  style: AppsTextStyle.rattingText
+                  style: AppsTextStyle.ratingText
                       .copyWith(color: Theme.of(context).primaryColor)),
             ],
           ),

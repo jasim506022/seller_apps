@@ -35,7 +35,7 @@ class AuthButton extends StatelessWidget {
               ? const Center(
                   child: CircularProgressIndicator(),
                 )
-              : Text(label, style: AppsTextStyle.buttonTextStyle),
+              : Text(label, style: AppsTextStyle.button),
         ),
       ),
     );

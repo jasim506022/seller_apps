@@ -33,7 +33,7 @@ class RoundButtonWidget extends StatelessWidget {
           child: Center(
             child: Text(
               title,
-              style: AppsTextStyle.buttonTextStyle,
+              style: AppsTextStyle.button,
             ),
           )),
     );

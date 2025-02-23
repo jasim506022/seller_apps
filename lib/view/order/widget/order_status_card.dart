@@ -54,7 +54,7 @@ class OrderStatusCard extends StatelessWidget {
               statusTitle,
               textAlign: TextAlign.center,
               style:
-                  AppsTextStyle.largeBoldText.copyWith(color: AppColors.white),
+                  AppsTextStyle.mediumBoldText.copyWith(color: AppColors.white),
             ),
           ),
         ],

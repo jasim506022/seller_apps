@@ -31,8 +31,8 @@ class PhotoOptionSheetWidget extends StatelessWidget {
           AppsFunction.verticalSpacing(10),
           Align(
               alignment: Alignment.center,
-              child: Text(AppStrings.selectPhoto,
-                  style: AppsTextStyle.titleTextStyle)),
+              child:
+                  Text(AppStrings.selectPhoto, style: AppsTextStyle.titleText)),
           AppsFunction.verticalSpacing(10),
           _buildPhotoOptions(selectImageController)
         ],
@@ -98,8 +98,7 @@ class PhotoOptionSheetWidget extends StatelessWidget {
             AppsFunction.horizontalSpacing(30),
             Text(
               title,
-              style: AppsTextStyle.buttonTextStyle
-                  .copyWith(color: AppColors.green),
+              style: AppsTextStyle.button.copyWith(color: AppColors.green),
             ),
           ],
         ),

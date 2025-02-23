@@ -70,7 +70,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         children: [
           /// Displays the label if provided.
           if (widget.label != null)
-            Text(widget.label!, style: AppsTextStyle.labelTextStyle),
+            Text(widget.label!, style: AppsTextStyle.label),
 
           /// Adds spacing between label and input field.
 
@@ -85,8 +85,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             obscureText: _obscureText,
             textInputAction: widget.textInputAction,
             keyboardType: widget.textInputType,
-            style: widget.style ??
-                AppsTextStyle.textFieldInputTextStyle(widget.enabled),
+            style: widget.style ?? AppsTextStyle.inputText(widget.enabled),
 
             /// Applies the provided decoration or uses default styling.
             decoration: widget.decoration ??

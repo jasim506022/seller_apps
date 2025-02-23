@@ -41,7 +41,7 @@ class GridItemWidet extends StatelessWidget {
               AppsFunction.verticalSpacing(10),
               Text(
                 label,
-                style: AppsTextStyle.gridViewTextStyle,
+                style: AppsTextStyle.gridTitleText,
                 textAlign: TextAlign.center,
               )
             ],

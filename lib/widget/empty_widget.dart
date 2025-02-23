@@ -38,7 +38,7 @@ class EmptyWidget extends StatelessWidget {
                 height: 300.h,
                 width: 130.w,
                 child: Center(
-                    child: Text(title, style: AppsTextStyle.emptyTestStyle)),
+                    child: Text(title, style: AppsTextStyle.emptyTextStyle)),
               ),
             ),
           )

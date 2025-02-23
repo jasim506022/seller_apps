@@ -29,7 +29,7 @@ class SingleEmptyWidget extends StatelessWidget {
             width: 10.w,
           ),
           Expanded(
-            child: Text(title, style: AppsTextStyle.emptyTestStyle),
+            child: Text(title, style: AppsTextStyle.emptyTextStyle),
           )
         ],
       ),

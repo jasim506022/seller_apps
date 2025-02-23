@@ -18,8 +18,8 @@ class ImagePickerDialog extends StatelessWidget {
     final ManageProductController manageProductController =
         Get.find<ManageProductController>();
     return SimpleDialog(
-      title: Text(AppStrings.selectPhotoTitle,
-          style: AppsTextStyle.dialogTitleText),
+      title:
+          Text(AppStrings.selectPhotoTitle, style: AppsTextStyle.dialogTitle),
       children: [
         _buildDialogOption(() {
           manageProductController.pickProductImage(ImageSource.camera);

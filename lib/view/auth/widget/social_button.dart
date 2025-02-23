@@ -28,7 +28,7 @@ class SocialButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async =>
-            await NetworkUtils.executeWithInternetCheck(action: onTap),
+          await NetworkUtils.executeWithInternetCheck(action: onTap),
       child: Container(
         alignment: Alignment.center,
         height: 60.h,
@@ -49,7 +49,7 @@ class SocialButton extends StatelessWidget {
             AppsFunction.horizontalSpacing(10),
             Text(
               label,
-              style: AppsTextStyle.buttonTextStyle,
+              style: AppsTextStyle.button,
             ),
           ],
         ),

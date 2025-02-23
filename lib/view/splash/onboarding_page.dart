@@ -33,8 +33,7 @@ class OnboardingPage extends StatelessWidget {
             onPressed: onboardingController.skipOnboarding,
             child: Text(
               AppStrings.btnSkip,
-              style: AppsTextStyle.buttonTextStyle
-                  .copyWith(color: AppColors.black),
+              style: AppsTextStyle.button.copyWith(color: AppColors.black),
             ),
           ),
         ],

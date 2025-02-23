@@ -18,6 +18,13 @@ import '../widget/show_alert_dialog_widget.dart';
 import 'loading_controller.dart';
 import 'select_image_controller.dart';
 
+/// **ProfileController**
+///
+/// Handles user profile operations:
+/// - Fetching/updating profile data.
+/// - Managing text fields and UI state.
+/// - Handling authentication and sign-out.
+/// - Managing Firebase Cloud Messaging (FCM) token
 class ProfileController extends GetxController {
   // Dependencies
   final ProfileRepository repository;
@@ -31,10 +38,10 @@ class ProfileController extends GetxController {
   final RxString image = "".obs;
 
   // TextEditingControllers for profile fields
-  final TextEditingController nameTEC = TextEditingController();
-  final TextEditingController addressTEC = TextEditingController();
-  final TextEditingController phoneTEC = TextEditingController();
-  final TextEditingController emailTEC = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController addressController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
 
   // Constructor with required repository
   ProfileController({required this.repository});
@@ -42,18 +49,24 @@ class ProfileController extends GetxController {
   @override
   void onClose() {
     // Dispose of all text controllers to prevent memory leaks
-    for (final controller in [nameTEC, addressTEC, phoneTEC, emailTEC]) {
+    for (final controller in [
+      nameController,
+      addressController,
+      phoneController,
+      emailController
+    ]) {
       controller.dispose();
     }
     // Reset observables to their initial states
     isDataChanged(false);
     image.value = "";
+    super.onClose();
   }
 
-  /// Updates user profile information in the database.
+  /// **Updates user profile information in Firestore.**
   Future<void> updateProfile() async {
-    if (phoneTEC.text.trim().isEmpty) {
-      AppsFunction.flutterToast(msg: AppStrings.givemPhoneNumbeer);
+    if (phoneController.text.trim().isEmpty) {
+      AppsFunction.flutterToast(msg: AppStrings.phoneNumberPromptToast);
       return;
     }
 
@@ -67,11 +80,11 @@ class ProfileController extends GetxController {
       }
 
       // Update profile in database
-      await repository.updateUserProfile(
+      await repository.updateProfile(
           map: _buildProfileModel().toMapProfileEdit());
       // Navigate to main page and show success message
       Get.offAllNamed(RoutesName.mainPage, arguments: 3);
-      AppsFunction.flutterToast(msg: AppStrings.successfullyUpdate);
+      AppsFunction.flutterToast(msg: AppStrings.profileUpdateToast);
     } catch (e) {
       _handleError(e);
     } finally {
@@ -79,22 +92,22 @@ class ProfileController extends GetxController {
     }
   }
 
-  /// Builds an updated ProfileModel object from the text controllers.
+  /// **Creates an updated ProfileModel from text fields.**
   ProfileModel _buildProfileModel() {
     return ProfileModel(
-      address: addressTEC.text.trim(),
-      phone: phoneTEC.text.trim(),
-      name: nameTEC.text.trim(),
+      address: addressController.text.trim(),
+      phone: phoneController.text.trim(),
+      name: nameController.text.trim(),
       imageurl: image.value,
     );
   }
 
-  /// Adds listeners to detect changes in text fields and update the UI state.
+  /// **Adds listeners to detect profile field changes.**
   void addChangeListener(ProfileModel profile) {
     final controllers = [
-      nameTEC,
-      phoneTEC,
-      addressTEC,
+      nameController,
+      phoneController,
+      addressController,
     ];
 
     for (var textField in controllers) {
@@ -104,14 +117,14 @@ class ProfileController extends GetxController {
     }
   }
 
-  /// Checks if the profile has been modified.
+  /// **Checks if the profile has been modified.**
   bool _isProfileChanged(ProfileModel profile) {
-    return nameTEC.text.trim() != profile.name ||
-        phoneTEC.text.trim() != profile.phone ||
-        addressTEC.text.trim() != profile.address;
+    return nameController.text.trim() != profile.name ||
+        phoneController.text.trim() != profile.phone ||
+        addressController.text.trim() != profile.address;
   }
 
-  /// Fetches user profile data from the database and updates the UI state.
+  /// **Fetches user profile from Firestore and updates UI.**
   Future<DocumentSnapshot<Map<String, dynamic>>> fetchUserProfile() async {
     try {
       var snapshot = await repository.fetchUserProfile();
@@ -119,15 +132,17 @@ class ProfileController extends GetxController {
       /// Ensure snapshot contains data before proceeding
       var data = snapshot.data()!;
 
+      /// Convert Firestore data into `ProfileModel`
       var profileModel = ProfileModel.fromMap(data);
 
-      /// Only proceed if user status is "approved"
+      /// Only proceed if user status is **approved**.
       if (profileModel.status == AppStrings.approved) {
-        await _saveProfileToSharedPreferences(profileModel);
-        _updateTextControllers(profileModel);
-        // Update Firebase Cloud Messaging (FCM) token
-        var token = await getFCMToken();
-        await repository.updateUserProfile(map: {"token": token});
+        await _storeProfileLocally(profileModel);
+        _populateTextFields(profileModel);
+
+        /// Update Firebase Cloud Messaging (FCM) token
+        var token = await fetchFCMToken();
+        await repository.updateProfile(map: {"token": token});
       }
       return snapshot;
     } catch (e) {
@@ -136,9 +151,8 @@ class ProfileController extends GetxController {
     }
   }
 
-  /// Saves the user's profile data to shared preferences.
-  Future<void> _saveProfileToSharedPreferences(
-      ProfileModel profileModel) async {
+  /// **Stores user profile locally in shared preferences.**
+  Future<void> _storeProfileLocally(ProfileModel profileModel) async {
     var prefs = AppConstants.sharedPreference;
     final prefsTasks = [
       prefs!.setString(AppStrings.prefUserId, profileModel.uid!),
@@ -153,16 +167,17 @@ class ProfileController extends GetxController {
     await Future.wait(prefsTasks);
   }
 
-  /// Updates the UI text controllers with the fetched user profile data.
-  void _updateTextControllers(ProfileModel profileModel) {
-    nameTEC.text = profileModel.name ?? '';
-    addressTEC.text = profileModel.address ?? '';
-    phoneTEC.text = profileModel.phone ?? '';
-    emailTEC.text = profileModel.email ?? '';
+  /// **Updates UI text fields with user profile data.**
+  void _populateTextFields(ProfileModel profileModel) {
+    nameController.text = profileModel.name ?? '';
+    addressController.text = profileModel.address ?? '';
+    phoneController.text = profileModel.phone ?? '';
+    emailController.text = profileModel.email ?? '';
     image.value = profileModel.imageurl ?? '';
   }
 
-  Future<void> handleBackNavigaion(bool didPop) async {
+  /// **Handles back navigation, prompting to save changes if necessary.**
+  Future<void> handleBackNavigation(bool didPop) async {
     if (didPop) return; // If the user already popped, exit
 
     if (!isDataChanged.value) {
@@ -180,13 +195,14 @@ class ProfileController extends GetxController {
         onConfirmPressed: () => Get.back()));
   }
 
+  /// **Resets input fields and profile image selection.*
   void resetInputs() {
     // Clear all text controllers
     for (var controller in [
-      nameTEC,
-      phoneTEC,
-      emailTEC,
-      addressTEC,
+      nameController,
+      phoneController,
+      emailController,
+      addressController,
     ]) {
       controller.text = '';
     }
@@ -196,7 +212,8 @@ class ProfileController extends GetxController {
     isDataChanged.value = false;
   }
 
-  Future<String?> getFCMToken() async {
+  /// **Fetches Firebase Cloud Messaging (FCM) token.**
+  Future<String?> fetchFCMToken() async {
     try {
       // Request permission for iOS devices
       NotificationSettings settings =
@@ -230,7 +247,7 @@ class ProfileController extends GetxController {
 
   /// Displays a confirmation dialog asking the user if they want to exit the app.
   /// If the user confirms, the app will be closed.
-  Future<void> exitApps(bool didPop) async {
+  Future<void> exitApp(bool didPop) async {
     // If the app screen was already popped, do nothing.
     if (didPop) return;
 
@@ -250,7 +267,7 @@ class ProfileController extends GetxController {
   Future<void> signOut() async {
     await Get.dialog(ShowAlertDialogWidget(
         icon: Icons.delete,
-        title: AppStrings.signOut,
+        title: AppStrings.signOutLabel,
         content: AppStrings.doYouwantSignout,
         onConfirmPressed: () async {
           try {
@@ -258,9 +275,10 @@ class ProfileController extends GetxController {
             await prefs.setString(AppStrings.prefUserProfilePic, "");
             await prefs.setString(AppStrings.prefUserName, "");
             await prefs.setString(AppStrings.prefUserEmail, "");
-            await repository.updateUserProfile(map: {"token": ""});
+            await repository.updateProfile(map: {"token": ""});
             await authRepository.signOut();
-            AppsFunction.flutterToast(msg: AppStrings.successfullySignedOut);
+            AppsFunction.flutterToast(
+                msg: AppStrings.successfullySignedOutToast);
 
             Get.offAllNamed(RoutesName.signPage);
           } catch (e) {
@@ -276,9 +294,12 @@ controller.text = ''; // Use `text = ''` instead of `clear()`
 Why Use controller.text = '' Instead of .clear()?
 Better performance: .clear() internally calls notifyListeners(), which can cause unnecessary UI rebuilds.
 More predictable: Directly setting .text = '' ensures that changes happen without side effects.
-
+#: What is memoery Leak
+/// Dispose text controllers to prevent memory leaks.
 #: ()
 how double to num
 #: Why use Final (already)
+#:     [nameController, addressController, phoneController, emailController].forEach((c) => c.dispose());
+
 */
 

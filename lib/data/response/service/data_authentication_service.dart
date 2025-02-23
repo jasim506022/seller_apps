@@ -49,7 +49,7 @@ class DataAuthenticationService extends BaseAuthenticationService {
     if (userId == null) return false;
 
     final userDoc = await _firebaseFirestore
-        .collection(AppStrings.sellersCollection)
+        .collection(AppStrings.collectionSeller)
         .doc(userId)
         .get();
 
@@ -61,7 +61,7 @@ class DataAuthenticationService extends BaseAuthenticationService {
   Future<void> createNewUserWithGoogle(
       {required User user, required ProfileModel profileModel}) async {
     _firebaseFirestore
-        .collection(AppStrings.sellersCollection)
+        .collection(AppStrings.collectionSeller)
         .doc(user.uid)
         .set(profileModel.toMap());
   }
@@ -72,8 +72,8 @@ class DataAuthenticationService extends BaseAuthenticationService {
       {required File file, bool isProfile = false}) async {
     String fileName = "ju_grocery_${DateTime.now().millisecondsSinceEpoch}";
     final storagePath = isProfile
-        ? "${AppStrings.sellersCollection}/${_firebaseAuth.currentUser!.uid}/profile/$fileName"
-        : "${AppStrings.sellersCollection}/profile/$fileName";
+        ? "${AppStrings.collectionSeller}/${_firebaseAuth.currentUser!.uid}/profile/$fileName"
+        : "${AppStrings.collectionSeller}/profile/$fileName";
 
     final ref = _firebaseStorage.ref().child(storagePath);
     final uploadTask = ref.putFile(file);
@@ -97,7 +97,7 @@ class DataAuthenticationService extends BaseAuthenticationService {
       {required ProfileModel profileModel,
       required String firebaseDocument}) async {
     await _firebaseFirestore
-        .collection(AppStrings.sellersCollection)
+        .collection(AppStrings.collectionSeller)
         .doc(firebaseDocument)
         .set(profileModel.toMap());
   }

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../res/apps_text_style.dart';
 
-/// A customizable profile list tile with an icon, title, and optional trailing icon.
-class ProfileOptionTileWidget extends StatelessWidget {
-  const ProfileOptionTileWidget(
+/// **ProfileMenuItemTile**
+///
+/// A reusable **list tile widget** used in the profile menu to display different options.
+/// - Handles **tap actions** for navigation or other interactions.
+class ProfileMenuItemTileWidget extends StatelessWidget {
+  const ProfileMenuItemTileWidget(
       {super.key,
       required this.title,
       required this.icon,
@@ -27,18 +29,18 @@ class ProfileOptionTileWidget extends StatelessWidget {
       leading: Icon(
         icon,
         color: defaultColor,
-        size: 25.h,
       ),
+      title: Text(title,
+          style: AppsTextStyle.largeBold.copyWith(color: defaultColor)),
+
+      /// **Trailing Arrow (Optional)**
       trailing: hasTrailingIcon
           ? IconButton(
               onPressed: onTap,
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_forward_ios,
-                size: 20.h,
               ))
           : null,
-      title: Text(title,
-          style: AppsTextStyle.mediumBoldText.copyWith(color: defaultColor)),
     );
   }
 }

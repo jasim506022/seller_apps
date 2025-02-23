@@ -10,7 +10,7 @@ import '../home/home_page.dart';
 import '../other/local_service.dart';
 import '../other/pushnotification.dart';
 import '../product/product_page.dart';
-import '../profile/profile_screen.dart';
+import '../profile/profile_page.dart';
 import '../search/search_page.dart';
 
 /// /// Main application page with a bottom navigation bar.
@@ -36,7 +36,7 @@ class _MainPageState extends State<MainPage> {
     HomePage(),
     ProductPage(),
     SearchPage(),
-    ProfileScreen(),
+    ProfilePage(),
   ];
 
   @override
@@ -78,7 +78,7 @@ class _MainPageState extends State<MainPage> {
     return PopScope(
       canPop: false,
       //controls whether the user can navigate back or exit the app
-      onPopInvoked: (didPop) => profileController.exitApps(didPop),
+      onPopInvoked: (didPop) => profileController.exitApp(didPop),
       child: Scaffold(
         bottomNavigationBar: SalomonBottomBar(
           backgroundColor: Theme.of(context).cardColor,

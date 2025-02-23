@@ -53,7 +53,7 @@ class DeliveryInfoCard extends StatelessWidget {
                       !snapshots.hasData ||
                       snapshots.data?.data() == null) {
                     return Text(
-                      AppStrings.noDataAvaiable,
+                      AppStrings.noDataAvaiableError,
                       style: AppsTextStyle.mediumBoldText,
                     );
                   }

@@ -48,7 +48,7 @@ class OrderItemWidget extends StatelessWidget {
             image: AppImage.error,
             title: snapshot.hasError
                 ? '${AppStrings.errorOccurred} ${snapshot.error}'
-                : AppStrings.noDataAvaiable,
+                : AppStrings.noDataAvaiableError,
           );
         }
         return InkWell(

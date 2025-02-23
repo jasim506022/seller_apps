@@ -53,7 +53,7 @@ class OrderUserDetailsStream extends StatelessWidget {
               if (!snapshots.hasData || snapshots.data?.data() == null) {
                 return SingleEmptyWidget(
                   image: AppImage.singleError,
-                  title: AppStrings.noDataAvaiable,
+                  title: AppStrings.noDataAvaiableError,
                 );
               }
 

@@ -42,7 +42,7 @@ class SimilarProductList extends StatelessWidget {
                 image: AppImage.singleError,
                 title: snapshot.hasError
                     ? '${AppStrings.errorOccure} ${snapshot.error}'
-                    : AppStrings.noDataAvaiable);
+                    : AppStrings.noDataAvaiableError);
           }
           if (snapshot.hasData) {
             final products = snapshot.data!.docs;

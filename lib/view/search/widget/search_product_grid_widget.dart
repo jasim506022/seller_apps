@@ -26,7 +26,7 @@ class SearchProductGridWidget extends StatelessWidget {
       return productList.isEmpty
           ? EmptyWidget(
               image: AppImage.error,
-              title: AppStrings.noDataAvaiable,
+              title: AppStrings.noDataAvaiableError,
             )
 
           /// Builds the product grid using the filtered product list.

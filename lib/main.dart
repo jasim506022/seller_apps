@@ -112,8 +112,10 @@ class MyApp extends StatelessWidget {
         color: isDarkTheme ? AppColors.cardDark : AppColors.white,
       ),
 
+      // Okay (Final)
       iconTheme: IconThemeData(
           color: isDarkTheme ? AppColors.white : AppColors.black, size: 25.h),
+      // Okay (final)
 
       // App Bar Theme (Modify)
       appBarTheme: AppBarTheme(

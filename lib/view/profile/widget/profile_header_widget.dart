@@ -53,13 +53,13 @@ class ProfileHeaderWidget extends StatelessWidget {
     return {
       'name':
           AppConstants.sharedPreference?.getString(AppStrings.prefUserName) ??
-              'Unknown User',
+              AppStrings.defaultName,
       'email':
           AppConstants.sharedPreference?.getString(AppStrings.prefUserEmail) ??
-              'No Email Available',
+              AppStrings.defaultEmail,
       'profileImageUrl': AppConstants.sharedPreference
               ?.getString(AppStrings.prefUserProfilePic) ??
-          '',
+          AppStrings.defaultImage,
     };
   }
 
@@ -86,7 +86,7 @@ class ProfileHeaderWidget extends StatelessWidget {
         AppButton(
           onPressed: () =>
               Get.toNamed(RoutesName.editProfilePage, arguments: true),
-          title: AppStrings.editProfile,
+          title: AppStrings.btnEditProfile,
           width: 160,
         ),
       ],

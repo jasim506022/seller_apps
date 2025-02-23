@@ -96,7 +96,7 @@ class ProductSearchController extends GetxController {
         double.tryParse(maxPriceController.text) ?? 10000.00;
 
     if (minPrice > maxPrice) {
-      AppsFunction.flutterToast(msg: AppStrings.minumeAndMaximum);
+      AppsFunction.flutterToast(msg: AppStrings.minPriceExceedsMaxToast);
       return;
     }
 

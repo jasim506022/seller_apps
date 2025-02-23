@@ -12,7 +12,7 @@ class AppsTextStyle {
 
   // Title Styles
   static TextStyle get titleText => GoogleFonts.poppins(
-      color: theme.primaryColor, fontSize: 20.sp, fontWeight: FontWeight.w800);
+      color: theme.primaryColor, fontSize: 19.sp, fontWeight: FontWeight.w800);
 
   static TextStyle get dialogTitle => GoogleFonts.poppins(
       color: AppColors.green, fontSize: 18.sp, fontWeight: FontWeight.w800);
@@ -66,7 +66,7 @@ class AppsTextStyle {
       color: theme.primaryColor, fontSize: 11.sp, fontWeight: FontWeight.w700);
 
   static TextStyle get largeBold => GoogleFonts.poppins(
-        fontSize: 16.sp,
+        fontSize: 17.sp,
         color: theme.primaryColor,
         fontWeight: FontWeight.w800,
       );

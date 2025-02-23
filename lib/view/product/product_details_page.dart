@@ -33,7 +33,11 @@ class ProductDetailsPage extends StatelessWidget {
       canPop: false,
       onPopInvoked: (bool didPop) {
         // Navigate back to Product Page
-        if (!didPop) Get.offAndToNamed(RoutesName.mainPage, arguments: 2);
+        if (!didPop) {
+          Get.offAndToNamed(
+            RoutesName.mainPage,
+          );
+        }
       },
       child: Scaffold(
         body: SingleChildScrollView(
@@ -51,7 +55,7 @@ class ProductDetailsPage extends StatelessWidget {
                     // Display product details such as title, description, etc.
                     ProductDetailsWidget(product: productModel),
                     Text(
-                      AppStrings.similarProducts,
+                      AppStrings.similarProductTitle,
                       style: AppsTextStyle.titleText,
                     ),
                     AppsFunction.verticalSpacing(10),

@@ -47,7 +47,7 @@ class DataFirebaseService implements BaseFirebaseService {
 
     // Define the storage path
     final storagePath =
-        "${AppStrings.sellersCollection}/$sellerId/$sellerName/$productId/images/$uniqueImageName";
+        "${AppStrings.collectionSeller}/$sellerId/$sellerName/$productId/images/$uniqueImageName";
 
     // Upload image to Firebase Storage
     final ref = firebaseStorage.ref().child(storagePath);
@@ -61,7 +61,7 @@ class DataFirebaseService implements BaseFirebaseService {
   Future<void> saveProductToDatabase(
       {required ProductModel productModel, required bool isUpdate}) async {
     final sellerDoc = firebaseFirestore
-        .collection(AppStrings.sellersCollection)
+        .collection(AppStrings.collectionSeller)
         .doc(AppConstants.sharedPreference!.getString(AppStrings.prefUserId));
 
     // References to the product documents in seller and global collections
@@ -87,7 +87,7 @@ class DataFirebaseService implements BaseFirebaseService {
   Stream<QuerySnapshot<Map<String, dynamic>>> fetchCategoryProducts(
       {required String category}) {
     var collectionRef = firebaseFirestore
-        .collection(AppStrings.sellersCollection)
+        .collection(AppStrings.collectionSeller)
         .doc(AppConstants.sharedPreference!.getString(AppStrings.prefUserId))
         .collection(AppStrings.productsCollection);
     var query = collectionRef.orderBy("publishDate", descending: true);
@@ -105,7 +105,7 @@ class DataFirebaseService implements BaseFirebaseService {
         AppConstants.sharedPreference?.getString(AppStrings.prefUserId);
 
     final sellerRef = firebaseFirestore
-        .collection(AppStrings.sellersCollection)
+        .collection(AppStrings.collectionSeller)
         .doc(sellerId);
 
     sellerRef.collection(AppStrings.productsCollection).doc(productId).delete();
@@ -124,7 +124,7 @@ class DataFirebaseService implements BaseFirebaseService {
     final sellerId =
         AppConstants.sharedPreference?.getString(AppStrings.prefUserId);
     return firebaseFirestore
-        .collection(AppStrings.sellersCollection)
+        .collection(AppStrings.collectionSeller)
         .doc(sellerId)
         .collection(AppStrings.productsCollection)
         .where("productId", isNotEqualTo: productModel.productId)

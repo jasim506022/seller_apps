@@ -4,19 +4,23 @@ import '../data/response/service/data_profile_service.dart';
 import '../res/app_function.dart';
 
 class ProfileRepository {
-  final profileService = DataProfileService();
+  final dataService = DataProfileService();
+
+  /// Retrieves the user profile from Firestore.
+
   Future<DocumentSnapshot<Map<String, dynamic>>> fetchUserProfile() async {
     try {
-      return profileService.fetchUserProfile();
+      return await dataService.fetchUserProfile();
     } catch (e) {
       AppsFunction.handleException(e);
       rethrow;
     }
   }
 
-  Future<void> updateUserProfile({required Map<String, dynamic> map}) async {
+  /// Updates the user profile in Firestore.
+  Future<void> updateProfile({required Map<String, dynamic> map}) async {
     try {
-      await profileService.updateUserProfile(map: map);
+      await dataService.updateProfile(map: map);
     } catch (e) {
       AppsFunction.handleException(e);
     }

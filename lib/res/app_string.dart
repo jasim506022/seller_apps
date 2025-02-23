@@ -4,7 +4,7 @@ class AppStrings {
   */
   static const String appName = "JasiVendor";
   // static const String welcome = "Welcome";
-  static const String about = "About";
+
   static const String permissionDenied = "Permission denied for notifications.";
   static const String fcmTokenError = "Error retrieving FCM token:";
   static const String noImageSelect = "No images selected";
@@ -30,6 +30,10 @@ class AppStrings {
   static const String allProductsTitle = "All Products";
   static const String totalSalesTitle = "Total Sales";
   static const String runningOrdersTitle = "Running Orders";
+  static const similarProductTitle = "Similar Products";
+  static const String aboutTitle = "About";
+  static const String orderTitle = 'My Orders';
+  static const String historyTitle = "History";
 
   // 📌 Authentication Titles & Messages
   static const String sellerLogInTitle = "JasiVendor Login";
@@ -49,8 +53,6 @@ class AppStrings {
   static String youdontWantToReset = "If you don't want to reset Password? ";
   static const String passwordMatch = "Passwords do not match.";
 
-  static const String successfullySignedOut = "Successfully signed out.";
-
   /*
   * 📸 Image Selection
   */
@@ -63,7 +65,6 @@ class AppStrings {
 
   static const String enterPhone = 'Please enter your phone number';
 
-  static const String address = "Address";
   static const String pleaseEnterAddress = "Please enter your Address";
 
 /*
@@ -103,6 +104,9 @@ class AppStrings {
   static const String btnFacebook = "Facebook";
   static const String btnGmail = "Gmail";
   static const String btnOkay = "Okay";
+  static const String btnEditProfile = "Edit Profile";
+  static const String btnCamera = "Camera";
+  static const String btnGallery = "Gallery";
 
   // 📌 Success & Toast Messages
   static const String successSignUpMessage = "Sign up successful!";
@@ -121,6 +125,13 @@ class AppStrings {
   static const String selectOneImageToast = "Please Select at least One Image";
   static const updateProductToastMessage = "Succesfully update a New Product";
   static const uploadProductToastMessage = "Succesfully Upload a New Product";
+  static const String minPriceExceedsMaxToast =
+      'Minimum price cannot exceed maximum price.';
+  static const String deleteSuccessToast = "Delete Succesffully";
+  static String phoneNumberPromptToast = "Please Give your Phone Numer";
+  static String profileUploadToast = "Profile Upload Successfully";
+  static String profileUpdateToast = "Profile Updated Successfully.";
+  static const String successfullySignedOutToast = "Successfully signed out.";
 
   // 📌 Form Field Labels
   static const productNameLabel = 'Product Name';
@@ -133,6 +144,10 @@ class AppStrings {
   static const String nameLabel = "Name";
   static const String passwordConfirmLabel = "Confirm Password";
   static const String phoneLabel = "Phone";
+  static String darkLabel = "Dark";
+  static String lightLabel = "Light";
+  static const String signOutLabel = "Sign Out";
+  static const String addressLabel = "Address";
 
   // 📌 Hint Texts (For Input Fields)
   static const String productNameHint = "Enter product name (e.g., Nike Shoes)";
@@ -221,14 +236,12 @@ class AppStrings {
 
   static String doYouwantSignout = "Do you want to sign out?";
 
-  static String selectPhoto = "Select Photo";
-  static String camera = "Camera";
-  static String gallery = "Gallery";
-
   // 📌 Firebase Collections & Shared Preferences Keys
   static const String collectionUsers = "users";
   static const String collectionProducts = "products";
   static const String collectionOrders = "orders";
+  static const String collectionSeller = "seller";
+  static const String tokenFirebaseField = "token";
   static const String prefUserId = "uid";
   static const String prefUserEmail = "email";
   static const String prefUserName = "name";
@@ -276,12 +289,7 @@ class AppStrings {
 
   // sharepare
 
-  static String givemPhoneNumbeer = "Please Give your Phone Numer";
   static String pleaseWait = "Pleasing Waiting........";
-  static String profileUpdate = "Profile Update";
-  static String successfullyUpdate = "Profile updated successfully";
-
-  static String historyPage = "History Page";
 
   static String addresNoteFound = "Address Not Found";
 
@@ -292,11 +300,10 @@ class AppStrings {
 
   static String searchProductHere = "Search Product Here";
 
-  static String myOrder = 'My Orders';
   static String off = "Off";
 
   // Firebase
-  static const sellersCollection = "seller";
+
   static const productsCollection = "products";
 
   //Error
@@ -305,8 +312,6 @@ class AppStrings {
   // Main Page
 
   // App Bar and Title
-  static const String editProfile = "Edit Profile";
-  static const String signOut = "Sign Out";
 
   static const String orderPage = "Order Page";
   static String orderOverview = "Order Overview";
@@ -316,10 +321,9 @@ class AppStrings {
   static String completeOrder = "Complete Order";
   static String deliveryPartner = "Delivery Partner";
   static String trackingNumber = "Tracking Number";
-  static String searchProducts = "Search Products";
+
   static String productPrice = 'Product Price';
   static String productCategory = 'Product Category';
-  static const similarProducts = "Similar Products";
 
   // Heading
   static String userDetails = "User Details";
@@ -337,7 +341,6 @@ class AppStrings {
 
   // Toast
 
-  static const deleteSuccessFully = "Delete Succesffully";
   static const userDoesntExit = "User Doesn't Exit";
 
   static const noInternet = 'No Internet';
@@ -348,7 +351,6 @@ class AppStrings {
   static const available = "available";
   // Firebase Message
   static const errorOccure = 'Error Occure';
-  static String noDataAvaiable = "No Data Available";
 
   //
   static const currencyIcon = "৳.";
@@ -364,28 +366,24 @@ class AppStrings {
 
   //botton
 
-  static String dark = "Dark";
-  static String light = "Light";
   static const String pleaseEnterPrefix = "Please enter";
   static const homePage = "Home Page";
 
   static const pleaseEnterProduct = 'Please Enter Product';
 
-  static String minumeAndMaximum = 'Minimum price cannot exceed maximum price.';
-
-  // 📌 Helper Functions for Dynamic Messages
+  // 📌 Helper Functions for Dynamic Messages and Others
   static String pleaseEnterField(String fieldName) {
     return "Please enter $fieldName.";
   }
 
+  static const String selectPhoto = "Select Photo";
   static const String goBack = "Go Back";
-
-  // Product
 
   // 📌 Error Messages
   static const String errorGeneric = "Something went wrong. Please try again.";
   static const String errorNoInternet =
       "No internet connection. Please check your network.";
+  static String noDataAvaiableError = "No Data Available";
 
   static const String errorUnauthorized =
       "Unauthorized access. Please sign in again.";

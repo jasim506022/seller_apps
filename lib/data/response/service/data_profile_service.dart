@@ -7,19 +7,21 @@ import 'base_profile_service.dart';
 
 class DataProfileService extends BaseProfileService {
   final _firebaseFirestore = FirebaseFirestore.instance;
-  //
+
+  /// **Fetch user profile from Firestore**
   @override
   Future<DocumentSnapshot<Map<String, dynamic>>> fetchUserProfile() {
     return _firebaseFirestore
-        .collection(AppStrings.sellersCollection)
+        .collection(AppStrings.collectionSeller)
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get();
   }
 
+  /// **Update user profile in Firestore**
   @override
-  Future<void> updateUserProfile({required Map<String, dynamic> map}) async {
+  Future<void> updateProfile({required Map<String, dynamic> map}) async {
     _firebaseFirestore
-        .collection(AppStrings.sellersCollection)
+        .collection(AppStrings.collectionSeller)
         .doc(AppConstants.sharedPreference?.getString(AppStrings.prefUserId))
         .update(map);
   }

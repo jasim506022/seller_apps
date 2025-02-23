@@ -17,6 +17,13 @@ import '../../controller/profile_controller.dart';
 
 import 'widget/profile_image_section_widget.dart';
 
+/// **EditProfilePage**
+///
+/// This screen allows users to **view and edit their profile details**.
+/// - Supports **edit mode** based on navigation arguments.
+/// - Uses **GetX for state management**.
+/// - Fetches user profile data using `ProfileController`.
+/// - Provides **form validation** for user inputs.
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({super.key});
 
@@ -25,17 +32,22 @@ class EditProfilePage extends StatefulWidget {
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
-  final profileController = Get.find<ProfileController>();
+  /// Controller for handling Profile-related logic
+  late final ProfileController profileController;
 
   // Indicates whether the page is in edit mode.
   late bool isEditMode;
 
   // Form key for validating form inputs.
-  final GlobalKey<FormState> key = GlobalKey<FormState>();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
+    /// Retrieves whether the page is in **edit mode** based on navigation arguments.
     isEditMode = Get.arguments ?? false;
+
+    /// Get the `ProfileController` instance for managing Profile.
+    profileController = Get.find<ProfileController>();
     super.initState();
   }
 
@@ -44,38 +56,42 @@ class _EditProfilePageState extends State<EditProfilePage> {
     return PopScope(
         canPop: false,
         onPopInvoked: (didPop) async {
+          /// Prevent back navigation while loading.
           if (!profileController.loadingController.loading.value) {
-            profileController.handleBackNavigaion(didPop);
+            profileController.handleBackNavigation(didPop);
           }
         },
         child: Scaffold(
             appBar: AppBar(
-              title: Text(
-                isEditMode ? AppStrings.editProfile : AppStrings.about,
-              ),
+              title: Text(isEditMode
+                  ? AppStrings.btnEditProfile
+                  : AppStrings.aboutTitle),
               actions: [
+                /// Save changes button (only in edit mode).
                 if (isEditMode)
                   IconButton(
                       onPressed: () async {
-                        if (!key.currentState!.validate()) return;
-                        NetworkUtils.executeWithInternetCheck(
+                        if (!formKey.currentState!.validate()) return;
+                        await NetworkUtils.executeWithInternetCheck(
                             action: () => profileController.updateProfile());
                       },
                       icon: const Icon(
-                        Icons.done,
+                        Icons.cloud_upload,
                       ))
               ],
             ),
             body: ListView(
               children: [
+                /// **Show loading indicator when updating profile.**
                 Obx(() {
                   return profileController.loadingController.loading.value
                       ? const LinearProgressIndicator(
-                          backgroundColor: AppColors.red,
-                        )
+                          backgroundColor: AppColors.red)
                       : const SizedBox
                           .shrink(); // Use this to avoid rendering anything when not loading.
                 }),
+
+                /// **Fetch user profile data.**
                 FutureBuilder(
                   future: profileController.fetchUserProfile(),
                   builder: (context, snapshot) {
@@ -83,69 +99,81 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       return const Center(child: CircularProgressIndicator());
                     }
                     if (!snapshot.hasData || snapshot.data == null) {
-                      return Center(child: Text(AppStrings.noDataAvaiable));
+                      return Center(
+                          child: Text(AppStrings.noDataAvaiableError));
                     }
-                    if (snapshot.hasData) {
-                      var profileModel =
-                          ProfileModel.fromMap(snapshot.data!.data()!);
-                      return Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 20.w, vertical: 15.h),
-                          child: SingleChildScrollView(
-                            child: Column(
-                              children: [
-                                ProfileImageSectionWidget(
-                                  isEditMode: isEditMode,
-                                  imageUrl: profileModel.imageurl!,
-                                ),
-                                AppsFunction.verticalSpacing(50),
-                                _buildFormField(profileModel),
-                                AppsFunction.verticalSpacing(100),
-                              ],
-                            ),
-                          ));
-                    }
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
+
+                    /// **Parse fetched profile data.**
+                    final profileModel =
+                        ProfileModel.fromMap(snapshot.data!.data()!);
+                    return Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 20.w, vertical: 15.h),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              /// **Profile Image Section**
+                              ProfileImageSectionWidget(
+                                isEditMode: isEditMode,
+                                imageUrl: profileModel.imageurl!,
+                              ),
+                              AppsFunction.verticalSpacing(50),
+                              _buildProfileForm(profileModel),
+                              AppsFunction.verticalSpacing(100),
+                            ],
+                          ),
+                        ));
                   },
                 ),
               ],
             )));
   }
 
-  _buildFormField(ProfileModel profileModel) {
+  /// **Builds the Profile Form**
+  ///
+  /// - Includes fields for **name, phone, email, and address**.
+  /// - Uses `CustomTextFormField` for text inputs.
+  /// - Uses `PhoneNumberWidget` for phone input.
+  /// - Validates inputs before submission.
+  _buildProfileForm(ProfileModel profileModel) {
     return Form(
-        key: key,
+        key: formKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            /// Name input field
             CustomTextFormField(
               label: AppStrings.nameLabel,
               onChanged: (value) =>
                   profileController.addChangeListener(profileModel),
               validator: Validators.validateName,
-              controller: profileController.nameTEC,
-              hintText: AppStrings.yourName,
+              controller: profileController.nameController,
+              hintText: AppStrings.nameHint,
               enabled: isEditMode,
             ),
+
+            /// Phone input field
             PhoneNumberWidget(
               enabled: isEditMode,
-              controller: profileController.phoneTEC,
+              controller: profileController.phoneController,
             ),
+
+            /// **Email Field (Non-Editable)**
             CustomTextFormField(
               label: AppStrings.emailLabel,
-              controller: profileController.emailTEC,
+              controller: profileController.emailController,
               enabled: false,
               hintText: AppStrings.emailHint,
             ),
+
+            /// Address input field
             CustomTextFormField(
-              label: AppStrings.address,
-              validator: Validators.validatePassword,
+              label: AppStrings.addressLabel,
+              validator: Validators.validateAddress,
               onChanged: (p0) =>
                   profileController.addChangeListener(profileModel),
-              hintText: AppStrings.pleaseEnterAddress,
-              controller: profileController.addressTEC,
+              hintText: AppStrings.addressHint,
+              controller: profileController.addressController,
               enabled: isEditMode,
             ),
           ],
@@ -153,106 +181,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
   }
 }
 
+// Understand Future Builder and SteamBuilder
 
 
-
-
-/*
-class AboutSingleWidget extends StatelessWidget {
-  const AboutSingleWidget({
-    super.key,
-    required this.title,
-    required this.titleName,
-  });
-
-  final String title;
-  final String titleName;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 10.h),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(title, style: AppsTextStyle.labelTextStyle),
-          AppsFunction.verticalSpace(8),
-          Container(
-            width: 1.sw,
-            decoration: BoxDecoration(
-                color: ThemeUtils.textFieldColor,
-                borderRadius: BorderRadius.circular(15.r)),
-            padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 20.h),
-            child: Text(
-              titleName,
-              style: AppsTextStyle.textFieldInputTextStyle(false),
-            ),
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class AboutDetails extends StatelessWidget {
-  const AboutDetails({super.key, required this.profileModel});
-  final ProfileModel profileModel;
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        AboutSingleWidget(
-          title: AppString.name,
-          titleName: profileModel.name!,
-        ),
-        AboutSingleWidget(
-          title: AppString.phone,
-          titleName: profileModel.phone!,
-        ),
-        AboutSingleWidget(
-          title: AppString.email,
-          titleName: profileModel.email!,
-        ),
-        AboutSingleWidget(
-          title: AppString.address,
-          titleName: profileModel.address!,
-        ),
-      ],
-    );
-  }
-}
-
-*/
-
-/*
-
-            /*
-            Obx(() {
-              if (profileController.loadingController.loading.value) {
-                // Show loading indicator
-                return const Scaffold(
-                  body: Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                );
-              } else {
-                return Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          ProfileImageSectionWidget(
-                            isEditMode: isEditMode,
-                          ),
-                          AppsFunction.verticalSpace(50),
-                          _buildFormField(),
-                          AppsFunction.verticalSpace(100),
-                        ],
-                      ),
-                    ));
-              }
-            })
-            */
-            
-    */

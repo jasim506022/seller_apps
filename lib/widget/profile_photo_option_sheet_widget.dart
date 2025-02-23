@@ -58,10 +58,10 @@ class PhotoOptionSheetWidget extends StatelessWidget {
       spacing: 30.w,
       runSpacing: 10.h,
       children: [
-        _buildPhotoOptionButton(AppStrings.camera, Icons.camera_alt, () {
+        _buildPhotoOptionButton(AppStrings.btnCamera, Icons.camera_alt, () {
           _onPhotoOptionSelected(selectImageController, ImageSource.camera);
         }),
-        _buildPhotoOptionButton(AppStrings.gallery, Icons.photo_album, () {
+        _buildPhotoOptionButton(AppStrings.btnGallery, Icons.photo_album, () {
           _onPhotoOptionSelected(selectImageController, ImageSource.gallery);
         }),
       ],

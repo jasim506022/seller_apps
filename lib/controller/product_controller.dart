@@ -54,7 +54,7 @@ class ProductController extends GetxController {
           try {
             await repository.deleteProductSnapshot(productId: productId);
             Get.toNamed(RoutesName.mainPage, arguments: 1);
-            AppsFunction.flutterToast(msg: AppStrings.deleteSuccessFully);
+            AppsFunction.flutterToast(msg: AppStrings.deleteSuccessToast);
           } catch (e) {
             Get.back();
             _handleException(e);

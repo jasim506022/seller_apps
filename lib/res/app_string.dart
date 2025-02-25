@@ -34,6 +34,8 @@ class AppStrings {
   static const String aboutTitle = "About";
   static const String orderTitle = 'My Orders';
   static const String historyTitle = "History";
+  static const String orderPageTitle = "Order";
+  static const String orderOverviewTitle = "Order Overview";
 
   // 📌 Authentication Titles & Messages
   static const String sellerLogInTitle = "JasiVendor Login";
@@ -107,6 +109,7 @@ class AppStrings {
   static const String btnEditProfile = "Edit Profile";
   static const String btnCamera = "Camera";
   static const String btnGallery = "Gallery";
+  static const String bntHomePage = "Home Page";
 
   // 📌 Success & Toast Messages
   static const String successSignUpMessage = "Sign up successful!";
@@ -148,6 +151,13 @@ class AppStrings {
   static String lightLabel = "Light";
   static const String signOutLabel = "Sign Out";
   static const String addressLabel = "Address";
+  static const String orderDateLabel = "or.Date";
+  static String estimatedDeliveryLabel = "Estimated Delivery Date is";
+  static String orderBreakdownLabel = "Order Breakdown";
+  static String deliveryAddressLabel = "Delivery Address";
+  static String completeOrderLabel = "Complete Order";
+  static String deliveryPartnerLabel = "Delivery Partner";
+  static String trackingNumberLabel = "Tracking Number";
 
   // 📌 Hint Texts (For Input Fields)
   static const String productNameHint = "Enter product name (e.g., Nike Shoes)";
@@ -241,7 +251,15 @@ class AppStrings {
   static const String collectionProducts = "products";
   static const String collectionOrders = "orders";
   static const String collectionSeller = "seller";
+  static const String collectionUserAddress = "useraddress";
   static const String tokenFirebaseField = "token";
+  static const String statusFirebaseField = "status";
+  static const String sellerFirebaseField = "seller";
+  static const String idSelllerFirebaseField = "sellerId";
+  static const String idProductFirebaseField = "productId";
+  static const String datePublishFirebaseField = "publishDate";
+  static const String categoryProductFirebaseField = "productcategory";
+  static const String uIdFirebaseField = "uid";
   static const String prefUserId = "uid";
   static const String prefUserEmail = "email";
   static const String prefUserName = "name";
@@ -261,7 +279,6 @@ class AppStrings {
 
 // TextField Label Text
 
-  static String orderDate = "or.Date";
   static String minium = "Minimum";
   static String maximum = "Maximum";
 
@@ -304,23 +321,11 @@ class AppStrings {
 
   // Firebase
 
-  static const productsCollection = "products";
-
   //Error
-  static String errorOccurred = "Error Occurred:";
 
   // Main Page
 
   // App Bar and Title
-
-  static const String orderPage = "Order Page";
-  static String orderOverview = "Order Overview";
-  static String estimatedDelivery = "Estimated Delivery Date is";
-  static String orderBreakdown = "Order Breakdown";
-  static String deliveryAddress = "Delivery Address";
-  static String completeOrder = "Complete Order";
-  static String deliveryPartner = "Delivery Partner";
-  static String trackingNumber = "Tracking Number";
 
   static String productPrice = 'Product Price';
   static String productCategory = 'Product Category';
@@ -357,17 +362,16 @@ class AppStrings {
 
   // static const signOut = "Sign Out";
 
-  // Order Status
-  static const sendProductAdmin = "Please send your products to the admin";
-  static const handoverProduct = "Handover the product to the admin";
-  static const deliveryProduct = "Product ready for delivery";
-  static const orderSuccesfullyCompleted =
+  // Orderr Status Message (okay)
+  static const sendToAdminMessage = "Please send your products to the admin";
+  static const handoverToAdminMessage = "Handover the product to the admin";
+  static const productReadyForDeliveryMessage = "Product ready for delivery";
+  static const orderCompletedMessage =
       "The order has been successfully completed";
 
   //botton
 
   static const String pleaseEnterPrefix = "Please enter";
-  static const homePage = "Home Page";
 
   static const pleaseEnterProduct = 'Please Enter Product';
 
@@ -393,4 +397,5 @@ class AppStrings {
   static const String errorInvalidInput = "Invalid input provided.";
   static const String errorInvalidLogin = "Invalid email or password.";
   static const String errorProductNotFound = "Product not found.";
+  static const String errorOccurred = "Error Occurred:";
 }

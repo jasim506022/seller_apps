@@ -32,7 +32,7 @@ class CartFunctions {
             .doc(AppConstants.sharedPreference!.getString("uid")!)
             .collection("products")
             .where("productId",
-                whereIn: CartFunctions.separteOrderProductIdList(
+                whereIn: CartFunctions.separateOrderProductIds(
                     (seller.docs[i].data())["productIds"]))
             .snapshots()
             .listen((event) {
@@ -151,7 +151,7 @@ class CartFunctions {
   }
 */
 // Seperate Order Product ID List
-  static List<String> separteOrderProductIdList(List<dynamic> productIds) {
+  static List<String> separateOrderProductIds(List<dynamic> productIds) {
     return [for (var item in productIds.skip(1)) item.toString().split(":")[0]];
   }
 

@@ -10,7 +10,9 @@ import '../../../res/apps_text_style.dart';
 import '../../../res/routes/routes_name.dart';
 import 'order_item_widget.dart';
 
-/// A widget that displays a summary of an order, including the order ID and a breakdown link.
+/// A widget that displays a summary of an order, including the order ID
+/// and a breakdown link to navigate to detailed order information.
+
 class OrderSummaryWidget extends StatelessWidget {
   const OrderSummaryWidget({
     super.key,
@@ -18,6 +20,8 @@ class OrderSummaryWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Retrieve the current order instance from the Provider.
+
     final order = Provider.of<OrderModel>(context, listen: false);
 
     return Column(
@@ -26,20 +30,17 @@ class OrderSummaryWidget extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            // Order ID
-            Text(
-              "${AppStrings.order} ${order.orderId}",
-              style: AppsTextStyle.mediumBoldText,
-            ),
-            // Order breakdown link
+            /// Displays the order ID.
+            Text("${AppStrings.order} ${order.orderId}",
+                style: AppsTextStyle.mediumBoldText),
+
+            /// Navigates to the order details page when tapped.
             InkWell(
               onTap: () =>
                   Get.toNamed(RoutesName.orderDetailsPage, arguments: order),
-              child: Text(
-                "${AppStrings.orderBreakdown} >",
-                style:
-                    AppsTextStyle.mediumBoldText.copyWith(color: AppColors.red),
-              ),
+              child: Text("${AppStrings.orderBreakdownLabel} >",
+                  style: AppsTextStyle.mediumBoldText
+                      .copyWith(color: AppColors.red)),
             ),
           ],
         ),

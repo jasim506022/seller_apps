@@ -77,7 +77,7 @@ class AppRoutes {
         ),
         GetPage(
           name: RoutesName.orderDetailsPage,
-          page: () => const SllerOrderBreakdownPage(),
+          page: () => const SellerOrderBreakdownPage(),
         ),
       ];
 }

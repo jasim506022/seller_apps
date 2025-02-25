@@ -8,8 +8,10 @@ import '../../../res/apps_color.dart';
 import '../../../res/apps_text_style.dart';
 import '../../../widget/user_avatar_widget.dart';
 
-/// A card widget that displays details about a delivery agent.
-/// Includes name, email, phone number, and order date.
+/// A card widget displaying details about a delivery agent.
+///
+/// Shows name, email, phone number, and order date.
+/// Uses `UserAvatarWidget` for profile picture display.
 class OrderUserDetailsWidget extends StatelessWidget {
   const OrderUserDetailsWidget(
       {super.key, required this.userProfileModel, required this.orderId});
@@ -26,14 +28,14 @@ class OrderUserDetailsWidget extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          /// Profile picture of the User Profile
+          /// **Profile picture of the User**
           UserAvatarWidget(
             diameter: 90,
             imageUrl: userProfileModel.imageurl!,
           ),
           AppsFunction.horizontalSpacing(15),
 
-          /// Expanded to ensure proper layout alignment
+          /// **Expanded to ensure proper layout alignment**
           Expanded(
             child: _buildUserDetailsTable(),
           )
@@ -42,8 +44,9 @@ class OrderUserDetailsWidget extends StatelessWidget {
     );
   }
 
-  /// Builds a table layout displaying the User's information.
-  Padding _buildUserDetailsTable() {
+  /// Builds a table layout displaying the user's information.
+
+  Widget _buildUserDetailsTable() {
     return Padding(
         padding: EdgeInsets.symmetric(vertical: 10.h),
         child: Table(
@@ -57,7 +60,7 @@ class OrderUserDetailsWidget extends StatelessWidget {
             _createTableRow(AppStrings.emailLabel, userProfileModel.email!),
             _createTableRow(
                 AppStrings.phoneLabel, "0${userProfileModel.phone!}"),
-            _createTableRow(AppStrings.orderDate,
+            _createTableRow(AppStrings.orderDateLabel,
                 AppsFunction.formatDate(timestamp: orderId)),
           ],
         ));

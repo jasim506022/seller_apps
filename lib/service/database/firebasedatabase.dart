@@ -311,8 +311,8 @@ class FirebaseDatabase {
         .doc(selleruid)
         .collection("products")
         .where("productId",
-            whereIn: CartFunctions.separteOrderProductIdList(
-                (snpshot)["productIds"]))
+            whereIn:
+                CartFunctions.separateOrderProductIds((snpshot)["productIds"]))
         .get();
   }
 
@@ -352,7 +352,7 @@ class FirebaseDatabase {
         .doc(selleruid)
         .collection("products")
         .where("productId",
-            whereIn: CartFunctions.separteOrderProductIdList(list))
+            whereIn: CartFunctions.separateOrderProductIds(list))
         .orderBy("publishDate", descending: true)
         .get();
   }

@@ -5,9 +5,20 @@ import '../../res/app_function.dart';
 import '../../widget/defaul_shimmer_widget.dart';
 
 /// A shimmer loading skeleton for the Delivery User section.
-/// This is displayed while the actual content is loading.
-class UserDetailsLoadingWidget extends StatelessWidget {
-  const UserDetailsLoadingWidget({super.key});
+///
+/// This widget is displayed as a placeholder while user details are being fetched.
+///
+/// ## Features:
+/// - Displays a circular shimmer for the profile image.
+/// - Shows multiple shimmering lines to simulate user information loading.
+/// - Uses `DefaultShimmerWidget` to ensure consistency in the shimmer effect.
+///
+/// ## Example Usage:
+/// ```dart
+/// LoadingUserDetailsWidget()
+/// ``
+class LoadingUserDetailsWidget extends StatelessWidget {
+  const LoadingUserDetailsWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

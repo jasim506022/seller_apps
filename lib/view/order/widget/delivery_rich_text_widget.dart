@@ -21,10 +21,7 @@ class DeliveryRichTextWidget extends StatelessWidget {
     return RichText(
       text: TextSpan(
         children: [
-          TextSpan(
-            text: title,
-            style: AppsTextStyle.mediumBoldText,
-          ),
+          TextSpan(text: title, style: AppsTextStyle.mediumBoldText),
           WidgetSpan(child: AppsFunction.horizontalSpacing(10)),
           TextSpan(
               text: description,

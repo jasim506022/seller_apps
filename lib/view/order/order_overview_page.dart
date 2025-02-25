@@ -25,7 +25,7 @@ class OrderOverviewPage extends StatelessWidget {
     // Ensure Get.arguments is of type OrderModel to prevent runtime errors
     OrderModel order = Get.arguments;
     return Scaffold(
-      appBar: AppBar(title: Text(AppStrings.orderOverview)),
+      appBar: AppBar(title: const Text(AppStrings.orderOverviewTitle)),
       body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 10.h),
           child: SingleChildScrollView(
@@ -35,13 +35,9 @@ class OrderOverviewPage extends StatelessWidget {
                 OrderUserDetailsStream(
                     userId: order.orderBy, orderId: order.orderId),
                 AppsFunction.verticalSpacing(10),
-                DeliveryInfoCard(
-                  orderModel: order,
-                ),
+                DeliveryInfoCard(orderModel: order),
                 AppsFunction.verticalSpacing(10),
-                OrderStatusCard(
-                  orderModel: order,
-                ),
+                OrderStatusCard(orderStatus: order.status),
                 AppsFunction.verticalSpacing(15),
                 ChangeNotifierProvider.value(
                   value: order,

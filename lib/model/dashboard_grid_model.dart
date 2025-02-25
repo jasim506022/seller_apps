@@ -39,7 +39,7 @@ final List<DashboardGridModel> dashboardGridList = [
   ),
   DashboardGridModel(
     image: AppImage.completeOrderImages,
-    label: AppStrings.completeOrder,
+    label: AppStrings.completeOrderLabel,
     destinationRoute: RoutesName.completeOrderPage,
   ),
 ];

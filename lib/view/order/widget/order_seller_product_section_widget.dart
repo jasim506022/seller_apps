@@ -20,7 +20,7 @@ class SellerOrderProductStream extends StatelessWidget {
   Widget build(BuildContext context) {
     var orderController = Get.find<OrderController>();
     return StreamBuilder(
-      stream: orderController.fatchSellerOrder(
+      stream: orderController.fetchSellerOrder(
           sellerList:
               CartFunctions.separateOrderSellerCartList(orderModel.seller)),
       builder: (context, snapshot) {
@@ -46,7 +46,9 @@ class SellerOrderProductStream extends StatelessWidget {
           itemCount: snapshot.data!.docs.length,
           itemBuilder: (context, index) {
             var sellerName = snapshot.data!.docs[index]["name"];
+
             var sellerId = snapshot.data!.docs[index]["uid"];
+
             return SellerOrderProductWidget(
               sellerName: sellerName,
               orderModel: orderModel,

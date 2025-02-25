@@ -9,7 +9,8 @@ import '../../../res/apps_color.dart';
 import '../../../res/apps_text_style.dart';
 import '../../../widget/product_image_widget.dart';
 
-/// Displays a single ordered product with its quantity, unit, and pricing details.
+/// A widget that displays a single ordered product with its details,
+/// including quantity, unit, discounted price, and total price.
 class OrderProductWidget extends StatelessWidget {
   const OrderProductWidget({super.key, required this.quantity});
 
@@ -17,7 +18,8 @@ class OrderProductWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final productModel = Provider.of<ProductModel>(context);
+    // Retrieve the product model from the provider.
+    final productModel = Provider.of<ProductModel>(context, listen: false);
     return Container(
       height: 110.h,
       width: 0.9.w,
@@ -25,26 +27,33 @@ class OrderProductWidget extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Displays the product image.
           ProductImageWidget(
             height: 100,
             width: 120,
             imageHeight: 110,
             productModel: productModel,
           ),
+          // Displays product details such as name, unit, and pricing.
           Expanded(child: _buildProductInfo(context, productModel)),
         ],
       ),
     );
   }
 
-  /// Builds the product details including name, unit, and total price.
+  /// Builds the product information section, including:
+  /// - The product name.
+  /// - The unit of measurement (e.g., "1kg", "500g").
+  /// - The discounted price per unit.
+  /// - The total price for the given quantity.
   Padding _buildProductInfo(BuildContext context, ProductModel productModel) {
-    final discountedPrice = AppsFunction.getDiscountedPrice(
+    // Calculate the discounted price per unit.
+    final double discountedPrice = AppsFunction.getDiscountedPrice(
       productModel.productprice!,
       productModel.discount!.toDouble(),
     );
-
-    final totalPrice = AppsFunction.calculateTotalPriceWithQuantity(
+    // Calculate the total price for the ordered quantity.
+    final String totalPrice = AppsFunction.calculateTotalPriceWithQuantity(
       productModel.productprice!,
       productModel.discount!.toDouble(),
       quantity,
@@ -59,7 +68,7 @@ class OrderProductWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Product Name
+          // Displays the product name in a fitted text widget.
           FittedBox(
             child: Text(
               productModel.productname!,
@@ -68,19 +77,22 @@ class OrderProductWidget extends StatelessWidget {
           ),
           Row(
             children: [
-              // Product Unit (e.g., "1kg", "500g")
+              // Displays the product unit (e.g., "1kg", "500g").
               Text(productModel.productunit!,
                   style: AppsTextStyle.mediumBoldText.copyWith(
                     color: Theme.of(context).hintColor,
                   )),
             ],
           ),
+          // Displays the pricing details.
           Row(
             children: [
+              // Displays the quantity and discounted price per unit.
               Text("$quantity × $discountedPrice",
                   style: AppsTextStyle.mediumNormalText
                       .copyWith(color: AppColors.green)),
               const Spacer(),
+              // Displays the total price calculation.
               Text("= ${AppStrings.currencyIcon} $totalPrice",
                   style: AppsTextStyle.mediumBoldText
                       .copyWith(color: AppColors.green)),

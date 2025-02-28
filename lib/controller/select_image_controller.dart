@@ -18,7 +18,7 @@ class SelectImageController extends GetxController {
       var image = await repository.captureImageSingle(imageSource: imageSource);
       selectPhoto.value = image;
     } catch (e) {
-      AppsFunction.flutterToast(msg: AppStrings.noImageSelected);
+      AppsFunction.flutterToast(msg: AppStrings.noImageSelectedToast);
     }
   }
 }

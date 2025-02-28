@@ -27,7 +27,8 @@ class ProductDetailsPage extends StatelessWidget {
 
     // Extract the ProductModel from the navigation arguments
     final arguments = Get.arguments;
-    final ProductModel productModel = arguments[AppStrings.productModel];
+    final ProductModel productModel =
+        arguments[AppStrings.productModelArgument];
 
     return PopScope(
       canPop: false,

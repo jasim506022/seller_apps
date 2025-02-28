@@ -52,8 +52,8 @@ class ProductOptionsMenu extends StatelessWidget {
         // Navigates to the product update screen
 
         Get.toNamed(RoutesName.uploadAndUpdateProduct, arguments: {
-          AppStrings.isUpdate: true,
-          AppStrings.productModel: productModel,
+          AppStrings.isUpdateArgument: true,
+          AppStrings.productModelArgument: productModel,
         });
       }
     });

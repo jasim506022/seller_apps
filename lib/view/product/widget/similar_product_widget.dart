@@ -29,7 +29,7 @@ class SimilarProductCard extends StatelessWidget {
         NetworkUtils.executeWithInternetCheck(action: () {
           Get.offAndToNamed(
             RoutesName.productDetails,
-            arguments: {AppStrings.productModel: productModel},
+            arguments: {AppStrings.productModelArgument: productModel},
           );
         });
       },

@@ -9,7 +9,7 @@ class AppConstants {
   static double previousEarning = 0.0;
 
   /// A flag to track if a specific action/view has been completed.
-  static int? isViewed;
+  static int isViewed = 0;
 
   /// SharedPreferences instance (  initialized in main)
   static SharedPreferences? sharedPreference;

@@ -102,8 +102,8 @@ class ManageProductController extends GetxController {
       Get.toNamed(RoutesName.mainPage, arguments: 0);
       AppsFunction.flutterToast(
           msg: isUpdate
-              ? AppStrings.updateProductToastMessage
-              : AppStrings.uploadProductToastMessage);
+              ? AppStrings.productUpdatedSuccessMessage
+              : AppStrings.productUploadedSuccessMessage);
     } catch (e) {
       if (e is AppException) {
         Get.dialog(

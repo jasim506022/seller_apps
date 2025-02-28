@@ -101,8 +101,8 @@ class ProductWidget extends StatelessWidget {
         ? RoutesName.uploadAndUpdateProduct
         : RoutesName.productDetails;
     Get.toNamed(routeName, arguments: {
-      AppStrings.productModel: productModel,
-      if (isUpdate) AppStrings.isUpdate: true,
+      AppStrings.productModelArgument: productModel,
+      if (isUpdate) AppStrings.isUpdateArgument: true,
     });
   }
 }

@@ -14,7 +14,7 @@ class OnboardingController extends GetxController {
   void skipOnboarding() {
     AppConstants.isViewed = 0;
     AppConstants.sharedPreference!
-        .setInt(AppStrings.prefOnboarding, AppConstants.isViewed!);
+        .setInt(AppStrings.prefOnboarding, AppConstants.isViewed);
     Get.offNamed(RoutesName.signPage);
   }
 

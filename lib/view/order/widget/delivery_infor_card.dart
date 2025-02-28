@@ -104,7 +104,7 @@ class DeliveryInfoCard extends StatelessWidget {
             Expanded(
               /// Displays either the completed status or the formatted delivery date
               child: Text(
-                orderModel.status == AppStrings.complete
+                orderModel.status == AppStrings.completeStatus
                     ? AppStrings.completeOrderLabel
                     : AppsFunction.formatDate(
                         timestamp: orderModel.deliveryDate, includeTime: false),

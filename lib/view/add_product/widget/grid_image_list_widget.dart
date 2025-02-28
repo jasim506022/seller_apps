@@ -49,7 +49,7 @@ class GridImageListWidget extends StatelessWidget {
   Widget _buildEmptyState() {
     return Center(
       child: Text(
-        AppStrings.noImageSelect,
+        AppStrings.noImageSelectedToast,
         style: AppsTextStyle.mediumBoldText.copyWith(color: AppColors.red),
       ),
     );

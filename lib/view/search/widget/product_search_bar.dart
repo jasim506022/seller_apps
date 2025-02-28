@@ -38,11 +38,11 @@ class ProductSearchBar extends StatelessWidget {
   /// Creates the search input field.
   Widget _buildSearchField(ProductSearchController searchController) {
     return CustomTextFormField(
-        hintText: AppStrings.minium,
+        hintText: AppStrings.minimumHint,
         style: AppsTextStyle.mediumNormalText
             .copyWith(color: ThemeUtils.baseTextColor),
         decoration:
-            AppsFunction.inputDecoration(hint: AppStrings.searchProductHere),
+            AppsFunction.inputDecoration(hint: AppStrings.searchProductHint),
         controller: searchController.searchTextTEC,
         onChanged: searchController.searchProducts);
   }

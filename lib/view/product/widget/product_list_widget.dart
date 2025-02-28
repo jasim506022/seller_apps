@@ -38,7 +38,7 @@ class ProductGridViewStream extends StatelessWidget {
               return EmptyWidget(
                   image: AppImage.error,
                   title: snapshot.hasError
-                      ? '${AppStrings.errorOccure}: ${snapshot.error}'
+                      ? '${AppStrings.errorOccurred}: ${snapshot.error}'
                       : AppStrings.noDataAvaiableError);
             }
             // If data is available, build and display the product grid.

@@ -23,7 +23,7 @@ class LoadingWidget extends StatelessWidget {
           SizedBox(
             height: 20.h,
           ),
-          Text("$message \n ${AppStrings.pleaseWait} ",
+          Text("$message \n ${AppStrings.pleaseWaitMessage} ",
               textAlign: TextAlign.center, style: AppsTextStyle.titleText)
         ],
       ),

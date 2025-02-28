@@ -66,7 +66,7 @@ class ProfileController extends GetxController {
   /// **Updates user profile information in Firestore.**
   Future<void> updateProfile() async {
     if (phoneController.text.trim().isEmpty) {
-      AppsFunction.flutterToast(msg: AppStrings.phoneNumberPromptToast);
+      AppsFunction.flutterToast(msg: AppStrings.phoneNumberPromptMessage);
       return;
     }
 
@@ -223,10 +223,10 @@ class ProfileController extends GetxController {
         String? token = await FirebaseMessaging.instance.getToken();
         return token;
       } else {
-        AppsFunction.flutterToast(msg: AppStrings.permissionDenied);
+        AppsFunction.flutterToast(msg: AppStrings.permissionDeniedToast);
       }
     } catch (e) {
-      AppsFunction.flutterToast(msg: "${AppStrings.fcmTokenError} $e");
+      AppsFunction.flutterToast(msg: "${AppStrings.fcmTokenErrorToast} $e");
     }
     return null;
   }
@@ -268,7 +268,7 @@ class ProfileController extends GetxController {
     await Get.dialog(ShowAlertDialogWidget(
         icon: Icons.delete,
         title: AppStrings.signOutLabel,
-        content: AppStrings.doYouwantSignout,
+        content: AppStrings.doYouwantSignoutMessage,
         onConfirmPressed: () async {
           try {
             final prefs = AppConstants.sharedPreference!;

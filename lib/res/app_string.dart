@@ -1,26 +1,27 @@
 class AppStrings {
-/*
-   🏠 General App Strings
-  */
+  /// ------------------------------------------------------------------------
+  ///  // 📌 General App Information
+  /// ------------------------------------------------------------------------
+
   static const String appName = "JasiVendor";
-  // static const String welcome = "Welcome";
 
-  static const String permissionDenied = "Permission denied for notifications.";
-  static const String fcmTokenError = "Error retrieving FCM token:";
-  static const String noImageSelect = "No images selected";
-
-  // 📌 Onboarding Titles & Descriptions
+  /// ------------------------------------------------------------------------
+  /// 🏠 Onboarding Titles & Descriptions
+  /// ------------------------------------------------------------------------
   static const String onboardingTitle1 = "Welcome to Grocery App";
   static const String onboardingDescription1 =
-      "Welcome to best online grocery store. Here you will find all the groceries at one place.";
+      "Find all your groceries in one place at the best prices.";
   static const String onboardingTitle2 = "Farm Fresh Produce";
   static const String onboardingDescription2 =
-      "Buy farm fresh fruits & vegetables online at the best & affordable prices.";
+      "Buy fresh fruits & vegetables at affordable prices.";
   static const String onboardingTitle3 = "Fast Delivery";
   static const String onboardingDescription3 =
-      "We offers speedy delivery of your groceries, bathroom supplies, baby care products, pet care items, stationary, etc within 30minutes at your doorstep.";
+      "Get your groceries and essentials delivered within 30 minutes.";
 
-// 📌 App Titles And Bottom Bar
+  /// ------------------------------------------------------------------------
+  /// 🔖 App Titles & Bottom Navigation
+  /// ------------------------------------------------------------------------
+
   static const String homeTitle = "Home";
   static const String productsTitle = "Products";
   static const String searchTitle = "Search";
@@ -36,48 +37,34 @@ class AppStrings {
   static const String historyTitle = "History";
   static const String orderPageTitle = "Order";
   static const String orderOverviewTitle = "Order Overview";
+  static const String userDetailsTitle = "User Details";
+  static const String filterSearchTitle = "Filter Search";
+  static const String productCategoryTitle = 'Product Category';
 
-  // 📌 Authentication Titles & Messages
+  /// ------------------------------------------------------------------------
+  /// 🔑 Authentication Titles & Messages
+  /// ------------------------------------------------------------------------
   static const String sellerLogInTitle = "JasiVendor Login";
   static const String signInTitle = "Sign In";
   static const String signUpTitle = "Sign Up";
-  static String resetPasswordTitle = "Reset Password";
+  static const String resetPasswordTitle = "Reset Password";
   static const String authPageDescription =
       "Check our fresh veggies from Jasim Grocery";
   static const String forgetPasswordTitle = "Forgot Password?";
-  static String withOr = "with Or";
-  static String forgetPasswordDescription =
+  static const String withOr = "with Or";
+  static const String forgetPasswordDescription =
       "Please Enter your mail address to reset you password";
   static String sellerRegistration = "JasiVender Registration";
   static const String createAccount = "Create Account";
   static const String alreadyHaveAccount = "Already have an account?";
   static const String dontHaveAccount = "Don't have an account?";
-  static String youdontWantToReset = "If you don't want to reset Password? ";
+  static const String youdontWantToReset =
+      "If you don't want to reset Password? ";
   static const String passwordMatch = "Passwords do not match.";
 
-  /*
-  * 📸 Image Selection
-  */
-
-  static const String noImageSelected = "No Image Selected";
-
-/*
-  * 📞 Contact Information
-  */
-
-  static const String enterPhone = 'Please enter your phone number';
-
-  static const String pleaseEnterAddress = "Please enter your Address";
-
-/*
-  * 🛒 Product Management
-  */
-
-  /*
-  * 📦 Orders & Delivery
-  */
-
-  // 📌 Dialog title & Messages
+  /// ------------------------------------------------------------------------
+  /// 🔔 Dialog Titles & Messages
+  /// ------------------------------------------------------------------------
   static const String exitDialogTitle = "Exit Application";
   static const String selectPhotoTitle = "Select Photo";
   static const String takePhotoCameraTitle = "Take a Photo";
@@ -89,8 +76,12 @@ class AppStrings {
   static const String saveMessage = "Do you want to save your changes?";
   static const String deleteMessage =
       "Do you want to delete the product? If you delete the product, it cannot be undone.";
+  static String pleaseWaitMessage = "Please wait........";
+  static String doYouwantSignoutMessage = "Do you want to sign out?";
 
-  // 📌 Button Labels
+  /// ------------------------------------------------------------------------
+  /// 🎛️ Button
+  /// ------------------------------------------------------------------------
   static const String btnYes = "Yes";
   static const String btnNo = "No";
   static const String btnAddProductImage = "Add Product Image";
@@ -109,10 +100,11 @@ class AppStrings {
   static const String btnEditProfile = "Edit Profile";
   static const String btnCamera = "Camera";
   static const String btnGallery = "Gallery";
-  static const String bntHomePage = "Home Page";
+  static const String btnHomePage = "Home Page";
 
-  // 📌 Success & Toast Messages
-  static const String successSignUpMessage = "Sign up successful!";
+  /// ------------------------------------------------------------------------
+  /// ✅ Success & Toast Messages
+  /// ------------------------------------------------------------------------
   static const String successSignInMessage = "Sign in successful!";
   static const String errorUserNotFoundToast = "User not found.";
   static const String toastWaitForUploadMessage =
@@ -126,17 +118,30 @@ class AppStrings {
   static const String imageUploadFailToast =
       "Image upload failed. Please try again.";
   static const String selectOneImageToast = "Please Select at least One Image";
-  static const updateProductToastMessage = "Succesfully update a New Product";
-  static const uploadProductToastMessage = "Succesfully Upload a New Product";
+  static const productUpdatedSuccessMessage =
+      "Succesfully update a New Product";
+  static const productUploadedSuccessMessage =
+      "Succesfully Upload a New Product";
   static const String minPriceExceedsMaxToast =
       'Minimum price cannot exceed maximum price.';
-  static const String deleteSuccessToast = "Delete Succesffully";
-  static String phoneNumberPromptToast = "Please Give your Phone Numer";
-  static String profileUploadToast = "Profile Upload Successfully";
-  static String profileUpdateToast = "Profile Updated Successfully.";
+  static const String deleteSuccessToast = "Delete successfully";
+  static const String phoneNumberPromptMessage = "Please Give your Phone Numer";
+  static const String profileUploadToast = "Profile Upload Successfully";
+  static const String profileUpdateToast = "Profile Updated Successfully.";
   static const String successfullySignedOutToast = "Successfully signed out.";
+  static const String noImageSelectedToast = "No Image Selected";
+  static const String sendingMailToast =
+      "Sending a mail. Please Check ur Email";
+  static const String signUpSuccessfulToast = "Sign up Successfully";
+  static const String loginWithGmailTitleToast =
+      "Loading for sign with Gmail \n Please wait........";
+  static const String permissionDeniedToast =
+      "Permission denied for notifications.";
+  static const String fcmTokenErrorToast = "Error retrieving FCM token:";
 
-  // 📌 Form Field Labels
+  /// ------------------------------------------------------------------------
+  /// 🔢 Form Field Labels
+  /// -----------------------------------------------------------------------
   static const productNameLabel = 'Product Name';
   static const String priceLabel = 'Price';
   static const String discountLabel = 'Discount';
@@ -147,19 +152,22 @@ class AppStrings {
   static const String nameLabel = "Name";
   static const String passwordConfirmLabel = "Confirm Password";
   static const String phoneLabel = "Phone";
-  static String darkLabel = "Dark";
-  static String lightLabel = "Light";
+  static const String darkLabel = "Dark";
+  static const String lightLabel = "Light";
   static const String signOutLabel = "Sign Out";
   static const String addressLabel = "Address";
   static const String orderDateLabel = "or.Date";
-  static String estimatedDeliveryLabel = "Estimated Delivery Date is";
-  static String orderBreakdownLabel = "Order Breakdown";
-  static String deliveryAddressLabel = "Delivery Address";
-  static String completeOrderLabel = "Complete Order";
-  static String deliveryPartnerLabel = "Delivery Partner";
-  static String trackingNumberLabel = "Tracking Number";
+  static const String estimatedDeliveryLabel = "Estimated Delivery Date is";
+  static const String orderBreakdownLabel = "Order Breakdown";
+  static const String deliveryAddressLabel = "Delivery Address";
+  static const String completeOrderLabel = "Complete Order";
+  static const String deliveryPartnerLabel = "Delivery Partner";
+  static const String trackingNumberLabel = "Tracking Number";
+  static const String productPriceLabel = 'Product Price';
 
-  // 📌 Hint Texts (For Input Fields)
+  /// ------------------------------------------------------------------------
+  /// 💡 Hint Texts for Input Fields
+  /// ------------------------------------------------------------------------
   static const String productNameHint = "Enter product name (e.g., Nike Shoes)";
   static const String productPriceHint = "Enter price (e.g., 99.99)";
   static const String productDiscountHint = "Enter discount (e.g., 10 for 10%)";
@@ -173,8 +181,13 @@ class AppStrings {
   static const String addressHint = "Enter your address (Street, City, ZIP)";
   static const String phoneHint = "Phone Number";
   static const String searchHint = "Search...........";
+  static const String minimumHint = "Minimum";
+  static const String maximumHint = "Maximum";
+  static const String searchProductHint = "Search Product Here";
 
-  // 📌 Validation Messages
+  /// ------------------------------------------------------------------------
+  /// ❌ Validation Messages
+  /// ------------------------------------------------------------------------
   // Product
   static const String emptyProductName = "Please enter a product name.";
   static const String productNameTooShort =
@@ -244,14 +257,17 @@ class AppStrings {
       "Address must be at least 5 characters long.";
   static const String addressTooLong = "Address cannot exceed 200 characters.";
 
-  static String doYouwantSignout = "Do you want to sign out?";
+  /// ------------------------------------------------------------------------
+  /// 🔥 Firebase Collections & Shared Preferences Keys
+  ///
 
-  // 📌 Firebase Collections & Shared Preferences Keys
+  /// Firebase Collection
   static const String collectionUsers = "users";
   static const String collectionProducts = "products";
   static const String collectionOrders = "orders";
   static const String collectionSeller = "seller";
   static const String collectionUserAddress = "useraddress";
+
   static const String tokenFirebaseField = "token";
   static const String statusFirebaseField = "status";
   static const String sellerFirebaseField = "seller";
@@ -260,6 +276,7 @@ class AppStrings {
   static const String datePublishFirebaseField = "publishDate";
   static const String categoryProductFirebaseField = "productcategory";
   static const String uIdFirebaseField = "uid";
+
   static const String prefUserId = "uid";
   static const String prefUserEmail = "email";
   static const String prefUserName = "name";
@@ -267,8 +284,9 @@ class AppStrings {
   static const String prefUserProfilePic = "imageurl";
   static const String prefUserEarnings = "earning";
   static const String prefOnboarding = 'onBoarding';
-
-  static String approved = "approved";
+  static const String available = "available";
+  static const String approved = "approved";
+  static const String completeStatus = "complete";
 
   // Defauld Value:
   static const String defaultName = "Name Not Found";
@@ -277,125 +295,42 @@ class AppStrings {
   static const String defaultImage =
       "https://www.example.com/default-profile.png";
 
-// TextField Label Text
-
-  static String minium = "Minimum";
-  static String maximum = "Maximum";
-
-  // Textfleid String
-
-  static String yourName = 'Your Name';
-  static String enterName = 'Please enter your name';
-  static String nameValid = 'Name must be longer than 2 characters';
-
-  static String validConfirmPassword =
-      'Confirm Password Must be geather then 6 Characteris';
-
-  static String sendingMail = "Sending a mail. Please Check ur Email";
-
-  //
-
-  static String signupSuccessfull = "Sign up Successfully";
-
-  static String loginWithGmailTitle =
-      "Loading for sign with Gmail \n Pleasing Waiting........";
-
-//
-
-  //
-
-  // sharepare
-
-  static String pleaseWait = "Pleasing Waiting........";
-
-  static String addresNoteFound = "Address Not Found";
-
-  static String complete = "complete";
-  static String orderComplete = "Order Complete";
-
-  static String order = "Order";
-
-  static String searchProductHere = "Search Product Here";
-
-  static String off = "Off";
-
-  // Firebase
-
-  //Error
-
-  // Main Page
-
-  // App Bar and Title
-
-  static String productPrice = 'Product Price';
-  static String productCategory = 'Product Category';
-
-  // Heading
-  static String userDetails = "User Details";
-  static String filterSearch = "Filter Search";
-
   // argument;
-  static const isUpdate = "isUpdate";
-  static const productModel = "productModel";
+  static const isUpdateArgument = "isUpdate";
+  static const productModelArgument = "productModel";
 
-  // Title
-
-  //add Product
-
-  // dialog
-
-  // Toast
-
-  static const userDoesntExit = "User Doesn't Exit";
-
-  static const noInternet = 'No Internet';
-  static const noInternetMessage =
-      'Please check your internet settings and try again.';
-
-  //
-  static const available = "available";
-  // Firebase Message
-  static const errorOccure = 'Error Occure';
-
-  //
-  static const currencyIcon = "৳.";
-
-  // static const signOut = "Sign Out";
-
-  // Orderr Status Message (okay)
+  // Orderr Status Message
   static const sendToAdminMessage = "Please send your products to the admin";
   static const handoverToAdminMessage = "Handover the product to the admin";
   static const productReadyForDeliveryMessage = "Product ready for delivery";
   static const orderCompletedMessage =
       "The order has been successfully completed";
 
-  //botton
-
-  static const String pleaseEnterPrefix = "Please enter";
-
-  static const pleaseEnterProduct = 'Please Enter Product';
-
-  // 📌 Helper Functions for Dynamic Messages and Others
-  static String pleaseEnterField(String fieldName) {
-    return "Please enter $fieldName.";
-  }
-
-  static const String selectPhoto = "Select Photo";
-  static const String goBack = "Go Back";
-
-  // 📌 Error Messages
+  /// ------------------------------------------------------------------------
+  /// 🔥 Error Messages
+  /// ------------------------------------------------------------------------
   static const String errorGeneric = "Something went wrong. Please try again.";
   static const String errorNoInternet =
       "No internet connection. Please check your network.";
   static String noDataAvaiableError = "No Data Available";
-
   static const String errorUnauthorized =
       "Unauthorized access. Please sign in again.";
   static const String errorImageUpload =
       "Image upload failed. Please try again.";
+
   static const String errorFetchingData = "Failed to fetch data.";
   static const String errorInvalidInput = "Invalid input provided.";
   static const String errorInvalidLogin = "Invalid email or password.";
   static const String errorProductNotFound = "Product not found.";
   static const String errorOccurred = "Error Occurred:";
+  static const noInternet = 'No Internet';
+  static const noInternetMessage =
+      'Please check your internet settings and try again.';
+
+  // Others
+  static const String goBack = "Go Back";
+  static const String selectPhoto = "Select Photo";
+  static const currencyIcon = "৳.";
+  static const String order = "Order";
+  static const String off = "Off";
 }

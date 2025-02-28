@@ -46,7 +46,7 @@ class SellerOrderBreakdownPage extends StatelessWidget {
                   width: 250,
                   onPressed: () =>
                       Get.offAndToNamed(RoutesName.mainPage, arguments: 0),
-                  title: AppStrings.bntHomePage,
+                  title: AppStrings.btnHomePage,
                 ),
               ),
               AppsFunction.verticalSpacing(100),

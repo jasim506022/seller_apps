@@ -200,7 +200,7 @@ class AuthController extends GetxController {
       // Reset the input fields after successful registration
       resetFields();
 
-      _navigateToMainPage(AppStrings.signupSuccessfull);
+      _navigateToMainPage(AppStrings.signUpSuccessfulToast);
     } catch (e) {
       // Handle any errors during registration
       _handleError(e);
@@ -256,7 +256,7 @@ class AuthController extends GetxController {
       loadingController.setLoading(true);
       await repository.sendPasswordResetEmail(
           email: emailController.text.trim());
-      AppsFunction.flutterToast(msg: AppStrings.sendingMail);
+      AppsFunction.flutterToast(msg: AppStrings.sendingMailToast);
       Get.toNamed(RoutesName.signPage);
     } catch (e) {
       _handleError(e);
